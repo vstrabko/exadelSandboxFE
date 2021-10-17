@@ -16,7 +16,9 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
       ],
       "rules": {
         "no-var": "error",
@@ -30,8 +32,14 @@
         "eqeqeq": "error",
         "func-call-spacing": "error",
         "space-in-parens": ["error", "never"],
-        "quotes": ["error", "single"],
+        "quotes": ["error", "single", { "allowTemplateLiterals": true }],
         "array-element-newline": ["error", { "multiline": true }],
+        "no-unused-vars": 1,
+        "@typescript-eslint/no-unsafe-member-access": 0,
+        "@typescript-eslint/no-unsafe-assignment": 0,
+        "@typescript-eslint/no-unsafe-call": 0,
+        "@typescript-eslint/no-explicit-any": "off",
+
         "@angular-eslint/directive-selector": [
           "error",
           {
