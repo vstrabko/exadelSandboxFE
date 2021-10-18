@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint exadelsandbox --fix",
+    "lint:ci": "ng lint exadelsandbox",
     "postinstall": "husky install && husky add .husky/pre-commit \"npx lint-staged\""
   },
   "husky": {

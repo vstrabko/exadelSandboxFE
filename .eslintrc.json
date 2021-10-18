@@ -35,6 +35,7 @@
         "space-infix-ops":"error",
         "func-call-spacing": "error",
         "space-in-parens": ["error", "never"],
+        "max-len": ["error", { "code": 140 }],
         "quotes": ["error", "single",
           {
             "allowTemplateLiterals": true
@@ -49,11 +50,10 @@
         "no-unused-vars": 1,
         "@typescript-eslint/typedef": [
           "error",
-          {
-            "arrowParameter": true
-          }
+          { "arrowParameter": true }
         ],
-        "@typescript-eslint/no-inferrable-types": 1,
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/no-inferrable-types": 0,
 
         "@typescript-eslint/no-unsafe-member-access": 0,
         "@typescript-eslint/no-unsafe-assignment": 0,
