@@ -1,11 +1,8 @@
-var foo = 1
-console.log(foo)
-var bar
-bar = 1
-function test(
+const foo = 1;
+console.log(foo);
+let bar;
 
-
-    ) {
-  console.log(baz)
+function test() {
+  console.log(baz);
 }
-var baz = 123
+const baz = 123;
