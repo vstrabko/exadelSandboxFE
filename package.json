@@ -7,18 +7,13 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint exadelsandbox --fix",
     "postinstall": "husky install && husky add .husky/pre-commit \"npx lint-staged\""
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged --relative"
     }
-  },
-  "lint-staged": {
-    "*.{js,ts}": [
-       "eslint --fix"
-    ]
   },
   "private": true,
   "dependencies": {
