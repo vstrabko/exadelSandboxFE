@@ -1,0 +1,90 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:prettier/recommended",
+        "prettier"
+      ],
+      "rules": {
+        "no-var": "error",
+        "arrow-spacing": "error",
+        "no-mixed-spaces-and-tabs": "error",
+        "no-multi-spaces": "error",
+        "no-multiple-empty-lines": "error",
+        "no-trailing-spaces": "error",
+        "comma-spacing": "error",
+        "semi": "error",
+        "eqeqeq": "error",
+        "space-infix-ops":"error",
+        "func-call-spacing": "error",
+        "space-in-parens": ["error", "never"],
+        "quotes": ["error", "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "array-element-newline": [
+          "error",
+          {
+            "multiline": true
+          }
+        ],
+        "no-unused-vars": 1,
+        "@typescript-eslint/typedef": [
+          "error",
+          {
+            "arrowParameter": true
+          }
+        ],
+        "@typescript-eslint/no-inferrable-types": 1,
+
+        "@typescript-eslint/no-unsafe-member-access": 0,
+        "@typescript-eslint/no-unsafe-assignment": 0,
+        "@typescript-eslint/no-unsafe-call": 0,
+        "@typescript-eslint/no-explicit-any": "off",
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
