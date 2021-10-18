@@ -17,7 +17,7 @@
   },
   "lint-staged": {
     "*.{js,ts}": [
-       "ng lint --fix"
+       "eslint --fix"
     ]
   },
   "private": true,
