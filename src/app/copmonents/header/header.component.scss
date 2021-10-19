@@ -1,0 +1,33 @@
+.header {
+
+  height: 60px;
+  background-color: #E5EBF0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+  align-items: center;
+
+  img {
+    height: 50px;
+  }
+
+  .candidates, .calendar, .sandbox {
+
+    button {
+      background-color: #445063;
+      color: #fff;
+      height: 50%;
+
+    }
+  }
+
+  .button_login, .button_logout {
+    button {
+      background-color: #3794C7;
+      color: #fff;
+      height: 50%;
+      border-radius: 20px 0 0 20px;
+    }
+  }
+}
