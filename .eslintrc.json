@@ -41,12 +41,12 @@
             "allowTemplateLiterals": true
           }
         ],
-        "array-element-newline": [
-          "error",
-          {
-            "multiline": true
-          }
-        ],
+        // "array-element-newline": [
+        //   "error",
+        //   {
+        //     "multiline": false
+        //   }
+        // ],
         "no-unused-vars": 1,
         "@typescript-eslint/typedef": [
           "error",
