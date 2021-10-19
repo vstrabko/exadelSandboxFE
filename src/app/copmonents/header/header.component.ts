@@ -1,3 +1,4 @@
+import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/template';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,9 +8,16 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  public title: string = 'Header';
+  private roles = { // till not back-end
+    nobody: '',
+    admin: 'admin',
+    manager: 'manager',
+    recruiter: 'recruiter',
+    interviewer: 'interviewer',
+    mentor: 'mentor'
+  }
 
-  public role: string = 'admin';
+  public role: string = this.roles.interviewer; //role from back-end
 
-  public userName: string = 'Mikhail';
+  public userName: string = 'Mikhail'; //name of user from back-end
 }

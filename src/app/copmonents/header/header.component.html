@@ -1,9 +1,9 @@
 <div class="header">
   <div class=""><img src="../../../assets/img/sapex.png" alt=""></div>
-  <div class="candidates"><button mat-raised-button>Candidates list</button></div>
-  <div class="calendar"><button mat-raised-button>Calendar</button></div>
-  <div class="sandbox"><button mat-raised-button>New sandbox</button></div>
-  <div class="username">{{ userName }}</div>
-  <div class="button_login"><button mat-raised-button>Log in</button></div>
-  <!-- <div class="button_logout"><button mat-raised-button>Log out</button></div> -->
+  <div class="candidates" *ngIf="role"><button mat-raised-button>Candidates list</button></div>
+  <div class="calendar" *ngIf="role"><button mat-raised-button>Calendar</button></div>
+  <div class="sandbox" *ngIf="role"><button mat-raised-button>New sandbox</button></div>
+  <div class="username" *ngIf="role">{{ userName }}</div>
+  <div class="button_login" *ngIf="!role"><button mat-raised-button>Log in</button></div>
+  <div class="button_logout" *ngIf="role"><button mat-raised-button>Log out</button></div>
 </div>
