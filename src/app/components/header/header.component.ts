@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  private roles = { // till not back-end
+  private roles = {
+    // till not back-end
     nobody: '',
     admin: 'admin',
     manager: 'manager',
