@@ -18,7 +18,9 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:prettier/recommended",
+        "prettier"
       ],
       "rules": {
         "no-var": "error",
@@ -33,25 +35,25 @@
         "space-infix-ops":"error",
         "func-call-spacing": "error",
         "space-in-parens": ["error", "never"],
+        "max-len": ["error", { "code": 140 }],
         "quotes": ["error", "single",
           {
             "allowTemplateLiterals": true
           }
         ],
-        "array-element-newline": [
-          "error",
-          {
-            "multiline": true
-          }
-        ],
+        // "array-element-newline": [
+        //   "error",
+        //   {
+        //     "multiline": false
+        //   }
+        // ],
         "no-unused-vars": 1,
         "@typescript-eslint/typedef": [
           "error",
-          {
-            "arrowParameter": true
-          }
+          { "arrowParameter": true }
         ],
-        "@typescript-eslint/no-inferrable-types": 1,
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/no-inferrable-types": 0,
 
         "@typescript-eslint/no-unsafe-member-access": 0,
         "@typescript-eslint/no-unsafe-assignment": 0,
