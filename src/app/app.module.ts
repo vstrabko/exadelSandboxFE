@@ -10,9 +10,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
-  declarations: [	AppComponent,
-      HomePageComponent
-   ],
+  declarations: [AppComponent, HomePageComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule, // required animations module
