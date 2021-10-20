@@ -1,7 +1,9 @@
+@import '/src/styles.scss';
+
 .header {
 
   height: 60px;
-  background-color: #E5EBF0;
+  background-color: $backColor;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,19 +14,21 @@
     height: 50px;
   }
 
-  .candidates, .calendar, .sandbox {
+  // .candidates, .calendar, .sandbox {
+    .user-buttons {
 
-    button {
-      background-color: #445063;
-      color: #fff;
+    a {
+      background-color: $headerButtonsColor;
+      color: $noColor;
       height: 50%;
+      margin: 5px;
 
     }
   }
 
-  .button_login, .button_logout {
+  .button-login, .button-logout {
     button {
-      background-color: #3794C7;
+      background-color: $logButtonsColor;
       color: #fff;
       height: 50%;
       border-radius: 20px 0 0 20px;

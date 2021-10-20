@@ -2,7 +2,7 @@ import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/templa
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'main-header',
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -17,7 +17,7 @@ export class HeaderComponent {
     mentor: 'mentor'
   }
 
-  public role: string = this.roles.interviewer; //role from back-end
+  public role: string = this.roles.manager; //role from back-end
 
   public userName: string = 'Mikhail'; //name of user from back-end
 }
