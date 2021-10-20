@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  constructor(private userService: UserService) {}
   title = 'exadelsandbox';
+
+  unicorns$ = this.userService.get();
 }

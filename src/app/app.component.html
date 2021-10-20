@@ -353,6 +353,10 @@
   </div>
 
   <!-- Resources -->
+  <h2>Unicorns List</h2>
+  <p *ngFor="let unicorn of unicorns$ | async">
+    {{ unicorn.name }}
+  </p>
   <h2>Resources</h2>
   <p>Here are some links to help you get started:</p>
 
