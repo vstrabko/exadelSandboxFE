@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { HeaderComponent } from './copmonents/header/header.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HeaderComponent } from './copmonents/header/header.component';
     AppComponent,
     HeaderComponent
   ],
+
   imports: [
     CommonModule,
     BrowserAnimationsModule, // required animations module
@@ -24,6 +26,6 @@ import { HeaderComponent } from './copmonents/header/header.component';
     MatButtonModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

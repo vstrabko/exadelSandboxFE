@@ -7,7 +7,14 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint exadelsandbox --fix",
+    "lint:ci": "ng lint exadelsandbox",
+    "postinstall": "husky install && husky add .husky/pre-commit \"npx lint-staged\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --relative"
+    }
   },
   "private": true,
   "dependencies": {
@@ -40,12 +47,21 @@
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.2",
     "jasmine-core": "~3.7.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
     "typescript": "^4.3.5"
+  },
+  "engines": {
+    "node": "",
+    "npm": ""
   }
 }
