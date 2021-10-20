@@ -1,0 +1,36 @@
+@import '../shared/styles/colors.scss';
+
+.header {
+
+  height: 60px;
+  background-color: $backColor;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+  align-items: center;
+
+  img {
+    height: 50px;
+  }
+
+    .user-buttons {
+
+    a {
+      background-color: $headerButtonsColor;
+      color: $noColor;
+      height: 50%;
+      margin: 5px;
+
+    }
+  }
+
+  .button-login, .button-logout {
+    button {
+      background-color: $logButtonsColor;
+      color: #fff;
+      height: 50%;
+      border-radius: 20px 0 0 20px;
+    }
+  }
+}
