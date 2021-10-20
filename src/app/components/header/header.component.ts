@@ -15,7 +15,7 @@ export class HeaderComponent {
     mentor: 'mentor',
   };
 
-  public role: string = this.roles.nobody; //role from back-end
+  public role: string = this.roles.admin; //role from back-end
 
   public userName: string = 'Mikhail'; //name of user from back-end
 }
