@@ -9,9 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomePageComponent } from './home-page/home-page.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HeaderModule } from './components/header/header.module';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent],
+  declarations: [AppComponent, HeaderComponent, HomePageComponent],
 
   imports: [
     CommonModule,
