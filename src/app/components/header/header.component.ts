@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  private roles = {
-    // till not back-end
+  private roles = { // till not back-end
     nobody: '',
     admin: 'admin',
     manager: 'manager',
@@ -16,7 +15,7 @@ export class HeaderComponent {
     mentor: 'mentor',
   };
 
-  public role: string = this.roles.admin; //role from back-end
+  public role: string = this.roles.nobody; //role from back-end
 
   public userName: string = 'Mikhail'; //name of user from back-end
 }
