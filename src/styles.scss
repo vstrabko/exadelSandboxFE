@@ -17,7 +17,7 @@ $shadow-color: #4b45485e;
     box-shadow: 2px 2px 4px 0 $shadow-color;
     transition-duration: 0.2s;
     &:hover {
-      box-shadow: 4px 4px 4px 0 shadow-color;
+      box-shadow: 4px 4px 4px 0 $shadow-color;
       transform: translateY(-1px);
       cursor: pointer;
     }
