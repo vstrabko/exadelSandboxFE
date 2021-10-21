@@ -1,4 +1,4 @@
-name: Push Validations
+name: Push-Validations
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
         run: npm run lint:ci
 
       - name: run test
-        run: npm test
+        run: npm run test
 
       - name: run build
         run: npm run build
