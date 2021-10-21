@@ -8,9 +8,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderModule } from './components/header/header.module';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterModule } from './components/footer/footer.module';
+import { HomePageModule } from './pages/home-page/home-page.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +21,8 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
-    HomePageComponent,
-    FooterComponent,
+    HomePageModule,
+    FooterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
