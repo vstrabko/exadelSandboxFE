@@ -12,13 +12,12 @@
       <mat-label>Enter your password</mat-label>
       <input matInput type="password" [formControl]="password" required>
       <mat-error *ngIf="password.hasError('required')">Please, enter your password</mat-error>
-      <mat-error *ngIf="password.hasError('required')">Your password must be at least 6 characters long</mat-error>
     </mat-form-field>
     <div class="buttons">
-      <button class="btn unfilled-btn" type="button" (click)="cancel()">cancel</button>
+      <button class="btn unfilled-btn" type="button" (click)="cancel()">Cancel</button>
       <button class="btn filled-btn"
               type="submit"
-      >log in</button>
+      >Log in</button>
     </div>
   </form>
 </app-modal-window>

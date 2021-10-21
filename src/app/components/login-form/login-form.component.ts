@@ -8,9 +8,9 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class LoginFormComponent {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
-  title = 'Log in';
+  public title = 'Log in';
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  password = new FormControl('', [Validators.required]);
 
   submit(): void {
     if (this.email.valid && this.password.valid) {
@@ -21,7 +21,6 @@ export class LoginFormComponent {
       this.modal.emit(false);
     }
   }
-
   cancel(): void {
     this.modal.emit(false);
   }
