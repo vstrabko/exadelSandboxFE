@@ -10,10 +10,10 @@ import { AppComponent } from './app.component';
 
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderModule } from './components/header/header.module';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent],
-
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule, // required animations module
@@ -21,6 +21,8 @@ import { HeaderModule } from './components/header/header.module';
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
+    HomePageComponent,
+    FooterComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
