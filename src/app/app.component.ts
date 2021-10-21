@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { User } from './models/user.model';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -6,9 +7,15 @@ import { UserService } from './services/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private userService: UserService) {}
   title = 'exadelsandbox';
+  users$ = this.userService.get();
+  userById = {};
 
-  unicorns$ = this.userService.get();
+  ngOnInit(): void {
+    this.userService.getById(1).subscribe((user: User) => {
+      this.userById = user;
+    });
+  }
 }

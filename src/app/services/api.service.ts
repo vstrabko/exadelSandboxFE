@@ -23,9 +23,8 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   }
 
   public getById(id: number): Observable<T> {
-    return this.httpClient
-      .get<T>(`${this.apiUrl}/${id}`)
-      .pipe(map((result: T) => new this.tConstructor(result)));
+    return this.httpClient.get<T>(`${this.apiUrl}/${id}`);
+    // .pipe(map((result: T) => new this.tConstructor(result)));
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<T> {
