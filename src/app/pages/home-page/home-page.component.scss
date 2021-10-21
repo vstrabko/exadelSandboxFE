@@ -1,9 +1,7 @@
-$background-content:rgba(37, 51, 73, 0.85);
-$border-color: rgba(68, 80, 99, 0.26);
-$box-shadow: rgba(0, 0, 0, 0.25);
+@import '../../shared/constants/colors.scss';
+
 $height-home-page:  calc(100vh - 110px);
 $width-content: calc(100% - 234px);
-
 .wrapper-home-page {
   height: $height-home-page
 }
