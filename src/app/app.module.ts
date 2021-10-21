@@ -11,7 +11,7 @@ import { HeaderModule } from './components/header/header.module';
 import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule, // required animations module
