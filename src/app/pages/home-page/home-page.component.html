@@ -1,0 +1,23 @@
+<div class="wrapper-home-page">
+  <div class="wrapper-content">
+    <div class="wrapper-drop-box">
+      <select class="drop-box">
+        <option *ngFor="let v of values" [value]="v">
+          {{ v.name }}
+        </option>
+      </select>
+    </div>
+    <div class="wrapper-description">
+      <div class="description">Описание Sandbox</div>
+    </div>
+    <div class="wrapper-sandbox-interviews">
+      <div class="content-sandbox-interviews">
+        <div class="sandbox-interviews"></div>
+        <div class="wrapper-btns">
+          <button class="btn unfilled-btn btn-home-page">отменить</button>
+          <button class="btn filled-btn btn-home-page">отправить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
