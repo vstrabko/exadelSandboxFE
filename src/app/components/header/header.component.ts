@@ -15,8 +15,15 @@ export class HeaderComponent {
     interviewer: 'interviewer',
     mentor: 'mentor',
   };
+  public isVisible = false;
 
   public role: string = this.roles.admin; //role from back-end
-
   public userName: string = 'Mikhail'; //name of user from back-end
+
+  openModal(): void {
+    this.isVisible = true;
+  }
+  closeModal(): void {
+    this.isVisible = false;
+  }
 }
