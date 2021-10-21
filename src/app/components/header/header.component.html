@@ -6,6 +6,11 @@
     <a mat-raised-button *ngIf="role" id="createNewSandbox">New sandbox</a>
   </nav>
   <div class="username" *ngIf="role">{{ userName }}</div>
-  <div class="button-login" *ngIf="!role"><button mat-raised-button>Log in</button></div>
-  <div class="button-logout" *ngIf="role"><button mat-raised-button>Log out</button></div>
+  <div class="button-login" *ngIf="!role">
+    <button mat-raised-button (click)="showModal()">Log in</button>
+  </div>
+  <div class="button-logout" *ngIf="role">
+    <button mat-raised-button>Log out</button>
+  </div>
 </header>
+<app-login-form *ngIf="showIt" (modal)="closeModal()"></app-login-form>

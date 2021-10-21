@@ -1,0 +1,24 @@
+<app-modal-window [title]="title">
+  <form (ngSubmit)="submit()" class="login-form">
+    <div class="form-field">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput type="email" placeholder="pat@example.com" [formControl]="email" required>
+        <mat-error *ngIf="email.hasError('required')">Please, enter your email</mat-error>
+        <mat-error *ngIf="email.hasError('email')">Please, enter a valid email</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Enter your password</mat-label>
+      <input matInput type="password" [formControl]="password" required>
+      <mat-error *ngIf="password.hasError('required')">Please, enter your password</mat-error>
+      <mat-error *ngIf="password.hasError('required')">Your password must be at least 6 characters long</mat-error>
+    </mat-form-field>
+    <div class="buttons">
+      <button class="btn unfilled-btn" type="button" (click)="cancel()">cancel</button>
+      <button class="btn filled-btn"
+              type="submit"
+      >log in</button>
+    </div>
+  </form>
+</app-modal-window>
