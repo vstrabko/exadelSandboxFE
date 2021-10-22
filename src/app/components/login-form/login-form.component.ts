@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { REGEXP } from '../../shared/constants/validators';
 
 @Component({
   selector: 'app-login-form',
@@ -9,8 +10,8 @@ import { FormControl, Validators } from '@angular/forms';
 export class LoginFormComponent {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   public title = 'Log in';
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
+  email = new FormControl( null, [Validators.required, Validators.pattern(REGEXP.email)]);
+  password = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.password_length)]);
 
   submit(): void {
     if (this.email.valid && this.password.valid) {
