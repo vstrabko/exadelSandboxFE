@@ -10,8 +10,11 @@ import { REGEXP } from '../../shared/constants/validators';
 export class LoginFormComponent {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   public title = 'Log in';
-  email = new FormControl( null, [Validators.required, Validators.pattern(REGEXP.email)]);
-  password = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.password_length)]);
+  email = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.email)]);
+  password = new FormControl(null, [
+    Validators.required,
+    Validators.pattern(REGEXP.password_length),
+  ]);
 
   submit(): void {
     if (this.email.valid && this.password.valid) {
