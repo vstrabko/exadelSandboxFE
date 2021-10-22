@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
-import {FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { ListSandboxes, Employee } from '../../interfaces/interfaces'
+import { ListSandboxes, Employee } from '../../interfaces/interfaces';
 @Component({
   selector: 'app-create-sandbox-page',
   templateUrl: './create-sandbox-page.component.html',
-  styleUrls: ['./create-sandbox-page.component.scss']
+  styleUrls: ['./create-sandbox-page.component.scss'],
 })
 export class CreateSandboxPageComponent {
   public sandboxes: ListSandboxes[] = [
@@ -32,24 +32,24 @@ export class CreateSandboxPageComponent {
     { id: 1, firstName: 'Ivan', lastName: 'Lysenko', tech: 'JS' },
     { id: 2, firstName: 'Ivan', lastName: 'Malyshev', tech: 'JS' },
     { id: 3, firstName: 'Ivan', lastName: 'Alymova', tech: '.NET' },
-    { id: 4, firstName: 'Ivan', lastName: 'Buynov', tech: '.NET'  },
+    { id: 4, firstName: 'Ivan', lastName: 'Buynov', tech: '.NET' },
     { id: 5, firstName: 'Ivan', lastName: 'Raykin', tech: 'JS' },
-    { id: 6, firstName: 'Ivan', lastName: 'Mayorov', tech: '.NET'  },
-    { id: 7, firstName: 'Ivan', lastName: 'Zaykov', tech: 'JS'  },
+    { id: 6, firstName: 'Ivan', lastName: 'Mayorov', tech: '.NET' },
+    { id: 7, firstName: 'Ivan', lastName: 'Zaykov', tech: 'JS' },
   ];
 
   public listMentors: Employee[] = [
-    { id: 1, firstName: 'Ivan', lastName: 'Lebedeva', tech: 'JS'  },
-    { id: 2, firstName: 'Ivan', lastName: 'Etkin', tech: '.NET'  },
-    { id: 3, firstName: 'Ivan', lastName: 'Yerin', tech: '.NET'  },
-    { id: 4, firstName: 'Ivan', lastName: 'Astafyev', tech: 'JS'  },
-    { id: 5, firstName: 'Ivan', lastName: 'Parfenov', tech: 'JS'  },
-    { id: 6, firstName: 'Ivan', lastName: 'Kiselyov', tech: 'JS'  },
-    { id: 7, firstName: 'Ivan', lastName: 'Belyaeva', tech: '.NET'  },
+    { id: 1, firstName: 'Ivan', lastName: 'Lebedeva', tech: 'JS' },
+    { id: 2, firstName: 'Ivan', lastName: 'Etkin', tech: '.NET' },
+    { id: 3, firstName: 'Ivan', lastName: 'Yerin', tech: '.NET' },
+    { id: 4, firstName: 'Ivan', lastName: 'Astafyev', tech: 'JS' },
+    { id: 5, firstName: 'Ivan', lastName: 'Parfenov', tech: 'JS' },
+    { id: 6, firstName: 'Ivan', lastName: 'Kiselyov', tech: 'JS' },
+    { id: 7, firstName: 'Ivan', lastName: 'Belyaeva', tech: '.NET' },
   ];
-    range = new FormGroup({
+  range = new FormGroup({
     start: new FormControl('', [Validators.required]),
-    end: new FormControl('', [Validators.required])
+    end: new FormControl('', [Validators.required]),
   });
   sandbox = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
@@ -57,7 +57,7 @@ export class CreateSandboxPageComponent {
   interviewers = new FormControl('', [Validators.required]);
   mentors = new FormControl('', [Validators.required]);
 
-  create():void{
-      console.log('create')
-    }
+  create(): void {
+    console.log('create');
+  }
 }
