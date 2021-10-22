@@ -17,6 +17,6 @@ export class HomePageComponent {
   ];
   constructor(private tosterMessage: ToastService){}
   testLog(){
-    this.tosterMessage.showSuccess('Вы успешно отправили форму', 'ОТПРАВЛЕНО')
+    this.tosterMessage.showSuccess('Вы успешно отправили форму', 'ОТПРАВЛЕНО');
   }
 }
