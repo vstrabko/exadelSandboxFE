@@ -15,13 +15,8 @@ export class HomePageComponent {
     { id: 5, name: 'JS + Java + QA' },
     { id: 6, name: 'DevOps' },
   ];
-
-  constructor(private tosterMessage: ToastService){
-
-  }
-
+  constructor(private tosterMessage: ToastService){}
   testLog(){
     this.tosterMessage.showSuccess('Вы успешно отправили форму', 'ОТПРАВЛЕНО')
-
   }
 }
