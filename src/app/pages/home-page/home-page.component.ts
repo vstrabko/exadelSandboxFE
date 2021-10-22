@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-home-page',
@@ -14,4 +15,13 @@ export class HomePageComponent {
     { id: 5, name: 'JS + Java + QA' },
     { id: 6, name: 'DevOps' },
   ];
+
+  constructor(private tosterMessage: ToastService){
+
+  }
+
+  testLog(){
+    this.tosterMessage.showSuccess('Вы успешно отправили форму', 'ОТПРАВЛЕНО')
+
+  }
 }
