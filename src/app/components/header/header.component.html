@@ -9,8 +9,8 @@
   <div class="button-login" *ngIf="role">
     <button mat-raised-button (click)="openModal()">Log in</button>
   </div>
-  <div class="button-logout" *ngIf="role">
+  <!-- <div class="button-logout" *ngIf="role">
     <button mat-raised-button>Log out</button>
-  </div>
+  </div> -->
 </header>
 <app-login-form *ngIf="isVisible" (modal)="closeModal()"></app-login-form>

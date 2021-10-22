@@ -19,6 +19,7 @@ export class LoginFormComponent {
         password: this.password.value,
       };
       this.modal.emit(false);
+      // document.location = '/sandbox'
     }
   }
   cancel(): void {
