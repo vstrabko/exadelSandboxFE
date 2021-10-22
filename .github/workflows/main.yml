@@ -1,0 +1,27 @@
+name: Push-Validations
+
+on:
+  push:
+    branches: [master, dev, feature/*, bugfix/*, chore/*]
+
+jobs:
+  lint-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: install
+        run: npm ci
+
+      - name: run lint
+        run: npm run lint:ci
+
+      - name: run build
+        run: npm run build
+
+
+
