@@ -4,7 +4,7 @@
   <div class="wrapper">
     <mat-form-field appearance="fill" class="select" >
       <mat-label>Sandbox</mat-label>
-      <mat-select required>
+      <mat-select [formControl]="sandbox" required>
         <mat-option *ngFor="let sandbox of sandboxes" [value]="sandbox.name">
           {{sandbox.name}}
         </mat-option>
@@ -14,8 +14,8 @@
     <mat-form-field appearance="fill" class="datepicker">
       <mat-label>Sandbox period</mat-label>
       <mat-date-range-input [formGroup]="range" [rangePicker]="picker" required>
-        <input matStartDate formControlName="start" placeholder="Start date">
-        <input matEndDate formControlName="end" placeholder="End date">
+        <input matStartDate formControlName="start" placeholder="Start date" required>
+        <input matEndDate formControlName="end" placeholder="End date" required>
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
@@ -23,49 +23,47 @@
       <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
       <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
 
-      <!--      <p>Selected range: {{range.value | json}}</p>-->
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="number-candidates ">
+    <mat-form-field appearance="fill" class="number-candidates">
       <mat-label>Number of candidates</mat-label>
-      <input type="number" matInput>
+      <input type="number" min="0" matInput>
     </mat-form-field>
 
   </div>
 
-  <mat-form-field class="description" appearance="fill">
+  <mat-form-field class="description" appearance="fill" >
     <mat-label>Sandbox description</mat-label>
-    <textarea matInput required></textarea>
+    <textarea matInput [formControl]="description" required></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="employee">
-    <mat-label>Recruters</mat-label>
-    <mat-select multiple required>
-      <mat-option *ngFor="let recruter of recruters" [value]="recruter.lastName">
-        {{recruter.lastName}}
+    <mat-label>Recruiters</mat-label>
+    <mat-select multiple [formControl]="recruiters" required>
+      <mat-option *ngFor="let recruiter of listRecruiters" [value]="recruiter.lastName">
+        {{recruiter.firstName + ' ' + recruiter.lastName}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="employee">
     <mat-label>Interviewers</mat-label>
-    <mat-select multiple required>
-      <mat-option *ngFor="let interviewer of interviewers" [value]="interviewer.lastName">
-        {{interviewer.lastName}}
+    <mat-select multiple [formControl]="interviewers" required>
+      <mat-option *ngFor="let interviewer of listInterviewers" [value]="interviewer.lastName">
+        {{interviewer.firstName + ' ' + interviewer.lastName  + ' ' + interviewer.tech}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="employee">
     <mat-label>Mentors</mat-label>
-    <mat-select multiple required>
-      <mat-option *ngFor="let mentor of mentors" [value]="mentor.lastName">
-        {{mentor.lastName}}
+    <mat-select multiple [formControl]="mentors" required>
+      <mat-option *ngFor="let mentor of listMentors" [value]="mentor.lastName">
+        {{mentor.firstName + ' ' + mentor.lastName + ' ' + mentor.tech}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <div class="btn-wrapper">
     <button class="btn filled-btn position" type="submit" (click)="create()">Create</button>
   </div>
-
 </form>

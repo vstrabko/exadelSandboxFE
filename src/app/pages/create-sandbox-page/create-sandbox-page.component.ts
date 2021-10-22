@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Sandbox, Employee } from '../../interfaces/interfaces'
+import { ListSandboxes, Employee } from '../../interfaces/interfaces'
 @Component({
   selector: 'app-create-sandbox-page',
   templateUrl: './create-sandbox-page.component.html',
   styleUrls: ['./create-sandbox-page.component.scss']
 })
 export class CreateSandboxPageComponent {
-  public sandboxes: Sandbox[] = [
+  public sandboxes: ListSandboxes[] = [
     { id: 1, name: 'JS + .NET' },
     { id: 2, name: 'JS + Java' },
     { id: 3, name: 'DevOps' },
@@ -17,40 +17,47 @@ export class CreateSandboxPageComponent {
     { id: 6, name: 'DevOps' },
     { id: 7, name: 'BA' },
   ];
-  public recruters: Employee[] = [
-    { id: 1, lastName: 'Ivanov' },
-    { id: 2, lastName: 'Petrov' },
-    { id: 3, lastName: 'Sidorov' },
-    { id: 4, lastName: 'Popov' },
-    { id: 5, lastName: 'Sokolov' },
-    { id: 6, lastName: 'Smirnov' },
-    { id: 7, lastName: 'Kuznecov' },
+
+  public listRecruiters: Employee[] = [
+    { id: 1, firstName: 'Ivan', lastName: 'Ivanov' },
+    { id: 2, firstName: 'Ivan', lastName: 'Petrov' },
+    { id: 3, firstName: 'Ivan', lastName: 'Sidorov' },
+    { id: 4, firstName: 'Ivan', lastName: 'Popov' },
+    { id: 5, firstName: 'Ivan', lastName: 'Sokolov' },
+    { id: 6, firstName: 'Ivan', lastName: 'Smirnov' },
+    { id: 7, firstName: 'Ivan', lastName: 'Kuznecov' },
   ];
 
-  public interviewers: Employee[] = [
-    { id: 1, lastName: 'Lysenko' },
-    { id: 2, lastName: 'Malyshev' },
-    { id: 3, lastName: 'Alymova' },
-    { id: 4, lastName: 'Buynov' },
-    { id: 5, lastName: 'Raykin' },
-    { id: 6, lastName: 'Mayorov' },
-    { id: 7, lastName: 'Zaykov' },
+  public listInterviewers: Employee[] = [
+    { id: 1, firstName: 'Ivan', lastName: 'Lysenko', tech: 'JS' },
+    { id: 2, firstName: 'Ivan', lastName: 'Malyshev', tech: 'JS' },
+    { id: 3, firstName: 'Ivan', lastName: 'Alymova', tech: '.NET' },
+    { id: 4, firstName: 'Ivan', lastName: 'Buynov', tech: '.NET'  },
+    { id: 5, firstName: 'Ivan', lastName: 'Raykin', tech: 'JS' },
+    { id: 6, firstName: 'Ivan', lastName: 'Mayorov', tech: '.NET'  },
+    { id: 7, firstName: 'Ivan', lastName: 'Zaykov', tech: 'JS'  },
   ];
 
-  public mentors: Employee[] = [
-    { id: 1, lastName: 'Lebedeva' },
-    { id: 2, lastName: 'Etkin' },
-    { id: 3, lastName: 'Yerin' },
-    { id: 4, lastName: 'Astafyev' },
-    { id: 5, lastName: 'Parfenov' },
-    { id: 6, lastName: 'Kiselyov' },
-    { id: 7, lastName: 'Belyaeva' },
+  public listMentors: Employee[] = [
+    { id: 1, firstName: 'Ivan', lastName: 'Lebedeva', tech: 'JS'  },
+    { id: 2, firstName: 'Ivan', lastName: 'Etkin', tech: '.NET'  },
+    { id: 3, firstName: 'Ivan', lastName: 'Yerin', tech: '.NET'  },
+    { id: 4, firstName: 'Ivan', lastName: 'Astafyev', tech: 'JS'  },
+    { id: 5, firstName: 'Ivan', lastName: 'Parfenov', tech: 'JS'  },
+    { id: 6, firstName: 'Ivan', lastName: 'Kiselyov', tech: 'JS'  },
+    { id: 7, firstName: 'Ivan', lastName: 'Belyaeva', tech: '.NET'  },
   ];
     range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
+    start: new FormControl('', [Validators.required]),
+    end: new FormControl('', [Validators.required])
   });
-    create():void{
+  sandbox = new FormControl('', [Validators.required]);
+  description = new FormControl('', [Validators.required]);
+  recruiters = new FormControl('', [Validators.required]);
+  interviewers = new FormControl('', [Validators.required]);
+  mentors = new FormControl('', [Validators.required]);
+
+  create():void{
       console.log('create')
     }
 }
