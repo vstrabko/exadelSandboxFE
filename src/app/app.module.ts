@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
@@ -20,6 +21,8 @@ import { HomePageModule } from './pages/home-page/home-page.module';
     ToastrModule.forRoot(), // ToastrModule added
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    HeaderModule,
     HeaderModule,
     HomePageModule,
     FooterModule,

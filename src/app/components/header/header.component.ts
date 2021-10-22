@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   private roles = {
-    // till not back-end
+    //todo: till not back-end
     nobody: '',
     admin: 'admin',
     manager: 'manager',
@@ -17,8 +16,8 @@ export class HeaderComponent {
   };
   public isVisible = false;
 
-  public role: string = this.roles.admin; //role from back-end
-  public userName: string = 'Mikhail'; //name of user from back-end
+  public role: string = this.roles.admin; //todo: role from back-end
+  public userName: string = 'Mikhail'; //todo: name of user from back-end
 
   openModal(): void {
     this.isVisible = true;
