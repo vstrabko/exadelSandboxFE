@@ -8,9 +8,8 @@ describe('CreateSandboxPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateSandboxPageComponent ]
-    })
-    .compileComponents();
+      declarations: [CreateSandboxPageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
