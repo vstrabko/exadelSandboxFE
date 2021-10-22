@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
 import { HomePageModule } from './pages/home-page/home-page.module';
+import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sandbox-page.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { HomePageModule } from './pages/home-page/home-page.module';
     HeaderModule,
     HomePageModule,
     FooterModule,
+    CreateSandboxPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
