@@ -19,7 +19,7 @@ export class LoginFormComponent {
         password: this.password.value,
       };
       this.modal.emit(false);
-      document.location.href = '/sandbox'
+      Location.go('/sandbox')
     }
   }
   cancel(): void {
