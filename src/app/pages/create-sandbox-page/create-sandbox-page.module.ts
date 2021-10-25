@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core'
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [CreateSandboxPageComponent],
@@ -19,8 +19,8 @@ import { MatNativeDateModule } from '@angular/material/core'
     MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
-  exports: [CreateSandboxPageComponent]
+  exports: [CreateSandboxPageComponent],
 })
-export class CreateSandboxPageModule { }
+export class CreateSandboxPageModule {}

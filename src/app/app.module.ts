@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
@@ -21,6 +22,8 @@ import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sand
     ToastrModule.forRoot(), // ToastrModule added
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    HeaderModule,
     HeaderModule,
     HomePageModule,
     FooterModule,
