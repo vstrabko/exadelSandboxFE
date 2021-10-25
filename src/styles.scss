@@ -1,4 +1,5 @@
 @import '~ngx-toastr/toastr';
+@import '../src/app/shared/constants/colors.scss';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -20,14 +21,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
   }
   .unfilled-btn {
-    background-color: $white-color;
+    background-color: $noColor;
     border: 1px solid #b8bcc5;
-    color: $blue-color;
+    color: $blueColor;
   }
 
   .filled-btn {
-    background-color: $blue-color;
-    color: $white-color;
+    background-color: $blueColor;
+    color: $noColor;
   }
 
 // Button end
