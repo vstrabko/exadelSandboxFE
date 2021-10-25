@@ -9,7 +9,7 @@ import { REGEXP } from '../../shared/constants/validators';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
-  constructor(private router: Router){}
+  constructor(private router: Router) {}
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   public title = 'Log in';
   email = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.email)]);
@@ -25,7 +25,6 @@ export class LoginFormComponent {
         password: this.password.value,
       };
       this.modal.emit(false);
-      this.router.navigateByUrl("/sandbox");
     }
   }
   cancel(): void {
