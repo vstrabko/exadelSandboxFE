@@ -5,7 +5,7 @@
   height: $height-home-page;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
 }
 
 .img-404 {
@@ -25,7 +25,7 @@
 
 .wrapper-content {
   position: absolute;
-  color: #f02020;
+  color: $noColor;
   width: 382px;
   height: 90px;
   display: flex;
