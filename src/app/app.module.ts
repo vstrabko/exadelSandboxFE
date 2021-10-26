@@ -13,6 +13,8 @@ import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
 import { HomePageModule } from './pages/home-page/home-page.module';
 import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sandbox-page.module';
+import { CandidateModule } from './components/candidate/candidate.module';
+import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,8 @@ import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sand
     HomePageModule,
     FooterModule,
     CreateSandboxPageModule,
+    CandidateModule,
+    CandidateCardPopupModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

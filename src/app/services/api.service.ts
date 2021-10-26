@@ -4,7 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { ResourceModel } from '../models/resource.model';
 
 export abstract class ApiService<T extends ResourceModel<T>> {
-  constructor(private httpClient: HttpClient, protected apiUrl: string) {}
+  constructor(
+    private httpClient: HttpClient,
+    private tConstructor: { new (m: Partial<T>, ...args: unknown[]): T },
+    protected apiUrl: string,
+  ) {}
 
   public create(resource: Partial<T> & { toJson: () => T }): Observable<T> {
     return this.httpClient.post<T>(`${this.apiUrl}`, resource.toJson());

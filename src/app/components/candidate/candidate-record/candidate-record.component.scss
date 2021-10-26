@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    background: rgba(37, 51, 73, 0.85);    
+}
+
+.content-wrapper {
+    font-family: "Roboto";
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(221, 221, 221);
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.cirlce {
+    display: inline-block;
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.status-wrapper {
+    & > span {
+        margin-left: 3px;
+    }
+}
