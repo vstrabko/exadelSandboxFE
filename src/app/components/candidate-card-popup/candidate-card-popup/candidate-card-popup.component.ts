@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 interface Status {
   value: string;
@@ -10,9 +10,7 @@ interface Status {
   templateUrl: './candidate-card-popup.component.html',
   styleUrls: ['./candidate-card-popup.component.scss'],
 })
-export class CandidateCardPopupComponent implements OnInit {
-  constructor() {}
-
+export class CandidateCardPopupComponent {
   public title = 'Candidate card';
   public classFlag: boolean = false;
   status: Status[] = [
@@ -20,6 +18,4 @@ export class CandidateCardPopupComponent implements OnInit {
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
-
-  ngOnInit(): void {}
 }
