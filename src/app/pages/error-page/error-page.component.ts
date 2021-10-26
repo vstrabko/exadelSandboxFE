@@ -7,6 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorPageComponent implements OnInit {
   ngOnInit(): void {
-    console.log('1');
+    console.log('the page does not exist');
   }
 }
