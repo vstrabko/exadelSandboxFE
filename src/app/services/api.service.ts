@@ -11,33 +11,33 @@ export abstract class ApiService<T extends ResourceModel<T>> {
     protected apiUrl: string,
   ) {}
 
-  create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+  public create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
       .post<T>(`${this.apiUrl}`, resource.toJson())
-      .pipe(catchError(this.erroHandler));
+      .pipe(catchError(this.errorHandler));
   }
 
-  get(): Observable<any> {
-    return this.httpClient.get<T[]>(`${this.apiUrl}`).pipe(catchError(this.erroHandler));
+  public get(): Observable<any> {
+    return this.httpClient.get<T[]>(`${this.apiUrl}`).pipe(catchError(this.errorHandler));
   }
 
-  getById(id: number): Observable<any> {
-    return this.httpClient.get<T>(`${this.apiUrl}/${id}`).pipe(catchError(this.erroHandler));
+  public getById(id: number): Observable<any> {
+    return this.httpClient.get<T>(`${this.apiUrl}/${id}`).pipe(catchError(this.errorHandler));
   }
 
-  update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+  public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
       .put<T>(`${this.apiUrl}/${resource._id}`, resource.toJson())
-      .pipe(catchError(this.erroHandler));
+      .pipe(catchError(this.errorHandler));
   }
 
-  delete(id: number): Observable<void | any> {
+  public delete(id: number): Observable<void | any> {
     return this.httpClient
       .delete<void | T>(`${this.apiUrl}/${id}`)
-      .pipe(catchError(this.erroHandler));
+      .pipe(catchError(this.errorHandler));
   }
 
-  private erroHandler(err: HttpErrorResponse): ObservableInput<any> {
+  private errorHandler(err: HttpErrorResponse): ObservableInput<any> {
     if (err.error instanceof Error) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', err.error.message);
