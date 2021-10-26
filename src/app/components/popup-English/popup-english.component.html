@@ -1,0 +1,32 @@
+<app-modal-window [title]="title">
+  <div class="wrapper-popup-English">
+    <div class="wrapper-select">
+      <mat-form-field appearance="fill">
+        <mat-label>English Level</mat-label>
+        <mat-select>
+          <mat-option value="1">Beginner</mat-option>
+          <mat-option value="2">Elementary A1</mat-option>
+          <mat-option value="3">Pre-intermediate A2</mat-option>
+          <mat-option value="4">Low Intermediate B1</mat-option>
+          <mat-option value="5">Intermediate B1</mat-option>
+          <mat-option value="6">Upper Intermediate B2</mat-option>
+          <mat-option value="7">Pre-advanced C1</mat-option>
+          <mat-option value="8">Advanced C2</mat-option>
+          <mat-option value="9">Very Advanced C2</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="wrapper-review">
+      <textarea
+        placeholder="Write your review..."
+        rows="15"
+        cols="55"
+        name="text-review"
+      ></textarea>
+    </div>
+    <div class="wrapper-btn">
+      <button class="btn unfilled-btn" type="button">Cancel</button>
+      <button class="btn filled-btn" type="button">OK</button>
+    </div>
+  </div>
+</app-modal-window>

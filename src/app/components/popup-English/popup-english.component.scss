@@ -1,0 +1,21 @@
+.wrapper-popup-English {
+  width: 500px;
+  height: 420px;
+}
+
+.wrapper-select,
+.wrapper-review,
+.wrapper-btn {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 0 0;
+}
+
+textarea {
+  background-color: #C4C4C4;
+  border: 1px solid #888;
+}
+
+.mat-form-field {
+  width: 427px;
+}
