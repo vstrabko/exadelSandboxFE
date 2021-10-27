@@ -10,10 +10,16 @@ import { User } from 'src/app/models/user.model';
 export class CandidateListComponent implements OnInit {
   constructor(private getData: UserService) {}
   showPopup: boolean;
+  candidate:User;
+  users: User[];
+
+  getUser(user: User): void {
+    this.candidate = user;
+  }
   openCard(): void {
     this.showPopup = !this.showPopup;
   }
-  users: User[];
+
   ngOnInit(): void {
     this.getData.get().subscribe((data: any): void => {
       this.users = data;

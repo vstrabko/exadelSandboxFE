@@ -1,8 +1,8 @@
-<app-modal-window [title]="title" [hidden]="classFlag">
+<app-modal-window [title]="title">
     <div class="wrapper">
         <section class="section first-column">
             <div class="two-column">
-                <mat-card>Name Surname</mat-card>
+                <mat-card>{{user.name}}</mat-card>
                 <mat-form-field appearance="fill">
                 <mat-label>Status</mat-label>
                 <mat-select>
@@ -24,7 +24,7 @@
                 <mat-card>Raiting 8</mat-card>
             </div>
             <div class="raiting two-column">
-                <button class="btn unfilled-btn" (click)="classFlag = !classFlag">close</button>
+                <button class="btn unfilled-btn" (click)="cancel()">close</button>
                 <button class="btn filled-btn">save</button>
             </div>            
         </section>

@@ -17,5 +17,6 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     MatInputModule,
   ],
+  exports: [CandidateCardPopupComponent],
 })
 export class CandidateCardPopupModule {}
