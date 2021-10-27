@@ -1,19 +1,18 @@
 .wrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 0 10px;
+    margin-top: 10px;
 }
 
 .content-wrapper {
-    font-family: "Roboto";
     width: 100%;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    background-color: rgb(221, 221, 221);
     margin-bottom: 10px;
-    border-radius: 10px;
 }
 
 .cirlce {
@@ -30,3 +29,9 @@
         margin-left: 3px;
     }
 }
+
+.example-margin {
+    margin: 0 12px;
+    position: relative;
+  bottom: 5px;
+  }
