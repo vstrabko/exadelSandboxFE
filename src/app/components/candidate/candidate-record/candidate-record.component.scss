@@ -1,9 +1,12 @@
+@import '../../../shared/constants/colors.scss';
+@import '../../../shared/constants/otherStyles.scss';
+
 .wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
-    margin-top: 10px;
+    width: $width-content;
+    margin: 10px auto; 
 }
 
 .content-wrapper {
@@ -12,7 +15,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
 }
 
 .cirlce {
@@ -32,6 +34,4 @@
 
 .example-margin {
     margin: 0 12px;
-    position: relative;
-  bottom: 5px;
-  }
+}
