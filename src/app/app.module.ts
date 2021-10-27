@@ -15,6 +15,7 @@ import { HomePageModule } from './pages/home-page/home-page.module';
 import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sandbox-page.module';
 import { CandidateModule } from './components/candidate/candidate.module';
 import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
+import { ErrorPageModule } from './pages/error-page/error-page.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { CandidateCardPopupModule } from './components/candidate-card-popup/cand
     CreateSandboxPageModule,
     CandidateModule,
     CandidateCardPopupModule,
+    ErrorPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

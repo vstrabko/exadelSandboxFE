@@ -1,7 +1,6 @@
 @import '../../shared/constants/colors.scss';
+@import '../../shared/constants/otherStyles.scss';
 
-$height-home-page:  calc(100vh - 110px);
-$width-content: calc(100% - 234px);
 .wrapper-home-page {
   height: $height-home-page
 }
