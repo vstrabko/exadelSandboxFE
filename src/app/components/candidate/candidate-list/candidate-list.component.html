@@ -1,0 +1,2 @@
+<app-candidate-record *ngFor="let user of users" (click)="getUser(user)" (click)="openCard()">{{user.name}}</app-candidate-record>
+<app-candidate-card-popup *ngIf="showPopup" (modal)="openCard()" [user]='candidate'></app-candidate-card-popup>
