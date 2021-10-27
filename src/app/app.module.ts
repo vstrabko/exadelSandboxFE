@@ -14,9 +14,10 @@ import { FooterModule } from './components/footer/footer.module';
 import { HomePageModule } from './pages/home-page/home-page.module';
 import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sandbox-page.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
+import { AdminMainPageComponent } from './pages/admin-main-page/admin-main-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AdminMainPageComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule, // required animations module
