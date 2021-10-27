@@ -9,3 +9,8 @@ export interface Employee {
   lastName: string;
   tech?: string;
 }
+
+export interface englishLevelList {
+  id: number;
+  name: string;
+}
