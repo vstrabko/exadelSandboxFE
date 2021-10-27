@@ -1,0 +1,9 @@
+{
+	"lang": {
+		"calendar": "Календарь",
+		"candidatesList": "Список кандидатов",
+		"createNewSandbox": "Создать песочницу",
+		"login": "Войти",
+		"logout": "Выйти"
+	}
+}
