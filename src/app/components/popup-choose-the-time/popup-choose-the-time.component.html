@@ -1,0 +1,17 @@
+<app-modal-window [title]="title">
+  <div class="wrapper-content">
+    <div class="wrapper-data">
+      <mat-form-field appearance="fill">
+        <mat-label>Moment.js datepicker</mat-label>
+        <input matInput [matDatepicker]="dp" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="wrapper-time"></div>
+    <div class="wrapper-btn">
+      <button class="btn unfilled-btn" type="button">Cancel</button>
+      <button class="btn filled-btn" type="button">OK</button>
+    </div>
+  </div>
+</app-modal-window>
