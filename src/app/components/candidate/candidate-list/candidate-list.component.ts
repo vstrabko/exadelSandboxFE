@@ -36,13 +36,20 @@ export class CandidateListComponent implements OnInit {
     const firstCut: number = e.pageIndex * e.pageSize;
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const secondCut: number = firstCut + e.pageSize;
-    this.activePageDataChunk = this.datasource.slice(firstCut, secondCut);
+    //this.activePageDataChunk = this.datasource.slice(firstCut, secondCut);
+    this.activePageDataChunk = [];
+    for (let i = firstCut; i < secondCut; i++) {
+      this.activePageDataChunk.push(this.datasource[i]);
+    }
   }
 
   ngOnInit(): void {
     this.userService.get().subscribe((data: any) => {
       this.datasource = data;
-      this.activePageDataChunk = this.datasource.slice(0, this.pageSize);
+      for (let i = 0; i < this.pageSize; i++) {
+        this.activePageDataChunk.push(this.datasource[i]);
+      }
+      //this.activePageDataChunk = this.datasource.slice(0, this.pageSize);
     });
   }
 }
