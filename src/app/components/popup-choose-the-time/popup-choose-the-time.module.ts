@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ModalWindowModule } from '../modal-window/modal-window.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [PopupChooseTheTimeComponent],
@@ -17,7 +17,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatSelectModule,
     FormsModule,
     MatDatepickerModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    MatInputModule,
+  ],
   exports: [PopupChooseTheTimeComponent],
 })
-export class PopupChooseTheTimeModule { }
+export class PopupChooseTheTimeModule {}
