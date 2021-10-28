@@ -1,3 +1,4 @@
+import { AdminMainPageModule } from './pages/admin-main-page/admin-main-page.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -13,11 +14,12 @@ import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
 import { HomePageModule } from './pages/home-page/home-page.module';
 import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sandbox-page.module';
+import { CandidateModule } from './components/candidate/candidate.module';
+import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
-import { AdminMainPageComponent } from './pages/admin-main-page/admin-main-page.component';
 
 @NgModule({
-  declarations: [AppComponent, AdminMainPageComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule, // required animations module
@@ -30,7 +32,10 @@ import { AdminMainPageComponent } from './pages/admin-main-page/admin-main-page.
     HomePageModule,
     FooterModule,
     CreateSandboxPageModule,
+    CandidateModule,
+    CandidateCardPopupModule,
     ErrorPageModule,
+    AdminMainPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

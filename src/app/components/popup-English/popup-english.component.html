@@ -1,0 +1,26 @@
+<app-modal-window [title]="title">
+  <div class="wrapper-popup-English">
+    <div class="wrapper-select">
+      <mat-form-field appearance="fill">
+        <mat-label>English Level</mat-label>
+        <mat-select  required>
+          <mat-option *ngFor="let englishLevel of englishLevelList" [value]="englishLevel.name">
+            {{ englishLevel.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="wrapper-review">
+      <textarea
+        placeholder="Write your review..."
+        rows="15"
+        cols="55"
+        name="text-review"
+      ></textarea>
+    </div>
+    <div class="wrapper-btn">
+      <button class="btn unfilled-btn" type="button">Cancel</button>
+      <button class="btn filled-btn" type="button">OK</button>
+    </div>
+  </div>
+</app-modal-window>

@@ -1,0 +1,37 @@
+.example-full-width {
+    width: 100%;
+}
+
+.textarea {
+    height: 400px;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 10px 0;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.two-column {
+    display: flex;
+}
+
+.section {
+    min-width: 460px;
+    max-width: 49%;
+}
+
+*:not(.radio-buttons > *) {
+    margin-bottom: 10px;
+}
+
+.two-column {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    &  > * {
+        flex-basis: 42%;
+    }
+}

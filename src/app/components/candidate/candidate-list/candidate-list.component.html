@@ -1,0 +1,7 @@
+<div class="wrapper">
+    <app-multiselect-search></app-multiselect-search>
+    <app-candidate-record *ngFor="let user of activePageDataChunk" (click)="getUser(user)" (click)="openCard()">{{user.name}}</app-candidate-record>
+    <app-candidate-card-popup *ngIf="showPopup" (modal)="openCard()" [user]='candidate'></app-candidate-card-popup>
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
+    </mat-paginator>
+</div>
