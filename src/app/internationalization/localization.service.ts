@@ -59,4 +59,8 @@ export class LocalizationService {
   public translate(key: string | string[], interpolateParams?: Record<string, unknown>): string {
     return this.translateService.instant(key, interpolateParams) as string;
   }
+
+  public localStorage(): any {
+    localStorage.setItem('language', 'en');
+  }
 }
