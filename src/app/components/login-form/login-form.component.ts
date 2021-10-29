@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 import { REGEXP } from '../../shared/constants/validators';
 
 @Component({
@@ -9,6 +10,8 @@ import { REGEXP } from '../../shared/constants/validators';
 })
 export class LoginFormComponent {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() log: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public title = 'Log in';
   email = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.email)]);
   password = new FormControl(null, [
@@ -16,15 +19,20 @@ export class LoginFormComponent {
     Validators.pattern(REGEXP.password_length),
   ]);
 
+  constructor(private authService: AuthService) {}
+
   submit(): void {
     if (this.email.valid && this.password.valid) {
-      const user = {
-        username: this.email.value,
-        password: this.password.value,
-      };
       this.modal.emit(false);
+      this.log.emit(this.authService.isAuthenticated());
+
+      this.authService.login(this.email.value, this.password.value).subscribe(
+        (data: any): void => console.log(data),
+        (error: any): void => console.log(error),
+      );
     }
   }
+
   cancel(): void {
     this.modal.emit(false);
   }

@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "firstName": "Leanne",
+    "lastName": "Bret",
+    "email": "admin@exadel.com",
+    "password": "adminsapex",
+    "roleName": "admin",
+    "Location": "Belarus"
+    },
+  {
+    "id": 2,
+    "firstName": "Ervin",
+    "lastName": "Howell",
+    "email": "recruiter@exadel.com",
+    "password": "recruitersapex",
+    "roleName": "recruiter",
+    "Location": "Belarus"
+  },
+  {
+    "id": 3,
+    "firstName": "Clementine",
+    "lastName": "Bauch",
+    "email": "mentor@exadel.com",
+    "password": "mentorsapex",
+    "roleName": "mentor",
+    "Location": "Belarus"
+  },
+  {
+    "id": 4,
+    "firstName": "Patricia",
+    "lastName": "Lebsack",
+    "email": "interviewer@exadel.com",
+    "password": "interviewersapex",
+    "roleName": "interviewer",
+    "Location": "Belarus"
+  },
+
+  {
+    "id": 5,
+    "firstName": "Chelsey",
+    "lastName": "Dietrich",
+    "email": "manager@exadel.com",
+    "password": "managersapex",
+    "roleName": "manager",
+    "Location": "Belarus"
+  }
+]

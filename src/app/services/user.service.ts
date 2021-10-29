@@ -7,6 +7,6 @@ import { ApiService } from './api.service';
 @Injectable({ providedIn: 'root' })
 export class UserService extends ApiService<User> {
   constructor(private http: HttpClient) {
-    super(http, User, 'https://jsonplaceholder.typicode.com/comments');
+    super(http, User, '../../assets/mock-data/users.json');
   }
 }

@@ -12,22 +12,24 @@
 
   .img {
     margin-top: auto;
+
     img {
       height: 50px;
     }
   }
 
-    .user-buttons {
-
+  .user-buttons {
     a {
       background-color: $darkColor;
       color: $noColor;
       height: 50%;
       margin: 5px;
-
     }
   }
-
+  .userName {
+  font-size: 18px;
+  color: $darkColor;
+  }
   .button-login, .button-logout {
     button {
       background-color: $blueColor;
