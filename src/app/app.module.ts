@@ -17,6 +17,7 @@ import { CandidateModule } from './components/candidate/candidate.module';
 import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
 import { CandidateRequestModule } from './components/candidate-request/candidate-request.module';
+import { CalendarModule } from './components/calendar/calendar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { CandidateRequestModule } from './components/candidate-request/candidate
     CandidateCardPopupModule,
     ErrorPageModule,
     CandidateRequestModule,
+    CalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
