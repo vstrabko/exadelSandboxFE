@@ -5,11 +5,11 @@ import { CandidateRecordComponent } from './candidate-record/candidate-record.co
 import { CandidateCardPopupModule } from '../candidate-card-popup/candidate-card-popup.module';
 
 import { MatCardModule } from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [CandidateListComponent, CandidateRecordComponent],
   imports: [CommonModule, MatCardModule, MatCheckboxModule, CandidateCardPopupModule],
+  exports: [CandidateListComponent],
 })
 export class CandidateModule {}

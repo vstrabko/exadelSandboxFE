@@ -10,14 +10,20 @@ import { User } from 'src/app/models/user.model';
 export class CandidateListComponent implements OnInit {
   constructor(private getData: UserService) {}
   showPopup: boolean;
-  candidate:User;
+  candidate: User;
   users: User[];
 
   getUser(user: User): void {
     this.candidate = user;
   }
-  openCard(): void {
+  closeCard(): void {
     this.showPopup = !this.showPopup;
+  }
+
+  showPop(e: any): void {
+    if (e.target.classList.contains('content-wrapper')) {
+      this.showPopup = !this.showPopup;
+    }
   }
 
   ngOnInit(): void {

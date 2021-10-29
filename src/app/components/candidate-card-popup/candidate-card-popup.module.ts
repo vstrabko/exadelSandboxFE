@@ -6,6 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [CandidateCardPopupComponent],
@@ -16,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonToggleModule,
     MatCardModule,
     MatInputModule,
+    TextFieldModule,
   ],
   exports: [CandidateCardPopupComponent],
 })
