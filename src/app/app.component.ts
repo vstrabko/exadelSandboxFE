@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalizationService } from './internationalization/localization.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'exadelsandbox';
+  constructor(private localizationService: LocalizationService) {
+    this.localizationService.localStorage();
+  }
 }

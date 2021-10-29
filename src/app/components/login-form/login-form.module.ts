@@ -8,6 +8,8 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { ModalWindowModule } from '../modal-window/modal-window.module';
 import { LoginFormComponent } from './login-form.component';
+import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
+import { LocalizationService } from 'src/app/internationalization/localization.service';
 
 @NgModule({
   declarations: [LoginFormComponent],
@@ -19,7 +21,9 @@ import { LoginFormComponent } from './login-form.component';
     ReactiveFormsModule,
     FormsModule,
     ModalWindowModule,
+    InternationalizationModule,
   ],
   exports: [LoginFormComponent],
+  providers: [LocalizationService],
 })
 export class LoginFormModule {}

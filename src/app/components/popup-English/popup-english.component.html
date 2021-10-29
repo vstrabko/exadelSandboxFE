@@ -2,7 +2,7 @@
   <div class="wrapper-popup-English">
     <div class="wrapper-select">
       <mat-form-field appearance="fill">
-        <mat-label>English Level</mat-label>
+        <mat-label>{{ 'other.englishLevel' | translate }}</mat-label>
         <mat-select  required>
           <mat-option *ngFor="let englishLevel of englishLevelList" [value]="englishLevel.name">
             {{ englishLevel.name }}
@@ -19,8 +19,8 @@
       ></textarea>
     </div>
     <div class="wrapper-btn">
-      <button class="btn unfilled-btn" type="button">Cancel</button>
-      <button class="btn filled-btn" type="button">OK</button>
+      <button class="btn unfilled-btn" type="button">{{ 'cancel' | translate }}</button>
+      <button class="btn filled-btn" type="button">{{ 'ok' | translate }}</button>
     </div>
   </div>
 </app-modal-window>

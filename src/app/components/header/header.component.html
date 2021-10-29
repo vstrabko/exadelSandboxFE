@@ -1,16 +1,16 @@
 <header class="header">
   <div class="img"><img src="../../../assets/img/sapex.png" alt=""></div>
   <nav class="user-buttons">
-    <a mat-raised-button *ngIf="role" id="candidatesList">Candidates list</a>
-    <a mat-raised-button *ngIf="role" id="calendar">Calendar</a>
-    <a mat-raised-button *ngIf="role" id="createNewSandbox">New sandbox</a>
+    <a mat-raised-button *ngIf="role" id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
+    <a mat-raised-button *ngIf="role" id="calendar">{{ 'header.calendar' | translate }}</a>
+    <a mat-raised-button *ngIf="role" id="createNewSandbox">{{ 'header.createNewSandbox' | translate }}</a>
   </nav>
   <div class="username" *ngIf="!role">{{ userName }}</div>
   <div class="button-login" *ngIf="role">
-    <button mat-raised-button (click)="openModal()">Log in</button>
+    <button mat-raised-button (click)="openModal()">{{ 'login' | translate }}</button>
   </div>
-  <!-- <div class="button-logout" *ngIf="role">
-    <button mat-raised-button>Log out</button>
-  </div> -->
+  <div class="button-logout" *ngIf="!role">
+    <button mat-raised-button>{{ 'logout' | translate }}</button>
+  </div>
 </header>
 <app-login-form *ngIf="isVisible" (modal)="closeModal()"></app-login-form>
