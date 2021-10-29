@@ -35,4 +35,8 @@ $width-content: calc(100% - 234px);
     display: flex;
     justify-content: flex-end;
   }
+
+  .textarea {
+    max-height: 250px;
+  }
 }

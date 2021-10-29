@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user.model';
+import { CandidateService } from 'src/app/services/candidate-service.service';
+import { Candidate } from 'src/app/models/candidate.model';
 
 @Component({
   selector: 'app-candidate-list',
@@ -8,9 +8,9 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./candidate-list.component.scss'],
 })
 export class CandidateListComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(private candidateService: CandidateService) {}
   showPopup: boolean;
-  candidate: User;
+  candidate: Candidate;
   //users: User[];
 
   length = 500;
@@ -20,9 +20,9 @@ export class CandidateListComponent implements OnInit {
   datasource: any[] = [];
 
   activePageDataChunk: any[] = [];
-  users: User[];
+  users: Candidate[];
 
-  getUser(user: User): void {
+  getUser(user: Candidate): void {
     this.candidate = user;
   }
   closeCard(): void {
@@ -49,7 +49,7 @@ export class CandidateListComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.userService.get().subscribe((data: any) => {
+    this.candidateService.get().subscribe((data: any) => {
       this.datasource = data;
       for (let i = 0; i < this.pageSize; i++) {
         this.activePageDataChunk.push(this.datasource[i]);

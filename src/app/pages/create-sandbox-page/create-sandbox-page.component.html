@@ -1,4 +1,4 @@
-<form class="container">
+<form class="container page">
   <h2>Create Sandbox</h2>
 
   <div class="wrapper">
@@ -34,7 +34,7 @@
 
   <mat-form-field class="description" appearance="fill" >
     <mat-label>Sandbox description</mat-label>
-    <textarea matInput [formControl]="description" required></textarea>
+    <textarea [cdkTextareaAutosize] class="textarea" matInput [formControl]="description" required></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="employee">
