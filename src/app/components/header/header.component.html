@@ -1,9 +1,9 @@
 <header class="header">
   <div class="img"><img src="../../../assets/img/sapex.png" alt=""></div>
   <nav class="user-buttons">
-    <a mat-raised-button *ngIf="role" id="candidatesList">Candidates list</a>
-    <a mat-raised-button *ngIf="role" id="calendar">Calendar</a>
-    <a mat-raised-button *ngIf="role" id="createNewSandbox">New sandbox</a>
+    <a routerLink="/users" routerLinkActive="active" mat-raised-button *ngIf="role" id="candidatesList">Candidates list</a>
+    <a routerLink="/calendar" routerLinkActive="active" mat-raised-button *ngIf="role" id="calendar">Calendar</a>
+    <a routerLink="/sandbox" routerLinkActive="active" mat-raised-button *ngIf="role" id="createNewSandbox">New sandbox</a>
   </nav>
   <div class="username" *ngIf="!role">{{ userName }}</div>
   <div class="button-login" *ngIf="role">
