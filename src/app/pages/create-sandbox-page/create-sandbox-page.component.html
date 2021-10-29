@@ -1,6 +1,5 @@
-<form class="container">
+<form class="container page">
   <h2>{{ 'sandbox.createSandbox' | translate }}</h2>
-
   <div class="wrapper">
     <mat-form-field appearance="fill" class="select" >
       <mat-label>{{ 'sandbox.name' | translate }}</mat-label>
@@ -38,7 +37,7 @@
 
   <mat-form-field class="description" appearance="fill" >
     <mat-label>{{ 'sandbox.description' | translate }}</mat-label>
-    <textarea matInput [formControl]="description" required></textarea>
+    <textarea [cdkTextareaAutosize] class="textarea"matInput [formControl]="description" required></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="employee">

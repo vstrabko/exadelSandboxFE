@@ -1,3 +1,4 @@
+import { AdminMainPageModule } from './pages/admin-main-page/admin-main-page.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -43,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CandidateModule,
     CandidateCardPopupModule,
     ErrorPageModule,
+    AdminMainPageModule,
     HttpClientModule,
     InternationalizationModule.forRoot({ locale_id: 'en' }), // iniating with default language: en
     TranslateModule.forRoot({

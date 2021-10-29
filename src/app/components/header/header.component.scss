@@ -26,6 +26,10 @@
       margin: 5px;
 
     }
+
+    .active {
+      background-color: $blueColor;
+    }
   }
 
   .button-login, .button-logout {
