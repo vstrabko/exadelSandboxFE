@@ -33,6 +33,6 @@ export class InternationalizationModule {
  * @param {LocalizationService} service
  * @returns {() => Promise<void>}
  */
-export function initLocalizationService(service: LocalizationService) {
-  return () => service.initService();
+export function initLocalizationService(service: LocalizationService): any {
+  return (): any => service.initService();
 }

@@ -16,9 +16,9 @@ import { InternationalizationModule } from 'src/app/internationalization/interna
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,
-    InternationalizationModule
+    InternationalizationModule,
   ],
   exports: [PopupEnglishComponent],
-  providers: [LocalizationService]
+  providers: [LocalizationService],
 })
 export class PopupEnglishModule {}

@@ -22,7 +22,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    InternationalizationModule
+    InternationalizationModule,
   ],
   exports: [CreateSandboxPageComponent],
   providers: [LocalizationService],

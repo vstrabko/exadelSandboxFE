@@ -21,7 +21,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
     ReactiveFormsModule,
     FormsModule,
     ModalWindowModule,
-    InternationalizationModule
+    InternationalizationModule,
   ],
   exports: [LoginFormComponent],
   providers: [LocalizationService],

@@ -30,9 +30,8 @@ export class LocalizationService {
    * Initialize the service.
    * @returns {Promise<void>}
    */
-  public initService(): Promise<void> {
+  public initService(): any {
     // language code same as file name.
-    console.log('switch');
 
     this._localeId = localStorage.getItem('language') || 'en';
     return this.useLanguage(this._localeId);
@@ -42,7 +41,7 @@ export class LocalizationService {
    * change the selected language
    * @returns {Promise<void>}
    */
-  public async useLanguage(lang: string): Promise<void> {
+  public async useLanguage(lang: string): Promise<any> {
     this.translateService.setDefaultLang(lang);
     try {
       return this.translateService.use(lang).toPromise();
@@ -57,7 +56,7 @@ export class LocalizationService {
    * @param interpolateParams
    * @returns {string|any}
    */
-  public translate(key: string | string[], interpolateParams?: object): string {
+  public translate(key: string | string[], interpolateParams?: Record<string, unknown>): string {
     return this.translateService.instant(key, interpolateParams) as string;
   }
 }
