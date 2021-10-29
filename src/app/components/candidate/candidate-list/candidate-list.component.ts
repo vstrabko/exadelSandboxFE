@@ -20,12 +20,18 @@ export class CandidateListComponent implements OnInit {
   datasource: any[] = [];
 
   activePageDataChunk: any[] = [];
+  users: User[];
 
   getUser(user: User): void {
     this.candidate = user;
   }
-  openCard(): void {
+  closeCard(): void {
     this.showPopup = !this.showPopup;
+  }
+  showPop(e: any): void {
+    if (e.target.classList.contains('content-wrapper')) {
+      this.showPopup = !this.showPopup;
+    }
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string): void {
@@ -42,7 +48,6 @@ export class CandidateListComponent implements OnInit {
       this.activePageDataChunk.push(this.datasource[i]);
     }
   }
-
   ngOnInit(): void {
     this.userService.get().subscribe((data: any) => {
       this.datasource = data;
