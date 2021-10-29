@@ -11,4 +11,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  button {
+    border: none;
+    cursor: pointer;
+  }
+
+  img {
+    height: 13px;
+  }
+
 }
