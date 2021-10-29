@@ -1,0 +1,43 @@
+{
+	"cancel": "Отмена",
+	"errors": {
+		"goHome": "Ошибка, вернуться на главную страницу",
+		"goHomeMessage": "На главную"
+	},
+	"header": {
+		"calendar": "Календарь",
+		"candidatesList": "Список кандидатов",
+		"createNewSandbox": "Создать песочницу"
+	},
+	"login": "Войти",
+	"loginForm": {
+		"emailInput": "Пожалуйста, введите Ваш email",
+		"emailInputValid": "Пожалуйста, введите правильный email",
+		"enterEmail": "Введите Ваш email",
+		"enterPassword": "Введите Ваш пароль",
+		"passwordInput": "Пожалуйста, введите пароль"
+	},
+	"logout": "Выйти",
+	"messages": {
+		"send": "ОТПРАВЛЕНО",
+		"success": "Вы успешно отправили форму"
+	},
+	"ok": "ОК",
+	"other": {
+		"englishLevel": "Уровень английского"
+	},
+	"roles": {
+		"interviewers": "Интервьюеры",
+		"mentors": "Менторы",
+		"recruiters": "Рекрутеры"
+	},
+	"sandbox": {
+		"candidatesNumber": "Количество кандидатов",
+		"createSandbox": "Создать песочницу",
+		"description": "Описание песочницы",
+		"invalidEndDate": "Неверная дата окончания",
+		"invalidStartDate": "Неверная дата старта",
+		"name": "Песочница",
+		"period": "Длительность"
+	}
+}

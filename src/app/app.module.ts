@@ -7,7 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
@@ -15,6 +15,13 @@ import { HomePageModule } from './pages/home-page/home-page.module';
 import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sandbox-page.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
 
+import { InternationalizationModule } from './internationalization/internationalization.module';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '../assets/locales/', '.json');
+}
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -30,6 +37,15 @@ import { ErrorPageModule } from './pages/error-page/error-page.module';
     FooterModule,
     CreateSandboxPageModule,
     ErrorPageModule,
+    HttpClientModule,
+    InternationalizationModule.forRoot({ locale_id: 'en' }), // iniating with default language: en
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

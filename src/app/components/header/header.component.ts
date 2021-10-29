@@ -21,6 +21,8 @@ export class HeaderComponent {
 
   openModal(): void {
     this.isVisible = true;
+    console.log('open');
+    
   }
   closeModal(): void {
     this.isVisible = false;

@@ -8,6 +8,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
+import { LocalizationService } from 'src/app/internationalization/localization.service';
 
 @NgModule({
   declarations: [CreateSandboxPageComponent],
@@ -20,7 +22,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    InternationalizationModule
   ],
   exports: [CreateSandboxPageComponent],
+  providers: [LocalizationService],
 })
 export class CreateSandboxPageModule {}
