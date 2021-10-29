@@ -1,0 +1,44 @@
+<app-modal-window [title]="title">
+    <div class="wrapper">
+        <section class="section first-column">
+            <div class="two-column">
+                <mat-card>{{user.name}}</mat-card>
+                <mat-form-field appearance="fill">
+                <mat-label>Status</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let stat of status" [value]="stat.value">
+                    {{stat.viewValue}}
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-card>Candidate skills</mat-card>
+            <div class="raiting two-column">
+                <mat-card>Raiting 1</mat-card>
+                <mat-card>Raiting 2</mat-card>
+                <mat-card>Raiting 3</mat-card>
+                <mat-card>Raiting 4</mat-card>
+                <mat-card>Raiting 5</mat-card>
+                <mat-card>Raiting 6</mat-card>
+                <mat-card>Raiting 7</mat-card>
+                <mat-card>Raiting 8</mat-card>
+            </div>
+        </section>
+        <section class="section second-column">
+            <mat-button-toggle-group class="radio-buttons" #group="matButtonToggleGroup" name="workerStatus" aria-label="Worker Status">
+                <mat-button-toggle value="Recruiter" checked>Recruiter</mat-button-toggle>
+                <mat-button-toggle value="Interviewer">Interviewer</mat-button-toggle>
+                <mat-button-toggle value="Mentor">Mentor</mat-button-toggle>
+            </mat-button-toggle-group>
+            <mat-card>{{group.value}} Name</mat-card>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>{{group.value}} feedback</mat-label>
+                <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
+            </mat-form-field>
+            <div class="raiting two-column">
+                <button class="btn unfilled-btn" (click)="cancel()">close</button>
+                <button class="btn filled-btn">save</button>
+            </div> 
+        </section>
+    </div>
+  </app-modal-window>

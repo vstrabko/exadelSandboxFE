@@ -1,0 +1,37 @@
+@import '../../../shared/constants/colors.scss';
+@import '../../../shared/constants/otherStyles.scss';
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $width-content;
+    margin: 10px auto; 
+}
+
+.content-wrapper {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cirlce {
+    display: inline-block;
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.status-wrapper {
+    & > span {
+        margin-left: 3px;
+    }
+}
+
+.example-margin {
+    margin: 0 12px;
+}

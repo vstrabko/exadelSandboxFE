@@ -13,7 +13,11 @@ import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
 import { HomePageModule } from './pages/home-page/home-page.module';
 import { CreateSandboxPageModule } from './pages/create-sandbox-page/create-sandbox-page.module';
+import { CandidateModule } from './components/candidate/candidate.module';
+import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
+import { CandidateRequestModule } from './components/candidate-request/candidate-request.module';
+import { CalendarModule } from './components/calendar/calendar.module';
 
 import { InternationalizationModule } from './internationalization/internationalization.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -36,6 +40,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HomePageModule,
     FooterModule,
     CreateSandboxPageModule,
+    CandidateModule,
+    CandidateCardPopupModule,
     ErrorPageModule,
     HttpClientModule,
     InternationalizationModule.forRoot({ locale_id: 'en' }), // iniating with default language: en
@@ -46,6 +52,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient],
       },
     }),
+    CandidateRequestModule,
+    CalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
