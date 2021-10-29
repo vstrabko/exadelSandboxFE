@@ -7,9 +7,14 @@ import { LoginFormModule } from '../login-form/login-form.module';
 import { AppRoutingModule } from '../../app-routing.module';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 
-
 @NgModule({
-  imports: [MatButtonModule, CommonModule, LoginFormModule, InternationalizationModule, AppRoutingModule],
+  imports: [
+    MatButtonModule,
+    CommonModule,
+    LoginFormModule,
+    InternationalizationModule,
+    AppRoutingModule,
+  ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
 })
