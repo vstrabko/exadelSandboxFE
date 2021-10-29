@@ -55,7 +55,7 @@ export class MultiselectSearchComponent implements OnInit {
     }
   }
 
-  openedChange(e: any): void {
+  openedChange(e: boolean): void {
     // Set search textbox value as empty while opening selectbox
     this.searchTextboxControl.patchValue('');
     // Focus to search textbox while clicking on selectbox

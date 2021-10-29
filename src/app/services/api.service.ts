@@ -21,12 +21,14 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   public get(): Observable<any> {
     return this.httpClient
       .get<T[]>(`${this.apiUrl}`)
-      .pipe(map((result: any) => new this.tConstructor(result)))
+      .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
       .pipe(catchError(this.errorHandler));
   }
 
   public getById(id: number): Observable<any> {
-    return this.httpClient.get<T>(`${this.apiUrl}/${id}`).pipe(catchError(this.errorHandler));
+    return this.httpClient.get<T>(`${this.apiUrl}/${id}`)
+          .pipe(map((result: any) => new this.tConstructor(result)))
+          .pipe(catchError(this.errorHandler));
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {

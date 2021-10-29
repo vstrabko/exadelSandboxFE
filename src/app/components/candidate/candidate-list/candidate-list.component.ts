@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidateService } from 'src/app/services/candidate-service.service';
 import { Candidate } from 'src/app/models/candidate.model';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-candidate-list',
@@ -34,27 +35,16 @@ export class CandidateListComponent implements OnInit {
     }
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string): void {
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map((str: string) => +str);
-  }
-
-  onPageChanged(e: any): void {
+  onPageChanged(e: PageEvent): void {
     const firstCut: number = e.pageIndex * e.pageSize;
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const secondCut: number = firstCut + e.pageSize;
-    //this.activePageDataChunk = this.datasource.slice(firstCut, secondCut);
-    this.activePageDataChunk = [];
-    for (let i = firstCut; i < secondCut; i++) {
-      this.activePageDataChunk.push(this.datasource[i]);
-    }
+    this.activePageDataChunk = this.datasource.slice(firstCut, secondCut);
   }
   ngOnInit(): void {
     this.candidateService.get().subscribe((data: any) => {
       this.datasource = data;
-      for (let i = 0; i < this.pageSize; i++) {
-        this.activePageDataChunk.push(this.datasource[i]);
-      }
-      //this.activePageDataChunk = this.datasource.slice(0, this.pageSize);
+      this.activePageDataChunk = this.datasource.slice(0, this.pageSize);
     });
   }
 }
