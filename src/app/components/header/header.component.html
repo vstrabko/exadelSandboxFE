@@ -5,12 +5,12 @@
     <a mat-raised-button  id="calendar" *ngIf="userName">{{ 'header.calendar' | translate }}</a>
     <a mat-raised-button  id="createNewSandbox" *ngIf="userName">{{ 'header.createNewSandbox' | translate }}</a>
   </nav>
-  <div class="username" *ngIf="userName" class="userName">Hello, {{ userName }}</div>
+  <div class="username" *ngIf="userName" class="userName">{{'header.hello' | translate}}, {{ userName }}</div>
   <div class="button-login">
-    <button mat-raised-button (click)="openModal()" *ngIf="!userName" > Log in</button>
+    <button mat-raised-button (click)="openModal()" *ngIf="!userName" > {{ 'login' | translate }}</button>
   </div>
   <div class="button-logout" *ngIf="userName" (click)="logOut()" >
-    <button mat-raised-button >Log out</button>
+    <button mat-raised-button >{{ 'logout' | translate }}</button>
   </div>
 </header>
-<app-login-form *ngIf="isVisible" (modal)="closeModal()" ></app-login-form>
+<app-login-form *ngIf="isVisible" (modal)="closeModal()"></app-login-form>
