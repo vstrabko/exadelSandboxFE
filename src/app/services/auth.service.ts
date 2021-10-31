@@ -14,17 +14,16 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   public userSave: Partial<User>;
-  public authSubject: BehaviorSubject<Partial<User>> = new BehaviorSubject({});
+  public authSubject: BehaviorSubject< Partial<User>> = new BehaviorSubject({});
 
-  constructor(
-    private http: HttpClient,
-    private userService: UserService,
-    private router: Router,
-    private toastService: ToastService,
-  ) {}
-  get token(): Partial<User> {
-    return this.userSave || '';
+  constructor(private http: HttpClient,
+              private userService: UserService,
+              private router: Router,
+              private toastService: ToastService) {
   }
+  get token(): Partial<User> {
+    return  this.userSave || ''
+};
 
   login(username: string, password: string): Observable<Partial<User>> {
     const listUsers = this.userService.get();
@@ -34,12 +33,11 @@ export class AuthService {
         const userFilter = user.filter((i: User) => i.mail === username && i.pass === password)[0];
         if (userFilter) {
           this.userSave = userFilter;
-          this.authSubject.next(userFilter), void this.router.navigate(['/sandbox']);
+          this.authSubject.next(userFilter),
+          void this.router.navigate(['/sandbox']);
+
         } else {
-          this.toastService.showError(
-            'Please check carefully that all details are correct.',
-            'Authentication error',
-          );
+          this.toastService.showError( 'Please check carefully that all details are correct.', 'Authentication error')
         }
         return userFilter; //моковое получение юзера, до получения инфы с бэка
       }),
@@ -51,7 +49,7 @@ export class AuthService {
   }
   logout(): void {
     this.userSave = {};
-    this.authSubject.next({});
+    this.authSubject.next({})
     void this.router.navigate(['']);
   }
 }

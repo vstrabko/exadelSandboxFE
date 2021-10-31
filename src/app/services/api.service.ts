@@ -3,6 +3,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { ResourceModel } from '../models/resource.model';
+import { map } from 'rxjs/operators';
 
 export abstract class ApiService<T extends ResourceModel<T>> {
   constructor(
@@ -17,8 +18,10 @@ export abstract class ApiService<T extends ResourceModel<T>> {
       .pipe(catchError(this.errorHandler));
   }
 
-  public get(): Observable<any> {
-    return this.httpClient.get<T[]>(`${this.apiUrl}`).pipe(catchError(this.errorHandler));
+  public get(): Observable<T[]> {
+    return this.httpClient
+      .get<T[]>(`${this.apiUrl}`)
+      .pipe(map((result: T[]) => result.map((i: T) => new this.tConstructor(i))));
   }
 
   public getById(id: number): Observable<any> {
@@ -36,7 +39,6 @@ export abstract class ApiService<T extends ResourceModel<T>> {
       .delete<void | T>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.errorHandler));
   }
-
   private errorHandler(err: HttpErrorResponse): ObservableInput<any> {
     if (err.error instanceof Error) {
       // A client-side or network error occurred. Handle it accordingly.
