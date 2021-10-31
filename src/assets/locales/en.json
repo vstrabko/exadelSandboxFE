@@ -1,0 +1,43 @@
+{
+	"cancel": "Cancel",
+	"errors": {
+		"goHome": "Error, go back to home page",
+		"goHomeMessage": "Back to Home page"
+	},
+	"header": {
+		"calendar": "Calendar",
+		"candidatesList": "Candidates list",
+		"createNewSandbox": "New sandbox"
+	},
+	"login": "Log in",
+	"loginForm": {
+		"emailInput": "Please, enter your email",
+		"emailInputValid": "Please, enter a valid email",
+		"enterEmail": "Enter your email",
+		"enterPassword": "Enter your password",
+		"passwordInput": "Please, enter your password"
+	},
+	"logout": "Log out",
+	"messages": {
+		"send": "SEND",
+		"success": "You have successfully submitted the form"
+	},
+	"ok": "OK",
+	"other": {
+		"englishLevel": "English Level"
+	},
+	"roles": {
+		"interviewers": "Interviewers",
+		"mentors": "Mentors",
+		"recruiters": "Recruiters"
+	},
+	"sandbox": {
+		"candidatesNumber": "Number of candidates",
+		"createSandbox": "Create sandbox",
+		"description": "Sandbox description",
+		"invalidEndDate": "Invalid end date",
+		"invalidStartDate": "Invalid start date",
+		"name": "Sandbox",
+		"period": "Sandbox period"
+	}
+}

@@ -25,6 +25,10 @@
       height: 50%;
       margin: 5px;
     }
+
+    .active {
+      background-color: $blueColor;
+    }
   }
   .userName {
   font-size: 18px;

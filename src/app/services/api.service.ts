@@ -1,9 +1,8 @@
 import { Observable, ObservableInput, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { ResourceModel } from '../models/resource.model';
-import { map } from 'rxjs/operators';
 
 export abstract class ApiService<T extends ResourceModel<T>> {
   constructor(
@@ -15,30 +14,38 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   public create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
       .post<T>(`${this.apiUrl}`, resource.toJson())
+      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler));
   }
 
-  public get(): Observable<T[]> {
+  public get(): Observable<any> {
     return this.httpClient
       .get<T[]>(`${this.apiUrl}`)
-      .pipe(map((result: T[]) => result.map((i: T) => new this.tConstructor(i))));
+      .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
+      .pipe(catchError(this.errorHandler));
   }
 
   public getById(id: number): Observable<any> {
-    return this.httpClient.get<T>(`${this.apiUrl}/${id}`).pipe(catchError(this.errorHandler));
+    return this.httpClient
+      .get<T>(`${this.apiUrl}/${id}`)
+      .pipe(map((result: any) => new this.tConstructor(result)))
+      .pipe(catchError(this.errorHandler));
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
       .put<T>(`${this.apiUrl}/${resource._id}`, resource.toJson())
+      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler));
   }
 
   public delete(id: number): Observable<void | any> {
     return this.httpClient
       .delete<void | T>(`${this.apiUrl}/${id}`)
+      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler));
   }
+
   private errorHandler(err: HttpErrorResponse): ObservableInput<any> {
     if (err.error instanceof Error) {
       // A client-side or network error occurred. Handle it accordingly.

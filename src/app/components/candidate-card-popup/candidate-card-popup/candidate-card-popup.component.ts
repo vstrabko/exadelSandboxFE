@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { User } from 'src/app/models/user.model';
+import { Candidate } from 'src/app/models/candidate.model';
 
 interface Status {
   value: string;
@@ -13,7 +13,7 @@ interface Status {
 })
 export class CandidateCardPopupComponent {
   public title = 'Candidate card';
-  @Input() user: User;
+  @Input() user: Candidate;
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   status: Status[] = [
