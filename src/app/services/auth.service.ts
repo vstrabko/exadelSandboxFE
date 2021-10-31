@@ -39,7 +39,7 @@ export class AuthService {
         } else {
           this.toastService.showError( 'Please check carefully that all details are correct.', 'Authentication error')
         }
-        return userFilter; //моковое получение юзера, до получения инфы с бэка
+        return userFilter; //TODO: getting a mock user before integrating with backend
       }),
     );
   }
