@@ -1,19 +1,26 @@
 <app-modal-window [title]="title">
   <div class="wrapper-content">
     <div class="wrapper-data" [title]="titleData">
+      <span class="title-data">{{ titleData }}</span>
       <!-- <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field> -->
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> -->
     </div>
     <div class="wrapper-time">
-      <app-time *ngFor="let id of times" [id]="id" (delete)="del($event)"></app-time>
+      <app-time
+        *ngFor="let id of times"
+        [id]="id"
+        (delete)="del($event)"
+        style="margin-top: 10px"
+      ></app-time>
+      <button class="btn filled-btn btn-plus" type="button" (click)="add()">+</button>
     </div>
     <div class="wrapper-btn">
       <button class="btn unfilled-btn" type="button">Cancel</button>
-      <button class="btn filled-btn" type="button" (click)="add()">OK</button>
+      <button class="btn filled-btn" type="button">OK</button>
     </div>
   </div>
 </app-modal-window>

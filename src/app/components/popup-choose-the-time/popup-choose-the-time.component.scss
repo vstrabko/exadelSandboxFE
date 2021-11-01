@@ -3,14 +3,27 @@
 .wrapper-btn {
   display: flex;
   justify-content: center;
-  margin: 25px 0 0 0;
-}
-
-.myBlock {
-  background-color: rosybrown;
-  height: 200px;
+  margin: 25px 0 20px 0;
 }
 
 .wrapper-time {
-  width: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn-plus {
+  margin: 12px 0 0 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 25px;
+}
+
+.title-data {
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0;
 }
