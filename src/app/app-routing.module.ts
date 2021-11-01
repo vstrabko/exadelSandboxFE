@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarComponent },
   { path: 'sandbox', component: CreateSandboxPageComponent },
   { path: 'error', component: ErrorPageComponent },
+  { path: 'form', component: CandidateRequestComponent },
 ];
 
 @NgModule({

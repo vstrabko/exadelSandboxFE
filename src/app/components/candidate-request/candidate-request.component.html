@@ -1,3 +1,139 @@
-<div class="wrapper">
-    
-</div>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <div class="sandbox">
+    <mat-form-field appearance="outline">
+      <mat-label>Sandbox</mat-label>
+      <input formControlName="sandbox" matInput placeholder="Sandbox" readonly />
+    </mat-form-field>
+  </div>
+  
+
+  <div class="personal three-column">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input formControlName="firstName" matInput placeholder="Placeholder" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Second Name</mat-label>
+      <input formControlName="secondName" matInput placeholder="Placeholder" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>English level</mat-label>
+      <mat-select formControlName="englishLevel">
+        <mat-option value="A1">Beginner (A1)</mat-option>
+        <mat-option value="A2">Elementary (A2)</mat-option>
+        <mat-option value="B1">Intermediate (B1)</mat-option>
+        <mat-option value="B2">Upper Intermediate (B2)</mat-option>
+        <mat-option value="C1">Advanced (C1)</mat-option>
+        <mat-option value="C2">Proficiency (C2)</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div class="personal three-column">
+    <mat-form-field appearance="outline">
+      <mat-label>Telephone</mat-label>
+      <input formControlName="telephone" matInput placeholder="Placeholder" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input formControlName="email" matInput placeholder="Placeholder" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Skype</mat-label>
+        <input formControlName="skype" matInput placeholder="Placeholder" />
+      </mat-form-field>
+  </div>
+
+
+  <div class="motivation">
+    <mat-form-field appearance="outline">
+      <mat-label>Motivation</mat-label>
+      <textarea
+        formControlName="motivation"
+        [cdkTextareaAutosize]
+        class="motivation_textarea"
+        matInput
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="three-column">
+    <div class="radio">
+      <label id="Availability">Availability hours per day</label>
+      <mat-radio-group formControlName="availability" aria-labelledby="Availability">
+        <mat-radio-button class="radio-button" *ngFor="let hours of hoursList" [value]="hours">
+          {{ hours }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="lang">
+      <mat-form-field appearance="outline">
+        <mat-label>Language of intership</mat-label>
+        <mat-select formControlName="language">
+          <mat-option value="English">English</mat-option>
+          <mat-option value="Russian">Russian</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Location (City, Country)</mat-label>
+        <mat-select formControlName="location">
+          <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="job">
+      <mat-form-field appearance="outline">
+        <mat-label>Primary skill</mat-label>
+        <mat-select formControlName="skills">
+          <mat-option value="Frontend">Frontend</mat-option>
+          <mat-option value="Backend">Backend</mat-option>
+          <mat-option value="BA">BA</mat-option>
+          <mat-option value="Ui/Ux">Ui/Ux</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Current job</mat-label>
+        <input formControlName="job" matInput placeholder="Placeholder" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="skills">
+    <mat-form-field appearance="outline">
+      <mat-label>Professional certificates</mat-label>
+      <textarea formControlName="certificates" [cdkTextareaAutosize] class="skills_textarea" matInput></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Additional skills, technologies</mat-label>
+      <textarea formControlName="addSkills" [cdkTextareaAutosize] class="skills_textarea" matInput></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="time_contact">
+    <mat-form-field appearance="outline">
+      <mat-label>The best time to contact you</mat-label>
+      <input formControlName="timeContact" matInput placeholder="Placeholder" />
+    </mat-form-field>
+  </div>
+
+  <div class="checkboxes">
+    <mat-checkbox formControlName="joinExadel">Are you planning to join Exadel after the Trainig?</mat-checkbox>
+    <mat-checkbox formControlName="agreement" required
+      >Could you provide your agreement to proceed with your Personal Data in accordance with the
+      Privacy article above?</mat-checkbox
+    >
+  </div>
+
+  <div class="button">
+    <button type="submit" class="btn filled-btn">Send</button>
+  </div>
+</form>
