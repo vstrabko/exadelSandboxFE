@@ -1,5 +1,5 @@
 import { Observable, ObservableInput, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { ResourceModel } from '../models/resource.model';
@@ -14,26 +14,35 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   public create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
       .post<T>(`${this.apiUrl}`, resource.toJson())
+      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler));
   }
 
   public get(): Observable<any> {
-    return this.httpClient.get<T[]>(`${this.apiUrl}`).pipe(catchError(this.errorHandler));
+    return this.httpClient
+      .get<T[]>(`${this.apiUrl}`)
+      .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
+      .pipe(catchError(this.errorHandler));
   }
 
   public getById(id: number): Observable<any> {
-    return this.httpClient.get<T>(`${this.apiUrl}/${id}`).pipe(catchError(this.errorHandler));
+    return this.httpClient
+      .get<T>(`${this.apiUrl}/${id}`)
+      .pipe(map((result: any) => new this.tConstructor(result)))
+      .pipe(catchError(this.errorHandler));
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
       .put<T>(`${this.apiUrl}/${resource._id}`, resource.toJson())
+      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler));
   }
 
   public delete(id: number): Observable<void | any> {
     return this.httpClient
       .delete<void | T>(`${this.apiUrl}/${id}`)
+      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler));
   }
 
