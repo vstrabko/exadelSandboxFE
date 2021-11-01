@@ -7,6 +7,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { ModalWindowModule } from '../modal-window/modal-window.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserModule } from '@angular/platform-browser';
+import { TimeModule } from './time/time.module';
 
 @NgModule({
   declarations: [PopupChooseTheTimeComponent],
@@ -19,6 +22,10 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule,
     ReactiveFormsModule,
     MatInputModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    BrowserModule,
+    TimeModule,
   ],
   exports: [PopupChooseTheTimeComponent],
 })
