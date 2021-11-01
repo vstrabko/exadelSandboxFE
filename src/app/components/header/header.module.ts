@@ -6,6 +6,7 @@ import { HeaderComponent } from './header.component';
 import { LoginFormModule } from '../login-form/login-form.module';
 import { AppRoutingModule } from '../../app-routing.module';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
+import { SpinnerModule } from 'src/app/modules/spinner/spinner.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { InternationalizationModule } from 'src/app/internationalization/interna
     LoginFormModule,
     InternationalizationModule,
     AppRoutingModule,
+    SpinnerModule,
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
