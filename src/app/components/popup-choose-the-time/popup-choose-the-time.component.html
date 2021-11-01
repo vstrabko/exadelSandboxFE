@@ -2,6 +2,7 @@
   <div class="wrapper-content">
     <div class="wrapper-data" [title]="titleData">
       <span class="title-data">{{ titleData }}</span>
+      <!-- {{ 'popupTimer.title' | translate }} -->
     </div>
     <div class="wrapper-time">
       <app-time
@@ -13,8 +14,8 @@
       <button class="btn filled-btn btn-plus" type="button" (click)="add()">+</button>
     </div>
     <div class="wrapper-btn">
-      <button class="btn unfilled-btn" type="button">Cancel</button>
-      <button class="btn filled-btn" type="button">OK</button>
+      <button class="btn unfilled-btn" type="button">{{ 'popupTimer.cancel' | translate }}</button>
+      <button class="btn filled-btn" type="button">{{ 'popupTimer.ok' | translate }}</button>
     </div>
   </div>
 </app-modal-window>

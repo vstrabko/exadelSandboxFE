@@ -39,5 +39,12 @@
 		"invalidStartDate": "Invalid start date",
 		"name": "Sandbox",
 		"period": "Sandbox period"
-	}
+	},
+  "popupTimer": {
+    "from": "from",
+    "to": "to",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "title": "Choose the time"
+  }
 }
