@@ -5,7 +5,7 @@
   border-radius: 25px;
 }
 
-label {
+.wrapper-input-time {
   margin: 0 25px 0 25px;
 }
 
@@ -13,6 +13,7 @@ label {
   margin: 15px 0 0 0;
 }
 
-input[type='time' i] {
+input[type='time'] {
   margin: 0 6px 0 6px;
+  padding: 0 2px 0 6px;
 }

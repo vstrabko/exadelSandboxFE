@@ -1,11 +1,7 @@
 import {
   Component,
-  ComponentFactoryResolver,
   Input,
-  ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
-import { TimeComponent } from './time/time.component';
 
 @Component({
   selector: 'app-popup-choose-the-time',
@@ -18,9 +14,6 @@ export class PopupChooseTheTimeComponent {
 
   public times: any = [0];
 
-  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
-  input = TimeComponent;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
   // eslint-disable-next-line
   add() {
     if (!this.times.length) {

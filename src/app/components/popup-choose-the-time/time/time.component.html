@@ -1,7 +1,11 @@
-<label>
-  from
-  <input type="time" />
-  to
-  <input type="time" />
-  <button class="btn unfilled-btn btn-minus" (click)="removeObject()">-</button>
-</label>
+<div class="wrapper-input-time">
+  <label>
+    from
+    <input type="time" min="0" max="15" step="900" />
+  </label>
+  <label>
+    to
+    <input type="time" step="900" />
+    <button class="btn unfilled-btn btn-minus" (click)="removeObject()">-</button>
+  </label>
+</div>
