@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private roles = {
     //todo: till not back-end
     nobody: '',
@@ -15,11 +17,20 @@ export class HeaderComponent {
     mentor: 'mentor',
   };
   public isVisible = false;
+
   public vision = false;
 
-  public role: string = this.roles.admin; //todo: role from back-end
-  public userName: string = 'Mikhail'; //todo: name of user from back-end
+  public userName = '';
 
+
+  public role: string = this.roles.admin; //todo: role from back-end
+
+  constructor(private authService: AuthService) {}
+  ngOnInit(): void {
+    this.authService.authSubject.subscribe((res: Partial<User>): void => {
+      this.userName = !!res?.name ? res.name : '';
+    });
+  }
   openModal(): void {
     this.isVisible = true;
   }
@@ -32,5 +43,9 @@ export class HeaderComponent {
     setTimeout(() => {
       this.vision = false;
     }, 3000);
+
+  logOut(): void {
+    this.authService.logout();
+
   }
 }
