@@ -12,7 +12,6 @@ export class CandidateListComponent implements OnInit {
   constructor(private candidateService: CandidateService) {}
   showPopup: boolean;
   candidate: Candidate;
-  //users: User[];
 
   length = 500;
   pageSize = 10;
@@ -29,15 +28,14 @@ export class CandidateListComponent implements OnInit {
   closeCard(): void {
     this.showPopup = !this.showPopup;
   }
-  showPop(e: any): void {
-    if (e.target.classList.contains('content-wrapper')) {
+  showPop(e: MouseEvent): void {
+    if ((e.target as HTMLElement).classList.contains('content-wrapper')) {
       this.showPopup = !this.showPopup;
     }
   }
 
   onPageChanged(e: PageEvent): void {
     const firstCut: number = e.pageIndex * e.pageSize;
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     const secondCut: number = firstCut + e.pageSize;
     this.activePageDataChunk = this.datasource.slice(firstCut, secondCut);
   }
