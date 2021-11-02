@@ -9,8 +9,8 @@ import { EventEmitter } from '@angular/core';
 export class TimeComponent {
   @Input() id: number;
   @Output() delete = new EventEmitter<number>();
-  // eslint-disable-next-line
-  removeObject() {
+
+  removeObject(): void {
     this.delete.emit(this.id);
   }
 }
