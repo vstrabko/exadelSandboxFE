@@ -1,7 +1,7 @@
 <header class="header">
   <div class="img"><img src="../../../assets/img/sapex.png" alt=""></div>
   <nav class="user-buttons">
-    <a routerLink="/users" routerLinkActive="active" mat-raised-button *ngIf="role" id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
+    <a routerLink="/users" routerLinkActive="active" (click)="showSpinner()" mat-raised-button *ngIf="role" id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
     <a routerLink="/calendar" routerLinkActive="active" mat-raised-button *ngIf="role" id="calendar">{{ 'header.calendar' | translate }}</a>
     <a routerLink="/sandbox" routerLinkActive="active" mat-raised-button *ngIf="role" id="createNewSandbox">{{ 'header.createNewSandbox' | translate }}</a>
   </nav>
@@ -14,4 +14,4 @@
   </div>
 </header>
 <app-login-form *ngIf="isVisible" (modal)="closeModal()"></app-login-form>
-<app-spinner></app-spinner>
+<app-spinner *ngIf="vision"></app-spinner>

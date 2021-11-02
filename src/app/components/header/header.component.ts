@@ -15,6 +15,7 @@ export class HeaderComponent {
     mentor: 'mentor',
   };
   public isVisible = false;
+  public vision = false;
 
   public role: string = this.roles.admin; //todo: role from back-end
   public userName: string = 'Mikhail'; //todo: name of user from back-end
@@ -24,5 +25,12 @@ export class HeaderComponent {
   }
   closeModal(): void {
     this.isVisible = false;
+  }
+
+  showSpinner(): void {
+    this.vision = true;
+    setTimeout(() => {
+      this.vision = false;
+    }, 3000);
   }
 }
