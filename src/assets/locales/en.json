@@ -16,7 +16,8 @@
 		"emailInputValid": "Please, enter a valid email",
 		"enterEmail": "Enter your email",
 		"enterPassword": "Enter your password",
-		"passwordInput": "Please, enter your password"
+		"passwordInput": "Please, enter your password",
+    "passwordInputValid": "The password must be at least 8 characters"
 	},
 	"logout": "Log out",
 	"messages": {
