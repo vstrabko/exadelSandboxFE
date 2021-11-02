@@ -1,7 +1,4 @@
-import {
-  Component,
-  Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-popup-choose-the-time',
@@ -12,21 +9,21 @@ export class PopupChooseTheTimeComponent {
   @Input() title: string = 'Choose the time';
   @Input() titleData: string = '01/11/2021';
 
-  public times: any = [0];
+  public times: number[] = [0];
 
-  // eslint-disable-next-line
-  add() {
+
+  add(): void {
     if (!this.times.length) {
       this.times.push(0);
       return;
     }
-    // eslint-disable-next-line
+
     const lastId = this.times[this.times.length - 1];
-    // eslint-disable-next-line
+
     this.times.push(lastId + 1);
   }
-  // eslint-disable-next-line
-  del(timeId: number) {
+
+  del(timeId: number): void {
     this.times = this.times.filter((id: number) => {
       return id !== timeId;
     });
