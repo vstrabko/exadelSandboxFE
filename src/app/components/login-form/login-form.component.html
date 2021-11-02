@@ -3,14 +3,14 @@
     <div class="form-field">
       <mat-form-field appearance="fill">
         <mat-label>{{ 'loginForm.enterEmail' | translate }}</mat-label>
-        <input matInput type="email" placeholder="pat@example.com" [formControl]="email" required />
+        <input matInput name="email" type="email" placeholder="pat@example.com" [formControl]="email" required />
         <mat-error *ngIf="email.hasError('required')">{{ 'loginForm.emailInput' | translate }}</mat-error>
         <mat-error *ngIf="email.hasError('email')">{{ 'loginForm.emailInputValid' | translate }}</mat-error>
       </mat-form-field>
     </div>
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>{{ 'loginForm.enterPassword' | translate }}</mat-label>
-      <input matInput type="password" [formControl]="password" required />
+      <input matInput name="password" type="password" [formControl]="password" required />
       <mat-error *ngIf="password.hasError('required')">{{ 'loginForm.passwordInput' | translate }}</mat-error>
     </mat-form-field>
     <div class="buttons">
