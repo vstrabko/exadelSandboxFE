@@ -41,13 +41,14 @@
             "allowTemplateLiterals": true
           }
         ],
-//         "array-element-newline": [
-//           "error",
-//           {
-//             "multiline": false
-//           }
-//         ],
-        "no-unused-vars": 1,
+        "array-element-newline": [
+          "error", "consistent",
+          {
+            "multiline": true
+          }
+        ],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"],
         "@typescript-eslint/typedef": [
           "error",
           { "arrowParameter": true }
