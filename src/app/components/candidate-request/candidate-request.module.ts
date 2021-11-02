@@ -26,9 +26,10 @@ import { CandidateModule } from '../candidate/candidate.module';
     MatInputModule,
     MatIconModule,
     MatRadioModule,
-    MatCheckboxModule, InternationalizationModule
+    MatCheckboxModule,
+    InternationalizationModule,
   ],
   providers: [LocalizationService],
-  exports: [CandidateRequestComponent]
+  exports: [CandidateRequestComponent],
 })
 export class CandidateRequestModule {}

@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./candidate-request.component.scss'],
 })
 export class CandidateRequestComponent implements OnInit {
-  constructor(private toastr: ToastrService){}
+  constructor(private toastr: ToastrService) {}
   registrationForm: FormGroup;
 
   cities: string[] = ['Moscow', 'New York', 'Minsk'];
@@ -41,7 +41,7 @@ export class CandidateRequestComponent implements OnInit {
   onSubmit(): void {
     if (this.registrationForm.valid) {
       console.log(this.registrationForm.value);
-      this.toastr.success('Вы успешно отправили форму', 'Принято')
+      this.toastr.success('Вы успешно отправили форму', 'Принято');
       this.registrationForm.reset();
     }
   }
