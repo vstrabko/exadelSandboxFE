@@ -1,6 +1,10 @@
 @import '../../shared/constants/colors.scss';
 @import '../../shared/constants/otherStyles.scss';
 
+form {
+  padding: 5px 15px;
+}
+
 .sandbox > * {
   width: 100%;
 }
@@ -59,6 +63,9 @@
 }
 
 .button {
-  width: 80px;
+  width: 120px;
   margin: 10px auto;
+  & > button {
+    width: 120px;
+  }
 }

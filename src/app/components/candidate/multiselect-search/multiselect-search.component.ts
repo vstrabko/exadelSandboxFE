@@ -76,7 +76,6 @@ export class MultiselectSearchComponent implements OnInit {
    * Set selected values to retain the state
    */
   setSelectedValues(): void {
-    console.log('selectFormControl', this.selectFormControl.value);
     if (this.selectFormControl.value && this.selectFormControl.value.length > 0) {
       this.selectFormControl.value.forEach((e: any) => {
         if (this.selectedValues.indexOf(e) === -1) {

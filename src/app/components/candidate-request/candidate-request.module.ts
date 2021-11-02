@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
+import { LocalizationService } from 'src/app/internationalization/localization.service';
+
 import { CandidateModule } from '../candidate/candidate.module';
 
 @NgModule({
@@ -23,7 +26,9 @@ import { CandidateModule } from '../candidate/candidate.module';
     MatInputModule,
     MatIconModule,
     MatRadioModule,
-    MatCheckboxModule,
+    MatCheckboxModule, InternationalizationModule
   ],
+  providers: [LocalizationService],
+  exports: [CandidateRequestComponent]
 })
 export class CandidateRequestModule {}

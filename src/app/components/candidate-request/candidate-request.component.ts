@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-candidate-request',
@@ -7,9 +8,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./candidate-request.component.scss'],
 })
 export class CandidateRequestComponent implements OnInit {
+  constructor(private toastr: ToastrService){}
   registrationForm: FormGroup;
 
-  hoursList: string[] = ['Less than 4 hours', '4-6 hours per day', '6-infinity hours per day'];
   cities: string[] = ['Moscow', 'New York', 'Minsk'];
 
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -29,10 +30,10 @@ export class CandidateRequestComponent implements OnInit {
       location: new FormControl('', [Validators.required]),
       skills: new FormControl('', [Validators.required]),
       job: new FormControl('', [Validators.required]),
-      certificates: new FormControl('', [Validators.required]),
-      addSkills: new FormControl('', [Validators.required]),
+      certificates: new FormControl(''),
+      addSkills: new FormControl(''),
       timeContact: new FormControl('', [Validators.required]),
-      joinExadel: new FormControl('', [Validators.required]),
+      joinExadel: new FormControl(''),
       agreement: new FormControl('', [Validators.required]),
     });
   }
@@ -40,7 +41,8 @@ export class CandidateRequestComponent implements OnInit {
   onSubmit(): void {
     if (this.registrationForm.valid) {
       console.log(this.registrationForm.value);
-      this.registrationForm.reset;
+      this.toastr.success('Вы успешно отправили форму', 'Принято')
+      this.registrationForm.reset();
     }
   }
 }
