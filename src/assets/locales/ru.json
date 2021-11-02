@@ -13,10 +13,11 @@
 	"login": "Войти",
 	"loginForm": {
 		"emailInput": "Пожалуйста, введите Ваш email",
-		"emailInputValid": "Пожалуйста, введите правильный email",
+		"emailInputValid": "Пожалуйста, введите корректный email",
 		"enterEmail": "Введите Ваш email",
 		"enterPassword": "Введите Ваш пароль",
-		"passwordInput": "Пожалуйста, введите пароль"
+		"passwordInput": "Пожалуйста, введите пароль",
+    "passwordInputValid": "Пароль должен содержать не менее 8 символов"
 	},
 	"logout": "Выйти",
 	"messages": {
