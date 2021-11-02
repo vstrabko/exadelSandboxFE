@@ -48,5 +48,13 @@
     "cancel": "Отмена",
     "ok": "OK",
     "title": "Выберите время"
+  },
+  "candidateList": {
+    "select": "выбрать",
+	"search": "поиск",
+	"haveChosen": "Вы выбрали",
+	"other": "другой",
+	"others": "других",
+	"perPage": "Элементов на странице"
   }
 }

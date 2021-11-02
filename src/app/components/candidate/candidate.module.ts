@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
 import { CandidateRecordComponent } from './candidate-record/candidate-record.component';
 import { CandidateCardPopupModule } from '../candidate-card-popup/candidate-card-popup.module';
+import { LocalizationService } from 'src/app/internationalization/localization.service';
+import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -30,7 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    InternationalizationModule,
   ],
   exports: [CandidateListComponent, CandidateRecordComponent],
+  providers: [LocalizationService],
 })
 export class CandidateModule {}

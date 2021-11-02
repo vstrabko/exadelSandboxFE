@@ -48,5 +48,13 @@
     "cancel": "Cancel",
     "ok": "OK",
     "title": "Choose the time"
+  },
+  "candidateList": {
+    "select": "select",
+	"search": "search",
+	"haveChosen": "You have chosen",
+	"other": "other",
+	"others": "others",
+	"perPage": "Items per page"
   }
 }

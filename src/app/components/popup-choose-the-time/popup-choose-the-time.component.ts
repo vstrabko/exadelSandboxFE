@@ -11,7 +11,6 @@ export class PopupChooseTheTimeComponent {
 
   public times: number[] = [0];
 
-
   add(): void {
     if (!this.times.length) {
       this.times.push(0);
