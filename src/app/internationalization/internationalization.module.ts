@@ -4,6 +4,7 @@ import { LocalizationService } from './localization.service';
 import { LocalizationServiceConfig } from './localization-config.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
+import { LocalConfig } from '../interfaces/interfaces';
 
 @NgModule({
   declarations: [],
@@ -11,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [TranslateModule],
 })
 export class InternationalizationModule {
-  public static forRoot(config: any): ModuleWithProviders<InternationalizationModule> {
+  public static forRoot(config: LocalConfig): ModuleWithProviders<InternationalizationModule> {
     return {
       ngModule: InternationalizationModule,
       providers: [

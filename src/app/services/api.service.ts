@@ -15,35 +15,35 @@ export abstract class ApiService<T extends ResourceModel<T>> {
     return this.httpClient
       .post<T>(`${this.apiUrl}`, resource.toJson())
       .pipe(map((result: any) => new this.tConstructor(result)))
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public get(): Observable<any> {
     return this.httpClient
       .get<T[]>(`${this.apiUrl}`)
       .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public getById(id: number): Observable<any> {
     return this.httpClient
       .get<T>(`${this.apiUrl}/${id}`)
       .pipe(map((result: any) => new this.tConstructor(result)))
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
-      .put<T>(`${this.apiUrl}/${resource._id}`, resource.toJson())
+      .put<T>(`${this.apiUrl}/${String(resource._id)}`, resource.toJson())
       .pipe(map((result: any) => new this.tConstructor(result)))
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public delete(id: number): Observable<void | any> {
     return this.httpClient
       .delete<void | T>(`${this.apiUrl}/${id}`)
       .pipe(map((result: any) => new this.tConstructor(result)))
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   private errorHandler(err: HttpErrorResponse): ObservableInput<any> {
@@ -53,7 +53,7 @@ export abstract class ApiService<T extends ResourceModel<T>> {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(`Backend returned code ${err.status}, body was: ${err.error}`);
+      console.error(`Backend returned code ${err.status}, body was: ${String(err.error)}`);
     }
 
     // ...optionally return a default fallback value so app can continue (pick one)

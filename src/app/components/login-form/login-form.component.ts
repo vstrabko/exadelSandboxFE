@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { REGEXP } from '../../shared/constants/validators';
@@ -17,10 +18,10 @@ export class LoginFormComponent {
 
   submit(): void {
     if (this.email.valid && this.password.valid) {
-      const user = {
-        username: this.email.value,
-        password: this.password.value,
-      };
+      // const user = {
+      //   username: this.email.value,
+      //   password: this.password.value,
+      // };
       this.modal.emit(false);
     }
   }
