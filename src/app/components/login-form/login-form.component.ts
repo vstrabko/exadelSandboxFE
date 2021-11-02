@@ -18,10 +18,6 @@ export class LoginFormComponent {
 
   submit(): void {
     if (this.email.valid && this.password.valid) {
-      // const user = {
-      //   username: this.email.value,
-      //   password: this.password.value,
-      // };
       this.modal.emit(false);
     }
   }
