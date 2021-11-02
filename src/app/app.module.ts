@@ -19,6 +19,7 @@ import { CandidateCardPopupModule } from './components/candidate-card-popup/cand
 import { ErrorPageModule } from './pages/error-page/error-page.module';
 import { CandidateRequestModule } from './components/candidate-request/candidate-request.module';
 import { CalendarModule } from './components/calendar/calendar.module';
+import { PopupChooseTheTimeModule } from './components/popup-choose-the-time/popup-choose-the-time.module';
 
 import { InternationalizationModule } from './internationalization/internationalization.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     CandidateRequestModule,
     CalendarModule,
+    PopupChooseTheTimeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
