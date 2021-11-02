@@ -10,7 +10,7 @@ export class User extends ResourceModel<User> {
     super(model);
   }
   get name(): string {
-    return this.firstName + ' ' + this.lastName;
+    return `${this.firstName} ${this.lastName}`;
   }
   get mail(): string {
     return this.email;
