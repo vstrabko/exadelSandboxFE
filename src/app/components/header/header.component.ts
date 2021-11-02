@@ -16,13 +16,10 @@ export class HeaderComponent implements OnInit {
     interviewer: 'interviewer',
     mentor: 'mentor',
   };
+
   public isVisible = false;
-
   public vision = false;
-
   public userName = '';
-
-
   public role: string = this.roles.admin; //todo: role from back-end
 
   constructor(private authService: AuthService) {}
@@ -43,6 +40,7 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.vision = false;
     }, 3000);
+  }
 
   logOut(): void {
     this.authService.logout();
