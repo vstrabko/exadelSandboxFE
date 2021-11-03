@@ -55,6 +55,9 @@
 	"haveChosen": "You have chosen",
 	"other": "other",
 	"others": "others",
-	"perPage": "Items per page"
+	"perPage": "Items per page",
+	"nextPage": "Next page",
+	"prevPage": "Previous page",
+	"of": "of" 
   }
 }
