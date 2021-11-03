@@ -1,9 +1,9 @@
 <header class="header">
   <div class="img"><img src="../../../assets/img/sapex.png" alt=""></div>
   <nav class="user-buttons">
-    <a mat-raised-button routerLink="/admin-main-page" routerLinkActive="active" id="candidatesList" *ngIf="userName">{{ 'header.candidatesList' | translate }}</a>
-    <a mat-raised-button routerLink="/calendar" routerLinkActive="active"  id="calendar" *ngIf="userName">{{ 'header.calendar' | translate }}</a>
-    <a mat-raised-button routerLink="/sandbox" routerLinkActive="active" id="createNewSandbox" *ngIf="userName">{{ 'header.createNewSandbox' | translate }}</a>
+    <a routerLink="/users" routerLinkActive="active" (click)="showSpinner()" mat-raised-button *ngIf="role" id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
+    <a routerLink="/calendar" routerLinkActive="active" mat-raised-button *ngIf="role" id="calendar">{{ 'header.calendar' | translate }}</a>
+    <a routerLink="/sandbox" routerLinkActive="active" mat-raised-button *ngIf="role" id="createNewSandbox">{{ 'header.createNewSandbox' | translate }}</a>
   </nav>
   <div class="username" *ngIf="userName" class="userName">{{'header.hello' | translate}}, {{ userName }}</div>
   <div class="button-login">
@@ -14,3 +14,4 @@
   </div>
 </header>
 <app-login-form *ngIf="isVisible" (modal)="closeModal()"></app-login-form>
+<app-spinner *ngIf="vision"></app-spinner>

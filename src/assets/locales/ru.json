@@ -1,47 +1,70 @@
 {
-	"cancel": "Отмена",
-	"errors": {
-		"goHome": "Ошибка, вернуться на главную страницу",
-		"goHomeMessage": "На главную"
-	},
-	"header": {
-		"calendar": "Календарь",
-		"candidatesList": "Список кандидатов",
-		"createNewSandbox": "Создать песочницу",
-    "hello": "Здравствуйте"
-	},
-	"login": "Войти",
-	"loginForm": {
-		"emailInput": "Пожалуйста, введите Ваш email",
-		"emailInputValid": "Пожалуйста, введите корректный email",
-		"enterEmail": "Введите Ваш email",
-		"enterPassword": "Введите Ваш пароль",
-		"passwordInput": "Пожалуйста, введите пароль",
-    "passwordInputValid": "Пароль должен содержать не менее 8 символов"
-	},
-	"logout": "Выйти",
-	"messages": {
-		"send": "ОТПРАВЛЕНО",
-		"success": "Вы успешно отправили форму"
-	},
-	"ok": "ОК",
-	"other": {
-		"englishLevel": "Уровень английского"
-	},
-	"roles": {
-		"interviewers": "Интервьюеры",
-		"mentors": "Менторы",
-		"recruiters": "Рекрутеры"
-	},
-	"sandbox": {
-		"candidatesNumber": "Количество кандидатов",
-		"createSandbox": "Создать песочницу",
-		"description": "Описание песочницы",
-		"invalidEndDate": "Неверная дата окончания",
-		"invalidStartDate": "Неверная дата старта",
-		"name": "Песочница",
-		"period": "Длительность"
-	},
+  "cancel": "Отмена",
+  "errors": {
+    "goHome": "Ошибка, вернуться на главную страницу",
+    "goHomeMessage": "На главную"
+  },
+  "header": {
+    "calendar": "Календарь",
+    "candidatesList": "Список кандидатов",
+    "createNewSandbox": "Создать песочницу"
+  },
+  "login": "Войти",
+  "loginForm": {
+    "emailInput": "Пожалуйста, введите Ваш email",
+    "emailInputValid": "Пожалуйста, введите правильный email",
+    "enterEmail": "Введите Ваш email",
+    "enterPassword": "Введите Ваш пароль",
+    "passwordInput": "Пожалуйста, введите пароль"
+  },
+  "logout": "Выйти",
+  "messages": {
+    "send": "ОТПРАВЛЕНО",
+    "success": "Вы успешно отправили форму"
+  },
+  "ok": "ОК",
+  "other": {
+    "englishLevel": "Уровень английского"
+  },
+  "roles": {
+    "interviewers": "Интервьюеры",
+    "mentors": "Менторы",
+    "recruiters": "Рекрутеры"
+  },
+  "sandbox": {
+    "candidatesNumber": "Количество кандидатов",
+    "createSandbox": "Создать песочницу",
+    "description": "Описание песочницы",
+    "invalidEndDate": "Неверная дата окончания",
+    "invalidStartDate": "Неверная дата старта",
+    "name": "Песочница",
+    "period": "Длительность"
+  },
+  "request": {
+    "header": "Заявка кандидата",
+    "firstName": "Имя",
+    "secondName": "Фамилия",
+    "telephone": "Телефон",
+    "email": "E-mail",
+    "skype": "Skype",
+    "englishLevel": "Уровень английского",
+    "motivation": "Мотивация",
+    "availability": "Часы доступности в день",
+    "available1": "Менее 4 чассов",
+    "available2": "4-6 часа",
+    "available3": "6 и более часов",
+    "language": "Язык стажировки",
+    "location": "Место нахождения (Город, Страна)",
+    "skills": "Основные навыки",
+    "job": "Текущее место работы ",
+    "certificates": "Сертификаты",
+    "addSkills": "Дополнительные навыки",
+    "timeContact": "Подходящее время для связи",
+    "joinExadel": "Планируете ли вы присоединиться к Exadel после обучения?",
+    "agreement": "Согласны ли вы на обработку ваших персональных данных в соответствии со статьей о конфиденциальности выше?",
+    "sendButton": "Отправить"
+
+  },
   "popupTimer": {
     "from": "с",
     "to": "по",
@@ -51,13 +74,17 @@
   },
   "candidateList": {
     "select": "выбрать",
-	"search": "поиск",
-	"haveChosen": "Вы выбрали",
-	"other": "другой",
-	"others": "других",
-	"perPage": "Элементов на странице",
-	"nextPage": "Следущая страница",
-	"prevPage": "Предыдущая страница",
-	"of": "из"
+    "search": "поиск",
+    "haveChosen": "Вы выбрали",
+    "other": "другой",
+    "others": "других",
+    "perPage": "Элементов на странице",
+    "nextPage": "Следущая страница",
+    "prevPage": "Предыдущая страница",
+    "of": "из"
+  },
+  "tostr": {
+    "title": "Данные отправлены",
+    "text": "Вы зарегистрированы"
   }
 }
