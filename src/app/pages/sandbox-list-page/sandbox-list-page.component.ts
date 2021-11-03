@@ -9,6 +9,6 @@ import { Router } from '@angular/router';
 export class SandboxListPageComponent {
   constructor(private router: Router) {}
   goCreateSandbox(): void {
-    this.router.navigateByUrl('/sandbox/create');
+    void this.router.navigateByUrl('/sandbox/create');
   }
 }
