@@ -1,15 +1,16 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, AfterViewChecked } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ChangeDetectorRef } from '@angular/core';
+import { MatOptionSelectionChange } from '@angular/material/core';
 
 @Component({
   selector: 'app-multiselect-search',
   templateUrl: './multiselect-search.component.html',
   styleUrls: ['./multiselect-search.component.scss'],
 })
-export class MultiselectSearchComponent implements OnInit {
+export class MultiselectSearchComponent implements OnInit, AfterViewChecked {
   @ViewChild('search') searchTextBox: ElementRef;
 
   selectFormControl = new FormControl();
@@ -48,7 +49,7 @@ export class MultiselectSearchComponent implements OnInit {
   }
 
   //Remove from selected values based on uncheck
-  selectionChange(event: any): void {
+  selectionChange(event: MatOptionSelectionChange): void {
     if (event.isUserInput && event.source.selected === false) {
       const index = this.selectedValues.indexOf(event.source.value);
       this.selectedValues.splice(index, 1);
@@ -67,7 +68,7 @@ export class MultiselectSearchComponent implements OnInit {
   /**
    * Clearing search textbox value
    */
-  clearSearch(event: any): void {
+  clearSearch(event: MouseEvent): void {
     event.stopPropagation();
     this.searchTextboxControl.patchValue('');
   }
@@ -76,7 +77,6 @@ export class MultiselectSearchComponent implements OnInit {
    * Set selected values to retain the state
    */
   setSelectedValues(): void {
-    console.log('selectFormControl', this.selectFormControl.value);
     if (this.selectFormControl.value && this.selectFormControl.value.length > 0) {
       this.selectFormControl.value.forEach((e: any) => {
         if (this.selectedValues.indexOf(e) === -1) {

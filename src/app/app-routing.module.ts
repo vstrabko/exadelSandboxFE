@@ -5,7 +5,6 @@ import { CreateSandboxPageComponent } from './pages/create-sandbox-page/create-s
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CandidateListComponent } from './components/candidate/candidate-list/candidate-list.component';
-import { CandidateRequestComponent } from './components/candidate-request/candidate-request.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
@@ -14,7 +13,7 @@ const routes: Routes = [
   { path: 'users', component: CandidateListComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'sandbox', component: CreateSandboxPageComponent },
-  { path: 'error', component: ErrorPageComponent },
+  { path: '**', component: ErrorPageComponent },
 ];
 
 @NgModule({
