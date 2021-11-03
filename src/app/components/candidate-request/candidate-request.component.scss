@@ -1,2 +1,71 @@
 @import '../../shared/constants/colors.scss';
 @import '../../shared/constants/otherStyles.scss';
+
+form {
+  padding: 5px 15px;
+}
+
+.sandbox > * {
+  width: 100%;
+}
+
+.three-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  & > * {
+    width: 32%;
+  }
+}
+
+.skills {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  & > * {
+    width: 49%;
+  }
+}
+
+.motivation > * {
+  width: 100%;
+}
+
+.radio > * {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  .radio-button {
+    margin-bottom: 15px;
+  }
+}
+
+.lang {
+  display: flex;
+  flex-direction: column;
+}
+
+.job {
+  display: flex;
+  flex-direction: column;
+}
+
+.time_contact {
+  width: 100%;
+  & > * {
+    width: 100%;
+  }
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  width: 120px;
+  margin: 10px auto;
+  & > button {
+    width: 120px;
+  }
+}

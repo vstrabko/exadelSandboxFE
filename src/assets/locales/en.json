@@ -1,52 +1,80 @@
 {
-	"cancel": "Cancel",
-	"errors": {
-		"goHome": "Error, go back to home page",
-		"goHomeMessage": "Back to Home page"
-	},
-	"header": {
-		"calendar": "Calendar",
-		"candidatesList": "Candidates list",
-		"createNewSandbox": "New sandbox",
+  "cancel": "Cancel",
+  "errors": {
+    "goHome": "Error, go back to home page",
+    "goHomeMessage": "Back to Home page"
+  },
+  "header": {
+    "calendar": "Calendar",
+    "candidatesList": "Candidates list",
+    "createNewSandbox": "New sandbox",
     "hello": "Hello"
-	},
-	"login": "Log in",
-	"loginForm": {
-		"emailInput": "Please, enter your email",
-		"emailInputValid": "Please, enter a valid email",
-		"enterEmail": "Enter your email",
-		"enterPassword": "Enter your password",
-		"passwordInput": "Please, enter your password",
+  },
+  "login": "Log in",
+  "loginForm": {
+    "emailInput": "Please, enter your email",
+    "emailInputValid": "Please, enter a valid email",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "passwordInput": "Please, enter your password",
     "passwordInputValid": "The password must be at least 8 characters"
-	},
-	"logout": "Log out",
-	"messages": {
-		"send": "SEND",
-		"success": "You have successfully submitted the form"
-	},
-	"ok": "OK",
-	"other": {
-		"englishLevel": "English Level"
-	},
-	"roles": {
-		"interviewers": "Interviewers",
-		"mentors": "Mentors",
-		"recruiters": "Recruiters"
-	},
-	"sandbox": {
-		"candidatesNumber": "Number of candidates",
-		"createSandbox": "Create sandbox",
-		"description": "Sandbox description",
-		"invalidEndDate": "Invalid end date",
-		"invalidStartDate": "Invalid start date",
-		"name": "Sandbox",
-		"period": "Sandbox period"
-	},
+  },
+  "logout": "Log out",
+  "messages": {
+    "send": "SEND",
+    "success": "You have successfully submitted the form"
+  },
+  "ok": "OK",
+  "other": {
+    "englishLevel": "English Level"
+  },
+  "roles": {
+    "interviewers": "Interviewers",
+    "mentors": "Mentors",
+    "recruiters": "Recruiters"
+  },
+  "sandbox": {
+    "candidatesNumber": "Number of candidates",
+    "createSandbox": "Create sandbox",
+    "description": "Sandbox description",
+    "invalidEndDate": "Invalid end date",
+    "invalidStartDate": "Invalid start date",
+    "name": "Sandbox",
+    "period": "Sandbox period"
+  },
+  "request": {
+    "header": "Candidate request",
+    "firstName": "First Name",
+    "secondName": "Second Name",
+    "telephone": "Telephone",
+    "email": "E-mail",
+    "skype": "Skype",
+    "englishLevel": "English level",
+    "motivation": "Motivation",
+    "availability": "Availability hours per day",
+    "available1": "Less than 4 hours",
+    "available2": "4-6 hours",
+    "available3": "6-infinity hours",
+    "language": "Language of intership",
+    "location": "Location (City, Country)",
+    "skills": "Primary skill",
+    "job": "Current job",
+    "certificates": "Professional certificates",
+    "addSkills": "Additional skills, technologies",
+    "timeContact": "The best time to contact you",
+    "joinExadel": "Are you planning to join Exadel after the Trainig?",
+    "agreement": "Could you provide your agreement to proceed with your Personal Data in accordance with the Privacy article above?",
+    "sendButton": "Send"
+  },
   "popupTimer": {
     "from": "from",
     "to": "to",
     "cancel": "Cancel",
     "ok": "OK",
     "title": "Choose the time"
+  },
+  "tostr": {
+	"title": "Sucess",
+    "text": "You are registred!"
   }
 }
