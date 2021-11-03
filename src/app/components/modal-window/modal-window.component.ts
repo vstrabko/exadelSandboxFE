@@ -12,7 +12,7 @@ export class ModalWindowComponent {
   @Input() title: string = '';
 
   @HostListener('window:keydown', ['$event'])
-  closeESC(event: any): any {
+  closeESC(event: any): void {
     if (event.keyCode === 27) {
       this.closeModal.closeModal();
     }
