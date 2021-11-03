@@ -2,7 +2,7 @@ name: exadelSandboxFE-Push-Validations
 
 on:
   push:
-    branches: [main, dev, feature/**, bugfix/**, chore/**]
+    branches: [master, dev, feature/**, bugfix/**, chore/**]
 
 jobs:
   build:
@@ -18,4 +18,4 @@ jobs:
       - name: Build dependencies
         run: npm run build
       - name: Hello
-        run: echo "Hello, GitHub Actions!"
+        run: echo "Hello, GitHub Actions work!"
