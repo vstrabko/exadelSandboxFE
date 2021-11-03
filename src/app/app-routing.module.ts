@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'users', component: CandidateListComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'sandbox', component: CreateSandboxPageComponent },
-  { path: 'error', component: ErrorPageComponent },
+  { path: '**', component: ErrorPageComponent },
 ];
 
 @NgModule({

@@ -14,3 +14,7 @@ export interface englishLevelList {
   id: number;
   name: string;
 }
+
+export interface LocalConfig {
+  locale_id: string;
+}

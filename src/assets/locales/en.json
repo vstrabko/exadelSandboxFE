@@ -7,7 +7,8 @@
 	"header": {
 		"calendar": "Calendar",
 		"candidatesList": "Candidates list",
-		"createNewSandbox": "New sandbox"
+		"createNewSandbox": "New sandbox",
+    "hello": "Hello"
 	},
 	"login": "Log in",
 	"loginForm": {
@@ -15,7 +16,8 @@
 		"emailInputValid": "Please, enter a valid email",
 		"enterEmail": "Enter your email",
 		"enterPassword": "Enter your password",
-		"passwordInput": "Please, enter your password"
+		"passwordInput": "Please, enter your password",
+    "passwordInputValid": "The password must be at least 8 characters"
 	},
 	"logout": "Log out",
 	"messages": {
@@ -63,5 +65,12 @@
 		"joinExadel": "Are you planning to join Exadel after the Trainig?",
 		"agreement": "Could you provide your agreement to proceed with your Personal Data in accordance with the Privacy article above?",
 		"sendButton": "Send"
-	}
+	},
+  "popupTimer": {
+    "from": "from",
+    "to": "to",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "title": "Choose the time"
+  }
 }
