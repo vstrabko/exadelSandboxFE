@@ -17,5 +17,3 @@ jobs:
         run: npm run lint:ci
       - name: Build dependencies
         run: npm run build
-      - name: Hello
-        run: echo "Hello, GitHub Actions work!"
