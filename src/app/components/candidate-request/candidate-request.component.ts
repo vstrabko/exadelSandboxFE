@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { EnglishLevels } from '../../enums/enums';
+import { EnglishLevels } from '../../enums/english-levels.enum';
 
 @Component({
   selector: 'app-candidate-request',
