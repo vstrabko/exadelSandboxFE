@@ -24,6 +24,7 @@ import { PopupChooseTheTimeModule } from './components/popup-choose-the-time/pop
 import { InternationalizationModule } from './internationalization/internationalization.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-page.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ErrorPageModule,
     AdminMainPageModule,
     HttpClientModule,
+    SandboxListPageModule,
     InternationalizationModule.forRoot({ locale_id: 'en' }), // iniating with default language: en
     TranslateModule.forRoot({
       loader: {
