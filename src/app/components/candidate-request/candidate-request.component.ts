@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-candidate-request',
@@ -8,7 +9,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./candidate-request.component.scss'],
 })
 export class CandidateRequestComponent implements OnInit {
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService, private translateService: TranslateService) {
+    this.translateService.onLangChange.subscribe(() => {
+      this.translateLabels();
+    });
+    this.translateLabels();
+  }
+  title = '';
+  text = '';
   registrationForm: FormGroup;
 
   cities: string[] = ['Moscow', 'New York', 'Minsk'];
@@ -41,8 +49,12 @@ export class CandidateRequestComponent implements OnInit {
   onSubmit(): void {
     if (this.registrationForm.valid) {
       console.log(this.registrationForm.value);
-      this.toastr.success('Sucess', 'You are registred!');
+      this.toastr.success(this.title, this.text);
       this.registrationForm.reset();
     }
+  }
+  translateLabels(): void {
+    this.title = this.translateService.instant('tostr.title');
+    this.text = this.translateService.instant('tostr.text');
   }
 }
