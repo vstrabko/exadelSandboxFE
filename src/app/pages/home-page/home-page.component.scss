@@ -1,90 +1,24 @@
 @import '../../shared/constants/colors.scss';
 @import '../../shared/constants/otherStyles.scss';
 
-.wrapper-home-page {
-  height: $height-home-page;
-}
-
-.wrapper-content {
-  height: auto;
-  background: $background-content;
-}
-
-.wrapper-drop-box,
-.wrapper-description {
+.drop-box_container,
+.description_container,
+.sandbox-interviews_container {
   width: 100%;
-  padding: 6px 0 0 0;
-  display: flex;
-  justify-content: center;
-}
-
-.wrapper-drop-box {
-  height: 5%;
-}
-
-.wrapper-description {
-  height: 15%;
+  background: #fafafa;
+  &:not(:first-child) {
+    margin-top: 12px;
+  }
 }
 
 .drop-box,
-.description {
-  height: 100%;
-  width: $width-content;
-  background: #fafafa;
-  border: 2px solid $border-color;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px $box-shadow;
+.description,
+.sandbox-interviews {
+  padding: 15px 10px;
+  border: 1px solid $border-color;
   border-radius: 5px;
 }
 
 .drop-box {
-  height: 50px;
-}
-
-.description {
-  height: 150px;
-}
-
-.description {
-  display: flex;
-  align-items: center;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 42px;
-  color: #000000;
-}
-
-.wrapper-sandbox-interviews {
-  display: flex;
-  justify-content: center;
-  padding-top: 6px;
-  padding-bottom: $height-footer;
-}
-
-.content-sandbox-interviews {
-  width: $width-content;
-  height: auto;
-  background: #fafafa;
-  border: 2px solid $border-color;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px $box-shadow;
-  border-radius: 5px;
-}
-
-.wrapper-btns {
-  height: 16%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.btn-home-page {
-  width: 140px;
-  height: 34px;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+  width: 100%;
 }

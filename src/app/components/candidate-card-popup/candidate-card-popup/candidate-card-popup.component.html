@@ -1,18 +1,18 @@
 <app-modal-window [title]="title">
-    <div class="wrapper">
-        <section class="section first-column">
-            <div class="two-column">
-                <mat-card>{{user.name}}</mat-card>
-                <mat-form-field appearance="fill">
-                <mat-label>Status</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let stat of status" [value]="stat.value">
-                    {{stat.viewValue}}
-                    </mat-option>
-                </mat-select>
-                </mat-form-field>
-            </div>
-            <mat-card>Candidate skills</mat-card>
+  <div class="card-popup_container">
+    <div class="section">
+      <div class="two-column ">
+        <mat-card class="candidate-name">{{ user.name }}</mat-card>
+        <mat-form-field class="candidate-status" appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let stat of status" [value]="stat.value">
+              {{ stat.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-card class="candidate-skills">Candidate skills</mat-card>
             <div class="raiting two-column">
                 <mat-card>Raiting 1</mat-card>
                 <mat-card>Raiting 2</mat-card>
@@ -23,22 +23,27 @@
                 <mat-card>Raiting 7</mat-card>
                 <mat-card>Raiting 8</mat-card>
             </div>
-        </section>
-        <section class="section second-column">
-            <mat-button-toggle-group class="radio-buttons" #group="matButtonToggleGroup" name="workerStatus" aria-label="Worker Status">
-                <mat-button-toggle value="Recruiter" checked>Recruiter</mat-button-toggle>
-                <mat-button-toggle value="Interviewer">Interviewer</mat-button-toggle>
-                <mat-button-toggle value="Mentor">Mentor</mat-button-toggle>
-            </mat-button-toggle-group>
-            <mat-card>{{group.value}} Name</mat-card>
-            <mat-form-field class="example-full-width" appearance="fill">
+    </div>
+    <div class="section">
+      <mat-button-toggle-group
+        class="radio-buttons"
+        #group="matButtonToggleGroup"
+        name="workerStatus"
+        aria-label="Worker Status"
+      >
+        <mat-button-toggle value="Recruiter" checked>Recruiter</mat-button-toggle>
+        <mat-button-toggle value="Interviewer">Interviewer</mat-button-toggle>
+        <mat-button-toggle value="Mentor">Mentor</mat-button-toggle>
+      </mat-button-toggle-group>
+      <mat-card class="user-name">{{group.value}} Name</mat-card>
+            <mat-form-field class="textarea_container" appearance="fill">
                 <mat-label>{{group.value}} feedback</mat-label>
                 <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
             </mat-form-field>
-            <div class="raiting two-column">
+            <div class="two-column buttons">
                 <button class="btn unfilled-btn" (click)="cancel()">close</button>
                 <button class="btn filled-btn">save</button>
             </div> 
-        </section>
     </div>
-  </app-modal-window>
+  </div>
+</app-modal-window>
