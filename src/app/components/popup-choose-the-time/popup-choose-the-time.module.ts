@@ -8,12 +8,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
 
 @NgModule({
   declarations: [PopupChooseTheTimeComponent],
-  imports: [
-    CommonModule,
-    ModalWindowModule,
-    TimeModule,
-    InternationalizationModule,
-  ],
+  imports: [CommonModule, ModalWindowModule, TimeModule, InternationalizationModule],
   exports: [PopupChooseTheTimeComponent],
   providers: [LocalizationService],
 })
