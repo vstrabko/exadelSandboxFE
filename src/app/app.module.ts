@@ -18,16 +18,31 @@ import { CandidateModule } from './components/candidate/candidate.module';
 import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
 import { CandidateRequestModule } from './components/candidate-request/candidate-request.module';
-import { CalendarModule } from './components/calendar/calendar.module';
+import { CalendarPageModule } from './pages/calendar-page/calendar-page.module';
 import { PopupChooseTheTimeModule } from './components/popup-choose-the-time/popup-choose-the-time.module';
 
 import { InternationalizationModule } from './internationalization/internationalization.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timegridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+import scrollgrid from '@fullcalendar/scrollgrid';
+
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
 }
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  timegridPlugin,
+  interactionPlugin,
+  listPlugin,
+  scrollgrid,
+]);
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -56,8 +71,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
     CandidateRequestModule,
-    CalendarModule,
+    CalendarPageModule,
     PopupChooseTheTimeModule,
+    FullCalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
