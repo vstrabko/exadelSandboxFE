@@ -41,7 +41,7 @@ export class CandidateRequestComponent implements OnInit {
   onSubmit(): void {
     if (this.registrationForm.valid) {
       console.log(this.registrationForm.value);
-      this.toastr.success('Вы успешно отправили форму', 'Принято');
+      this.toastr.success('Sucess', 'You are registred!');
       this.registrationForm.reset();
     }
   }
