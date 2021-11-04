@@ -8,6 +8,7 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
   styleUrls: ['./calendar-page.component.scss'],
 })
 export class CalendarPageComponent {
+  public isVisible = false;
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
@@ -33,7 +34,9 @@ export class CalendarPageComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg): void {
-    const title = prompt('Please enter a new title for your event');
+    this.openModal();
+    // const title = prompt('Please enter a new title for your event');
+    const title = 'free time';
     const calendarApi = selectInfo.view.calendar;
 
     calendarApi.unselect();
@@ -57,5 +60,12 @@ export class CalendarPageComponent {
 
   handleEvents(events: EventApi[]): void {
     this.currentEvents = events;
+  }
+
+  openModal(): void {
+    this.isVisible = true;
+  }
+  closeModal(): void {
+    this.isVisible = false;
   }
 }
