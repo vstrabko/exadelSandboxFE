@@ -1,4 +1,12 @@
-[
+[{
+  "id": 0,
+  "firstName": "Admin",
+  "lastName": "Adminov",
+  "email": "a@a.com",
+  "password": "11111111",
+  "roleName": "admin",
+  "Location": "Belarus"
+  },
   {
     "id": 1,
     "firstName": "Leanne",

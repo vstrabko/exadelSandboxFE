@@ -1,7 +1,11 @@
-<div class="wrapper page">
-    <app-multiselect-search></app-multiselect-search>
-    <app-candidate-record *ngFor="let user of activePageDataChunk" (click)="getUser(user)" (click)="showPop($event)">{{user.name}}</app-candidate-record>
-    <app-candidate-card-popup *ngIf="showPopup" (modal)="closeCard()" [user]='candidate'></app-candidate-card-popup>
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
-    </mat-paginator>
+<div class="page_container">
+    <div class="page_wrapper">
+        <app-multiselect-search></app-multiselect-search>
+        <app-candidate-record *ngFor="let user of activePageDataChunk" (click)="getUser(user)"
+            (click)="showPop($event)">{{ user.name }}</app-candidate-record>
+        <app-candidate-card-popup *ngIf="showPopup" (modal)="closeCard()" [user]="candidate"></app-candidate-card-popup>
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="onPageChanged($event)">
+        </mat-paginator>
+    </div>
 </div>

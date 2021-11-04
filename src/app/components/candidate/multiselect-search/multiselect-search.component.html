@@ -1,15 +1,15 @@
 <mat-form-field>
-	<mat-select (openedChange)="openedChange($event)" placeholder="Select" [formControl]="selectFormControl" multiple>
+	<mat-select (openedChange)="openedChange($event)" placeholder="{{'candidateList.select' | translate}}" [formControl]="selectFormControl" multiple>
 		<mat-select-trigger>
 			{{selectFormControl.value ? selectFormControl.value[0] : ''}}
 			<span *ngIf="selectFormControl.value?.length > 1" class="additional-selection">
-        (+{{selectFormControl.value.length - 1}} {{selectFormControl.value?.length === 2 ? 'other' : 'others'}})
+        (+{{selectFormControl.value.length - 1}} {{selectFormControl.value?.length === 2 ? 'candidateList.other' : 'candidateList.others' | translate }})
       </span>
     </mat-select-trigger>
     <div class="select-container">
     <mat-optgroup >
   <mat-form-field style="width:100%;">
-    <input #search autocomplete="off" placeholder="Search" aria-label="Search" matInput [formControl]="searchTextboxControl">
+    <input #search autocomplete="off" placeholder="{{'candidateList.search' | translate}}" aria-label="Search" matInput [formControl]="searchTextboxControl">
     <button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch($event)">
     <mat-icon >close</mat-icon>
   </button>
@@ -21,4 +21,4 @@
 </div>
 </mat-select>
 </mat-form-field>
-<div *ngIf="selectFormControl.value">{{ 'You have choosen ' + selectFormControl.value }}</div>
+<div *ngIf="selectFormControl.value">{{'candidateList.haveChosen' | translate }}  {{ selectFormControl.value }}</div>

@@ -1,38 +1,60 @@
 @import '~ngx-toastr/toastr';
 @import '../src/app/shared/constants/colors.scss';
+@import '../src/app/shared/constants/otherStyles.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+  box-sizing: border-box;
+}
 
-.page {
-  padding-bottom: 50px;
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 20px;
+}
+
+.page_wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  background: $background-content;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.page_container {
+  padding: 12px 15px 0;
+  padding-bottom: $height-footer;
+  background: $background-container_dark;
+  min-height: calc(100vh - 50px);
 }
 
 // Button start
-  .btn {
-    width: 80px;
-    height: 30px;
-    margin: 0 15px;
-    border-radius: 10px;
-    border: none;
-    font-size: 14px;
-    box-shadow: 2px 2px 4px 0 $shadow-color;
-    transition-duration: 0.2s;
-    &:hover {
-      box-shadow: 4px 4px 4px 0 $shadow-color;
-      transform: translateY(-1px);
-      cursor: pointer;
-    }
+.btn {
+  width: 80px;
+  height: 30px;
+  margin: 0 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  box-shadow: 2px 2px 4px 0 $shadow-color;
+  transition-duration: 0.2s;
+  &:hover {
+    box-shadow: 4px 4px 4px 0 $shadow-color;
+    transform: translateY(-1px);
+    cursor: pointer;
   }
-  .unfilled-btn {
-    background-color: $noColor;
-    border: 1px solid #b8bcc5;
-    color: $blueColor;
-  }
+}
+.unfilled-btn {
+  background-color: $noColor;
+  border: 1px solid #b8bcc5;
+  color: $blueColor;
+}
 
-  .filled-btn {
-    background-color: $blueColor;
-    color: $noColor;
-  }
+.filled-btn {
+  background-color: $blueColor;
+  color: $noColor;
+}
 
 // Button end

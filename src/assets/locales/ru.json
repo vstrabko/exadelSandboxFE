@@ -7,7 +7,8 @@
   "header": {
     "calendar": "Календарь",
     "candidatesList": "Список кандидатов",
-    "createNewSandbox": "Создать песочницу"
+    "createNewSandbox": "Создать песочницу",
+    "hello": "Привет"
   },
   "login": "Войти",
   "loginForm": {
@@ -71,6 +72,17 @@
     "cancel": "Отмена",
     "ok": "OK",
     "title": "Выберите время"
+  },
+  "candidateList": {
+    "select": "выбрать",
+    "search": "поиск",
+    "haveChosen": "Вы выбрали",
+    "other": "другой",
+    "others": "других",
+    "perPage": "Элементов на странице",
+    "nextPage": "Следущая страница",
+    "prevPage": "Предыдущая страница",
+    "of": "из"
   },
   "tostr": {
     "title": "Данные отправлены",

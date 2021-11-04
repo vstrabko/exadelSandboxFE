@@ -2,23 +2,15 @@
 
 $width-content: calc(100% - 234px);
 
-.container {
+.sandbox_wrapper {
   display: flex;
   flex-direction: column;
-  width: $width-content;
-  margin: 0 auto;
-  background-color: #FAFAFA;
-  padding: 15px;
-  border: 2px solid $border-color;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px $box-shadow;
-  border-radius: 5px;
 
   .description {
     min-width: 320px;
   }
 
-  .wrapper {
+  .sandbox_container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

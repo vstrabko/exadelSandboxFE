@@ -1,26 +1,19 @@
 @import '../../shared/constants/otherStyles.scss';
 @import '../../shared/constants/colors.scss';
 
-.wrapper-404 {
-  height: $height-home-page;
+/* src="assets/img/404.png" */
+
+.container-404 {
   display: flex;
+  padding: 0;
+  min-height: calc(100vh - 70px);
   justify-content: center;
   align-items: flex-end;
-}
-
-.img-404 {
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.btn-404 {
-  width: 142px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  margin-top: 10px;
+  background-color: #262626;
+  background-image: url('../../../assets/img/404.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .wrapper-content {
@@ -33,4 +26,14 @@
   flex-wrap: wrap;
   z-index: 10;
   font-size: 30px;
+  bottom: 50px;
+}
+
+.btn-404 {
+  width: 142px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-top: 10px;
 }
