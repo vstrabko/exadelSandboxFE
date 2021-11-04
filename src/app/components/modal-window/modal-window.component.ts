@@ -6,7 +6,6 @@ import { Component, HostListener, Input } from '@angular/core';
   styleUrls: ['./modal-window.component.scss'],
 })
 export class ModalWindowComponent {
-  
   @Input() title: string = '';
 
   @HostListener('window:keydown', ['$event'])

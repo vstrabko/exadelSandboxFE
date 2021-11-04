@@ -19,6 +19,6 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent],
-  providers: [LocalizationService]
+  providers: [LocalizationService],
 })
 export class HeaderModule {}
