@@ -1,9 +1,12 @@
 @import '../../shared/constants/colors.scss';
 @import '../../shared/constants/otherStyles.scss';
 
-form {
-  padding: 5px 15px;
+.request_form {
+  ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 5px;
 }
+}
+
 
 .sandbox > * {
   width: 100%;
@@ -34,9 +37,9 @@ form {
 .radio > * {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   .radio-button {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 }
 
@@ -60,6 +63,7 @@ form {
 .checkboxes {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 }
 
 .button {
@@ -67,5 +71,6 @@ form {
   margin: 10px auto;
   & > button {
     width: 120px;
+    margin-top: 10px;
   }
 }

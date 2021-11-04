@@ -26,7 +26,7 @@ body {
 .page_container {
   padding: 12px 15px 0;
   padding-bottom: $height-footer;
-  background: #EEF2F7;
+  background: $background-container_dark;
   min-height: calc(100vh - 50px);
 }
 
