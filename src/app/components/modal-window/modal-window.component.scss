@@ -8,7 +8,7 @@
   background-color: rgba(20, 20, 20, 0.459);
 
   .modal-window {
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -22,6 +22,11 @@
       font-weight: bold;
       text-align: center;
       line-height: 40px;
+    }
+
+    .content_container {
+      overflow-y: scroll;
+      max-height: 90vh;
     }
   }
 }

@@ -4,8 +4,8 @@
       <mat-form-field appearance="fill">
         <mat-label>{{ 'other.englishLevel' | translate }}</mat-label>
         <mat-select  required>
-          <mat-option *ngFor="let englishLevel of englishLevelList" [value]="englishLevel.name">
-            {{ englishLevel.name }}
+          <mat-option *ngFor="let level of levelsValues" [value]="level">
+            {{level}}
           </mat-option>
         </mat-select>
       </mat-form-field>

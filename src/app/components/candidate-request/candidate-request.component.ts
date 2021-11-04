@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { EnglishLevels } from '../../enums/english-levels.enum';
 
 @Component({
   selector: 'app-candidate-request',
@@ -9,6 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./candidate-request.component.scss'],
 })
 export class CandidateRequestComponent implements OnInit {
+  level: string;
+  levels = EnglishLevels;
+  levelsValues = Object.values(this.levels);
+
   constructor(private toastr: ToastrService, private translateService: TranslateService) {
     this.translateService.onLangChange.subscribe(() => {
       this.translateLabels();
@@ -18,8 +23,6 @@ export class CandidateRequestComponent implements OnInit {
   title = '';
   text = '';
   registrationForm: FormGroup;
-
-  cities: string[] = ['Moscow', 'New York', 'Minsk'];
 
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 

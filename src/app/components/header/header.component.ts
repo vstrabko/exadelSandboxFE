@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     this.vision = true;
     setTimeout(() => {
       this.vision = false;
-    }, 3000);
+    }, 500);
   }
 
   logOut(): void {
