@@ -1,5 +1,4 @@
 import { Component, HostListener, Input } from '@angular/core';
-import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-modal-window',
@@ -7,21 +6,21 @@ import { LoginFormComponent } from '../login-form/login-form.component';
   styleUrls: ['./modal-window.component.scss'],
 })
 export class ModalWindowComponent {
-  constructor(private login: LoginFormComponent) {}
-
+  
   @Input() title: string = '';
 
   @HostListener('window:keydown', ['$event'])
   closeESC(event: KeyboardEvent): void {
     switch (event.keyCode) {
       case 27:
-        this.login.cancel();
+        console.log('esc');
         break;
       case 9:
         event.preventDefault();
+        console.log('tab');
         break;
       case 13:
-        this.login.submit();
+        console.log('enter');
         break;
       default:
         break;
