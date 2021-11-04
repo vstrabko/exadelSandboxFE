@@ -7,9 +7,7 @@ import { LoginFormComponent } from '../login-form/login-form.component';
   styleUrls: ['./modal-window.component.scss'],
 })
 export class ModalWindowComponent {
-  constructor(
-    private login: LoginFormComponent
-    ) {}
+  constructor(private login: LoginFormComponent) {}
 
   @Input() title: string = '';
 
