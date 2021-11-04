@@ -1,5 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
+import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-modal-window',
@@ -7,14 +7,26 @@ import { HeaderComponent } from '../header/header.component';
   styleUrls: ['./modal-window.component.scss'],
 })
 export class ModalWindowComponent {
-  constructor(private closeModal: HeaderComponent) {}
+  constructor(
+    private login: LoginFormComponent
+    ) {}
 
   @Input() title: string = '';
 
   @HostListener('window:keydown', ['$event'])
-  closeESC(event: any): void {
-    if (event.keyCode === 27) {
-      this.closeModal.closeModal();
+  closeESC(event: KeyboardEvent): void {
+    switch (event.keyCode) {
+      case 27:
+        this.login.cancel();
+        break;
+      case 9:
+        event.preventDefault();
+        break;
+      case 13:
+        this.login.submit();
+        break;
+      default:
+        break;
     }
   }
 }
