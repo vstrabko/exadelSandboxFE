@@ -5,7 +5,7 @@
 .description_container,
 .sandbox-interviews_container {
   width: 100%;
-  background: #fafafa;
+  background: $background-content;
   &:not(:first-child) {
     margin-top: 12px;
   }
