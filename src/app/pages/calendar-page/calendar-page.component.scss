@@ -1,0 +1,15 @@
+@import '../../shared/constants/colors.scss';
+@import '../../shared/constants/otherStyles.scss';
+
+  .fc { /* the calendar root */
+    max-width: $width-content;
+    max-height: 100vh;
+    margin: 0 auto;
+
+    padding: 20px;
+    background-color: #FAFAFA;
+    border: 2px solid $border-color;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px $box-shadow;
+    border-radius: 5px;
+  }
