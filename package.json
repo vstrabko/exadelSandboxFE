@@ -33,7 +33,6 @@
     "@fullcalendar/daygrid": "^5.10.1",
     "@fullcalendar/interaction": "^5.10.1",
     "@fullcalendar/list": "^5.10.1",
-    "@fullcalendar/scrollgrid": "^5.10.1",
     "@fullcalendar/timegrid": "^5.10.1",
     "@material/button": "^13.0.0",
     "@ngx-translate/core": "^13.0.0",
