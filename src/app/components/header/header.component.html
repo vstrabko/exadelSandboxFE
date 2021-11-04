@@ -1,16 +1,21 @@
 <header class="header">
-  <div class="img"><img src="../../../assets/img/sapex.png" alt=""></div>
+  <div class="img">
+    <a routerLink="/"><img src="../../../assets/img/sapex.png" alt=""></a>
+  </div>
   <nav class="user-buttons">
-    <a routerLink="/users" routerLinkActive="active" (click)="showSpinner()" mat-raised-button *ngIf="userName" id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
-    <a routerLink="/calendar" routerLinkActive="active" mat-raised-button *ngIf="userName" id="calendar">{{ 'header.calendar' | translate }}</a>
-    <a routerLink="/sandbox" routerLinkActive="active" mat-raised-button *ngIf="userName" id="createNewSandbox">{{ 'header.createNewSandbox' | translate }}</a>
+    <a routerLink="/users" routerLinkActive="active" (click)="showSpinner()" mat-raised-button *ngIf="userName"
+      id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
+    <a routerLink="/calendar" routerLinkActive="active" mat-raised-button *ngIf="userName" id="calendar">{{
+      'header.calendar' | translate }}</a>
+    <a routerLink="/sandbox" routerLinkActive="active" mat-raised-button *ngIf="userName" id="createNewSandbox">{{
+      'header.createNewSandbox' | translate }}</a>
   </nav>
   <div class="username" *ngIf="userName" class="userName">{{'header.hello' | translate}}, {{ userName }}</div>
   <div class="button-login">
-    <button mat-raised-button (click)="openModal()" *ngIf="!userName" > {{ 'login' | translate }}</button>
+    <button mat-raised-button (click)="openModal()" *ngIf="!userName"> {{ 'login' | translate }}</button>
   </div>
-  <div class="button-logout" *ngIf="userName" (click)="logOut()" >
-    <button mat-raised-button >{{ 'logout' | translate }}</button>
+  <div class="button-logout" *ngIf="userName" (click)="logOut()">
+    <button mat-raised-button>{{ 'logout' | translate }}</button>
   </div>
 </header>
 <app-login-form *ngIf="isVisible" (modal)="closeModal()"></app-login-form>
