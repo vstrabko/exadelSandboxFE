@@ -13,14 +13,16 @@ body {
 }
 
 .page_wrapper {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
+  background: $background-content;
+  padding: 20px;
 }
 
 .page_container {
   padding: 12px 15px 0;
   padding-bottom: $height-footer;
-  background: $background-content;
+  background: $background-container;
   min-height: calc(100vh - 70px);
 }
 
