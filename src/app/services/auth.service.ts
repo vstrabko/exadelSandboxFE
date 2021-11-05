@@ -34,7 +34,7 @@ export class AuthService {
         const userFilter = user.filter((i: User) => i.mail === username && i.pass === password)[0];
         if (userFilter) {
           this.userSave = userFilter;
-          this.authSubject.next(userFilter), void this.router.navigate(['/sandbox']);
+          this.authSubject.next(userFilter), void this.router.navigate(['/users']);
         } else {
           this.toastService.showError(
             'Please check carefully that all details are correct.',

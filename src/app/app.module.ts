@@ -31,7 +31,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timegridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import scrollgrid from '@fullcalendar/scrollgrid';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
@@ -42,7 +41,6 @@ FullCalendarModule.registerPlugins([
   timegridPlugin,
   interactionPlugin,
   listPlugin,
-  scrollgrid,
 ]);
 @NgModule({
   declarations: [AppComponent],

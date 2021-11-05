@@ -1,2 +1,4 @@
-<full-calendar [options]='calendarOptions'></full-calendar>
+<div class="page_container">
+  <full-calendar [options]='calendarOptions'></full-calendar>
+</div>
 <app-popup-choose-the-time *ngIf="isVisible" (modal)="closeModal()"></app-popup-choose-the-time>
