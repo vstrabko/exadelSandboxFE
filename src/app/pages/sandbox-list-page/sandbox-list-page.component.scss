@@ -1,4 +1,5 @@
 @import '../../shared/constants/otherStyles.scss';
+@import '../../shared/constants/colors.scss';
 
 .wrapper {
   width: $width-content;
@@ -8,4 +9,8 @@
 .btn-create-sandbox {
   width: 133px;
   height: 42px;
+}
+
+.mat-paginator {
+  background: $background-content;
 }

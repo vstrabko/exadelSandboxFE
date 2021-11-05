@@ -1,7 +1,12 @@
-<div class="wrapper page">
- <app-sandbox-card  *ngFor="let sandbox of sandboxArr" >{{sandbox.title}}</app-sandbox-card>
-  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
+<div class="page_container">
+  <div class="page_wrapper">
+    <div class="wrapper page">
+      <app-sandbox-card  *ngFor="let sandbox of sandboxArr" >{{sandbox.title}}</app-sandbox-card>
+       <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
+     </div>
+     <button class="btn filled-btn btn-create-sandbox" (click)="goCreateSandbox()">
+       {{ 'sandbox.createSandbox' | translate }}
+     </button>
+
+  </div>
 </div>
-<button class="btn filled-btn btn-create-sandbox" (click)="goCreateSandbox()">
-  {{ 'sandbox.createSandbox' | translate }}
-</button>
