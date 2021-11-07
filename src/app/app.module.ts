@@ -18,7 +18,6 @@ import { CandidateModule } from './components/candidate/candidate.module';
 import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
 import { CandidateRequestModule } from './components/candidate-request/candidate-request.module';
-import { CalendarPageModule } from './pages/calendar-page/calendar-page.module';
 import { PopupChooseTheTimeModule } from './components/popup-choose-the-time/popup-choose-the-time.module';
 
 import { InternationalizationModule } from './internationalization/internationalization.module';
@@ -71,9 +70,7 @@ FullCalendarModule.registerPlugins([
       },
     }),
     CandidateRequestModule,
-    CalendarPageModule,
     PopupChooseTheTimeModule,
-    FullCalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

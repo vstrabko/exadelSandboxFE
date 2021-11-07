@@ -6,7 +6,6 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CandidateListComponent } from './components/candidate/candidate-list/candidate-list.component';
 import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page.component';
-import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -14,7 +13,7 @@ const routes: Routes = [
   { path: 'users', component: CandidateListComponent },
   { path: 'sandbox', component: SandboxListPageComponent },
   { path: 'sandbox/create', component: CreateSandboxPageComponent },
-  { path: 'calendar', component: CalendarPageComponent },
+  // { path: 'calendar', component: CalendarPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 
