@@ -25,22 +25,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-page.module';
 
-import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timegridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list';
-
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
 }
-FullCalendarModule.registerPlugins([
-  // register FullCalendar plugins
-  dayGridPlugin,
-  timegridPlugin,
-  interactionPlugin,
-  listPlugin,
-]);
 @NgModule({
   declarations: [AppComponent],
   imports: [
