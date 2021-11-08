@@ -21,10 +21,10 @@ export class CandidateTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   users: Candidate[];
-  candidate: any;
+  candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  togglePopup(row: any): void {
+  togglePopup(row: Candidate): void {
     this.candidate = row;
     this.showModal.emit();
   }
