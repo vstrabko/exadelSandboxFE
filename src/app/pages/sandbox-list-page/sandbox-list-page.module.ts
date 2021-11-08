@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
-import { SandboxListPageComponent } from './candidate-table/sandbox-list-page.component';
+import { SandboxListPageComponent } from './sandbox-list-page/sandbox-list-page.component';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 
 @NgModule({
