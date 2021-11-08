@@ -17,19 +17,6 @@ table {
  margin-right: 20px;
 }
 
-// th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
-//   padding-left: 0;
-// }
-
-// th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
-//   padding-right: 0;
-// }
-
-// td, th {
-//   /* border-right: 1px solid currentColor; */
-//   padding: 5px;
-// }
-
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   padding: 5px 15px;
 }
@@ -47,4 +34,12 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-column-select,
 .mat-column-id {
   width: 7%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 2px solid #adabad;
 }
