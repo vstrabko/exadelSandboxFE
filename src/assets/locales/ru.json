@@ -76,13 +76,15 @@
   "candidateList": {
     "select": "выбрать",
     "search": "поиск",
-    "haveChosen": "Вы выбрали",
+    "haveChosen": "Вы выбрали:",
     "other": "другой",
     "others": "других",
     "perPage": "Элементов на странице",
     "nextPage": "Следущая страница",
     "prevPage": "Предыдущая страница",
-    "of": "из"
+    "of": "из",
+    "filter": "фильтр",
+    "example": "Прим. Минск"
   },
   "tostr": {
     "title": "Данные отправлены",
