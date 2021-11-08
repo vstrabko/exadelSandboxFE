@@ -8,16 +8,18 @@ table {
 }
 
 .filter_container {
- display: flex;
- align-items: baseline;
- margin-bottom: 50px;
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 50px;
 }
 
-.multiselect{
- margin-right: 20px;
+.multiselect {
+  margin-right: 20px;
 }
 
-th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
   padding: 5px 15px;
 }
 
@@ -34,4 +36,29 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-column-select,
 .mat-column-id {
   width: 7%;
+}
+
+.btn-create-sandbox {
+  width: 133px;
+  height: 42px;
+}
+
+.wrapper-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0 0 0;
+  padding: 0 0 15px 0;
+}
+
+.filter {
+  margin: 0 0 0 23px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 2px solid #adabad;
 }
