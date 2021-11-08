@@ -1,37 +1,72 @@
-.example-full-width {
-    width: 100%;
+.textarea_container {
+    width: 500px;
 }
 
 .textarea {
-    max-height: 225px;
+  max-height: 150px;
 }
 
-.wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px 10px 0;
-    justify-content: space-between;
-    margin: auto;
-}
-
-.two-column {
-    display: flex;
-}
-
-.section {
-    min-width: 460px;
-    max-width: 49%;
+.card-popup_container {
+  display: flex;
+  padding: 20px 10px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-bottom: 0 !important;
 }
 
 *:not(.radio-buttons > *) {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.two-column {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    &  > * {
-        flex-basis: 42%;
+.section {
+    padding: 0 10px;
+    margin-bottom: 0 !important;
+}
+
+.candidate-name,
+.candidate-status {
+    width: 245px;
+    height: 60px;
+}
+
+.candidate-skills,
+.raiting {
+    width: 500px;
+    & > * {
+        width: 245px;
     }
 }
+
+.user-name {
+    width: 300px;
+}
+
+
+.two-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0 !important;
+}
+
+.buttons {
+    justify-content: flex-end;
+    & > * {
+        width: 100px;
+        margin: 0 0 0 15px;
+    }
+}
+
+.radio-buttons {
+    width: 498px;
+    & > * {
+        width: calc(498px / 3);
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .card-popup_container {
+        flex-wrap: wrap;
+    }
+  }

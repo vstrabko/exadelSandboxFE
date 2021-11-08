@@ -1,11 +1,10 @@
 @import '../../shared/constants/colors.scss';
+@import '../../shared/constants/otherStyles.scss';
 
 .header {
-
-  height: 60px;
+  height: $header-height;
   background-color: $backColor;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   padding: 0 0 0 10px;
   align-items: center;
@@ -14,7 +13,7 @@
     margin-top: auto;
 
     img {
-      height: 50px;
+      height: 30px;
     }
   }
 
@@ -30,16 +29,43 @@
       background-color: $blueColor;
     }
   }
-  .userName {
-  font-size: 18px;
-  color: $darkColor;
-  }
-  .button-login, .button-logout {
-    button {
-      background-color: $blueColor;
-      color: $noColor;
-      height: 50%;
-      border-radius: 20px 0 0 20px;
+
+  .user_tabs {
+    a {
+      line-height: $header-height;
+      border-radius: 0;
     }
+    
+    .active {
+      background-color: $blueColor;
+      color: white;
+    }
+  }
+
+  .userName {
+    font-size: 18px;
+    color: $darkColor;
+    margin-right: 15px;
+  }
+}
+
+.header_right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: $header-height;
+}
+
+.button-login,
+.button-logout {
+  button {
+    width: 100px;
+    height: 30px;
+    background-color: $blueColor;
+    color: $noColor;
+    border-radius: 20px 0 0 20px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 0;
   }
 }
