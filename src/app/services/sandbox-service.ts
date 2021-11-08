@@ -6,6 +6,6 @@ import { ApiService } from './api.service';
 @Injectable({ providedIn: 'root' })
 export class SandboxService extends ApiService<Sandbox> {
   constructor(private http: HttpClient) {
-    super(http, Sandbox, 'https://jsonplaceholder.typicode.com/albums');
+    super(http, Sandbox, 'https://jsonplaceholder.typicode.com/comments');
   }
 }
