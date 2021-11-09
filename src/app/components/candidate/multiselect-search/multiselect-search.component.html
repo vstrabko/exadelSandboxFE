@@ -3,7 +3,7 @@
 		<mat-select-trigger>
 			{{selectFormControl.value ? selectFormControl.value[0] : ''}}
 			<span *ngIf="selectFormControl.value?.length > 1" class="additional-selection">
-        (+{{selectFormControl.value.length - 1}} {{selectFormControl.value?.length === 2 ? 'candidateList.other' : 'candidateList.others' | translate }})
+        (+{{selectFormControl.value.length - 1}} {{selectFormControl.value?.length === 2 ? ('candidateList.other' | translate) : ('candidateList.others' | translate) }})
       </span>
     </mat-select-trigger>
     <div class="select-container">
@@ -21,4 +21,4 @@
 </div>
 </mat-select>
 </mat-form-field>
-<div *ngIf="selectFormControl.value">{{'candidateList.haveChosen' | translate }}  {{ selectFormControl.value }}</div>
+<div *ngIf="selectFormControl.value" class="selected">{{'candidateList.haveChosen' | translate }}  {{ selectFormControl.value }}</div>

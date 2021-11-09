@@ -26,6 +26,6 @@ export class CandidateCardPopupComponent {
   ];
 
   cancel(): void {
-    this.modal.emit(false);
+    this.modal.emit();
   }
 }

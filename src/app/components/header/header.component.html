@@ -10,14 +10,6 @@
     <a routerLink="/sandbox" routerLinkActive="active" mat-button *ngIf="userName" id="createNewSandbox">{{
       'header.createNewSandbox' | translate }}</a>
   </nav>
-  <!-- <nav class="user-buttons">
-    <a routerLink="/users" routerLinkActive="active" (click)="showSpinner()" mat-raised-button *ngIf="userName"
-      id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
-    <a routerLink="/calendar" routerLinkActive="active" mat-raised-button *ngIf="userName" id="calendar">{{
-      'header.calendar' | translate }}</a>
-    <a routerLink="/sandbox" routerLinkActive="active" mat-raised-button *ngIf="userName" id="createNewSandbox">{{
-      'header.createNewSandbox' | translate }}</a>
-  </nav> -->
   <div class="header_right">
     <div class="username" *ngIf="userName" class="userName">{{'header.hello' | translate}}, {{ userName }}</div>
     <div class="button-login">
