@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-popup-choose-the-time',
@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./popup-choose-the-time.component.scss'],
 })
 export class PopupChooseTheTimeComponent {
+  @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() title: string = 'Choose the time';
   @Input() titleData: string = '01/11/2021';
 
@@ -26,5 +27,12 @@ export class PopupChooseTheTimeComponent {
     this.times = this.times.filter((id: number) => {
       return id !== timeId;
     });
+  }
+  submit(): void {
+    this.modal.emit(false);
+  }
+
+  cancel(): void {
+    this.modal.emit(false);
   }
 }

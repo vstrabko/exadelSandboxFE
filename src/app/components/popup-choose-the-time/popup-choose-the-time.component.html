@@ -14,8 +14,8 @@
       <button class="btn filled-btn btn-plus" type="button" (click)="add()">+</button>
     </div>
     <div class="wrapper-btn">
-      <button class="btn unfilled-btn" type="button">{{ 'popupTimer.cancel' | translate }}</button>
-      <button class="btn filled-btn" type="button">{{ 'popupTimer.ok' | translate }}</button>
+      <button class="btn unfilled-btn" type="button" (click)="cancel()">{{ 'popupTimer.cancel' | translate }}</button>
+      <button class="btn filled-btn" type="submit" (click)="submit()">{{ 'popupTimer.ok' | translate }}</button>
     </div>
   </div>
 </app-modal-window>
