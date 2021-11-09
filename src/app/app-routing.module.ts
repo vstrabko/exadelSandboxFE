@@ -6,8 +6,6 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CandidateListComponent } from './components/candidate/candidate-list/candidate-list.component';
 import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page/sandbox-list-page.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
