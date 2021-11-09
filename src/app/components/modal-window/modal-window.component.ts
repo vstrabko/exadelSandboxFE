@@ -1,14 +1,17 @@
+
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalWindowService } from './modal-window.service';
 
 import { User } from 'src/app/models/user.model';
 
+
 @Component({
   selector: 'app-modal-window',
   templateUrl: './modal-window.component.html',
   styleUrls: ['./modal-window.component.scss'],
 })
+
 export class ModalWindowComponent implements OnInit {
   constructor(private modalWindowService: ModalWindowService, private authService: AuthService) {}
 
@@ -44,4 +47,5 @@ export class ModalWindowComponent implements OnInit {
         break;
     }
   }
+
 }

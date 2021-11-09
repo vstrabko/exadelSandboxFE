@@ -1,13 +1,12 @@
-import { CandidateModule } from './../../components/candidate/candidate.module';
 import { AdminMainPageComponent } from './admin-main-page.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { CandidateTableModule } from 'src/app/components/candidate-table/candidate-table.module';
+import { CandidateCardPopupModule } from 'src/app/components/candidate-card-popup/candidate-card-popup.module';
 
 @NgModule({
   declarations: [AdminMainPageComponent],
-  imports: [CommonModule, CandidateModule, MatPaginatorModule],
+  imports: [CommonModule, CandidateTableModule, CandidateCardPopupModule],
   exports: [AdminMainPageComponent],
 })
 export class AdminMainPageModule {}

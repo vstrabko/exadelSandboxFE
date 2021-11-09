@@ -73,8 +73,21 @@
     "ok": "OK",
     "title": "Choose the time"
   },
+  "candidateList": {
+    "select": "select",
+    "search": "search",
+    "haveChosen": "You have chosen:",
+    "other": "other",
+    "others": "others",
+    "perPage": "Items per page",
+    "nextPage": "Next page",
+    "prevPage": "Previous page",
+    "of": "of",
+    "filter": "Filter",
+    "example": "Ex. Minsk"
+  },
   "tostr": {
-	"title": "Sucess",
+    "title": "Success",
     "text": "You are registred!"
   }
 }

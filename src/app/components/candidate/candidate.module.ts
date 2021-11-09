@@ -4,18 +4,24 @@ import { CandidateListComponent } from './candidate-list/candidate-list.componen
 import { CandidateRecordComponent } from './candidate-record/candidate-record.component';
 import { CandidateCardPopupModule } from '../candidate-card-popup/candidate-card-popup.module';
 
+import { LocalizationService } from 'src/app/internationalization/localization.service';
+import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MultiselectSearchComponent } from './multiselect-search/multiselect-search.component';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorIntlRu } from 'src/app/components/candidate/candidate-list/intPaginator';
+
+import { MultiselectSearchModule } from './multiselect-search/multiselect-search.module';
 
 @NgModule({
-  declarations: [CandidateListComponent, CandidateRecordComponent, MultiselectSearchComponent],
+  declarations: [CandidateListComponent, CandidateRecordComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -28,7 +34,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
+    InternationalizationModule,
+    MultiselectSearchModule,
   ],
   exports: [CandidateListComponent, CandidateRecordComponent],
+  providers: [LocalizationService, { provide: MatPaginatorIntl, useClass: MatPaginatorIntlRu }],
 })
 export class CandidateModule {}

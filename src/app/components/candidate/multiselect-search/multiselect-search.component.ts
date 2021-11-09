@@ -16,7 +16,7 @@ export class MultiselectSearchComponent implements OnInit, AfterViewChecked {
   selectFormControl = new FormControl();
   searchTextboxControl = new FormControl();
   selectedValues: any[] = [];
-  data: string[] = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
+  data: string[] = [' status', ' location', ' recruiter', ' sandbox'];
 
   filteredOptions: Observable<any[]>;
 

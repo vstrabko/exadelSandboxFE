@@ -1,1 +1,6 @@
-<app-candidate-list></app-candidate-list>
+<div class="page_container">
+    <div class="page_wrapper">
+        <app-candidate-table #candidate (showModal)="showPop()"></app-candidate-table>
+        <app-candidate-card-popup *ngIf="showPopup" (modal)="closeCard()" [user]="candidate.candidate"></app-candidate-card-popup>
+    </div>
+</div>
