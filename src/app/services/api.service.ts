@@ -13,35 +13,35 @@ export abstract class ApiService<T extends ResourceModel<T>> {
 
   public create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
-      .post<T>(`${this.apiUrl}`, resource.toJson())
+      .post<T>(`http://64.227.114.210:9090${this.apiUrl}`, resource.toJson())
       .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public get(): Observable<any> {
     return this.httpClient
-      .get<T[]>(`${this.apiUrl}`)
+      .get<T[]>(`http://64.227.114.210:9090${this.apiUrl}`)
       .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public getById(id: number): Observable<any> {
     return this.httpClient
-      .get<T>(`${this.apiUrl}/${id}`)
+      .get<T>(`http://64.227.114.210:9090${this.apiUrl}/${id}`)
       .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
     return this.httpClient
-      .put<T>(`${this.apiUrl}/${String(resource._id)}`, resource.toJson())
+      .put<T>(`http://64.227.114.210:9090${this.apiUrl}/${String(resource._id)}`, resource.toJson())
       .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   public delete(id: number): Observable<void | any> {
     return this.httpClient
-      .delete<void | T>(`${this.apiUrl}/${id}`)
+      .delete<void | T>(`http://64.227.114.210:9090${this.apiUrl}/${id}`)
       .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }

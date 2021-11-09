@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { EnglishLevels } from '../../enums/english-levels.enum';
+import { LagnugageLevelService } from 'src/app/services/lagnugage-level.service';
+import { SkillsService } from 'src/app/services/skills.service';
+import { languageLevel } from '../../models/languageLevels.model';
+import { skills } from '../../models/skills.model';
 
 @Component({
   selector: 'app-candidate-request',
@@ -11,11 +14,15 @@ import { EnglishLevels } from '../../enums/english-levels.enum';
   styleUrls: ['./candidate-request.component.scss'],
 })
 export class CandidateRequestComponent implements OnInit {
-  level: string;
-  levels = EnglishLevels;
-  levelsValues = Object.values(this.levels);
+  levelsValues: string[] = [];
+  skills: string[] = [];
 
-  constructor(private toastr: ToastrService, private translateService: TranslateService) {
+  constructor(
+    private toastr: ToastrService,
+    private translateService: TranslateService,
+    private lagnugageLevelService: LagnugageLevelService,
+    private skillsService: SkillsService,
+  ) {
     this.translateService.onLangChange.subscribe(() => {
       this.translateLabels();
     });
@@ -28,6 +35,15 @@ export class CandidateRequestComponent implements OnInit {
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   ngOnInit(): void {
+    this.lagnugageLevelService
+      .get()
+      .subscribe((data: languageLevel[]): void =>
+        data.forEach((level: languageLevel): number => this.levelsValues.push(level.name)),
+      );
+    this.skillsService
+      .get()
+      .subscribe((data: skills[]): void => data.forEach((skill: skills): number => this.skills.push(skill.name)));
+
     this.registrationForm = new FormGroup({
       sandbox: new FormControl(),
       firstName: new FormControl('', [Validators.required]),
