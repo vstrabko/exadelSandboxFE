@@ -1,5 +1,5 @@
 <div class="filter_container">
-    <app-multiselect-search class="multiselect"></app-multiselect-search>
+    <app-multiselect-search [placeholder]="'select'" [data]="labels" class="multiselect"></app-multiselect-search>
     <mat-form-field appearance="standard">
         <mat-label>{{'candidateList.filter' | translate}}</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="{{'candidateList.example' | translate}}" #input>

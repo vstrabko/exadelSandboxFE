@@ -32,3 +32,13 @@ $width-content: calc(100% - 234px);
     max-height: 250px;
   }
 }
+
+.multi_flex {
+  display: flex;
+  align-items: baseline;
+  background-color: rgba(0,0,0,.04);
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  min-height: 25px;
+}

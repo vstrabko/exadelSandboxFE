@@ -4,13 +4,14 @@
     opacity: 0.75;
     font-size: 0.75em;
   }
+
   .select-container{
     margin-top:10px;
   }
 
   .selected {
-    width: 500px;
-    position: absolute;
+    margin-left: 20px;
+    color: rgba(0,0,0,0.6);
   }
 
   ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
