@@ -13,7 +13,6 @@ const routes: Routes = [
   { path: 'users', component: CandidateListComponent },
   { path: 'sandbox', component: SandboxListPageComponent },
   { path: 'sandbox/create', component: CreateSandboxPageComponent },
-  { path: 'calendar', component: CalendarPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 
