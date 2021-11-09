@@ -42,8 +42,8 @@ export class MultiselectSearchComponent implements OnInit, AfterViewChecked {
     // Set selected values to retain the selected checkbox state
     this.setSelectedValues();
     this.selectFormControl.patchValue(this.selectedValues);
-    const filteredList = this.data.filter(
-      (option: any) => option.toLowerCase().indexOf(filterValue) === 0,
+    const filteredList = this.data.filter((option: any) =>
+      option.trim().toLowerCase().includes(filterValue),
     );
     return filteredList;
   }

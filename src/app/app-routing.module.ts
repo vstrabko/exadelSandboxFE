@@ -8,7 +8,6 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'admin-main-page', component: AdminMainPageComponent },
   { path: 'users', component: AdminMainPageComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'sandbox', component: CreateSandboxPageComponent },
