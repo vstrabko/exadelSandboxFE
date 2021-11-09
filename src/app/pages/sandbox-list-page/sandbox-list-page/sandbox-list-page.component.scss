@@ -68,3 +68,7 @@ tr {
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: $blueColor;
 }
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $blueColor;
+}
