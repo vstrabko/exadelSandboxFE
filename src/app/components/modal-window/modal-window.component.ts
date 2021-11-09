@@ -1,10 +1,8 @@
-
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalWindowService } from './modal-window.service';
-
 import { User } from 'src/app/models/user.model';
-
 
 @Component({
   selector: 'app-modal-window',
@@ -20,8 +18,6 @@ export class ModalWindowComponent implements OnInit {
 
   public ngOnInit(): void {
     this.modalWindowService.visible.subscribe((value: boolean) => console.log(value));
-
-    // const closeModal = this.modalWindowService.visible.subscribe( value => console.log(value));
   }
 
   @Input() title: string = '';
@@ -47,5 +43,4 @@ export class ModalWindowComponent implements OnInit {
         break;
     }
   }
-
 }
