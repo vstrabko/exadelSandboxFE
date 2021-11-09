@@ -18,12 +18,12 @@ import { CandidateModule } from './components/candidate/candidate.module';
 import { CandidateCardPopupModule } from './components/candidate-card-popup/candidate-card-popup.module';
 import { ErrorPageModule } from './pages/error-page/error-page.module';
 import { CandidateRequestModule } from './components/candidate-request/candidate-request.module';
-import { CalendarModule } from './components/calendar/calendar.module';
 import { PopupChooseTheTimeModule } from './components/popup-choose-the-time/popup-choose-the-time.module';
 
 import { InternationalizationModule } from './internationalization/internationalization.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-page.module';
 import { CandidateTableModule } from './components/candidate-table/candidate-table.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -48,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ErrorPageModule,
     AdminMainPageModule,
     HttpClientModule,
+    SandboxListPageModule,
     InternationalizationModule.forRoot({ locale_id: 'en' }), // iniating with default language: en
     TranslateModule.forRoot({
       loader: {
@@ -57,7 +58,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
     CandidateRequestModule,
-    CalendarModule,
     PopupChooseTheTimeModule,
     CandidateTableModule,
   ],

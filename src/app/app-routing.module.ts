@@ -4,13 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateSandboxPageComponent } from './pages/create-sandbox-page/create-sandbox-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
+import { CandidateListComponent } from './components/candidate/candidate-list/candidate-list.component';
+import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page/sandbox-list-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'users', component: AdminMainPageComponent },
   { path: 'calendar', component: CalendarComponent },
-  { path: 'sandbox', component: CreateSandboxPageComponent },
+  { path: 'sandbox', component: SandboxListPageComponent },
+  { path: 'sandbox/create', component: CreateSandboxPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 
