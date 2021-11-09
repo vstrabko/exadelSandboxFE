@@ -26,7 +26,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-page.module';
 import { CandidateTableModule } from './components/candidate-table/candidate-table.module';
 
-
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
 }
