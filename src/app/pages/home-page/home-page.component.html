@@ -4,8 +4,8 @@
       <h2>{{ 'sandbox.name' | translate }}</h2>
       <mat-form-field class="drop-box" appearance="outline">
         <mat-label>{{ 'sandbox.name' | translate }}</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let v of values" [value]="v">
+        <mat-select #sandbox>
+          <mat-option *ngFor="let v of values" [value]="v.name">
             {{ v.name }}
           </mat-option>
         </mat-select>
@@ -18,7 +18,7 @@
     
     <div class="sandbox-interviews_container">
       <div class="sandbox-interviews">
-          <app-candidate-request></app-candidate-request>
+          <app-candidate-request [sandboxValue]="sandbox.value"></app-candidate-request>
       </div>
     </div>
   </div>

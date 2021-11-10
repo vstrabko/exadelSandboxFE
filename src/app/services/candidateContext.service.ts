@@ -13,15 +13,14 @@ export class CandidateContext extends ApiService<candidateRequestData> {
   skills: string[] = [];
 
   getData(dataArray: string[], currentUrl: string): string[] {
-    if (dataArray.length) {
-      return dataArray;
-    } else {
+    if (!dataArray.length) {
       super.apiUrl = currentUrl;
       this.get().subscribe((data: candidateRequestData[]): void =>
         data.forEach((item: candidateRequestData): number => dataArray.push(item.name)),
       );
       return dataArray;
-    }
+    } 
+    return dataArray;
   }
 
   getEnglishLevels(): string[] {

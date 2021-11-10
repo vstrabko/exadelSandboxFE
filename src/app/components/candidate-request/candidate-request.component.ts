@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,9 +11,6 @@ import { CandidateContext } from 'src/app/services/candidateContext.service';
   styleUrls: ['./candidate-request.component.scss'],
 })
 export class CandidateRequestComponent implements OnInit {
-  levelsValues: string[] = [];
-  skills: string[] = [];
-
   constructor(
     private toastr: ToastrService,
     private translateService: TranslateService,
@@ -24,6 +21,11 @@ export class CandidateRequestComponent implements OnInit {
     });
     this.translateLabels();
   }
+  levelsValues: string[];
+  skills: string[];
+
+  @Input() sandboxValue: string;
+
   title = '';
   text = '';
   registrationForm: FormGroup;
@@ -57,10 +59,12 @@ export class CandidateRequestComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.registrationForm.valid) {
+    if (this.registrationForm.valid && this.sandboxValue) {
+      this.registrationForm.controls.sandbox.setValue(this.sandboxValue);
       console.log(this.registrationForm.value);
       this.toastr.success(this.title, this.text);
-      this.registrationForm.reset();
+      
+      /* this.registrationForm.reset(); */
     }
   }
   translateLabels(): void {

@@ -1,11 +1,6 @@
 <form class="request_form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
   <h2>{{ 'request.header' | translate }}</h2>
-  <div class="sandbox">
-    <mat-form-field appearance="outline">
-      <mat-label>Sandbox</mat-label>
-      <input formControlName="sandbox" matInput placeholder="Sandbox" readonly />
-    </mat-form-field>
-  </div>
+  <input style="display: none;" formControlName="sandbox" [value]="sandboxValue" />
 
   <div class="personal three-column">
     <mat-form-field appearance="outline">
@@ -20,7 +15,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.englishLevel' | translate }}</mat-label>
-      <mat-select formControlName="englishLevel" >
+      <mat-select formControlName="englishLevel">
         <mat-option *ngFor="let level of levelsValues" [value]="level">{{level}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -46,12 +41,7 @@
   <div class="motivation">
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.motivation' | translate }}</mat-label>
-      <textarea
-        formControlName="motivation"
-        [cdkTextareaAutosize]
-        class="motivation_textarea"
-        matInput
-      ></textarea>
+      <textarea formControlName="motivation" [cdkTextareaAutosize] class="motivation_textarea" matInput></textarea>
     </mat-form-field>
   </div>
 
@@ -61,13 +51,13 @@
       <mat-radio-group formControlName="availability" aria-labelledby="Availability">
         <mat-radio-button [value]="'Less than 4 hours'" class="radio-button">{{
           'request.available1' | translate
-        }}</mat-radio-button>
+          }}</mat-radio-button>
         <mat-radio-button [value]="'4-6 hours'" class="radio-button">{{
           'request.available2' | translate
-        }}</mat-radio-button>
+          }}</mat-radio-button>
         <mat-radio-button [value]="'6-infinity hours'" class="radio-button">{{
           'request.available3' | translate
-        }}</mat-radio-button>
+          }}</mat-radio-button>
       </mat-radio-group>
     </div>
 
@@ -105,22 +95,12 @@
   <div class="skills">
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.certificates' | translate }}</mat-label>
-      <textarea
-        formControlName="certificates"
-        [cdkTextareaAutosize]
-        class="skills_textarea"
-        matInput
-      ></textarea>
+      <textarea formControlName="certificates" [cdkTextareaAutosize] class="skills_textarea" matInput></textarea>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.addSkills' | translate }}</mat-label>
-      <textarea
-        formControlName="addSkills"
-        [cdkTextareaAutosize]
-        class="skills_textarea"
-        matInput
-      ></textarea>
+      <textarea formControlName="addSkills" [cdkTextareaAutosize] class="skills_textarea" matInput></textarea>
     </mat-form-field>
   </div>
 
@@ -135,7 +115,7 @@
     <mat-checkbox formControlName="joinExadel">{{ 'request.joinExadel' | translate }}</mat-checkbox>
     <mat-checkbox formControlName="agreement" required>{{
       'request.agreement' | translate
-    }}</mat-checkbox>
+      }}</mat-checkbox>
   </div>
 
   <div class="button">
