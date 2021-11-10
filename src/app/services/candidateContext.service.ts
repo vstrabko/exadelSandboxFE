@@ -19,7 +19,7 @@ export class CandidateContext extends ApiService<candidateRequestData> {
         data.forEach((item: candidateRequestData): number => dataArray.push(item.name)),
       );
       return dataArray;
-    } 
+    }
     return dataArray;
   }
 

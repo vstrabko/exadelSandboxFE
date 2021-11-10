@@ -63,7 +63,7 @@ export class CandidateRequestComponent implements OnInit {
       this.registrationForm.controls.sandbox.setValue(this.sandboxValue);
       console.log(this.registrationForm.value);
       this.toastr.success(this.title, this.text);
-      
+
       /* this.registrationForm.reset(); */
     }
   }
