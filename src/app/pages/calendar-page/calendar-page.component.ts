@@ -15,8 +15,10 @@ export class CalendarPageComponent {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
+    locale: 'en',
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS,
+    weekNumberCalculation: "ISO",
     weekends: true,
     editable: true,
     selectable: true,
@@ -38,7 +40,6 @@ export class CalendarPageComponent {
     // const title = prompt('Please enter a new title for your event');
     const title = 'free time';
     const calendarApi = selectInfo.view.calendar;
-
     calendarApi.unselect();
 
     if (title) {
