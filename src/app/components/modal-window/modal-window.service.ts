@@ -7,13 +7,13 @@ import { Subject } from 'rxjs';
 export class ModalWindowService {
   public visible = new Subject<boolean>();
 
-  public modalSubject = new Subject<boolean>();
+  public modalWindow = new Subject<string>();
 
   constructor() {
-    this.visible.subscribe((val: boolean) => this.openWindow(val) as boolean);
+    // this.visible.subscribe((val: boolean) => console.log(val));
   }
 
-  public openWindow(event: boolean): any {
-    this.modalSubject.next(event);
-  }
+  // public openWindow(event: boolean): any {
+  //   // this.visible.next(event);
+  // }
 }
