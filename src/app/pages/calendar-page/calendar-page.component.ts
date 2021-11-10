@@ -18,7 +18,7 @@ export class CalendarPageComponent {
     locale: 'en',
     initialView: 'dayGridMonth',
     initialEvents: INITIAL_EVENTS,
-    weekNumberCalculation: "ISO",
+    weekNumberCalculation: 'ISO',
     weekends: true,
     editable: true,
     selectable: true,

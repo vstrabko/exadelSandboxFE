@@ -34,12 +34,7 @@ import listPlugin from '@fullcalendar/list';
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
 }
-FullCalendarModule.registerPlugins([
-  dayGridPlugin,
-  timegridPlugin,
-  interactionPlugin,
-  listPlugin,
-]);
+FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPlugin, listPlugin]);
 @NgModule({
   declarations: [AppComponent],
   imports: [
