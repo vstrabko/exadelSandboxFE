@@ -3,6 +3,7 @@ import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { ResourceModel } from '../models/resource.model';
+import { environment } from 'src/environments/environment';
 
 export abstract class ApiService<T extends ResourceModel<T>> {
   constructor(
@@ -18,6 +19,14 @@ export abstract class ApiService<T extends ResourceModel<T>> {
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
+  public getUser(): Observable<any> {
+    return this.httpClient.get<T[]>(`${environment.API_URL}${this.apiUrl}`).pipe(
+      map((result: any) => {
+        console.log(result);
+        return new this.tConstructor(result);
+      }),
+    );
+  }
   public get(): Observable<any> {
     return this.httpClient
       .get<T[]>(`${this.apiUrl}`)

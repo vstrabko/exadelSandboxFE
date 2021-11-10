@@ -34,8 +34,8 @@ export class ModalWindowComponent implements OnInit {
         break;
       case 13:
         console.log('enter');
-        this.authService.authSubject.subscribe((res: Partial<User>): void => {
-          this.userName = !!res?.name ? res.name : '';
+        this.authService.authSubject.subscribe((res: User | null): void => {
+          this.userName = !!res?.fullName ? res.fullName : '';
         });
         break;
       default:
