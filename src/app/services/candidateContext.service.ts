@@ -11,47 +11,23 @@ export class CandidateContext extends ApiService<candidateRequestData> {
   }
   englishLevels: string[] = [];
   skills: string[] = [];
-  
+
   getData(dataArray: string[], currentUrl: string): string[] {
-    if (dataArray.length) {
+    if (dataArray.length) {      
       return dataArray;
     } else {
       super.apiUrl = currentUrl;
-      this.get()
-        .subscribe((data: candidateRequestData[]): void =>
-          data.forEach((item: candidateRequestData): number =>
-            dataArray.push(item.name)));
+      this.get().subscribe((data: candidateRequestData[]): void =>
+        data.forEach((item: candidateRequestData): number => dataArray.push(item.name)),
+      );
       return dataArray;
     }
   }
 
   getEnglishLevels(): string[] {
-    return this.getData(this.englishLevels, '/api/languagelevels')
+    return this.getData(this.englishLevels, '/api/languagelevels');
   }
   getSkills(): string[] {
-    return this.getData(this.skills, '/api/skills')
+    return this.getData(this.skills, '/api/skills');
   }
-
-
-
-
-
-
-
-
-
-
-
-
-  /* getEnglishLevels() {
-    if (this.englishLevels) {
-      return this.englishLevels;
-    } else {
-      this.get()
-        .subscribe((data: candidateRequestData[]): void => 
-          data.forEach((level: candidateRequestData): number => 
-            this.englishLevels.push(level.name)));
-      return this.englishLevels;
-    }
-  } */
 }

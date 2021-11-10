@@ -1,15 +1,21 @@
 <div class="page_container">
   <div class="page_wrapper">
     <div class="drop-box_container">
-      <select class="drop-box">
-        <option *ngFor="let v of values" [value]="v">
-          {{ v.name }}
-        </option>
-      </select>
+      <h2>{{ 'sandbox.name' | translate }}</h2>
+      <mat-form-field class="drop-box" appearance="outline">
+        <mat-label>{{ 'sandbox.name' | translate }}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let v of values" [value]="v">
+            {{ v.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="description_container">
+        <mat-card class="description">{{ 'sandbox.description' | translate }}</mat-card>
+      </div>
     </div>
-    <div class="description_container">
-      <div class="description">Описание Sandbox</div>
-    </div>
+    
     <div class="sandbox-interviews_container">
       <div class="sandbox-interviews">
           <app-candidate-request></app-candidate-request>

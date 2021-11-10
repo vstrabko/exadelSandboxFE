@@ -11,8 +11,7 @@
   }
 }
 
-.drop-box,
-.description,
+.drop-box_container,
 .sandbox-interviews {
   padding: 10px 15px;
   border: 1px solid $border-color;
@@ -21,4 +20,10 @@
 
 .drop-box {
   width: 100%;
+}
+
+.drop-box {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
 }

@@ -31,8 +31,8 @@ export class CandidateRequestComponent implements OnInit {
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   ngOnInit(): void {
-    this.levelsValues = this.candidateContext.getEnglishLevels()
-    this.skills = this.candidateContext.getSkills()
+    this.levelsValues = this.candidateContext.getEnglishLevels();
+    this.skills = this.candidateContext.getSkills();
 
     this.registrationForm = new FormGroup({
       sandbox: new FormControl(),
