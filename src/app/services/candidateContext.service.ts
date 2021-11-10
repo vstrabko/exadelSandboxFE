@@ -13,7 +13,7 @@ export class CandidateContext extends ApiService<candidateRequestData> {
   skills: string[] = [];
 
   getData(dataArray: string[], currentUrl: string): string[] {
-    if (dataArray.length) {      
+    if (dataArray.length) {
       return dataArray;
     } else {
       super.apiUrl = currentUrl;

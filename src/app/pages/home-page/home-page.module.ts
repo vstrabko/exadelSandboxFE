@@ -9,8 +9,14 @@ import { CandidateRequestModule } from 'src/app/components/candidate-request/can
 
 @NgModule({
   declarations: [HomePageComponent],
-  imports: [CommonModule, InternationalizationModule, CandidateRequestModule, MatSelectModule, MatCardModule],
+  imports: [
+    CommonModule,
+    InternationalizationModule,
+    CandidateRequestModule,
+    MatSelectModule,
+    MatCardModule,
+  ],
   exports: [HomePageComponent],
   providers: [LocalizationService],
 })
-export class HomePageModule { }
+export class HomePageModule {}
