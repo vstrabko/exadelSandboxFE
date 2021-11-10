@@ -36,7 +36,7 @@ $width-content: calc(100% - 234px);
 .multi_flex {
   display: flex;
   align-items: baseline;
-  background-color: rgba(0,0,0,.04);
+  background-color: $inputBg;
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 4px;
