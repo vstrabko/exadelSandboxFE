@@ -37,7 +37,6 @@ export class CalendarPageComponent {
 
   handleDateSelect(selectInfo: DateSelectArg): void {
     this.openModal();
-    // const title = prompt('Please enter a new title for your event');
     const title = 'free time';
     const calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
