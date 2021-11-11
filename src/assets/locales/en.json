@@ -7,7 +7,7 @@
   "header": {
     "calendar": "Calendar",
     "candidatesList": "Candidates list",
-    "createNewSandbox": "New sandbox",
+    "createNewSandbox": "Sandbox",
     "hello": "Hello"
   },
   "login": "Log in",
@@ -76,16 +76,24 @@
   "candidateList": {
     "select": "select",
     "search": "search",
-    "haveChosen": "You have chosen",
+    "haveChosen": "You have chosen:",
     "other": "other",
     "others": "others",
     "perPage": "Items per page",
     "nextPage": "Next page",
     "prevPage": "Previous page",
-    "of": "of"
+    "of": "of",
+    "filter": "Filter",
+    "example": "Ex. Minsk"
   },
   "tostr": {
     "title": "Success",
     "text": "You are registred!"
+  },
+  "select": {
+    "default": "select",
+    "recruiters": "Recruiters *",
+    "mentors": "Mentors *",
+    "interviewers": "Interviewers *"
   }
 }

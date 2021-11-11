@@ -7,7 +7,7 @@
   "header": {
     "calendar": "Календарь",
     "candidatesList": "Список кандидатов",
-    "createNewSandbox": "Создать песочницу",
+    "createNewSandbox": "Песочница",
     "hello": "Привет"
   },
   "login": "Войти",
@@ -76,16 +76,24 @@
   "candidateList": {
     "select": "выбрать",
     "search": "поиск",
-    "haveChosen": "Вы выбрали",
+    "haveChosen": "Вы выбрали:",
     "other": "другой",
     "others": "других",
     "perPage": "Элементов на странице",
     "nextPage": "Следущая страница",
     "prevPage": "Предыдущая страница",
-    "of": "из"
+    "of": "из",
+    "filter": "фильтр",
+    "example": "Прим. Минск"
   },
   "tostr": {
     "title": "Данные отправлены",
     "text": "Вы зарегистрированы"
+  },
+  "select": {
+    "default": "выбрать",
+    "recruiters": "Рекрутеры *",
+    "mentors": "Менторы *",
+    "interviewers": "Интервьюеры *"
   }
 }

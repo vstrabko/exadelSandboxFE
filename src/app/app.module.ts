@@ -24,6 +24,8 @@ import { PopupChooseTheTimeModule } from './components/popup-choose-the-time/pop
 import { InternationalizationModule } from './internationalization/internationalization.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-page.module';
+import { CandidateTableModule } from './components/candidate-table/candidate-table.module';
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -54,6 +56,7 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     ErrorPageModule,
     AdminMainPageModule,
     HttpClientModule,
+    SandboxListPageModule,
     InternationalizationModule.forRoot({ locale_id: 'en' }), // iniating with default language: en
     TranslateModule.forRoot({
       loader: {
@@ -66,6 +69,8 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     CalendarPageModule,
     PopupChooseTheTimeModule,
     FullCalendarModule,
+    CandidateTableModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

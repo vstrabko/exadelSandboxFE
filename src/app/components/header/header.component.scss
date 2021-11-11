@@ -17,19 +17,6 @@
     }
   }
 
-  .user-buttons {
-    a {
-      background-color: $darkColor;
-      color: $noColor;
-      height: 50%;
-      margin: 5px;
-    }
-
-    .active {
-      background-color: $blueColor;
-    }
-  }
-
   .user_tabs {
     a {
       line-height: $header-height;

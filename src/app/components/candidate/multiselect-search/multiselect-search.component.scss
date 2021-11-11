@@ -1,8 +1,40 @@
+@import '../../../shared/constants/colors.scss';
+
 .additional-selection {
     opacity: 0.75;
     font-size: 0.75em;
   }
+
   .select-container{
     margin-top:10px;
+  }
+
+  .selected {
+    margin-left: 20px;
+    color: $inputText;
+  }
+
+  ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: $blueColor;
+  }
+
+  ::ng-deep .mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+    background: $blueColor;
+  }
+
+  ::ng-deep .mat-input-element {
+    caret-color: $blueColor;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: $blueColor;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-underline {
+    background-color: $blueColor;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: $blueColor;
   }
   

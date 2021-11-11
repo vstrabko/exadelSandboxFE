@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from '../../services/auth.service';
+import { ModalWindowService } from '../modal-window/modal-window.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -22,17 +23,22 @@ export class HeaderComponent implements OnInit {
   public userName = '';
   public role: string = this.roles.admin; //todo: role from back-end
 
-  constructor(private authService: AuthService) {}
-  ngOnInit(): void {
+  constructor(private authService: AuthService, private modalWindowService: ModalWindowService) {}
+
+  public ngOnInit(): void {
     this.authService.authSubject.subscribe((res: Partial<User>): void => {
       this.userName = !!res?.name ? res.name : '';
     });
+    this.modalWindowService.modalSubject.subscribe((result: boolean) => (this.isVisible = result));
   }
+
   openModal(): void {
-    this.isVisible = true;
+    this.modalWindowService.visible.next(true);
   }
+
   closeModal(): void {
-    this.isVisible = false;
+    // this.isVisible = false;
+    this.modalWindowService.visible.next(false);
   }
 
   showSpinner(): void {
