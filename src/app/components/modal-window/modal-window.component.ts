@@ -64,6 +64,8 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
             console.log('candidates cards will be save');
             break;
           case 'time':
+            alert('choose the ime will be here');
+            console.log('choose the time will be here');
             break;
           case 'english':
             break;

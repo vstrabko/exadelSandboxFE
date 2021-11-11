@@ -1,11 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModalWindowService } from '../modal-window/modal-window.service';
 
 @Component({
   selector: 'app-popup-choose-the-time',
   templateUrl: './popup-choose-the-time.component.html',
   styleUrls: ['./popup-choose-the-time.component.scss'],
 })
-export class PopupChooseTheTimeComponent {
+export class PopupChooseTheTimeComponent implements OnInit {
+  constructor(private modalWindowService: ModalWindowService) {}
+
+  ngOnInit(): void {
+    this.modalWindowService.visible.subscribe((result: boolean) => {
+      console.log(result);
+      this.cancel();
+    });
+
+    setTimeout(() => {
+      this.modalWindowService.modalWindow.next('time');
+    }, 200);
+  }
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() title: string = 'Choose the time';
   @Input() titleData: string = '01/11/2021';
