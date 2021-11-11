@@ -40,33 +40,11 @@
       <mat-label>{{ 'sandbox.description' | translate }}</mat-label>
       <textarea [cdkTextareaAutosize] class="textarea"matInput [formControl]="description" required></textarea>
     </mat-form-field>
-  
-    <mat-form-field appearance="fill" class="employee">
-      <mat-label>{{ 'roles.recruiters' | translate }}</mat-label>
-      <mat-select multiple [formControl]="recruiters" required>
-        <mat-option *ngFor="let recruiter of listRecruiters" [value]="recruiter.lastName">
-          {{recruiter.firstName + ' ' + recruiter.lastName}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill" class="employee">
-      <mat-label>{{ 'roles.interviewers' | translate }}</mat-label>
-      <mat-select multiple [formControl]="interviewers" required>
-        <mat-option *ngFor="let interviewer of listInterviewers" [value]="interviewer.lastName">
-          {{interviewer.firstName + ' ' + interviewer.lastName  + ' ' + interviewer.tech}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill" class="employee">
-      <mat-label>{{ 'roles.mentors' | translate }}</mat-label>
-      <mat-select multiple [formControl]="mentors" required>
-        <mat-option *ngFor="let mentor of listMentors" [value]="mentor.lastName">
-          {{mentor.firstName + ' ' + mentor.lastName + ' ' + mentor.tech}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+
+    <app-multiselect-search [placeholder]=" 'select.recruiters' | translate " [data]="recr" class="multiselect multi_flex"></app-multiselect-search>
+    <app-multiselect-search [placeholder]=" 'select.interviewers' | translate " [data]="int" class="multiselect multi_flex"></app-multiselect-search>
+    <app-multiselect-search [placeholder]=" 'select.mentors' | translate " [data]="ment" class="multiselect multi_flex"></app-multiselect-search>
+
     <div class="btn-wrapper">
       <button class="btn filled-btn position" type="submit" (click)="create()">Create</button>
     </div>

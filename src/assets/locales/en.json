@@ -90,6 +90,12 @@
     "title": "Success",
     "text": "You are registred!"
   },
+  "select": {
+    "default": "select",
+    "recruiters": "Recruiters *",
+    "mentors": "Mentors *",
+    "interviewers": "Interviewers *"
+  },
   "authTostr": {
     "title": "Authentication error",
     "text": "Please check carefully that all details are correct"
