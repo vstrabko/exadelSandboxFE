@@ -14,9 +14,15 @@ interface Status {
 })
 export class CandidateCardPopupComponent implements OnInit {
   constructor(private modalWindowService: ModalWindowService) {}
-
   ngOnInit(): void {
-    this.modalWindowService.modalWindow.next('candidates card');
+    this.modalWindowService.visible.subscribe((result: boolean) => {
+      console.log(result);
+      this.cancel()
+    });
+
+    setTimeout(() => {
+      this.modalWindowService.modalWindow.next('candidates card');
+    }, 200);
   }
 
   public title = 'Candidate card';

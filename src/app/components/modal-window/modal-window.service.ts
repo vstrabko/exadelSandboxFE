@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ModalWindowService {
-  public visible = new Subject<boolean>();
+  public visible = new Subject<any>();
 
   public modalWindow = new Subject<string>();
 

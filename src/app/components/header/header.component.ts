@@ -34,7 +34,9 @@ export class HeaderComponent implements OnInit {
 
   openModal(): void {
     this.modalWindowService.visible.next(true);
-    this.modalWindowService.modalWindow.next('login');
+    setTimeout(() => {
+      this.modalWindowService.modalWindow.next('login');
+    }, 200);
   }
 
   closeModal(): void {
