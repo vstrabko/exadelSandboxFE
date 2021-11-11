@@ -9,7 +9,6 @@ import { User } from 'src/app/models/user.model';
   templateUrl: './modal-window.component.html',
   styleUrls: ['./modal-window.component.scss'],
 })
-
 export class ModalWindowComponent implements OnInit {
   constructor(private modalWindowService: ModalWindowService, private authService: AuthService) {}
 
