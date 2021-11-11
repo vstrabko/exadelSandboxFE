@@ -1,0 +1,62 @@
+@import '../../../shared/constants/colors.scss';
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.filter_container {
+ display: flex;
+ align-items: baseline;
+ margin-bottom: 50px;
+}
+
+.multiselect{
+ margin-right: 20px;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding: 5px 15px;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background: whitesmoke;
+}
+
+.mat-column-select,
+.mat-column-id {
+  width: 7%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 2px solid #adabad;
+}
+
+// table checkboxes styles
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: $blueColor;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $blueColor;
+}
+
+// multiselect search colors
+
+
+

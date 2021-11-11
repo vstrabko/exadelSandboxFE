@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, AfterViewChecked, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -16,8 +16,8 @@ export class MultiselectSearchComponent implements OnInit, AfterViewChecked {
   selectFormControl = new FormControl();
   searchTextboxControl = new FormControl();
   selectedValues: any[] = [];
-  data: string[] = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
-
+  @Input() data: string[];
+  @Input() placeholder: string;
   filteredOptions: Observable<any[]>;
 
   constructor(private cdRef: ChangeDetectorRef) {}
@@ -42,8 +42,8 @@ export class MultiselectSearchComponent implements OnInit, AfterViewChecked {
     // Set selected values to retain the selected checkbox state
     this.setSelectedValues();
     this.selectFormControl.patchValue(this.selectedValues);
-    const filteredList = this.data.filter(
-      (option: any) => option.toLowerCase().indexOf(filterValue) === 0,
+    const filteredList = this.data.filter((option: any) =>
+      option.trim().toLowerCase().includes(filterValue),
     );
     return filteredList;
   }
@@ -80,7 +80,7 @@ export class MultiselectSearchComponent implements OnInit, AfterViewChecked {
     if (this.selectFormControl.value && this.selectFormControl.value.length > 0) {
       this.selectFormControl.value.forEach((e: any) => {
         if (this.selectedValues.indexOf(e) === -1) {
-          this.selectedValues.push(e);
+          this.selectedValues.push(` ${String(e)}`);
         }
       });
     }
