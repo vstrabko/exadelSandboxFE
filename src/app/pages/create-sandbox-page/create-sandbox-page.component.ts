@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -8,7 +9,7 @@ import { ListSandboxes, Employee } from '../../interfaces/interfaces';
   templateUrl: './create-sandbox-page.component.html',
   styleUrls: ['./create-sandbox-page.component.scss'],
 })
-export class CreateSandboxPageComponent {
+export class CreateSandboxPageComponent implements OnInit {
   public sandboxes: ListSandboxes[] = [
     { id: 1, name: 'JS + .NET' },
     { id: 2, name: 'JS + Java' },
@@ -48,6 +49,7 @@ export class CreateSandboxPageComponent {
     { id: 6, firstName: 'Ivan', lastName: 'Kiselyov', tech: 'JS' },
     { id: 7, firstName: 'Ivan', lastName: 'Belyaeva', tech: '.NET' },
   ];
+
   range = new FormGroup({
     start: new FormControl('', [Validators.required]),
     end: new FormControl('', [Validators.required]),
@@ -58,7 +60,21 @@ export class CreateSandboxPageComponent {
   interviewers = new FormControl('', [Validators.required]);
   mentors = new FormControl('', [Validators.required]);
 
+  recr: string[] = [];
+  int: string[] = [];
+  ment: string[] = [];
+
   create(): void {
     console.log('create');
+  }
+
+  ngOnInit(): void {
+    this.listRecruiters.map((el: Employee) => this.recr.push(`${el.firstName} ${el.lastName}`));
+    this.listInterviewers.map((el: Employee) =>
+      this.int.push(`${el.firstName} ${el.lastName} ${String(el.tech)}`),
+    );
+    this.listMentors.map((el: Employee) =>
+      this.ment.push(`${el.firstName} ${el.lastName} ${String(el.tech)}`),
+    );
   }
 }

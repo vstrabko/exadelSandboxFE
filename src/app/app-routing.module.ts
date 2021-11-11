@@ -5,14 +5,17 @@ import { CreateSandboxPageComponent } from './pages/create-sandbox-page/create-s
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CandidateListComponent } from './components/candidate/candidate-list/candidate-list.component';
+import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page/sandbox-list-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'admin-main-page', component: AdminMainPageComponent },
   { path: 'users', component: CandidateListComponent },
+  { path: 'calendar', component: CalendarPageComponent },
   { path: 'sandbox', component: SandboxListPageComponent },
   { path: 'sandbox/create', component: CreateSandboxPageComponent },
+
   { path: '**', component: ErrorPageComponent },
 ];
 
