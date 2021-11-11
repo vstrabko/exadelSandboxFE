@@ -17,7 +17,7 @@ export class CandidateCardPopupComponent implements OnInit {
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
-      this.cancel()
+      this.cancel();
     });
 
     setTimeout(() => {
