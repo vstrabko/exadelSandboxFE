@@ -70,7 +70,6 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     PopupChooseTheTimeModule,
     FullCalendarModule,
     CandidateTableModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent],
