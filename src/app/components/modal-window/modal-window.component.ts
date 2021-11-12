@@ -17,7 +17,7 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.vision = this.modalWindowService.visible.subscribe((value: boolean) => console.log(value));
-    this.form = this.modalWindowService.modalWindow.subscribe((value: any) => {
+    this.form = this.modalWindowService.modalWindow.subscribe((value: string) => {
       this.whatIsTheForm = value;
     });
   }
@@ -39,7 +39,6 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
       case 27:
         console.log('esc');
         setTimeout(() => {
-          // this.modalWindowService.modalWindow.next('login');
           this.modalWindowService.visible.next(false);
         }, 200);
         break;
