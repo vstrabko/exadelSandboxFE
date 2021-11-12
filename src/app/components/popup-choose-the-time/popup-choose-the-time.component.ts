@@ -1,33 +1,49 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { ComingTimeType } from './time/time.component';
 @Component({
   selector: 'app-popup-choose-the-time',
   templateUrl: './popup-choose-the-time.component.html',
   styleUrls: ['./popup-choose-the-time.component.scss'],
 })
-export class PopupChooseTheTimeComponent {
+export class PopupChooseTheTimeComponent implements OnInit {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() title: string = 'Choose the time';
   @Input() titleData: string = '01/11/2021';
 
-  public times: number[] = [0];
+  @Input() comingTime: ComingTimeType[] = [];
+
+  public times: ComingTimeType[] = [];
+
+  ngOnInit(): void {
+    this.times = this.comingTime.slice();
+  }
+
+  sortTime(): void {
+    this.times = this.times.sort((a: any, b: any) => {
+      if (a.startTime < b.startTime) return -1;
+      else if (a.startTime > b.startTime) return 1;
+      else return 0;
+    });
+  }
 
   add(): void {
-    if (!this.times.length) {
-      this.times.push(0);
-      return;
-    }
-
-    const lastId = this.times[this.times.length - 1];
-
-    this.times.push(lastId + 1);
+    const newId = this.times.length;
+    const newTime = {
+      startTime: '00:00',
+      endTime: '00:00',
+      id: newId,
+    };
+    this.times.push(newTime);
+    this.sortTime();
   }
 
   del(timeId: number): void {
-    this.times = this.times.filter((id: number) => {
-      return id !== timeId;
+    this.times = this.times.filter((time: ComingTimeType) => {
+      return time.id !== timeId;
     });
+    this.sortTime();
   }
+
   submit(): void {
     this.modal.emit(false);
   }

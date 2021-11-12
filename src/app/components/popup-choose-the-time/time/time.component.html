@@ -1,15 +1,15 @@
 <div class="wrapper-input-time">
   <label>
     {{ 'popupTimer.from' | translate }}
-    <input list="times" type="time" value="00:00" step="900" />
+    <input list="times" type="time" [value]="comingTime.startTime"   (input)="sort()"/>
   </label>
   <label>
     {{ 'popupTimer.to' | translate }}
-    <input list="times" type="time" value="00:00" step="900" />
+    <input list="times" type="time" [value]="comingTime.endTime" />
     <button class="btn unfilled-btn btn-minus" (click)="removeObject()">-</button>
   </label>
 </div>
-<datalist id="times">
+<!-- <datalist id="times">
   <option value="01:00:00"></option>
   <option value="01:15:00"></option>
   <option value="01:30:00"></option>
@@ -106,4 +106,4 @@
   <option value="00:15:00"></option>
   <option value="00:30:00"></option>
   <option value="00:45:00"></option>
-</datalist>
+</datalist> -->
