@@ -1,48 +1,42 @@
-
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
             Candidate list request
-          </mat-panel-title>
-          <mat-icon>assignment</mat-icon>
-        </mat-expansion-panel-header>
-        <div class="inputs_container">
-
-            <mat-form-field appearance="fill">
-                <mat-label>Status</mat-label>
-                <mat-select multiple>
-                  <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-                <mat-label>Location</mat-label>
-                <mat-select multiple>
-                  <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-                <mat-label>Mentor</mat-label>
-                <mat-select multiple>
-                  <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-                <mat-label>Sandbox</mat-label>
-                <mat-select multiple>
-                  <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-        </div>
-        <button class="btn filled-btn">Request</button>
-    </mat-expansion-panel>
-    <mat-form-field appearance="standard">
-        <mat-label>{{'candidateList.filter' | translate}}</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="{{'candidateList.example' | translate}}" #input>
-    </mat-form-field>
+        </mat-panel-title>
+        <mat-icon>assignment</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="inputs_container">
+        <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Location</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Mentor</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Sandbox</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <button class="btn filled-btn">Request</button>
+</mat-expansion-panel>
+<mat-form-field appearance="standard">
+    <mat-label>{{'candidateList.filter' | translate}}</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="{{'candidateList.example' | translate}}" #input>
+</mat-form-field>
 
 
 <div class="mat-elevation-z8">
