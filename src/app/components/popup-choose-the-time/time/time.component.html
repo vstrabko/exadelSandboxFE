@@ -1,7 +1,8 @@
 <div class="wrapper-input-time">
   <label>
     {{ 'popupTimer.from' | translate }}
-    <input list="times" type="time" [value]="comingTime.startTime"   (input)="sort()"/>
+    <input list="times" type="time" [value]="comingTime.startTime"   (onSelectionChange)="sortChildren()"  />
+    <!-- (input)="recordNewValue()"  -->
   </label>
   <label>
     {{ 'popupTimer.to' | translate }}

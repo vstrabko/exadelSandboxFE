@@ -16,6 +16,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
 
   ngOnInit(): void {
     this.times = this.comingTime.slice();
+    this.sortTime();
   }
 
   sortTime(): void {
@@ -26,6 +27,10 @@ export class PopupChooseTheTimeComponent implements OnInit {
     });
   }
 
+  // recordNewValue(){
+
+  // }
+
   add(): void {
     const newId = this.times.length;
     const newTime = {
@@ -35,6 +40,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
     };
     this.times.push(newTime);
     this.sortTime();
+    console.log(this.times);
   }
 
   del(timeId: number): void {
@@ -42,6 +48,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
       return time.id !== timeId;
     });
     this.sortTime();
+    console.log(this.times);
   }
 
   submit(): void {
@@ -51,4 +58,8 @@ export class PopupChooseTheTimeComponent implements OnInit {
   cancel(): void {
     this.modal.emit(false);
   }
+  // sort(): void {
+  //   console.log('sort');
+  //   console.log(this.times);
+  // }
 }

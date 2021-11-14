@@ -8,6 +8,7 @@
       <app-time *ngFor="let id of times"
       [comingTime]="id"
       (delete)="del($event)"
+      (sort)="sortTime()"
 
        style="margin-top: 10px"></app-time>
       <button class="btn filled-btn btn-plus" type="button" (click)="add()">+</button>

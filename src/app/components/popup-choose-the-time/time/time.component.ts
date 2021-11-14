@@ -9,9 +9,9 @@ export type ComingTimeType = { startTime: string; endTime: string; id: number };
 })
 export class TimeComponent {
   @Output() delete = new EventEmitter<number>();
-  @Output() times: any[];
-
+  @Output() sort = new EventEmitter<any>();
   @Input() comingTime: ComingTimeType;
+  // @Input() sortChildren: any;
 
   removeObject(): void {
     this.delete.emit(this.comingTime.id);
@@ -19,8 +19,7 @@ export class TimeComponent {
   returnId(): number {
     return this.comingTime.id;
   }
-  sort(): void {
-    console.log('sort');
-    console.log(this.comingTime.id);
+  sortChildren(): void {
+    this.sort.emit();
   }
 }
