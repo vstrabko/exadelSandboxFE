@@ -1,11 +1,27 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { ComingTimeType } from './time/time.component';
+import { ModalWindowService } from '../modal-window/modal-window.service';
+
 @Component({
   selector: 'app-popup-choose-the-time',
   templateUrl: './popup-choose-the-time.component.html',
   styleUrls: ['./popup-choose-the-time.component.scss'],
 })
 export class PopupChooseTheTimeComponent implements OnInit {
+  constructor(private modalWindowService: ModalWindowService) {}
+
+  ngOnInit(): void {
+    this.times = this.comingTime.slice();
+    this.sortTime();
+    this.modalWindowService.visible.subscribe((result: boolean) => {
+      console.log(result);
+      this.cancel();
+    });
+
+    setTimeout(() => {
+      this.modalWindowService.modalWindow.next('time');
+    }, 200);
+  }
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() title: string = 'Choose the time';
   @Input() titleData: string = '01/11/2021';
@@ -13,11 +29,6 @@ export class PopupChooseTheTimeComponent implements OnInit {
   @Input() comingTime: ComingTimeType[] = [];
 
   public times: ComingTimeType[] = [];
-
-  ngOnInit(): void {
-    this.times = this.comingTime.slice();
-    this.sortTime();
-  }
 
   sortTime(): void {
     this.times = this.times.sort((a: any, b: any) => {

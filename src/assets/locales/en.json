@@ -89,5 +89,11 @@
   "tostr": {
     "title": "Success",
     "text": "You are registred!"
+  },
+  "select": {
+    "default": "select",
+    "recruiters": "Recruiters *",
+    "mentors": "Mentors *",
+    "interviewers": "Interviewers *"
   }
 }
