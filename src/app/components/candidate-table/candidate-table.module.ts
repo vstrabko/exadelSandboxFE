@@ -9,6 +9,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { MatPaginatorIntlRu } from '../candidate/candidate-list/intPaginator';
@@ -25,6 +28,9 @@ import { MatPaginatorIntlRu } from '../candidate/candidate-list/intPaginator';
     MatSortModule,
     MultiselectSearchModule,
     InternationalizationModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatSelectModule,
   ],
   exports: [CandidateTableComponent],
   providers: [LocalizationService, { provide: MatPaginatorIntl, useClass: MatPaginatorIntlRu }],

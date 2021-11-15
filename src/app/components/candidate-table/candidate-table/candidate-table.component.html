@@ -1,10 +1,43 @@
-<div class="filter_container">
-    <app-multiselect-search [placeholder]="'select'" [data]="labels" class="multiselect"></app-multiselect-search>
-    <mat-form-field appearance="standard">
-        <mat-label>{{'candidateList.filter' | translate}}</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="{{'candidateList.example' | translate}}" #input>
-    </mat-form-field>
-</div>
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ 'candidateList.requestTitle' | translate }}
+        </mat-panel-title>
+        <mat-icon>assignment</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="inputs_container">
+        <mat-form-field appearance="fill">
+            <mat-label>{{ 'select.status' | translate }}</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>{{ 'select.location' | translate }}</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>{{ 'select.mentor' | translate }}</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>{{ 'select.sandbox' | translate }}</mat-label>
+            <mat-select multiple>
+                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <button class="btn filled-btn">{{ 'candidateList.request' | translate }}</button>
+</mat-expansion-panel>
+<mat-form-field appearance="standard">
+    <mat-label>{{'candidateList.filter' | translate}}</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="{{'candidateList.example' | translate}}" #input>
+</mat-form-field>
+
 
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
