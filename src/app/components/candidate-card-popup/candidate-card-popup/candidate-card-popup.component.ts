@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Candidate } from 'src/app/models/candidate.model';
+import { ModalWindowService } from '../../modal-window/modal-window.service';
 
 interface Status {
   value: string;
@@ -11,7 +12,19 @@ interface Status {
   templateUrl: './candidate-card-popup.component.html',
   styleUrls: ['./candidate-card-popup.component.scss'],
 })
-export class CandidateCardPopupComponent {
+export class CandidateCardPopupComponent implements OnInit {
+  constructor(private modalWindowService: ModalWindowService) {}
+  ngOnInit(): void {
+    this.modalWindowService.visible.subscribe((result: boolean) => {
+      console.log(result);
+      this.cancel();
+    });
+
+    setTimeout(() => {
+      this.modalWindowService.modalWindow.next('candidates card');
+    }, 200);
+  }
+
   public title = 'Candidate card';
   @Input() user: Candidate;
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();

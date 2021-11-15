@@ -18,15 +18,17 @@ export class HeaderComponent implements OnInit {
     this.authService.authSubject.subscribe((res: Partial<User> | null): void => {
       this.userName = !!res?.fullName ? res.fullName : '';
     });
-    this.modalWindowService.modalSubject.subscribe((result: boolean) => (this.isVisible = result));
+    this.modalWindowService.visible.subscribe((result: boolean) => (this.isVisible = result));
   }
 
   openModal(): void {
     this.modalWindowService.visible.next(true);
+    setTimeout(() => {
+      this.modalWindowService.modalWindow.next('login');
+    }, 200);
   }
 
   closeModal(): void {
-    // this.isVisible = false;
     this.modalWindowService.visible.next(false);
   }
 
