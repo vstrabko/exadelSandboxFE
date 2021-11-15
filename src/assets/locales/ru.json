@@ -75,6 +75,8 @@
     "title": "Выберите время"
   },
   "candidateList": {
+    "requestTitle": "Запрос списка кандидатов",
+    "request": "Запросить",
     "select": "выбрать",
     "search": "поиск",
     "haveChosen": "Вы выбрали:",
@@ -84,7 +86,7 @@
     "nextPage": "Следущая страница",
     "prevPage": "Предыдущая страница",
     "of": "из",
-    "filter": "фильтр",
+    "filter": "Фильтр",
     "example": "Прим. Минск"
   },
   "tostr": {
@@ -95,6 +97,10 @@
     "default": "выбрать",
     "recruiters": "Рекрутеры *",
     "mentors": "Менторы *",
-    "interviewers": "Интервьюеры *"
+    "interviewers": "Интервьюеры *",
+    "status": "Статус",
+    "location": "Локация",
+    "mentor": "Ментор",
+    "sandbox": "Песочница"
   }
 }

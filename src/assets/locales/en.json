@@ -75,6 +75,8 @@
     "title": "Choose the time"
   },
   "candidateList": {
+    "requestTitle": "Candidate list request",
+    "request": "Request",
     "select": "select",
     "search": "search",
     "haveChosen": "You have chosen:",
@@ -95,6 +97,10 @@
     "default": "select",
     "recruiters": "Recruiters *",
     "mentors": "Mentors *",
-    "interviewers": "Interviewers *"
+    "interviewers": "Interviewers *",
+    "status": "Status",
+    "location": "Location",
+    "mentor": "Mentor",
+    "sandbox": "Sandbox"
   }
 }
