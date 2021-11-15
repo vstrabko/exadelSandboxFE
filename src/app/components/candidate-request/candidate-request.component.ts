@@ -1,28 +1,34 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { CandidateContext } from 'src/app/services/candidateContext.service';
+import { CandidateContextService } from 'src/app/services/candidate-context.service';
+import { IdName } from 'src/app/models/id-name.model';
+import { Sandbox } from 'src/app/models/sandbox.model';
 
 @Component({
   selector: 'app-candidate-request',
   templateUrl: './candidate-request.component.html',
   styleUrls: ['./candidate-request.component.scss'],
 })
-export class CandidateRequestComponent implements OnInit {
+export class CandidateRequestComponent implements OnInit, OnChanges {
   constructor(
     private toastr: ToastrService,
     private translateService: TranslateService,
-    private candidateContext: CandidateContext,
+    private candidateContextService: CandidateContextService,
   ) {
     this.translateService.onLangChange.subscribe(() => {
       this.translateLabels();
     });
     this.translateLabels();
   }
-  levelsValues: string[];
-  skills: string[];
+
+  levelsValues: IdName[];
+  skills: IdName[];
+  availability: IdName[];
+  sandboxes: Sandbox[] = [];
+  sandbox: any = [];
 
   @Input() sandboxValue: string;
 
@@ -32,15 +38,27 @@ export class CandidateRequestComponent implements OnInit {
 
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.sandboxes.length) {
+      let cur: any;
+      for (const propName in changes) {
+        cur = changes[propName].currentValue;
+      }
+      this.sandbox = this.sandboxes.find((item: Sandbox): boolean => item.name === cur);
+    }
+  }
+
   ngOnInit(): void {
-    this.levelsValues = this.candidateContext.getEnglishLevels();
-    this.skills = this.candidateContext.getSkills();
+    this.levelsValues = this.candidateContextService.getEnglishLevels();
+    this.skills = this.candidateContextService.getSkills();
+    this.availability = this.candidateContextService.getAvailability();
+    this.sandboxes = this.candidateContextService.getSandbox();
 
     this.registrationForm = new FormGroup({
       sandbox: new FormControl(),
-      firstName: new FormControl('', [Validators.required]),
-      secondName: new FormControl('', [Validators.required]),
-      telephone: new FormControl(null, [Validators.required, Validators.pattern('[0-9]*')]),
+      name: new FormControl('', [Validators.required]),
+      surname: new FormControl('', [Validators.required]),
+      phone: new FormControl(null, [Validators.required, Validators.pattern('[0-9]*')]),
       email: new FormControl('', [Validators.required, Validators.pattern(this.emailRegex)]),
       skype: new FormControl('', [Validators.required]),
       englishLevel: new FormControl('', [Validators.required]),

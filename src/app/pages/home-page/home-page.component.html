@@ -4,21 +4,21 @@
       <h2>{{ 'sandbox.name' | translate }}</h2>
       <mat-form-field class="drop-box" appearance="outline">
         <mat-label>{{ 'sandbox.name' | translate }}</mat-label>
-        <mat-select #sandbox>
-          <mat-option *ngFor="let v of values" [value]="v.name">
-            {{ v.name }}
+        <mat-select #sandboxSelect (selectionChange)="inputChange(sandboxSelect.value)" >
+          <mat-option *ngFor="let sandbox of sandboxes" [value]="sandbox.name">
+            {{ sandbox.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <div class="description_container">
-        <mat-card class="description">{{ 'sandbox.description' | translate }}</mat-card>
+        <mat-card class="description">{{sandbox.description}}</mat-card>
       </div>
     </div>
-    
-    <div class="sandbox-interviews_container">
+
+    <div [style.display]="sandboxSelect.value ? 'block' : 'none'" class="sandbox-interviews_container">
       <div class="sandbox-interviews">
-          <app-candidate-request [sandboxValue]="sandbox.value"></app-candidate-request>
+        <app-candidate-request [sandboxValue]="sandboxSelect.value"></app-candidate-request>
       </div>
     </div>
   </div>
