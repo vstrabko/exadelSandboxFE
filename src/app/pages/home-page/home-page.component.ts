@@ -14,12 +14,15 @@ export class HomePageComponent implements OnInit {
     private candidateContextService: CandidateContextService,
   ) {}
 
-  sandboxChosen: any = {};
+  sandboxChosen: Partial<Sandbox> = {};
   sandboxes: Sandbox[] = [];
 
   inputChange(value: string): void {
     if (this.sandboxes.length) {
-      this.sandboxChosen = this.sandboxes.find((item: Sandbox) => item.name === value);
+      const sandCh = this.sandboxes.find((item: Sandbox) => item.name === value);
+      if (sandCh) {
+        this.sandboxChosen = sandCh;
+      }
     }
   }
 
