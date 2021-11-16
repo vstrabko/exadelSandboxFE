@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CandidateContextService } from 'src/app/services/candidate-context.service';
 import { IdName } from 'src/app/models/id-name.model';
+import { REGEXP } from '../../shared/constants/validators';
 
 @Component({
   selector: 'app-candidate-request',
@@ -19,8 +20,6 @@ export class CandidateRequestComponent implements OnInit {
 
   registrationForm: FormGroup;
 
-  emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
   ngOnInit(): void {
     this.levelsValues = this.candidateContextService.getEnglishLevels();
     this.skills = this.candidateContextService.getSkills();
@@ -31,7 +30,7 @@ export class CandidateRequestComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       surname: new FormControl('', [Validators.required]),
       phone: new FormControl(null, [Validators.required, Validators.pattern('[+0-9]*')]),
-      email: new FormControl('', [Validators.required, Validators.pattern(this.emailRegex)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(REGEXP.email)]),
       skype: new FormControl('', [Validators.required]),
       englishLevelId: new FormControl('', [Validators.required]),
       motivation: new FormControl('', [Validators.required]),

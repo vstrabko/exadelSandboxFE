@@ -9,7 +9,7 @@ import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'users', component: AdminMainPageComponent },
+  { path: 'candidates', component: AdminMainPageComponent },
   { path: 'calendar', component: CalendarPageComponent },
   { path: 'sandbox', component: SandboxListPageComponent },
   { path: 'sandbox/create', component: CreateSandboxPageComponent },
