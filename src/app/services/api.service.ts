@@ -12,9 +12,9 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   ) {}
 
   public create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+    resource = new this.tConstructor(resource);
     return this.httpClient
       .post<T>(`http://64.227.114.210:9090${this.apiUrl}`, resource.toJson())
-      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
@@ -33,9 +33,9 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+    resource = new this.tConstructor(resource);
     return this.httpClient
       .put<T>(`http://64.227.114.210:9090${this.apiUrl}/${String(resource._id)}`, resource.toJson())
-      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 

@@ -6,12 +6,28 @@ import { candidateRequestData } from '../models/candidate-request-data.model';
 import { ApiService } from './api.service';
 import { IdName } from '../models/id-name.model';
 import { Sandbox } from '../models/sandbox.model';
+import { CandidateFormModel } from '../models/candidateForm.model';
+
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({ providedIn: 'root' })
 export class CandidateContextService extends ApiService<candidateRequestData> {
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private translateService: TranslateService,
+  ) {
     super(http, candidateRequestData, '');
+    this.translateService.onLangChange.subscribe(() => {
+      this.translateLabels();
+    });
+    this.translateLabels();
   }
+
+  title = '';
+  text = '';
+
   englishLevels: IdName[] = [];
   skills: IdName[] = [];
   availability: IdName[] = [];
@@ -41,9 +57,14 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     return this.getData(this.availability, '/api/availabilitytypes');
   }
 
-  postCandidate(formData: any): void {
+  postCandidate(formData: CandidateFormModel): void {
     super.apiUrl = '/api/candidates';
     this.create(formData);
-    console.log('Yeee');
+    this.toastr.success(this.title, this.text);
+  }
+
+  translateLabels(): void {
+    this.title = this.translateService.instant('tostr.title');
+    this.text = this.translateService.instant('tostr.text');
   }
 }

@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { TranslateService } from '@ngx-translate/core';
 import { CandidateContextService } from 'src/app/services/candidate-context.service';
 import { IdName } from 'src/app/models/id-name.model';
 
@@ -12,24 +10,13 @@ import { IdName } from 'src/app/models/id-name.model';
   styleUrls: ['./candidate-request.component.scss'],
 })
 export class CandidateRequestComponent implements OnInit {
-  constructor(
-    private toastr: ToastrService,
-    private translateService: TranslateService,
-    private candidateContextService: CandidateContextService,
-  ) {
-    this.translateService.onLangChange.subscribe(() => {
-      this.translateLabels();
-    });
-    this.translateLabels();
-  }
+  constructor(private candidateContextService: CandidateContextService) {}
 
   levelsValues: IdName[];
   skills: IdName[];
   availability: IdName[];
   @Input() sandboxChosen: any = {};
 
-  title = '';
-  text = '';
   registrationForm: FormGroup;
 
   emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -65,14 +52,7 @@ export class CandidateRequestComponent implements OnInit {
     if (this.registrationForm.valid && this.sandboxChosen.name) {
       this.registrationForm.controls.sandboxId.setValue(this.sandboxChosen.id);
       this.candidateContextService.postCandidate(this.registrationForm.value);
-      console.log(this.registrationForm.value);
-      this.toastr.success(this.title, this.text);
-
-      /* this.registrationForm.reset(); */
+      this.registrationForm.reset();
     }
-  }
-  translateLabels(): void {
-    this.title = this.translateService.instant('tostr.title');
-    this.text = this.translateService.instant('tostr.text');
   }
 }
