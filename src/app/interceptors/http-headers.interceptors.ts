@@ -16,6 +16,8 @@ export class HttpHeadersInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+    } else {
+      this.authService.logout();
     }
     return next.handle(request);
   }

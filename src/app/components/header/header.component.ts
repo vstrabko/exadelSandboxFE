@@ -40,6 +40,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(): void {
-    this.authService.logout();
+    this.authService.logout().subscribe();
   }
 }
