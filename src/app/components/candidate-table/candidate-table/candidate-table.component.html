@@ -39,7 +39,7 @@
 </mat-form-field>
 
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 candidate-table">
     <table mat-table [dataSource]="dataSource" matSort>
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
@@ -90,4 +90,6 @@
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+   
 </div>
+<button (click)="toggleAppoinInterview()" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>

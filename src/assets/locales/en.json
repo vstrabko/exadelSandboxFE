@@ -87,7 +87,8 @@
     "prevPage": "Previous page",
     "of": "of",
     "filter": "Filter",
-    "example": "Ex. Minsk"
+    "example": "Ex. Minsk",
+    "appointInterview": "Appoint Interview"
   },
   "tostr": {
     "title": "Success",
