@@ -12,13 +12,13 @@
       </mat-form-field>
 
       <div class="description_container">
-        <mat-card class="description">{{sandbox.description}}</mat-card>
+        <mat-card class="description">{{sandboxChosen.description}}</mat-card>
       </div>
     </div>
 
     <div [style.display]="sandboxSelect.value ? 'block' : 'none'" class="sandbox-interviews_container">
       <div class="sandbox-interviews">
-        <app-candidate-request [sandboxValue]="sandboxSelect.value"></app-candidate-request>
+        <app-candidate-request [sandboxChosen]="sandboxChosen"></app-candidate-request>
       </div>
     </div>
   </div>

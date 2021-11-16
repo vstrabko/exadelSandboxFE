@@ -40,4 +40,10 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
   getAvailability(): IdName[] {
     return this.getData(this.availability, '/api/availabilitytypes');
   }
+
+  postCandidate(formData: any): void {
+    super.apiUrl = '/api/candidates';
+    this.create(formData);
+    console.log('Yeee');
+  }
 }
