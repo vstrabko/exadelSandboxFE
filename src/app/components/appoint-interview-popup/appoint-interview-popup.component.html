@@ -1,0 +1,44 @@
+<app-modal-window [title]="title">
+  <div class="card-popup_container">
+    <div class="section">
+      <mat-stepper #stepper>
+        <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Choose the date</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+            </mat-form-field>
+            <div>
+              <p>Go to a different step to see the error state</p>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Choose an interviewer</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
+                     required>
+            </mat-form-field>
+            <div>
+              <p>Go to a different step to see the error state</p>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Choose the time</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+      <div class="two-column buttons">
+        <button class="btn unfilled-btn" (click)="cancel()">close</button>
+        <button class="btn filled-btn">save</button>
+      </div>
+    </div>
+  </div>
+</app-modal-window>
