@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { candidateRequestData } from '../models/candidateRequestData.model';
 import { ApiService } from './api.service';
+import { Sandbox } from '../models/sandbox.model';
+import { IdName } from '../models/id-name.model';
 
 @Injectable({ providedIn: 'root' })
 export class CandidateContext extends ApiService<candidateRequestData> {
   constructor(private http: HttpClient) {
     super(http, candidateRequestData, '');
   }
-  englishLevels: string[] = [];
-  skills: string[] = [];
-  statuses: string[] = [];
+  englishLevels: IdName[] = [];
+  skills: IdName[] = [];
+  statuses: IdName[] = [];
+  sandboxes: Sandbox[] = [];
 
-  getData(dataArray: string[], currentUrl: string): string[] {
+  getData(dataArray: any[], currentUrl: string): any[] {
     if (!dataArray.length) {
       super.apiUrl = currentUrl;
       this.get().subscribe((data: candidateRequestData[]): void =>
@@ -24,13 +28,16 @@ export class CandidateContext extends ApiService<candidateRequestData> {
     return dataArray;
   }
 
-  getEnglishLevels(): string[] {
+  getEnglishLevels(): IdName[] {
     return this.getData(this.englishLevels, '/api/languagelevels');
   }
-  getSkills(): string[] {
+  getSkills(): IdName[] {
     return this.getData(this.skills, '/api/skills');
   }
-  getStatuses(): string[] {
+  getStatuses(): IdName[] {
     return this.getData(this.statuses, '/api/statuses');
+  }
+  getSandbox(): Sandbox[] {
+    return this.getData(this.sandboxes, '/api/sandboxes');
   }
 }

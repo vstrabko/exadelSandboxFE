@@ -6,7 +6,7 @@ import { CandidateService } from 'src/app/services/candidate-service.service';
 import { Candidate } from 'src/app/models/candidate.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CandidateContext } from 'src/app/services/candidateContext.service';
-
+import { IdName } from 'src/app/models/id-name.model';
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
@@ -24,7 +24,8 @@ export class CandidateTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   labels = ['status', 'location', 'recruiter', 'sandbox'];
-  statusValues: string[];
+  statusValues: IdName[];
+  sandboxValues: IdName[];
   users: Candidate[];
   candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -36,7 +37,7 @@ export class CandidateTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.statusValues = this.candidateContext.getStatuses();
-    console.log(this.statusValues);
+    this.sandboxValues = this.candidateContext.getSandbox();
 
     this.candidateService.getCandidate().subscribe((data: any) => {
       this.users = data;
