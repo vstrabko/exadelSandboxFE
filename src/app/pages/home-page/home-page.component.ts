@@ -29,8 +29,4 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.sandboxes = this.candidateContextService.getSandbox();
   }
-
-  testLog(): void {
-    this.tosterMessage.showSuccess('Вы успешно отправили форму', 'ОТПРАВЛЕНО');
-  }
 }
