@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastService } from 'src/app/services/toast.service';
 import { CandidateContextService } from 'src/app/services/candidate-context.service';
 import { Sandbox } from 'src/app/models/sandbox.model';
 
@@ -9,10 +8,7 @@ import { Sandbox } from 'src/app/models/sandbox.model';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(
-    private tosterMessage: ToastService,
-    private candidateContextService: CandidateContextService,
-  ) {}
+  constructor(private candidateContextService: CandidateContextService) {}
 
   sandboxChosen: Partial<Sandbox> = {};
   sandboxes: Sandbox[] = [];
