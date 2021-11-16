@@ -9,10 +9,11 @@ table {
   width: 100%;
 }
 
-.filter_container {
+.inputs_container {
  display: flex;
  align-items: baseline;
  margin-bottom: 50px;
+ gap: 20px;
 }
 
 .multiselect{
@@ -57,6 +58,10 @@ tr {
 }
 
 // multiselect search colors
+
+.mat-icon {
+  margin-right: 10px;
+}
 
 
 

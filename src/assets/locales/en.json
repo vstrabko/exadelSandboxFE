@@ -64,7 +64,8 @@
     "timeContact": "The best time to contact you",
     "joinExadel": "Are you planning to join Exadel after the Trainig?",
     "agreement": "Could you provide your agreement to proceed with your Personal Data?",
-    "sendButton": "Send"
+    "sendButton": "Send",
+    "choose": "Choose an option"
   },
   "popupTimer": {
     "from": "from",
@@ -74,6 +75,8 @@
     "title": "Choose the time"
   },
   "candidateList": {
+    "requestTitle": "Candidate list request",
+    "request": "Request",
     "select": "select",
     "search": "search",
     "haveChosen": "You have chosen:",
@@ -89,5 +92,15 @@
   "tostr": {
     "title": "Success",
     "text": "You are registred!"
+  },
+  "select": {
+    "default": "select",
+    "recruiters": "Recruiters *",
+    "mentors": "Mentors *",
+    "interviewers": "Interviewers *",
+    "status": "Status",
+    "location": "Location",
+    "mentor": "Mentor",
+    "sandbox": "Sandbox"
   }
 }

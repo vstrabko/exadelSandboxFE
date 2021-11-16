@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
+import { MultiselectSearchModule } from 'src/app/components/candidate/multiselect-search/multiselect-search.module';
 
 @NgModule({
   declarations: [CreateSandboxPageComponent],
@@ -23,6 +24,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
     ReactiveFormsModule,
     MatNativeDateModule,
     InternationalizationModule,
+    MultiselectSearchModule,
   ],
   exports: [CreateSandboxPageComponent],
   providers: [LocalizationService],
