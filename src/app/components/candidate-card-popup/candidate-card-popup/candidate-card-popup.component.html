@@ -4,7 +4,7 @@
       <div class="two-column">
         <mat-card class="candidate-name">{{ user.name }}</mat-card>
         <mat-form-field class="candidate-status" appearance="fill">
-          <mat-label>Status</mat-label>
+          <mat-label>{{ 'candidate.status' | translate }}</mat-label>
           <mat-select>
             <mat-option *ngFor="let stat of status" [value]="stat.value">
               {{ stat.viewValue }}
@@ -12,26 +12,44 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <mat-card class="candidate-skills">Candidate skills</mat-card>
+      <mat-card class="candidate-skills">{{USER_INFO.techSkills}}</mat-card>
+      <mat-card class="candidate-skills">additional skills</mat-card>
       <div class="raiting two-column">
-        <mat-card>Raiting 1</mat-card>
-        <mat-card>Raiting 2</mat-card>
-        <mat-card>Raiting 3</mat-card>
-        <mat-card>Raiting 4</mat-card>
-        <mat-card>Raiting 5</mat-card>
-        <mat-card>Raiting 6</mat-card>
-        <mat-card>Raiting 7</mat-card>
-        <mat-card>Raiting 8</mat-card>
+        <mat-card>{{USER_INFO.email}}</mat-card>
+        <mat-card>{{USER_INFO.skype}}</mat-card>
+        <mat-card>{{USER_INFO.location}}</mat-card>
+        <mat-card>sertificates</mat-card>
+        <mat-card>{{USER_INFO.phone}}</mat-card>
+        <mat-card>{{USER_INFO.languages}}</mat-card>
+        <mat-card>current job</mat-card>
+        <mat-card>time to contact</mat-card>
       </div>
     </div>
     <div class="section">
       <mat-button-toggle-group class="radio-buttons" #group="matButtonToggleGroup" name="workerStatus"
         aria-label="Worker Status">
-        <mat-button-toggle value="Recruiter" checked>Recruiter</mat-button-toggle>
-        <mat-button-toggle value="Interviewer">Interviewer</mat-button-toggle>
-        <mat-button-toggle value="Mentor">Mentor</mat-button-toggle>
+        <mat-button-toggle value="Recruiter" checked>{{ 'candidate.recruiter' | translate }}</mat-button-toggle>
+        <mat-button-toggle value="Interviewer">{{ 'candidate.interviewer' | translate }}</mat-button-toggle>
+        <mat-button-toggle value="Mentor">{{ 'candidate.mentor' | translate }}</mat-button-toggle>
       </mat-button-toggle-group>
       <mat-card class="user-name">{{ group.value }} Name</mat-card>
+
+
+      <!-- <section class="example-section">
+        <mat-checkbox>Show thumb label</mat-checkbox>
+      </section> -->
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        tickInterval="1"
+        step="1"
+        min="0"
+        max="100"
+        aria-label="units">
+      </mat-slider>
+
+
+
 
       <mat-form-field *ngIf="group.value === 'Recruiter'" class="textarea_container" appearance="fill">
         <mat-label>{{ group.value }} feedback</mat-label>
@@ -49,8 +67,8 @@
       </mat-form-field>
 
       <div class="two-column buttons">
-        <button class="btn unfilled-btn" (click)="cancel()">close</button>
-        <button class="btn filled-btn">save</button>
+        <button class="btn unfilled-btn" (click)="cancel()">{{ 'cancel' | translate }}</button>
+        <button class="btn filled-btn" (click)="putUserInfo(USER_INFO)">{{ 'save' | translate }}</button>
       </div>
     </div>
   </div>

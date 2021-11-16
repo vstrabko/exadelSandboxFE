@@ -25,6 +25,7 @@
     "success": "You have successfully submitted the form"
   },
   "ok": "OK",
+  "save": "Save",
   "other": {
     "englishLevel": "English Level"
   },
@@ -95,5 +96,12 @@
     "recruiters": "Recruiters *",
     "mentors": "Mentors *",
     "interviewers": "Interviewers *"
+  },
+  "candidate": {
+    "status": "Status",
+    "recruiter": "Recruiter",
+    "mentor": "Mentor",
+    "interviewer": "Interviewer",
+    "feedback": "Feedback"
   }
 }

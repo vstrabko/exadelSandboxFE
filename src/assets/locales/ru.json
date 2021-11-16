@@ -24,6 +24,7 @@
     "success": "Вы успешно отправили форму"
   },
   "ok": "ОК",
+  "save": "Сохранить",
   "other": {
     "englishLevel": "Уровень английского"
   },
@@ -95,5 +96,12 @@
     "recruiters": "Рекрутеры *",
     "mentors": "Менторы *",
     "interviewers": "Интервьюеры *"
+  },
+  "candidate": {
+    "status": "Статус",
+    "recruiter": "Рекрутер",
+    "mentor": "Ментор",
+    "interviewer": "Интервьюер",
+    "feedback": "обратная связь"
   }
 }

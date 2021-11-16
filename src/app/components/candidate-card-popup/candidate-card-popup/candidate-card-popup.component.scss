@@ -69,4 +69,13 @@
     .card-popup_container {
         flex-wrap: wrap;
     }
-  }
+}
+
+mat-slider {
+    width: 300px;
+
+    &-thumb-container {
+        color: green;
+    }
+}
+// mat-slider-thumb-container
