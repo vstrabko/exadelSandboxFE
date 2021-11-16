@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CandidateService } from 'src/app/services/candidate-service.service';
 import { Candidate } from 'src/app/models/candidate.model';
 import { SelectionModel } from '@angular/cdk/collections';
+import { CandidateContext } from 'src/app/services/candidateContext.service';
 
 @Component({
   selector: 'app-candidate-table',
@@ -12,7 +13,10 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./candidate-table.component.scss'],
 })
 export class CandidateTableComponent implements OnInit {
-  constructor(private candidateService: CandidateService) {}
+  constructor(
+    private candidateService: CandidateService,
+    private candidateContext: CandidateContext,
+  ) {}
   displayedColumns: string[] = ['select', 'id', 'name', 'email', 'body'];
   dataSource: MatTableDataSource<Candidate>;
   selection = new SelectionModel<Candidate>(true, []);
@@ -20,6 +24,7 @@ export class CandidateTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   labels = ['status', 'location', 'recruiter', 'sandbox'];
+  statusValues: string[];
   users: Candidate[];
   candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -30,7 +35,10 @@ export class CandidateTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.candidateService.get().subscribe((data: any) => {
+    this.statusValues = this.candidateContext.getStatuses();
+    console.log(this.statusValues);
+
+    this.candidateService.getCandidate().subscribe((data: any) => {
       this.users = data;
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
