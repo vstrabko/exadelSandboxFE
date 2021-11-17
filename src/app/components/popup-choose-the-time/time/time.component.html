@@ -1,11 +1,12 @@
 <div class="wrapper-input-time">
   <label>
     {{ 'popupTimer.from' | translate }}
-    <input type="time" value="00:00" step="900" />
+    <input matInput type="time" [value]="comingTime.startTime"   (input)="onTimeChange($event, 'from')"  />
   </label>
   <label>
     {{ 'popupTimer.to' | translate }}
-    <input type="time" value="00:00" step="900" />
+    <input matInput list="times" type="time" [value]="comingTime.endTime" (input)="onTimeChange($event, 'to')" />
     <button class="btn unfilled-btn btn-minus" (click)="removeObject()">-</button>
   </label>
 </div>
+

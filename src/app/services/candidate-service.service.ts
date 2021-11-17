@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Candidate } from '../models/candidate.model';
 import { ApiService } from './api.service';
