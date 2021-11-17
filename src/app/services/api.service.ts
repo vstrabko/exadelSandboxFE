@@ -3,7 +3,6 @@ import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ResourceModel } from '../models/resource.model';
-import { environment } from 'src/environments/environment';
 
 export abstract class ApiService<T extends ResourceModel<T>> {
   constructor(

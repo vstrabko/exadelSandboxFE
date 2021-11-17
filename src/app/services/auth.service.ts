@@ -61,14 +61,11 @@ export class AuthService {
     this.authSubject.next(null);
     void this.router.navigate(['']);
     return this.http
-      .get<any>(
-        `${environment.API_URL}/authorization/sign-out/${localStorage.getItem('refreshToken')}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
+      .get<any>(`${environment.API_URL}/authorization/sign-out/${this.getLSItem('refreshToken')}`, {
+        headers: {
+          Authorization: `Bearer ${this.getLSItem('accessToken')}`,
         },
-      )
+      })
       .pipe(
         map(() => {
           this.removeToken();
@@ -77,15 +74,14 @@ export class AuthService {
   }
 
   refreshToken(): Observable<any> {
-    console.log('start refresh');
     return this.http
       .post<any>(`${environment.API_URL}/authorization/refresh-token`, {
-        accessToken: `${localStorage.getItem('accessToken')}`,
-        refreshToken: `${localStorage.getItem('refreshToken')}`,
+        accessToken: this.getLSItem('accessToken'),
+        refreshToken: this.getLSItem('refreshToken'),
       })
       .pipe(
         map((res: any) => {
-          console.log('refresh', res);
+          this.removeToken();
           this.setToken(res);
         }),
       );
@@ -108,8 +104,13 @@ export class AuthService {
     return !!this.authToken;
   }
 
-  private removeToken():void {
+  private removeToken(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+  }
+
+  private getLSItem(key: string): string {
+    const item = localStorage.getItem(key);
+    return item ? item : '';
   }
 }

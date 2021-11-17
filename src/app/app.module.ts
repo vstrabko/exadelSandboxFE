@@ -28,7 +28,6 @@ import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-pa
 import { CandidateTableModule } from './components/candidate-table/candidate-table.module';
 
 import { HttpHeadersInterceptor } from './interceptors/http-headers.interceptors';
-import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptors';
 import { AuthService } from './services/auth.service';
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
@@ -80,11 +79,6 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeadersInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorsInterceptor,
       multi: true,
     },
   ],
