@@ -1,13 +1,14 @@
 <div class="wrapper-input-time">
+  <mat-form-field>
   <label>
     {{ 'popupTimer.from' | translate }}
-    <input type="time" [value]="comingTime.startTime"   (onSelectionChange)="sortChildren()"  />
-    <!-- (input)="recordNewValue()"  -->
+    <input matInput type="time" [value]="comingTime.startTime"   (input)="onTimeChange($event, 'from')"  />
   </label>
   <label>
     {{ 'popupTimer.to' | translate }}
-    <input list="times" type="time" [value]="comingTime.endTime" />
+    <input matInput list="times" type="time" [value]="comingTime.endTime" (input)="onTimeChange($event, 'to')" />
     <button class="btn unfilled-btn btn-minus" (click)="removeObject()">-</button>
   </label>
+</mat-form-field>
 </div>
 

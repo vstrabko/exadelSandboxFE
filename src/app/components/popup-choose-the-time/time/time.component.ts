@@ -11,7 +11,6 @@ export class TimeComponent {
   @Output() delete = new EventEmitter<number>();
   @Output() sort = new EventEmitter<any>();
   @Input() comingTime: ComingTimeType;
-  // @Input() sortChildren: any;
 
   removeObject(): void {
     this.delete.emit(this.comingTime.id);
@@ -21,5 +20,13 @@ export class TimeComponent {
   }
   sortChildren(): void {
     this.sort.emit();
+  }
+  onTimeChange(event: any, type: any): void {
+    if (type === 'from') {
+      this.comingTime.startTime = event.target.value;
+    } else {
+      this.comingTime.endTime = event.target.value;
+    }
+    this.sort.emit(this.comingTime);
   }
 }

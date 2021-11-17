@@ -2,13 +2,12 @@
   <div class="wrapper-content">
     <div class="wrapper-data" [title]="titleData">
       <span class="title-data">{{ titleData }}</span>
-      <!-- {{ 'popupTimer.title' | translate }} -->
     </div>
     <div class="wrapper-time">
       <app-time *ngFor="let id of times"
       [comingTime]="id"
       (delete)="del($event)"
-      (sort)="sortTime()"
+      (sort)="sortTime($event)"
 
        style="margin-top: 10px"></app-time>
       <button class="btn filled-btn btn-plus" type="button" (click)="add()">+</button>
@@ -23,4 +22,3 @@
     </div>
   </div>
 </app-modal-window>
-<!-- | orderBy: 'startTime':'asc' -->

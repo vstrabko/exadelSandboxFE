@@ -30,17 +30,23 @@ export class PopupChooseTheTimeComponent implements OnInit {
 
   public times: ComingTimeType[] = [];
 
-  sortTime(): void {
+  sortTime(updateTime: ComingTimeType | undefined = undefined): void {
+    if (updateTime) {
+      this.times = this.times.map((value: ComingTimeType) => {
+        if (value.id === updateTime.id) {
+          return updateTime;
+        } else {
+          return value;
+        }
+      });
+    }
+
     this.times = this.times.sort((a: any, b: any) => {
       if (a.startTime < b.startTime) return -1;
       else if (a.startTime > b.startTime) return 1;
       else return 0;
     });
   }
-
-  // recordNewValue(){
-
-  // }
 
   add(): void {
     const newId = this.times.length;
@@ -50,16 +56,13 @@ export class PopupChooseTheTimeComponent implements OnInit {
       id: newId,
     };
     this.times.push(newTime);
-    this.sortTime();
-    console.log(this.times);
+    this.sortTime(newTime);
   }
 
   del(timeId: number): void {
     this.times = this.times.filter((time: ComingTimeType) => {
       return time.id !== timeId;
     });
-    this.sortTime();
-    console.log(this.times);
   }
 
   submit(): void {
@@ -69,8 +72,4 @@ export class PopupChooseTheTimeComponent implements OnInit {
   cancel(): void {
     this.modal.emit(false);
   }
-  // sort(): void {
-  //   console.log('sort');
-  //   console.log(this.times);
-  // }
 }
