@@ -16,8 +16,8 @@ interface Status {
 export class CandidateCardPopupComponent implements OnInit {
   public USERS_INFO = {
     name: 'Mikhail Hasilau',
-    role: 'admin'
-  }
+    role: 'admin',
+  };
 
   public CANDIDATES_INFO = {
     id: '1',
