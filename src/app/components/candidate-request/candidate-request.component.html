@@ -1,4 +1,4 @@
-<form class="request_form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+<form class="request-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
   <h2>{{ 'request.header' | translate }}</h2>
   <input style="display: none;" formControlName="sandboxId"/>
 
@@ -89,16 +89,16 @@
   <div class="skills">
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.certificates' | translate }}</mat-label>
-      <textarea formControlName="professionaCertificates" [cdkTextareaAutosize] class="skills_textarea" matInput></textarea>
+      <textarea formControlName="professionaCertificates" [cdkTextareaAutosize] class="skills-textarea" matInput></textarea>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.addSkills' | translate }}</mat-label>
-      <textarea formControlName="additionalSkills" [cdkTextareaAutosize] class="skills_textarea" matInput></textarea>
+      <textarea formControlName="additionalSkills" [cdkTextareaAutosize] class="skills-textarea" matInput></textarea>
     </mat-form-field>
   </div>
 
-  <div class="time_contact">
+  <div class="time-contact">
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.timeContact' | translate }}</mat-label>
       <input formControlName="timeContact" matInput placeholder="Placeholder" />

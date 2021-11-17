@@ -25,36 +25,37 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     this.translateLabels();
   }
 
-  title = '';
-  text = '';
+  title: string = '';
+  text: string = '';
 
   englishLevels: IdName[] = [];
   skills: IdName[] = [];
   availability: IdName[] = [];
   sandboxes: Sandbox[] = [];
 
-  getData(dataArray: any[], currentUrl: string): any[] {
+  getData<T>(dataArray: T[], currentUrl: string): T[] {
     if (!dataArray.length) {
       super.apiUrl = currentUrl;
-      this.get().subscribe((data: candidateRequestData[]): void =>
-        data.forEach((item: any): number => dataArray.push(item)),
-      );
+      this.get().subscribe((data: T[]): T[] => (dataArray = [...data]));
       return dataArray;
     }
     return dataArray;
   }
 
   getEnglishLevels(): IdName[] {
-    return this.getData(this.englishLevels, '/api/languagelevels');
+    return this.getData<IdName>(this.englishLevels, '/api/languagelevels');
   }
   getSkills(): IdName[] {
-    return this.getData(this.skills, '/api/skills');
+    return this.getData<IdName>(this.skills, '/api/skills');
   }
   getSandbox(): Sandbox[] {
-    return this.getData(this.sandboxes, '/api/sandboxes');
+    return this.getData<Sandbox>(this.sandboxes, '/api/sandboxes');
   }
   getAvailability(): IdName[] {
-    return this.getData(this.availability, '/api/availabilitytypes');
+    return this.getData<IdName>(this.availability, '/api/availabilitytypes');
+  }
+  getStatuses(): IdName[] {
+    return this.getData<IdName>(this.availability, '/api/statuses');
   }
 
   postCandidate(formData: CandidateFormModel): void {

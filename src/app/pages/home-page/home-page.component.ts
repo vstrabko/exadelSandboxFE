@@ -15,9 +15,9 @@ export class HomePageComponent implements OnInit {
 
   inputChange(value: string): void {
     if (this.sandboxes.length) {
-      const sandCh = this.sandboxes.find((item: Sandbox) => item.name === value);
-      if (sandCh) {
-        this.sandboxChosen = sandCh;
+      const _sandboxChosen = this.sandboxes.find((item: Sandbox) => item.name === value);
+      if (_sandboxChosen) {
+        this.sandboxChosen = _sandboxChosen;
       }
     }
   }
