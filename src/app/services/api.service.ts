@@ -23,7 +23,6 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   public getUser(): Observable<any> {
     return this.httpClient.get<T[]>(`${environment.API_URL}${this.apiUrl}`).pipe(
       map((result: any) => {
-        console.log(result);
         return new this.tConstructor(result);
       }),
     );

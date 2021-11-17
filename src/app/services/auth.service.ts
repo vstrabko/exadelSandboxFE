@@ -92,7 +92,6 @@ export class AuthService {
       this.removeToken();
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
-      console.log('setToken', response);
     }
   }
 
