@@ -36,7 +36,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
   getData<T>(dataArray: T[], currentUrl: string): T[] {
     if (!dataArray.length) {
       super.apiUrl = currentUrl;
-      this.get().subscribe((data: T[]): T[] => (dataArray = [...data]));
+      this.get().subscribe((data: T[]) => dataArray.push(...data));
       return dataArray;
     }
     return dataArray;
@@ -49,7 +49,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     return this.getData<IdName>(this.skills, '/api/skills');
   }
   getSandbox(): Sandbox[] {
-    return this.getData<Sandbox>(this.sandboxes, '/api/sandboxes');
+    return this.getData<Sandbox>(this.sandboxes, '/api/sandboxes/all');
   }
   getAvailability(): IdName[] {
     return this.getData<IdName>(this.availability, '/api/availabilitytypes');
