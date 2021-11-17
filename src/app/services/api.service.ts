@@ -3,7 +3,6 @@ import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ResourceModel } from '../models/resource.model';
-
 export abstract class ApiService<T extends ResourceModel<T>> {
   constructor(
     private httpClient: HttpClient,
@@ -14,9 +13,9 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   private baseUrl = String(environment.API_URL);
 
   public create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+    resource = new this.tConstructor(resource);
     return this.httpClient
       .post<T>(`${this.baseUrl}${this.apiUrl}`, resource.toJson())
-      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
@@ -29,7 +28,7 @@ export abstract class ApiService<T extends ResourceModel<T>> {
 
   public getCandidate(): Observable<any> {
     return this.httpClient
-      .get<T[]>(`${this.apiUrl}`)
+      .get<T[]>(`https://jsonplaceholder.typicode.com/comments`)
       .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
@@ -42,9 +41,9 @@ export abstract class ApiService<T extends ResourceModel<T>> {
   }
 
   public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+    resource = new this.tConstructor(resource);
     return this.httpClient
       .put<T>(`${this.baseUrl}${this.apiUrl}/${String(resource._id)}`, resource.toJson())
-      .pipe(map((result: any) => new this.tConstructor(result)))
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
