@@ -25,6 +25,7 @@
     "success": "You have successfully submitted the form"
   },
   "ok": "OK",
+  "feedback": ", please, add your feedback",
   "save": "Save",
   "other": {
     "englishLevel": "English Level"

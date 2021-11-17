@@ -14,11 +14,10 @@ interface Status {
   styleUrls: ['./candidate-card-popup.component.scss'],
 })
 export class CandidateCardPopupComponent implements OnInit {
-  public USER_ROLES = {
-    mentor: '',
-    recruiter: '',
-    interviewer: '',
-  };
+  public USERS_INFO = {
+    name: 'Mikhail Hasilau',
+    role: 'admin'
+  }
 
   public CANDIDATES_INFO = {
     id: '1',
