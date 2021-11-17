@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { ComingTimeType } from './time/time.component';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 
 @Component({
@@ -10,6 +11,8 @@ export class PopupChooseTheTimeComponent implements OnInit {
   constructor(private modalWindowService: ModalWindowService) {}
 
   ngOnInit(): void {
+    this.times = this.comingTime.slice();
+    this.sortTime();
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
       this.cancel();
@@ -23,24 +26,45 @@ export class PopupChooseTheTimeComponent implements OnInit {
   @Input() title: string = 'Choose the time';
   @Input() titleData: string = '01/11/2021';
 
-  public times: number[] = [0];
+  @Input() comingTime: ComingTimeType[] = [];
 
-  add(): void {
-    if (!this.times.length) {
-      this.times.push(0);
-      return;
+  public times: ComingTimeType[] = [];
+
+  sortTime(updateTime: ComingTimeType | undefined = undefined): void {
+    if (updateTime) {
+      this.times = this.times.map((value: ComingTimeType) => {
+        if (value.id === updateTime.id) {
+          return updateTime;
+        } else {
+          return value;
+        }
+      });
     }
 
-    const lastId = this.times[this.times.length - 1];
+    this.times = this.times.sort((a: any, b: any) => {
+      if (a.startTime < b.startTime) return -1;
+      else if (a.startTime > b.startTime) return 1;
+      else return 0;
+    });
+  }
 
-    this.times.push(lastId + 1);
+  add(): void {
+    const newId = this.times.length;
+    const newTime = {
+      startTime: '00:00',
+      endTime: '00:00',
+      id: newId,
+    };
+    this.times.push(newTime);
+    this.sortTime(newTime);
   }
 
   del(timeId: number): void {
-    this.times = this.times.filter((id: number) => {
-      return id !== timeId;
+    this.times = this.times.filter((time: ComingTimeType) => {
+      return time.id !== timeId;
     });
   }
+
   submit(): void {
     this.modal.emit(false);
   }
