@@ -1,3 +1,5 @@
+@import '../../../shared/constants/colors.scss';
+
 .textarea_container {
     width: 500px;
 }
@@ -41,7 +43,6 @@
     width: 300px;
 }
 
-
 .two-column {
   display: flex;
   flex-wrap: wrap;
@@ -71,11 +72,24 @@
     }
 }
 
-mat-slider {
-    width: 300px;
 
-    &-thumb-container {
-        color: green;
+.custom-slider {
+    display: flex;
+    &-slide {
+        width: 90%;
     }
 }
-// mat-slider-thumb-container
+
+mat-slider {
+    width: 100%;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+    background-color: $blueColor;
+}
+::ng-deep .mat-accent .mat-slider-thumb-label {
+    background-color: $blueColor;
+}
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: $blueColor;
+}

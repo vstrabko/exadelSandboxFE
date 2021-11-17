@@ -12,15 +12,15 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <mat-card class="candidate-skills">{{USER_INFO.techSkills}}</mat-card>
+      <mat-card class="candidate-skills">{{CANDIDATES_INFO.techSkills}}</mat-card>
       <mat-card class="candidate-skills">additional skills</mat-card>
       <div class="raiting two-column">
-        <mat-card>{{USER_INFO.email}}</mat-card>
-        <mat-card>{{USER_INFO.skype}}</mat-card>
-        <mat-card>{{USER_INFO.location}}</mat-card>
+        <mat-card>{{CANDIDATES_INFO.email}}</mat-card>
+        <mat-card>{{CANDIDATES_INFO.skype}}</mat-card>
+        <mat-card>{{CANDIDATES_INFO.location}}</mat-card>
         <mat-card>sertificates</mat-card>
-        <mat-card>{{USER_INFO.phone}}</mat-card>
-        <mat-card>{{USER_INFO.languages}}</mat-card>
+        <mat-card>{{CANDIDATES_INFO.phone}}</mat-card>
+        <mat-card>{{CANDIDATES_INFO.languages}}</mat-card>
         <mat-card>current job</mat-card>
         <mat-card>time to contact</mat-card>
       </div>
@@ -34,22 +34,22 @@
       </mat-button-toggle-group>
       <mat-card class="user-name">{{ group.value }} Name</mat-card>
 
-
-      <!-- <section class="example-section">
-        <mat-checkbox>Show thumb label</mat-checkbox>
-      </section> -->
-      <mat-slider
-        thumbLabel
-        [displayWith]="formatLabel"
-        tickInterval="1"
-        step="1"
-        min="0"
-        max="100"
-        aria-label="units">
-      </mat-slider>
-
-
-
+      <div class="custom-slider">
+        <div class="custom-slider-slide">
+          <mat-slider
+            thumbLabel
+            tickInterval="1"
+            step="1"
+            min="0"
+            max="100"
+            aria-label="units"
+            (change)="onChangeRange($event)">
+          </mat-slider>
+        </div>
+        <div class="custom-slider-info">
+          <span>{{ sliderValue }}</span>
+        </div>
+      </div>
 
       <mat-form-field *ngIf="group.value === 'Recruiter'" class="textarea_container" appearance="fill">
         <mat-label>{{ group.value }} feedback</mat-label>
@@ -68,7 +68,7 @@
 
       <div class="two-column buttons">
         <button class="btn unfilled-btn" (click)="cancel()">{{ 'cancel' | translate }}</button>
-        <button class="btn filled-btn" (click)="putUserInfo(USER_INFO)">{{ 'save' | translate }}</button>
+        <button class="btn filled-btn">{{ 'save' | translate }}</button>
       </div>
     </div>
   </div>

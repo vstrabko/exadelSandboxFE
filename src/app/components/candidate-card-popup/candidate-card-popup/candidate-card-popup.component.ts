@@ -14,7 +14,13 @@ interface Status {
   styleUrls: ['./candidate-card-popup.component.scss'],
 })
 export class CandidateCardPopupComponent implements OnInit {
-  public USER_INFO = {
+  public USER_ROLES = {
+    mentor: '',
+    recruiter: '',
+    interviewer: '',
+  };
+
+  public CANDIDATES_INFO = {
     id: '1',
     name: 'name',
     surname: 'surname',
@@ -57,6 +63,7 @@ export class CandidateCardPopupComponent implements OnInit {
   }
 
   public title = 'Candidate card';
+  public sliderValue: number;
 
   @Input() user: Candidate;
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -74,35 +81,30 @@ export class CandidateCardPopupComponent implements OnInit {
     this.modal.emit();
   }
 
-  formatLabel(value: number): number {
-    // if (value >= 1000) {
-    return Math.round(value);
-    // }
-
-    // return value;
-    // console.log(value);
+  onChangeRange(rangeValue: any): any {
+    this.sliderValue = rangeValue.value;
   }
 
   getCandidateInfo(): any {
     return axios
-      .get(`http://64.227.114.210:9090/api/candidates`)
+      .get(`https://jsonplaceholder.typicode.com/users`)
       .then((response: any) => console.log('getC', response))
       .catch((error: any) => console.log('getC', error));
   }
 
   getUserInfo(): any {
     return axios
-      .get(`http://64.227.114.210:9090/api/users`)
-      .then((response: any) => console.log('getU', response))
+      .get(`https://jsonplaceholder.typicode.com/users`)
+      .then((response: any) => console.log('getU', response.data))
       .catch((error: any) => console.log('getU', error));
   }
 
-  putUserInfo(USER_INFO: any): any {
-    console.log(USER_INFO.id);
+  // putUserInfo(USER_INFO: any): any {
+  //   console.log(USER_INFO.id);
 
-    return axios
-      .post(`http://64.227.114.210:9090/api/candidates${USER_INFO.id}`, USER_INFO)
-      .then((response: any) => console.log('put', response))
-      .catch((error: any) => console.log('put', error));
-  }
+  //   return axios
+  //     .post(`http://64.227.114.210:9090/api/candidates${USER_INFO.id}`, USER_INFO)
+  //     .then((response: any) => console.log('put', response))
+  //     .catch((error: any) => console.log('put', error));
+  // }
 }
