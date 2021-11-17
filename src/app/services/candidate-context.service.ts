@@ -36,7 +36,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
   getData<T>(dataArray: T[], currentUrl: string): T[] {
     if (!dataArray.length) {
       super.apiUrl = currentUrl;
-      this.get().subscribe((data: T[]) => dataArray.push(...data))
+      this.get().subscribe((data: T[]) => dataArray.push(...data));
       return dataArray;
     }
     return dataArray;
