@@ -40,7 +40,7 @@ export class AuthService {
             this.setToken(token);
             this.userService.getUser().subscribe((user: User) => {
               this.authSubject.next(user);
-              void this.router.navigate(['/users']);
+              void this.router.navigate(['/candidates']);
               this.currentUser = user;
             });
           }
