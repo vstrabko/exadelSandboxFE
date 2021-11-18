@@ -27,13 +27,6 @@ export abstract class ApiService<T extends ResourceModel<T>> {
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
-  public getCandidate(): Observable<any> {
-    return this.httpClient
-      .get<T[]>(`${this.apiUrl}`)
-      .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
-      .pipe(catchError(this.errorHandler.bind(this)));
-  }
-
   public getById(id: number): Observable<any> {
     return this.httpClient
       .get<T>(`${this.baseUrl}${this.apiUrl}/${id}`)

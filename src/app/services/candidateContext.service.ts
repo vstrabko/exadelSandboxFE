@@ -15,6 +15,7 @@ export class CandidateContext extends ApiService<candidateRequestData> {
   englishLevels: IdName[] = [];
   skills: IdName[] = [];
   statuses: IdName[] = [];
+  mentors: IdName[] = [];
   sandboxes: Sandbox[] = [];
 
   getData(dataArray: any[], currentUrl: string): any[] {
@@ -38,6 +39,9 @@ export class CandidateContext extends ApiService<candidateRequestData> {
     return this.getData(this.statuses, '/api/statuses');
   }
   getSandbox(): Sandbox[] {
-    return this.getData(this.sandboxes, '/api/sandboxes');
+    return this.getData(this.sandboxes, '/api/sandboxes/all');
+  }
+  getMentors(): Sandbox[] {
+    return this.getData(this.mentors, '/api/mentors');
   }
 }

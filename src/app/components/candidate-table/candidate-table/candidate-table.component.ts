@@ -17,7 +17,15 @@ export class CandidateTableComponent implements OnInit {
     private candidateService: CandidateService,
     private candidateContext: CandidateContext,
   ) {}
-  displayedColumns: string[] = ['select', 'id', 'name', 'email', 'body'];
+  displayedColumns: string[] = [
+    'select',
+    'position',
+    'name',
+    'surname',
+    'email',
+    'status',
+    'sandbox',
+  ];
   dataSource: MatTableDataSource<Candidate>;
   selection = new SelectionModel<Candidate>(true, []);
 
@@ -26,7 +34,8 @@ export class CandidateTableComponent implements OnInit {
   labels = ['status', 'location', 'recruiter', 'sandbox'];
   statusValues: IdName[];
   sandboxValues: IdName[];
-  users: Candidate[];
+  mentorsValues: IdName[];
+  candidates: Candidate[];
   candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -38,10 +47,12 @@ export class CandidateTableComponent implements OnInit {
   ngOnInit(): void {
     this.statusValues = this.candidateContext.getStatuses();
     this.sandboxValues = this.candidateContext.getSandbox();
+    this.mentorsValues = this.candidateContext.getMentors();
 
-    this.candidateService.getCandidate().subscribe((data: any) => {
-      this.users = data;
-      this.dataSource = new MatTableDataSource(this.users);
+    this.candidateService.get().subscribe((data: any) => {
+      this.candidates = data;
+      this.candidates.map((e: Candidate) => (e.position = this.candidates.indexOf(e) + 1));
+      this.dataSource = new MatTableDataSource(this.candidates);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -49,8 +60,9 @@ export class CandidateTableComponent implements OnInit {
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue);
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
+    console.log(this.dataSource);
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -83,6 +95,8 @@ export class CandidateTableComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${Number(row.id) + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      Number(row.position) + 1
+    }`;
   }
 }
