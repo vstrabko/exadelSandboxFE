@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class SandboxListPageComponent implements OnInit {
   constructor(private router: Router, private sandboxService: SandboxService) {}
 
-  displayedColumns: string[] = ['select', 'id', 'name'];
+  displayedColumns: string[] = ['select', 'startDate', 'name', 'description'];
   dataSource: MatTableDataSource<Sandbox>;
   selection = new SelectionModel<Sandbox>(true, []);
 
@@ -41,6 +41,7 @@ export class SandboxListPageComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.sandBoxes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      console.log(this.sandBoxes);
     });
   }
 
