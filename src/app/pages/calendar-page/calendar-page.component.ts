@@ -47,7 +47,7 @@ export class CalendarPageComponent {
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
+        allDay: false,
       });
     }
   }
@@ -60,6 +60,10 @@ export class CalendarPageComponent {
 
   handleEvents(events: EventApi[]): void {
     this.currentEvents = events;
+  }
+
+  getTime(time: any):void {
+    console.log('getTimes: ', time);
   }
 
   openModal(): void {

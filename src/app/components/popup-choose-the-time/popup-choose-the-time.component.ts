@@ -8,6 +8,14 @@ import { ModalWindowService } from '../modal-window/modal-window.service';
   styleUrls: ['./popup-choose-the-time.component.scss'],
 })
 export class PopupChooseTheTimeComponent implements OnInit {
+  @Input() title: string = 'Choose the time';
+  @Input() titleData: string = '01/11/2021';
+  @Input() comingTime: ComingTimeType[] = [];
+  @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() addTime: EventEmitter<ComingTimeType[]> = new EventEmitter<ComingTimeType[]>();
+
+  public times: ComingTimeType[] = [];
+
   constructor(private modalWindowService: ModalWindowService) {}
 
   ngOnInit(): void {
@@ -22,13 +30,6 @@ export class PopupChooseTheTimeComponent implements OnInit {
       this.modalWindowService.modalWindow.next('time');
     }, 200);
   }
-  @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() title: string = 'Choose the time';
-  @Input() titleData: string = '01/11/2021';
-
-  @Input() comingTime: ComingTimeType[] = [];
-
-  public times: ComingTimeType[] = [];
 
   sortTime(updateTime: ComingTimeType | undefined = undefined): void {
     if (updateTime) {
@@ -67,6 +68,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
 
   submit(): void {
     this.modal.emit(false);
+    this.addTime.emit(this.times);
   }
 
   cancel(): void {
