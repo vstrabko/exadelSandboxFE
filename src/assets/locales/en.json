@@ -42,7 +42,10 @@
     "invalidEndDate": "Invalid end date",
     "invalidStartDate": "Invalid start date",
     "name": "Sandbox",
-    "period": "Sandbox period"
+    "period": "Sandbox period",
+    "startDate": "Start date",
+    "nameSandbox": "Name",
+    "nameDescription": "Descriptionme"
   },
   "request": {
     "header": "Candidate request",

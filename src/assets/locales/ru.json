@@ -41,7 +41,10 @@
     "invalidEndDate": "Неверная дата окончания",
     "invalidStartDate": "Неверная дата старта",
     "name": "Песочница",
-    "period": "Длительность"
+    "period": "Длительность",
+    "startDate": "Дата начала",
+    "nameSandbox": "Наименование",
+    "nameDescription": "Описание"
   },
   "request": {
     "header": "Заявка кандидата",
