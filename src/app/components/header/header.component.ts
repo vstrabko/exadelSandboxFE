@@ -8,26 +8,15 @@ import { ModalWindowService } from '../modal-window/modal-window.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  private roles = {
-    //todo: till not back-end
-    nobody: '',
-    admin: 'admin',
-    manager: 'manager',
-    recruiter: 'recruiter',
-    interviewer: 'interviewer',
-    mentor: 'mentor',
-  };
-
   public isVisible = false;
   public vision = false;
   public userName = '';
-  public role: string = this.roles.admin; //todo: role from back-end
 
   constructor(private authService: AuthService, private modalWindowService: ModalWindowService) {}
 
   public ngOnInit(): void {
-    this.authService.authSubject.subscribe((res: Partial<User>): void => {
-      this.userName = !!res?.name ? res.name : '';
+    this.authService.authSubject.subscribe((res: Partial<User> | null): void => {
+      this.userName = !!res?.fullName ? res.fullName : '';
     });
     this.modalWindowService.visible.subscribe((result: boolean) => (this.isVisible = result));
   }
@@ -51,6 +40,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(): void {
-    this.authService.logout();
+    this.authService.logout().subscribe();
   }
 }

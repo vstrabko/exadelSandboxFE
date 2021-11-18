@@ -113,5 +113,9 @@
     "mentor": "Mentor",
     "interviewer": "Interviewer",
     "feedback": "Feedback"
+  },
+  "authTostr": {
+    "title": "Authentication error",
+    "text": "Please check carefully that all details are correct"
   }
 }
