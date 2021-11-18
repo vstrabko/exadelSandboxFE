@@ -45,7 +45,7 @@
     "period": "Sandbox period",
     "startDate": "Start date",
     "nameSandbox": "Name",
-    "nameDescription": "Descriptionme"
+    "nameDescription": "Description"
   },
   "request": {
     "header": "Candidate request",
