@@ -9,6 +9,8 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 })
 export class CalendarPageComponent {
   public isVisible = false;
+  public selectDate: string;
+
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
@@ -37,6 +39,7 @@ export class CalendarPageComponent {
 
   handleDateSelect(selectInfo: DateSelectArg): void {
     this.openModal();
+    this.selectDate = selectInfo.startStr;
     const title = 'free time';
     const calendarApi = selectInfo.view.calendar;
     calendarApi.unselect();
@@ -62,7 +65,7 @@ export class CalendarPageComponent {
     this.currentEvents = events;
   }
 
-  getTime(time: any):void {
+  getTime(time: any): void {
     console.log('getTimes: ', time);
   }
 

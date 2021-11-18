@@ -8,8 +8,8 @@ import { ModalWindowService } from '../modal-window/modal-window.service';
   styleUrls: ['./popup-choose-the-time.component.scss'],
 })
 export class PopupChooseTheTimeComponent implements OnInit {
-  @Input() title: string = 'Choose the time';
-  @Input() titleData: string = '01/11/2021';
+  @Input() title: string = 'Choose the free time';
+  @Input() selectDate: string;
   @Input() comingTime: ComingTimeType[] = [];
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() addTime: EventEmitter<ComingTimeType[]> = new EventEmitter<ComingTimeType[]>();

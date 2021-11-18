@@ -1,7 +1,7 @@
 <app-modal-window [title]="title">
   <div class="wrapper-content">
-    <div class="wrapper-data" [title]="titleData">
-      <span class="title-data">{{ titleData }}</span>
+    <div class="wrapper-data">
+      <span class="title-data">{{ selectDate }}</span>
     </div>
     <div class="wrapper-time">
       <app-time *ngFor="let id of times"
