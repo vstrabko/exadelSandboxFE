@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
+import { EventTime } from 'src/app/interfaces/interfaces';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
@@ -10,6 +11,7 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 export class CalendarPageComponent {
   public isVisible = false;
   public selectDate: string;
+  public arrTimes: EventTime[]
 
   calendarOptions: CalendarOptions = {
     headerToolbar: {
@@ -65,8 +67,9 @@ export class CalendarPageComponent {
     this.currentEvents = events;
   }
 
-  getTime(time: any): void {
-    console.log('getTimes: ', time);
+  getTime(time: EventTime[]): void {
+    this.arrTimes = time
+    console.log('getTimes: ', this.arrTimes);
   }
 
   openModal(): void {

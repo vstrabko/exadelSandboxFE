@@ -1,7 +1,7 @@
 import { Component, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { EventTime } from '../../../interfaces/interfaces'
 
-export type ComingTimeType = { startTime: string; endTime: string; id: number };
 @Component({
   selector: 'app-time',
   templateUrl: './time.component.html',
@@ -10,7 +10,7 @@ export type ComingTimeType = { startTime: string; endTime: string; id: number };
 export class TimeComponent {
   @Output() delete = new EventEmitter<number>();
   @Output() sort = new EventEmitter<any>();
-  @Input() comingTime: ComingTimeType;
+  @Input() comingTime: EventTime;
 
   removeObject(): void {
     this.delete.emit(this.comingTime.id);

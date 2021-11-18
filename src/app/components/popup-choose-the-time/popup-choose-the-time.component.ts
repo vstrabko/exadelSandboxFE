@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { ComingTimeType } from './time/time.component';
+import { EventTime } from '../../interfaces/interfaces';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 
 @Component({
@@ -10,11 +10,11 @@ import { ModalWindowService } from '../modal-window/modal-window.service';
 export class PopupChooseTheTimeComponent implements OnInit {
   @Input() title: string = 'Choose the free time';
   @Input() selectDate: string;
-  @Input() comingTime: ComingTimeType[] = [];
+  @Input() comingTime: EventTime[] = [];
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() addTime: EventEmitter<ComingTimeType[]> = new EventEmitter<ComingTimeType[]>();
+  @Output() addTime: EventEmitter<EventTime[]> = new EventEmitter<EventTime[]>();
 
-  public times: ComingTimeType[] = [];
+  public times: EventTime[] = [];
 
   constructor(private modalWindowService: ModalWindowService) {}
 
@@ -31,9 +31,9 @@ export class PopupChooseTheTimeComponent implements OnInit {
     }, 200);
   }
 
-  sortTime(updateTime: ComingTimeType | undefined = undefined): void {
+  sortTime(updateTime: EventTime | undefined = undefined): void {
     if (updateTime) {
-      this.times = this.times.map((value: ComingTimeType) => {
+      this.times = this.times.map((value: EventTime) => {
         if (value.id === updateTime.id) {
           return updateTime;
         } else {
@@ -51,7 +51,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
 
   add(): void {
     const newId = this.times.length;
-    const newTime = {
+    const newTime:EventTime = {
       startTime: '00:00',
       endTime: '00:00',
       id: newId,
@@ -61,7 +61,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
   }
 
   del(timeId: number): void {
-    this.times = this.times.filter((time: ComingTimeType) => {
+    this.times = this.times.filter((time: EventTime) => {
       return time.id !== timeId;
     });
   }

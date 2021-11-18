@@ -13,3 +13,9 @@ export interface Employee {
 export interface LocalConfig {
   locale_id: string;
 }
+
+export interface EventTime {
+  startTime: string;
+  endTime: string;
+  id: number
+}
