@@ -2,42 +2,88 @@
   <div class="card-popup_container">
     <div class="section">
       <mat-stepper #stepper>
-        <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+        <mat-step [stepControl]="firstFormGroup" errorMessage="Date is required.">
           <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Choose the date</ng-template>
-            <mat-form-field appearance="fill">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+            
+            <mat-form-field appearance="fill" class="example-form-field">
+              <mat-label>Choose a date</mat-label>
+              <input matInput (dateInput)="addEvent($event)" [matDatepicker]="datepicker" formControlName="firstCtrl" required>
+              <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel class="btn">Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply class="btn filled-btn">Ok</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
             </mat-form-field>
-            <div>
-              <p>Go to a different step to see the error state</p>
-            </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+        <mat-step [stepControl]="secondFormGroup" errorMessage="Interviewer is required.">
           <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>Choose an interviewer</ng-template>
-            <mat-form-field appearance="fill">
-              <mat-label>Address</mat-label>
-              <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
-                     required>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Selected date</mat-label>
+              <input matInput disabled value="{{localDateString}}">
             </mat-form-field>
-            <div>
-              <p>Go to a different step to see the error state</p>
-            </div>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Choose an interviewer</mat-label>
+              <mat-select [(value)]="selectedInterviewer" formControlName="secondCtrl"
+              required>
+                <mat-option *ngFor="let interviewer of interviewers" [value]="interviewer.name">
+                  {{interviewer.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+           
+           
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup" errorMessage="Time is required.">
+          <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Choose the time</ng-template>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Selected date</mat-label>
+              <input matInput disabled value="{{localDateString}}">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Interviewer</mat-label>
+              <input matInput disabled value="{{selectedInterviewer}}">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Choose the time</mat-label>
+              <mat-select [(value)]="selectedTime" formControlName="thirdCtrl"
+              required>
+                <mat-option *ngFor="let interval of intervals" [value]="interval.value">
+                  {{interval.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </form>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Choose the time</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-          </div>
+          <ng-template matStepLabel>End</ng-template>
+          <mat-card class="details_card">
+            <mat-card-title>Interview details</mat-card-title>
+            <div class="details_content">
+              <p><strong>Date</strong>: {{localDateString}}</p>
+              <p><strong>Interviewer</strong>: {{selectedInterviewer}}</p>
+              <p><strong>Time</strong>: {{selectedTime}}</p>
+            </div>
+            <mat-card-actions>
+              <div class="stepper-btn_container">
+                <button mat-button (click)="stepper.reset()" class="btn unfilled-btn">Reset</button>
+                <button class="btn filled-btn">Appoint interview</button>
+              </div>
+            </mat-card-actions>
+          </mat-card>
         </mat-step>
       </mat-stepper>
-      <div class="two-column buttons">
+      <div class="close-btn_container">
         <button class="btn unfilled-btn" (click)="cancel()">close</button>
-        <button class="btn filled-btn">save</button>
       </div>
     </div>
   </div>
