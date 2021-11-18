@@ -61,11 +61,14 @@ export class AuthService {
     this.authSubject.next(null);
     void this.router.navigate(['']);
     return this.http
-      .get<any>(`${environment.API_URL}/api/authorization/sign-out/${this.getLSItem('refreshToken')}`, {
-        headers: {
-          Authorization: `Bearer ${this.getLSItem('accessToken')}`,
+      .get<any>(
+        `${environment.API_URL}/api/authorization/sign-out/${this.getLSItem('refreshToken')}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getLSItem('accessToken')}`,
+          },
         },
-      })
+      )
       .pipe(
         map(() => {
           this.removeToken();
