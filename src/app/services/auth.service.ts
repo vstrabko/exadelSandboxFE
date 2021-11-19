@@ -8,7 +8,6 @@ import { BehaviorSubject } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 import { ToastService } from 'src/app/services/toast.service';
-
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { authResponse } from '../interfaces/interfaces';
@@ -31,11 +30,11 @@ export class AuthService {
     this.translateService = translateService;
   }
 
-  userName() {
+  userName(): any {
     return this.currentUser?.fullName;
   }
 
-  userRole() {
+  userRole(): any {
     return this.currentUser?.role;
   }
 

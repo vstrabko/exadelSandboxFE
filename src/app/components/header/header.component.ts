@@ -17,8 +17,6 @@ export class HeaderComponent implements OnInit {
   public ngOnInit(): void {
     this.authService.authSubject.subscribe((res: Partial<User> | null): void => {
       this.userName = !!res?.fullName ? res.fullName : '';
-
-
     });
     this.modalWindowService.visible.subscribe((result: boolean) => (this.isVisible = result));
   }
@@ -27,7 +25,6 @@ export class HeaderComponent implements OnInit {
     this.modalWindowService.visible.next(true);
     setTimeout(() => {
       this.modalWindowService.modalWindow.next('login');
-
     }, 200);
   }
 

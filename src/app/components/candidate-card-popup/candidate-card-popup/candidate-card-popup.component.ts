@@ -50,16 +50,12 @@ export class CandidateCardPopupComponent implements OnInit {
   public mentorName = this.userName.userName();
   public userRole = this.userName.userRole();
 
-  constructor(
-    private modalWindowService: ModalWindowService,
-    private userName: AuthService
-    ) {}
+  constructor(private modalWindowService: ModalWindowService, private userName: AuthService) {}
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
       this.cancel();
     });
-
 
     setTimeout(() => {
       this.modalWindowService.modalWindow.next('candidates card');
@@ -102,17 +98,9 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.phone = response.data.phone;
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills.push(response.data.additionalSkills);
-        this.CANDIDATES_INFO.surname = response.data.surname;
-        this.CANDIDATES_INFO.surname = response.data.surname;
-        this.CANDIDATES_INFO.surname = response.data.surname;
-
-
       })
       .catch((error: any) => console.log('getC', error));
   }
-
-
-
   // getUserInfo(): any {
   //   return axios
   //     .get(`http://64.227.114.210:9090/api/users/user-info`)
