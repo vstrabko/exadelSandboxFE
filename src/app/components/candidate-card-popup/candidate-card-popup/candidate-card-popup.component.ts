@@ -91,7 +91,7 @@ export class CandidateCardPopupComponent implements OnInit {
     return axios
       .get(`http://64.227.114.210:9090/api/candidates/${this.user.id}`)
       .then((response: any) => {
-        console.log('getC', response)
+        console.log('getC', response);
         this.CANDIDATES_INFO.surname = response.data.surname;
         this.CANDIDATES_INFO.email = response.data.email;
         this.CANDIDATES_INFO.location = response.data.location;
