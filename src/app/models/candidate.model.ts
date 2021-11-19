@@ -12,7 +12,10 @@ export class Candidate extends ResourceModel<Candidate> {
         name: string;
       };
       candidateProcess: {
-        status: string;
+        status: {
+          id: string;
+          name: string;
+        };
       };
     },
   ];
