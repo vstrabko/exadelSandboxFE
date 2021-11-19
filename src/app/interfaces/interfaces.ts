@@ -13,3 +13,7 @@ export interface Employee {
 export interface LocalConfig {
   locale_id: string;
 }
+
+export interface Interval {
+  value: string;
+}

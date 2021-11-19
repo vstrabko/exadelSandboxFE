@@ -6,10 +6,8 @@ import { ModalWindowService } from '../modal-window/modal-window.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Interval } from 'src/app/interfaces/interfaces';
 
-interface Interval {
-  value: string;
-}
 @Component({
   selector: 'app-appoint-interview-popup',
   templateUrl: './appoint-interview-popup.component.html',
@@ -64,8 +62,7 @@ export class AppointInterviewPopupComponent implements OnInit {
       this.interviewers = data;
     });
   }
-
-  public title = 'Appoint Interview';
+  
   @Input() user: Candidate;
   @Output() appointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
 

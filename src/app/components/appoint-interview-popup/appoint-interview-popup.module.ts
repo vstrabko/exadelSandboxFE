@@ -1,3 +1,5 @@
+import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
+import { LocalizationService } from './../../internationalization/localization.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointInterviewPopupComponent } from './appoint-interview-popup.component';
@@ -27,7 +29,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
+    InternationalizationModule,
   ],
   exports: [AppointInterviewPopupComponent],
+  providers: [LocalizationService],
 })
 export class AppointInterviewPopupModule {}

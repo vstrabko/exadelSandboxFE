@@ -1,34 +1,32 @@
-<app-modal-window [title]="title">
+<app-modal-window [title]="'candidateList.appointInterview' | translate">
   <div class="card-popup_container">
     <div class="section">
       <mat-stepper #stepper>
-        <mat-step [stepControl]="firstFormGroup" errorMessage="Date is required.">
+        <mat-step [stepControl]="firstFormGroup" errorMessage="{{'stepper.dateIsRequired' | translate}}">
           <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Choose the date</ng-template>
-            
+            <ng-template matStepLabel>{{ 'stepper.сhooseTheDate' | translate}}</ng-template>
             <mat-form-field appearance="fill" class="example-form-field">
-              <mat-label>Choose a date</mat-label>
+              <mat-label>{{ 'stepper.сhooseTheDate' | translate}}</mat-label>
               <input matInput (dateInput)="addEvent($event)" [matDatepicker]="datepicker" formControlName="firstCtrl" required>
               <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
               <mat-datepicker #datepicker>
                 <mat-datepicker-actions>
-                  <button mat-button matDatepickerCancel class="btn">Cancel</button>
-                  <button mat-raised-button color="primary" matDatepickerApply class="btn filled-btn">Ok</button>
+                  <button mat-button matDatepickerCancel class="btn unfilled-btn">{{'cancel' | translate}}</button>
+                  <button mat-raised-button color="primary" matDatepickerApply class="btn filled-btn">{{'apply' | translate}}</button>
                 </mat-datepicker-actions>
               </mat-datepicker>
             </mat-form-field>
           </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup" errorMessage="Interviewer is required.">
+        <mat-step [stepControl]="secondFormGroup" errorMessage="{{'stepper.interviewerIsRequired' | translate}}">
           <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Choose an interviewer</ng-template>
+            <ng-template matStepLabel>{{'stepper.chooseInterviewer' | translate}}</ng-template>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Selected date</mat-label>
+              <mat-label>{{'stepper.selectedDate' | translate}}</mat-label>
               <input matInput disabled value="{{localDateString}}">
             </mat-form-field>
-
             <mat-form-field appearance="fill">
-              <mat-label>Choose an interviewer</mat-label>
+              <mat-label>{{'stepper.chooseInterviewer' | translate}}</mat-label>
               <mat-select [(value)]="selectedInterviewer" formControlName="secondCtrl"
               required>
                 <mat-option *ngFor="let interviewer of interviewers" [value]="interviewer.name">
@@ -36,25 +34,21 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            
-           
-           
           </form>
         </mat-step>
-        <mat-step [stepControl]="thirdFormGroup" errorMessage="Time is required.">
+        <mat-step [stepControl]="thirdFormGroup" errorMessage="{{'stepper.timeIsRequired' | translate}}">
           <form [formGroup]="thirdFormGroup">
-            <ng-template matStepLabel>Choose the time</ng-template>
+            <ng-template matStepLabel>{{'stepper.chooseTime' | translate}}</ng-template>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Selected date</mat-label>
+              <mat-label>{{'stepper.selectedDate' | translate}}</mat-label>
               <input matInput disabled value="{{localDateString}}">
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Interviewer</mat-label>
+              <mat-label>{{'stepper.interviewer' | translate}}</mat-label>
               <input matInput disabled value="{{selectedInterviewer}}">
             </mat-form-field>
-
             <mat-form-field appearance="fill">
-              <mat-label>Choose the time</mat-label>
+              <mat-label>{{'stepper.chooseTime' | translate}}</mat-label>
               <mat-select [(value)]="selectedTime" formControlName="thirdCtrl"
               required>
                 <mat-option *ngFor="let interval of intervals" [value]="interval.value">
@@ -65,25 +59,25 @@
           </form>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>End</ng-template>
+          <ng-template matStepLabel>{{'stepper.end' | translate}}</ng-template>
           <mat-card class="details_card">
-            <mat-card-title>Interview details</mat-card-title>
+            <mat-card-title>{{'stepper.interviewDetails' | translate}}</mat-card-title>
             <div class="details_content">
-              <p><strong>Date</strong>: {{localDateString}}</p>
-              <p><strong>Interviewer</strong>: {{selectedInterviewer}}</p>
-              <p><strong>Time</strong>: {{selectedTime}}</p>
+              <p><strong>{{'stepper.date' | translate}}</strong>: {{localDateString}}</p>
+              <p><strong>{{'stepper.interviewer' | translate}}</strong>: {{selectedInterviewer}}</p>
+              <p><strong>{{'stepper.time' | translate}}</strong>: {{selectedTime}}</p>
             </div>
             <mat-card-actions>
               <div class="stepper-btn_container">
-                <button mat-button (click)="stepper.reset()" class="btn unfilled-btn">Reset</button>
-                <button class="btn filled-btn">Appoint interview</button>
+                <button mat-button (click)="stepper.reset()" class="btn unfilled-btn">{{'reset' | translate}}</button>
+                <button class="btn filled-btn">{{'candidateList.appointInterview' | translate}}</button>
               </div>
             </mat-card-actions>
           </mat-card>
         </mat-step>
       </mat-stepper>
       <div class="close-btn_container">
-        <button class="btn unfilled-btn" (click)="cancel()">close</button>
+        <button class="btn unfilled-btn" (click)="cancel()">{{'close' | translate}}</button>
       </div>
     </div>
   </div>

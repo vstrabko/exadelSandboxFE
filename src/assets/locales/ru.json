@@ -1,5 +1,8 @@
 {
   "cancel": "Отмена",
+  "apply": "Принять",
+  "reset": "Сбросить",
+  "close": "Закрыть",
   "errors": {
     "goHome": "Ошибка, вернуться на главную страницу",
     "goHomeMessage": "На главную"
@@ -103,5 +106,19 @@
     "location": "Локация",
     "mentor": "Ментор",
     "sandbox": "Песочница"
+  },
+  "stepper": {
+    "сhooseTheDate": "Выберите дату",
+    "selectedDate": "Выбранныя дата",
+    "date": "Дата",
+    "chooseInterviewer": "Выберите интервьюера",
+    "interviewer": "Интервьер",
+    "chooseTime": "Выберите время",
+    "time": "Время",
+    "end": "Завершить",
+    "interviewDetails": "Детали интервью",
+    "dateIsRequired": "Необходимо выбрать дату.",
+    "interviewerIsRequired": "Необходимо выбрать интервьюера.",
+    "timeIsRequired": "Необходимо выбрать время."
   }
 }
