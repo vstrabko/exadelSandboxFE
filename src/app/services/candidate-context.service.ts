@@ -59,7 +59,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
   }
 
   postCandidate(formData: CandidateFormModel): void {
-    super.apiUrl = '/api/candidates';
+    super.apiUrl = '/api/candidates/create';
     this.create(formData);
     this.toastr.success(this.title, this.text);
   }

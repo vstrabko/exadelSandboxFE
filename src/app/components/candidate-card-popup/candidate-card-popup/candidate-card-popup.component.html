@@ -2,7 +2,7 @@
   <div class="card-popup_container">
     <div class="section">
       <div class="two-column">
-        <mat-card class="candidate-name">{{ user.name }}</mat-card>
+        <mat-card class="candidate-name">{{ user.name }} {{ CANDIDATES_INFO.surname }}</mat-card>
         <mat-form-field class="candidate-status" appearance="fill">
           <mat-label>{{ 'candidate.status' | translate }}</mat-label>
           <mat-select>
@@ -13,7 +13,7 @@
         </mat-form-field>
       </div>
       <mat-card class="candidate-skills">{{CANDIDATES_INFO.techSkills}}</mat-card>
-      <mat-card class="candidate-skills">additional skills</mat-card>
+      <mat-card class="candidate-skills">{{CANDIDATES_INFO.additionalSkills}}</mat-card>
       <div class="raiting two-column">
         <mat-card>{{CANDIDATES_INFO.email}}</mat-card>
         <mat-card>{{CANDIDATES_INFO.skype}}</mat-card>
@@ -26,9 +26,9 @@
       </div>
     </div>
     <div class="section">
-      <mat-card class="user-name">{{ USERS_INFO.name }}{{ 'feedback' | translate }}</mat-card>
+      <mat-card class="user-name">{{ mentorName }}{{ 'feedback' | translate }}</mat-card>
 
-      <div class="custom-slider" *ngIf="USERS_INFO.role === 'admin'">
+      <div class="custom-slider" *ngIf="userRole === 'Admin'">
         <div class="custom-slider-slide">
           <mat-slider
             thumbLabel
@@ -45,23 +45,23 @@
         </div>
       </div>
 
-      <mat-form-field class="textarea_container" appearance="fill"  *ngIf="USERS_INFO.role === 'recruiter'">
-        <mat-label>{{ USERS_INFO.name }} feedback</mat-label>
+      <mat-form-field class="textarea_container" appearance="fill"  *ngIf="userRole === 'Recruiter'">
+        <mat-label>{{ mentorName }} feedback</mat-label>
         <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
       </mat-form-field>
 
-      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="USERS_INFO.role === 'interviewer'">
-        <mat-label>{{ USERS_INFO.name }} feedback</mat-label>
+      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="userRole === 'Interviewer'">
+        <mat-label>{{ mentorName }} feedback</mat-label>
         <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
       </mat-form-field>
 
-      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="USERS_INFO.role === 'mentor'">
-        <mat-label>{{ USERS_INFO.name }} feedback</mat-label>
+      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="userRole === 'Mentor'">
+        <mat-label>{{ mentorName }} feedback</mat-label>
         <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
       </mat-form-field>
 
-      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="USERS_INFO.role === 'admin'">
-        <mat-label>{{ USERS_INFO.name }} feedback</mat-label>
+      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="userRole === 'Admin'">
+        <mat-label>{{ mentorName }} feedback</mat-label>
         <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
       </mat-form-field>
 

@@ -31,6 +31,14 @@ export class AuthService {
     this.translateService = translateService;
   }
 
+  userName() {
+    return this.currentUser?.fullName;
+  }
+
+  userRole() {
+    return this.currentUser?.role;
+  }
+
   login(email: string, password: string): Observable<any> {
     return this.http
       .post<any>(`${environment.API_URL}/api/authorization/sign-in`, { email, password })

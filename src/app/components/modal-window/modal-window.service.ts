@@ -7,4 +7,5 @@ import { Subject } from 'rxjs';
 export class ModalWindowService {
   public visible = new Subject<boolean>();
   public modalWindow = new Subject<string>();
+
 }

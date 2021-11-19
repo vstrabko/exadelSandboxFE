@@ -35,7 +35,7 @@ export abstract class ApiService<T extends ResourceModel<T>> {
 
   public getCandidate(): Observable<any> {
     return this.httpClient
-      .get<T[]>(`https://jsonplaceholder.typicode.com/comments`)
+      .get<T[]>(`http://64.227.114.210:9090/api/candidates/all`)
       .pipe(map((result: any[]) => result.map((res: any) => new this.tConstructor(res))))
       .pipe(catchError(this.errorHandler.bind(this)));
   }

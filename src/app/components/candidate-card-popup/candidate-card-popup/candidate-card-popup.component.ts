@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import axios from 'axios';
 import { Candidate } from 'src/app/models/candidate.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ModalWindowService } from '../../modal-window/modal-window.service';
 
 interface Status {
@@ -15,21 +16,21 @@ interface Status {
 })
 export class CandidateCardPopupComponent implements OnInit {
   public USERS_INFO = {
-    name: 'Mikhail Hasilau',
-    role: 'admin',
+    role: 'mentor',
   };
 
   public CANDIDATES_INFO = {
-    id: '1',
-    name: 'name',
-    surname: 'surname',
-    email: 'email@gmail.com',
-    location: 'Belarus',
-    skype: 'skype',
-    phone: '+123456789',
+    id: '',
+    name: '',
+    surname: '',
+    email: '',
+    location: '',
+    skype: '',
+    phone: '+',
     education: 'BSIUR',
     languages: ['RU'],
     techSkills: ['JS'],
+    additionalSkills: [''],
     candidateSandboxes: [
       {
         id: '',
@@ -46,21 +47,27 @@ export class CandidateCardPopupComponent implements OnInit {
     ],
   };
 
-  constructor(private modalWindowService: ModalWindowService) {}
+  public mentorName = this.userName.userName();
+  public userRole = this.userName.userRole();
+
+  constructor(
+    private modalWindowService: ModalWindowService,
+    private userName: AuthService
+    ) {}
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
       this.cancel();
     });
 
+
     setTimeout(() => {
       this.modalWindowService.modalWindow.next('candidates card');
     }, 200);
 
     this.getCandidateInfo();
-    this.getUserInfo();
+    // this.getUserInfo();
   }
-
   public title = 'Candidate card';
   public sliderValue: number;
 
@@ -86,17 +93,32 @@ export class CandidateCardPopupComponent implements OnInit {
 
   getCandidateInfo(): any {
     return axios
-      .get(`https://jsonplaceholder.typicode.com/users`)
-      .then((response: any) => console.log('getC', response))
+      .get(`http://64.227.114.210:9090/api/candidates/${this.user.id}`)
+      .then((response: any) => {
+        console.log('getC', response)
+        this.CANDIDATES_INFO.surname = response.data.surname;
+        this.CANDIDATES_INFO.email = response.data.email;
+        this.CANDIDATES_INFO.location = response.data.location;
+        this.CANDIDATES_INFO.phone = response.data.phone;
+        this.CANDIDATES_INFO.skype = response.data.skype;
+        this.CANDIDATES_INFO.additionalSkills.push(response.data.additionalSkills);
+        this.CANDIDATES_INFO.surname = response.data.surname;
+        this.CANDIDATES_INFO.surname = response.data.surname;
+        this.CANDIDATES_INFO.surname = response.data.surname;
+
+
+      })
       .catch((error: any) => console.log('getC', error));
   }
 
-  getUserInfo(): any {
-    return axios
-      .get(`https://jsonplaceholder.typicode.com/users`)
-      .then((response: any) => console.log('getU', response.data))
-      .catch((error: any) => console.log('getU', error));
-  }
+
+
+  // getUserInfo(): any {
+  //   return axios
+  //     .get(`http://64.227.114.210:9090/api/users/user-info`)
+  //     .then((response: any) => console.log('getU', response.data))
+  //     .catch((error: any) => console.log('getU', error));
+  // }
 
   // putUserInfo(USER_INFO: any): any {
   //   console.log(USER_INFO.id);
