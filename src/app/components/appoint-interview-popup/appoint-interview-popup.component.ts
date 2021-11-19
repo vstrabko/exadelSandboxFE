@@ -62,7 +62,7 @@ export class AppointInterviewPopupComponent implements OnInit {
       this.interviewers = data;
     });
   }
-  
+
   @Input() user: Candidate;
   @Output() appointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
 
