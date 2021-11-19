@@ -19,3 +19,12 @@ export interface EventTime {
   endTime: string;
   id: number
 }
+
+export interface Interval {
+  value: string;
+}
+
+export interface authResponse {
+  accessToken: string;
+  refreshToken: string;
+}

@@ -1,5 +1,8 @@
 {
   "cancel": "Cancel",
+  "apply": "Apply",
+  "reset": "Reset",
+  "close": "Close",
   "errors": {
     "goHome": "Error, go back to home page",
     "goHomeMessage": "Back to Home page"
@@ -89,7 +92,8 @@
     "prevPage": "Previous page",
     "of": "of",
     "filter": "Filter",
-    "example": "Ex. Minsk"
+    "example": "Ex. Minsk",
+    "appointInterview": "Appoint Interview"
   },
   "tostr": {
     "title": "Success",
@@ -105,7 +109,20 @@
     "location": "Location",
     "mentor": "Mentor",
     "sandbox": "Sandbox"
-
+},
+  "stepper": {
+    "сhooseTheDate": "Choose the date",
+    "selectedDate": "Selected date",
+    "date": "Date",
+    "chooseInterviewer": "Choose an interviewer",
+    "interviewer": "Interviewer",
+    "chooseTime": "Choose the time",
+    "time": "Time",
+    "end": "End",
+    "interviewDetails": "Interview details",
+    "dateIsRequired": "Date is required.",
+    "interviewerIsRequired": "Interviewer is required.",
+    "timeIsRequired": "Time is required."
   },
   "candidate": {
     "status": "Status",
@@ -113,5 +130,9 @@
     "mentor": "Mentor",
     "interviewer": "Interviewer",
     "feedback": "Feedback"
+  },
+  "authTostr": {
+    "title": "Authentication error",
+    "text": "Please check carefully that all details are correct"
   }
 }

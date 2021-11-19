@@ -3,7 +3,7 @@
     <a routerLink="/"><img src="../../../assets/img/sapex.png" alt=""></a>
   </div>
   <nav class="user_tabs">
-    <a routerLink="/users" routerLinkActive="active" (click)="showSpinner()" mat-button *ngIf="userName"
+    <a routerLink="/candidates" routerLinkActive="active" (click)="showSpinner()" mat-button *ngIf="userName"
       id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
     <a routerLink="/calendar" routerLinkActive="active" mat-button *ngIf="userName" id="calendar">{{
       'header.calendar' | translate }}</a>
