@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class SandboxListPageComponent implements OnInit {
   constructor(private router: Router, private sandboxService: SandboxService) {}
 
-  displayedColumns: string[] = ['select', 'startDate', 'name', 'description'];
+  displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];
   dataSource: MatTableDataSource<Sandbox>;
   selection = new SelectionModel<Sandbox>(true, []);
 

@@ -44,7 +44,8 @@
     "period": "Длительность",
     "startDate": "Дата начала",
     "nameSandbox": "Наименование",
-    "nameDescription": "Описание"
+    "nameDescription": "Описание",
+    "statusSand": "Статус"
   },
   "request": {
     "header": "Заявка кандидата",
