@@ -1,6 +1,7 @@
 <div class="page_container">
     <div class="page_wrapper">
-        <app-candidate-table #candidate (showModal)="showPop()"></app-candidate-table>
+        <app-candidate-table #candidate (showModal)="showPop()" (showAppointInterview)="toggleAppointInterview()"></app-candidate-table>
         <app-candidate-card-popup *ngIf="showPopup" (modal)="closeCard()" [user]="candidate.candidate"></app-candidate-card-popup>
+        <app-appoint-interview-popup *ngIf="showAppointInterview" (appointInterview)="toggleAppointInterview()"></app-appoint-interview-popup>
     </div>
 </div>

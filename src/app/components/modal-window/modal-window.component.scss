@@ -1,3 +1,5 @@
+@import '../../shared/constants/colors.scss';
+
 .container {
   position: fixed;
   width: 100%;
@@ -5,7 +7,7 @@
   left: 0;
   top: 0;
   z-index: 10;
-  background-color: rgba(20, 20, 20, 0.459);
+  background-color: $background-modal;
 
   .modal-window {
     background-color: #fafafa;
@@ -15,13 +17,12 @@
     transform: translate(-50%, -50%);
 
     .header-container {
-      height: 40px;
-      background-color: #445063;
-      color: white;
+      background-color: $darkColor;
+      color: $textarea-color;
       font-size: 20px;
       font-weight: bold;
       text-align: center;
-      line-height: 40px;
+      line-height: 65px;
     }
 
     .content_container {
