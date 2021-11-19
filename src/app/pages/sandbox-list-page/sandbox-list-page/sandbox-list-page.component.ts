@@ -41,7 +41,6 @@ export class SandboxListPageComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.sandBoxes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      console.log(this.sandBoxes);
     });
   }
 
