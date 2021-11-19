@@ -28,6 +28,8 @@
     "success": "You have successfully submitted the form"
   },
   "ok": "OK",
+  "feedback": ", please, add your feedback",
+  "save": "Save",
   "other": {
     "englishLevel": "English Level"
   },
@@ -58,7 +60,7 @@
     "available1": "Less than 4 hours",
     "available2": "4-6 hours",
     "available3": "6-infinity hours",
-    "language": "Language of intership",
+    "language": "Language of internship",
     "location": "Location (City, Country)",
     "skills": "Primary skill",
     "job": "Current job",
@@ -66,7 +68,7 @@
     "addSkills": "Additional skills, technologies",
     "timeContact": "The best time to contact you",
     "joinExadel": "Are you planning to join Exadel after the Trainig?",
-    "agreement": "Could you provide your agreement to proceed with your Personal Data in accordance with the Privacy article above?",
+    "agreement": "Could you provide your agreement to proceed with your Personal Data?",
     "sendButton": "Send",
     "choose": "Choose an option"
   },
@@ -101,12 +103,13 @@
     "default": "select",
     "recruiters": "Recruiters *",
     "mentors": "Mentors *",
+
     "interviewers": "Interviewers *",
     "status": "Status",
     "location": "Location",
     "mentor": "Mentor",
     "sandbox": "Sandbox"
-  },
+},
   "stepper": {
     "сhooseTheDate": "Choose the date",
     "selectedDate": "Selected date",
@@ -120,5 +123,16 @@
     "dateIsRequired": "Date is required.",
     "interviewerIsRequired": "Interviewer is required.",
     "timeIsRequired": "Time is required."
+  },
+  "candidate": {
+    "status": "Status",
+    "recruiter": "Recruiter",
+    "mentor": "Mentor",
+    "interviewer": "Interviewer",
+    "feedback": "Feedback"
+  },
+  "authTostr": {
+    "title": "Authentication error",
+    "text": "Please check carefully that all details are correct"
   }
 }

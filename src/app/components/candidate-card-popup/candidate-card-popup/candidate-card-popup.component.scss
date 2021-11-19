@@ -1,3 +1,5 @@
+@import '../../../shared/constants/colors.scss';
+
 .textarea_container {
     width: 500px;
 }
@@ -38,9 +40,8 @@
 }
 
 .user-name {
-    width: 300px;
+    width: 100%;
 }
-
 
 .two-column {
   display: flex;
@@ -69,4 +70,26 @@
     .card-popup_container {
         flex-wrap: wrap;
     }
-  }
+}
+
+
+.custom-slider {
+    display: flex;
+    &-slide {
+        width: 90%;
+    }
+}
+
+mat-slider {
+    width: 100%;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+    background-color: $blueColor;
+}
+::ng-deep .mat-accent .mat-slider-thumb-label {
+    background-color: $blueColor;
+}
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: $blueColor;
+}

@@ -5,7 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CandidateService } from 'src/app/services/candidate-service.service';
 import { Candidate } from 'src/app/models/candidate.model';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CandidateContext } from 'src/app/services/candidateContext.service';
+import { CandidateContextService } from 'src/app/services/candidate-context.service';
+import { IdName } from 'src/app/models/id-name.model';
 
 @Component({
   selector: 'app-candidate-table',
@@ -15,7 +16,7 @@ import { CandidateContext } from 'src/app/services/candidateContext.service';
 export class CandidateTableComponent implements OnInit {
   constructor(
     private candidateService: CandidateService,
-    private candidateContext: CandidateContext,
+    private candidateContext: CandidateContextService,
   ) {}
   displayedColumns: string[] = ['select', 'id', 'name', 'email', 'body'];
   dataSource: MatTableDataSource<Candidate>;
@@ -24,7 +25,7 @@ export class CandidateTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   labels = ['status', 'location', 'recruiter', 'sandbox'];
-  statusValues: string[];
+  statusValues: IdName[];
   users: Candidate[];
   candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();

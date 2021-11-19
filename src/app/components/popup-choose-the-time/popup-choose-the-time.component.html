@@ -2,20 +2,23 @@
   <div class="wrapper-content">
     <div class="wrapper-data" [title]="titleData">
       <span class="title-data">{{ titleData }}</span>
-      <!-- {{ 'popupTimer.title' | translate }} -->
     </div>
     <div class="wrapper-time">
-      <app-time
-        *ngFor="let id of times"
-        [id]="id"
-        (delete)="del($event)"
-        style="margin-top: 10px"
-      ></app-time>
+      <app-time *ngFor="let id of times"
+      [comingTime]="id"
+      (delete)="del($event)"
+      (sort)="sortTime($event)"
+
+       style="margin-top: 10px"></app-time>
       <button class="btn filled-btn btn-plus" type="button" (click)="add()">+</button>
     </div>
     <div class="wrapper-btn">
-      <button class="btn unfilled-btn" type="button" (click)="cancel()">{{ 'popupTimer.cancel' | translate }}</button>
-      <button class="btn filled-btn" type="submit" (click)="submit()">{{ 'popupTimer.ok' | translate }}</button>
+      <button class="btn unfilled-btn" type="button" (click)="cancel()">
+        {{ 'popupTimer.cancel' | translate }}
+      </button>
+      <button class="btn filled-btn" type="submit" (click)="submit()">
+        {{ 'popupTimer.ok' | translate }}
+      </button>
     </div>
   </div>
 </app-modal-window>

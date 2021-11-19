@@ -2,56 +2,117 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 import { User } from '../models/user.model';
-import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { authResponse } from '../interfaces/interfaces';
+
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  public userSave: Partial<User>;
-  public authSubject: BehaviorSubject<Partial<User>> = new BehaviorSubject({});
+  public authSubject: BehaviorSubject<User | null>;
+  private currentUser: User | null;
 
   constructor(
     private http: HttpClient,
     private userService: UserService,
     private router: Router,
     private toastService: ToastService,
-  ) {}
-  get token(): Partial<User> {
-    return this.userSave || '';
+    private translateService: TranslateService,
+  ) {
+    this.authSubject = new BehaviorSubject<User | null>(this.currentUser || null);
+    this.translateService = translateService;
   }
 
-  login(username: string, password: string): Observable<Partial<User>> {
-    const listUsers = this.userService.get();
-
-    return listUsers.pipe(
-      map((user: User[]) => {
-        const userFilter = user.filter((i: User) => i.mail === username && i.pass === password)[0];
-        if (userFilter) {
-          this.userSave = userFilter;
-          this.authSubject.next(userFilter), void this.router.navigate(['/users']);
-        } else {
+  login(email: string, password: string): Observable<any> {
+    return this.http
+      .post<any>(`${environment.API_URL}/api/authorization/sign-in`, { email, password })
+      .pipe(
+        map((token: authResponse) => {
+          if (token) {
+            this.setToken(token);
+            this.userService.getUser().subscribe((user: User) => {
+              this.authSubject.next(user);
+              void this.router.navigate(['/candidates']);
+              this.currentUser = user;
+            });
+          }
+        }),
+      )
+      .pipe(
+        catchError((err: any): Observable<any> => {
           this.toastService.showError(
-            'Please check carefully that all details are correct.',
-            'Authentication error',
+            this.translateService.instant('authTostr.text'),
+            this.translateService.instant('authTostr.title'),
           );
-        }
-        return userFilter; //TODO: getting a mock user before integrating with backend
-      }),
-    );
+          return Observable.throw(err);
+        }),
+      );
   }
 
-  isAuthenticated(): boolean {
-    return !!this.token;
-  }
-  logout(): void {
-    this.userSave = {};
-    this.authSubject.next({});
+  logout(): Observable<any> {
+    this.authSubject.next(null);
     void this.router.navigate(['']);
+    return this.http
+      .get<any>(
+        `${environment.API_URL}/api/authorization/sign-out/${this.getLSItem('refreshToken')}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getLSItem('accessToken')}`,
+          },
+        },
+      )
+      .pipe(
+        map(() => {
+          this.removeToken();
+        }),
+      );
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http
+      .post<any>(`${environment.API_URL}/api/authorization/refresh-token`, {
+        accessToken: this.getLSItem('accessToken'),
+        refreshToken: this.getLSItem('refreshToken'),
+      })
+      .pipe(
+        map((res: any) => {
+          this.removeToken();
+          this.setToken(res);
+        }),
+      );
+  }
+
+  private setToken(response: authResponse | null): void {
+    if (response) {
+      this.removeToken();
+      localStorage.setItem('accessToken', response.accessToken);
+      localStorage.setItem('refreshToken', response.refreshToken);
+    }
+  }
+
+  get authToken(): string {
+    return localStorage.getItem('accessToken') || '';
+  }
+
+  public isAuthenticated(): boolean {
+    return !!this.authToken;
+  }
+
+  private removeToken(): void {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+  }
+
+  private getLSItem(key: string): string {
+    const item = localStorage.getItem(key);
+    return item ? item : '';
   }
 }

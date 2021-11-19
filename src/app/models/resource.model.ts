@@ -7,6 +7,6 @@ export abstract class ResourceModel<T> {
     }
   }
   public toJson(): any {
-    return JSON.parse(JSON.stringify(this));
+    return JSON.stringify(this);
   }
 }
