@@ -1,0 +1,39 @@
+.textarea_container {
+    width: 500px;
+}
+
+.textarea {
+  max-height: 150px;
+}
+
+.card-popup_container {
+  display: flex;
+  padding: 20px 10px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-bottom: 0 !important;
+}
+
+.mat-form-field {
+    margin-top: 16px;
+}
+
+.demo-inline-calendar-card {
+  width: 300px;
+}
+
+.details_card, .details_content{
+  margin-top: 30px;
+}
+
+.details_content p{
+  font-size: 16px;
+}
+
+.close-btn_container{
+  text-align: end;
+}
+
+.stepper-btn_container{
+  text-align: end;
+}
