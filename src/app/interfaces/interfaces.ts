@@ -28,3 +28,8 @@ export interface authResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface event {
+  startTime: string;
+  endTime: string;
+}
