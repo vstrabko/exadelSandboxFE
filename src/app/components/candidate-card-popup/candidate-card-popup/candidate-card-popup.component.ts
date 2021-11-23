@@ -169,7 +169,7 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.candidateLanguages = response.data.candidateLanguages[0].language.name; // TODO all languages
         const temp = response.data.candidateSandboxes;
         const temp2 = temp[temp.length - 1].candidateProcesses;
-        const temp3 = (this.feedbacks = (temp2[temp2.length - 1].feedbacks));
+        const temp3 = (this.feedbacks = temp2[temp2.length - 1].feedbacks);
         console.log(temp3);
         temp3.forEach((element: any) => {
           element.userId === this.userId ? (this.userReview = element.userReview) : null;
