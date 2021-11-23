@@ -42,8 +42,8 @@ export class CandidateCardPopupComponent implements OnInit {
           orderLevel: 1,
           id: '',
           name: '',
-        }
-      }
+        },
+      },
     ],
     candidateTechSkills: [
       {
@@ -51,8 +51,8 @@ export class CandidateCardPopupComponent implements OnInit {
         skill: {
           id: '',
           name: '',
-        }
-      }
+        },
+      },
     ],
     candidateSandboxes: [
       {
@@ -78,10 +78,8 @@ export class CandidateCardPopupComponent implements OnInit {
             },
             testResult: '',
             createDate: '',
-            feedbacks: [
-              null
-            ]
-          }
+            feedbacks: [null]
+          },
         ],
         candidateProjectRole: {
           id: '',
@@ -140,11 +138,11 @@ export class CandidateCardPopupComponent implements OnInit {
       createDate: '',
       userReview: '',
       candidateProccesId: this.CANDIDATES_INFO.id,
-    }
+    };
     this.postFeedbacks(FEEDBACK);
   }
 
-  postFeedbacks(FEEDBACK: any): any{
+  postFeedbacks(FEEDBACK: any): any {
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
       .then( (response) => console.log('y', response))
