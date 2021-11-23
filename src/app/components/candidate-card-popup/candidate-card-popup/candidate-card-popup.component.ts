@@ -78,7 +78,7 @@ export class CandidateCardPopupComponent implements OnInit {
             },
             testResult: '',
             createDate: '',
-            feedbacks: [null]
+            feedbacks: [null],
           },
         ],
         candidateProjectRole: {
@@ -145,8 +145,8 @@ export class CandidateCardPopupComponent implements OnInit {
   postFeedbacks(FEEDBACK: any): any {
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
-      .then( (response) => console.log('y', response))
-      .catch( (error) => console.log('n', error));
+      .then((response: any) => console.log('y', response))
+      .catch((error: any) => console.log('n', error));
   }
 
   onChangeRange(rangeValue: any): any {
