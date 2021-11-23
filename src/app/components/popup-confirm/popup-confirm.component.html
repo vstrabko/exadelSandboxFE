@@ -1,0 +1,7 @@
+<app-modal-window [title]="title">
+<p class="content">Are you sure you want to delete the event?</p>
+<div class="wrapper-btn">
+  <button class="btn unfilled-btn" type="button" (click)="cancel()">{{ 'cancel' | translate }}</button>
+  <button class="btn filled-btn" type="button" (click)="submit()">{{ 'ok' | translate }}</button>
+</div>
+</app-modal-window>
