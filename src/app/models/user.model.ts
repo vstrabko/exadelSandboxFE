@@ -18,4 +18,8 @@ export class User extends ResourceModel<User> {
   get role(): string {
     return `${this.roles}`;
   }
+
+  get uid(): string {
+    return `${this.id}`;
+  }
 }

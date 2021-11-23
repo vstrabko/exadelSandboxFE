@@ -12,7 +12,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <mat-card class="candidate-skills">{{CANDIDATES_INFO.techSkills}}</mat-card>
+      <mat-card class="candidate-skills">{{CANDIDATES_INFO.candidateTechSkills}}</mat-card>
       <mat-card class="candidate-skills">{{CANDIDATES_INFO.additionalSkills}}</mat-card>
       <div class="raiting two-column">
         <mat-card>{{CANDIDATES_INFO.email}}</mat-card>
@@ -20,13 +20,13 @@
         <mat-card>{{CANDIDATES_INFO.location}}</mat-card>
         <mat-card>sertificates</mat-card>
         <mat-card>{{CANDIDATES_INFO.phone}}</mat-card>
-        <mat-card>{{CANDIDATES_INFO.languages}}</mat-card>
+        <mat-card>{{CANDIDATES_INFO.candidateLanguages}}</mat-card>
         <mat-card>current job</mat-card>
         <mat-card>time to contact</mat-card>
       </div>
     </div>
     <div class="section">
-      <mat-card class="user-name">{{ mentorName }}{{ 'feedback' | translate }}</mat-card>
+      <mat-card class="user-name">{{ userAuthName }}{{ 'feedback' | translate }}</mat-card>
 
       <div class="custom-slider" *ngIf="userRole === 'Admin'">
         <div class="custom-slider-slide">
@@ -45,30 +45,28 @@
         </div>
       </div>
 
-      <mat-form-field class="textarea_container" appearance="fill"  *ngIf="userRole === 'Recruiter'">
-        <mat-label>{{ mentorName }} feedback</mat-label>
-        <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
+      <mat-form-field class="textarea_container" appearance="fill">
+        <mat-label>{{ userAuthName }} feedback</mat-label>
+        <textarea [cdkTextareaAutosize] 
+          class="textarea" 
+          [(ngModel)]="userReview"
+          matInput placeholder="Place your review here..."
+          >
+          {{ userReview }}
+        </textarea>
       </mat-form-field>
 
-      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="userRole === 'Interviewer'">
-        <mat-label>{{ mentorName }} feedback</mat-label>
-        <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
-      </mat-form-field>
+       <div class="all-feedback" *ngIf="userRole === 'Admin'">
+        <!-- <p>{{ feedback.userId }}</p>
+        <p>{{ feedback.createDate }}</p>
+        <p>{{ feedback.userReview }}</p> -->
+        <p *ngFor="let feedback of feedbacks">{{ feedback }}</p>
 
-      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="userRole === 'Mentor'">
-        <mat-label>{{ mentorName }} feedback</mat-label>
-        <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
-      </mat-form-field>
-
-      <mat-form-field  class="textarea_container" appearance="fill"  *ngIf="userRole === 'Admin'">
-        <mat-label>{{ mentorName }} feedback</mat-label>
-        <textarea [cdkTextareaAutosize] class="textarea" matInput placeholder="Place your review here..."></textarea>
-      </mat-form-field>
-
+      </div>
 
       <div class="two-column buttons">
         <button class="btn unfilled-btn" (click)="cancel()">{{ 'cancel' | translate }}</button>
-        <button class="btn filled-btn">{{ 'save' | translate }}</button>
+        <button class="btn filled-btn" (click)="printForm()">{{ 'save' | translate }}</button>
       </div>
     </div>
   </div>

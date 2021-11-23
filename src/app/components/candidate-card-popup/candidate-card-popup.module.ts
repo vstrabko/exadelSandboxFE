@@ -6,6 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
 
 import { MatInputModule } from '@angular/material/input';
 import { TextFieldModule } from '@angular/cdk/text-field';
@@ -24,6 +25,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
     TextFieldModule,
     InternationalizationModule,
     MatSliderModule,
+    FormsModule
   ],
   exports: [CandidateCardPopupComponent],
   providers: [LocalizationService],
