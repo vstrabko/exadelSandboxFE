@@ -36,12 +36,12 @@ export class CandidateCardPopupComponent implements OnInit {
         id: '',
         language: {
           id: '',
-          name: ''
+          name: '',
         },
         languageLevel: {
           orderLevel: 1,
           id: '',
-          name: ''
+          name: '',
         }
       }
     ],
@@ -50,7 +50,7 @@ export class CandidateCardPopupComponent implements OnInit {
         id: '',
         skill: {
           id: '',
-          name: ''
+          name: '',
         }
       }
     ],
@@ -67,14 +67,14 @@ export class CandidateCardPopupComponent implements OnInit {
           endRegistration: '',
           status: 0,
           id: '',
-          name: ''
+          name: '',
         },
         candidateProcesses: [
           {
             id: '',
             status: {
               id: '',
-              name: ''
+              name: '',
             },
             testResult: '',
             createDate: '',
@@ -85,11 +85,11 @@ export class CandidateCardPopupComponent implements OnInit {
         ],
         candidateProjectRole: {
           id: '',
-          name: ''
-        }
-      }
-    ]
-  }
+          name: '',
+        },
+      },
+    ],
+  };
 
   public title = 'Candidate card';
   public sliderValue: number;
@@ -131,24 +131,24 @@ export class CandidateCardPopupComponent implements OnInit {
     this.modal.emit();
   }
 
-  printForm(){
+  printForm(): any {
     console.log(this.userReview);
     const FEEDBACK = {
       id: this.CANDIDATES_INFO.id,
       userId: this.CANDIDATES_INFO.id,
       ratingId: this.CANDIDATES_INFO.id,
-      createDate: "",
-      userReview: "dfdsfsdfds",
-      candidateProccesId: this.CANDIDATES_INFO.id
+      createDate: '',
+      userReview: '',
+      candidateProccesId: this.CANDIDATES_INFO.id,
     }
     this.postFeedbacks(FEEDBACK);
-}
+  }
 
   postFeedbacks(FEEDBACK: any): any{
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
-      .then(response => console.log('y', response))
-      .catch(error => console.log('n', error));
+      .then( (response) => console.log('y', response))
+      .catch( (error) => console.log('n', error));
   }
 
   onChangeRange(rangeValue: any): any {
@@ -170,11 +170,11 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.candidateTechSkills = response.data.candidateTechSkills[0].skill.name; // TODO all skills
         this.CANDIDATES_INFO.candidateLanguages = response.data.candidateLanguages[0].language.name; // TODO all languages
         const temp = response.data.candidateSandboxes;
-        const temp2 = temp[temp.length-1].candidateProcesses;
-        const temp3 = this.feedbacks = temp2[temp2.length-1].feedbacks;
+        const temp2 = temp[temp.length - 1].candidateProcesses;
+        const temp3 = this.feedbacks = temp2[temp2.length - 1].feedbacks;
         console.log(temp3);
         temp3.forEach((element: any) => {
-          element.userId === this.userId ? this.userReview = element.userReview : null;
+          element.userId === this.userId ? (this.userReview = element.userReview) : null;
         });
         console.log(this.userId);
         console.log(this.feedbacks);
