@@ -21,77 +21,76 @@ export class CandidateCardPopupComponent implements OnInit {
   };
 
   public CANDIDATES_INFO = {
-    id: "",
-    name: "",
-    surname: "",
-    email: "",
-    location: "",
-    skype: "",
-    phone: "",
+    id: '',
+    name: '',
+    surname: '',
+    email: '',
+    location: '',
+    skype: '',
+    phone: '',
     currentJob: null,
-    professionaCertificates: "",
-    additionalSkills: "",
+    professionaCertificates: '',
+    additionalSkills: '',
     candidateLanguages: [
       {
-        id: "",
+        id: '',
         language: {
-          id: "",
-          name: ""
+          id: '',
+          name: ''
         },
         languageLevel: {
           orderLevel: 1,
-          id: "76f63e34-a583-4fc6-9849-d0030fb69524",
-          name: ""
+          id: '',
+          name: ''
         }
       }
     ],
     candidateTechSkills: [
       {
-        id: "",
+        id: '',
         skill: {
-          id: "",
-          name: ""
+          id: '',
+          name: ''
         }
       }
     ],
     candidateSandboxes: [
       {
-        id: "",
+        id: '',
         sandbox: {
-          description: "",
+          description: '',
           maxCandidates: 10,
-          createDate: "",
-          startDate: "",
-          endDate: "",
-          startRegistration: "",
-          endRegistration: "",
+          createDate: '',
+          startDate: '',
+          endDate: '',
+          startRegistration: '',
+          endRegistration: '',
           status: 0,
-          id: "",
-          name: ""
+          id: '',
+          name: ''
         },
         candidateProcesses: [
           {
-            id: "",
+            id: '',
             status: {
-              id: "",
-              name: ""
+              id: '',
+              name: ''
             },
-            testResult: "",
-            createDate: "",
+            testResult: '',
+            createDate: '',
             feedbacks: [
               null
             ]
           }
         ],
         candidateProjectRole: {
-          id: "",
-          name: ""
+          id: '',
+          name: ''
         }
       }
     ]
   }
 
-  
   public title = 'Candidate card';
   public sliderValue: number;
   public userAuthName = this.userName.userName();
@@ -99,9 +98,6 @@ export class CandidateCardPopupComponent implements OnInit {
   public userId = this.userName.userId();
   public userReview: string;
   public feedbacks: [];
-  
-
-
 
   constructor(private modalWindowService: ModalWindowService, private userName: AuthService) {}
 
@@ -118,7 +114,6 @@ export class CandidateCardPopupComponent implements OnInit {
     this.getCandidateInfo();
     console.log(this.CANDIDATES_INFO.id);
   }
-
 
   @Input() user: Candidate;
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -174,7 +169,6 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
         this.CANDIDATES_INFO.candidateTechSkills = response.data.candidateTechSkills[0].skill.name; // TODO all skills
         this.CANDIDATES_INFO.candidateLanguages = response.data.candidateLanguages[0].language.name; // TODO all languages
-
         const temp = response.data.candidateSandboxes;
         const temp2 = temp[temp.length-1].candidateProcesses;
         const temp3 = this.feedbacks = temp2[temp2.length-1].feedbacks;
@@ -184,9 +178,7 @@ export class CandidateCardPopupComponent implements OnInit {
         });
         console.log(this.userId);
         console.log(this.feedbacks);
-        
       })
       .catch((error: any) => console.log('getC', error));
   }
-
 }

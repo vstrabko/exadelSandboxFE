@@ -25,7 +25,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
     TextFieldModule,
     InternationalizationModule,
     MatSliderModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [CandidateCardPopupComponent],
   providers: [LocalizationService],
