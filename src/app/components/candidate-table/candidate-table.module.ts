@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CandidateTableComponent } from './candidate-table/candidate-table.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -14,7 +14,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
-import { MatPaginatorIntlRu } from '../candidate/candidate-list/intPaginator';
 
 @NgModule({
   declarations: [CandidateTableComponent],
@@ -33,6 +32,6 @@ import { MatPaginatorIntlRu } from '../candidate/candidate-list/intPaginator';
     MatSelectModule,
   ],
   exports: [CandidateTableComponent],
-  providers: [LocalizationService, { provide: MatPaginatorIntl, useClass: MatPaginatorIntlRu }],
+  providers: [LocalizationService],
 })
 export class CandidateTableModule {}

@@ -38,11 +38,17 @@
   "sandbox": {
     "candidatesNumber": "Number of candidates",
     "createSandbox": "Create sandbox",
+    "editSandbox": "Edit sandbox",
     "description": "Sandbox description",
     "invalidEndDate": "Invalid end date",
     "invalidStartDate": "Invalid start date",
     "name": "Sandbox",
-    "period": "Sandbox period"
+    "sandboxName": "Sandbox name",
+    "period": "Sandbox period",
+    "registration": "Sandbox registration period",
+    "listMentors": "List of Mentors",
+    "listInterviewers": "List of Interviewers",
+    "listRecruiters": "List of Recruiters"
   },
   "request": {
     "header": "Candidate request",

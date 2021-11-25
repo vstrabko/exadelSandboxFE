@@ -6,6 +6,7 @@ import { SandboxService } from 'src/app/services/sandbox-service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Sandbox } from 'src/app/models/sandbox.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sandbox-list-page',
@@ -21,7 +22,8 @@ export class SandboxListPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  users: Sandbox[];
+  sandboxes: Sandbox[];
+  getMethod: Observable<any>;
   candidate: any;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -35,9 +37,8 @@ export class SandboxListPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sandboxService.get().subscribe((data: any) => {
-      this.users = data;
-      this.dataSource = new MatTableDataSource(this.users);
+    this.sandboxService.get().subscribe((data: Sandbox[]) => {
+      this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

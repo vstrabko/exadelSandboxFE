@@ -36,7 +36,7 @@ export class CandidateTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.statusValues = this.candidateContext.getStatuses();
+    this.statusValues = this.candidateContext.getStatuses()[0];
     console.log(this.statusValues);
 
     this.candidateService.getCandidate().subscribe((data: any) => {

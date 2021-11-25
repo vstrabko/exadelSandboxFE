@@ -8,11 +8,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
-
-import { CandidateModule } from '../candidate/candidate.module';
 
 @NgModule({
   declarations: [CandidateRequestComponent],
@@ -20,7 +19,6 @@ import { CandidateModule } from '../candidate/candidate.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CandidateModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
@@ -28,6 +26,7 @@ import { CandidateModule } from '../candidate/candidate.module';
     MatRadioModule,
     MatCheckboxModule,
     InternationalizationModule,
+    MatAutocompleteModule,
   ],
   providers: [LocalizationService],
   exports: [CandidateRequestComponent],
