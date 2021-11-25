@@ -1,5 +1,8 @@
 {
   "cancel": "Отмена",
+  "apply": "Принять",
+  "reset": "Сбросить",
+  "close": "Закрыть",
   "errors": {
     "goHome": "Ошибка, вернуться на главную страницу",
     "goHomeMessage": "На главную"
@@ -47,7 +50,11 @@
     "registration": "Период регистрации",
     "listMentors": "Список менторов",
     "listInterviewers": "Список интервьюеров",
-    "listRecruiters": "Список рекрутеров"
+    "listRecruiters": "Список рекрутеров",
+    "startDate": "Дата начала",
+    "nameSandbox": "Наименование",
+    "nameDescription": "Описание",
+    "statusSand": "Статус"
   },
   "request": {
     "header": "Заявка кандидата",
@@ -94,7 +101,8 @@
     "prevPage": "Предыдущая страница",
     "of": "из",
     "filter": "Фильтр",
-    "example": "Прим. Минск"
+    "example": "Прим. Минск",
+    "appointInterview": "Назначить Интервью"
   },
   "tostr": {
     "title": "Данные отправлены",
@@ -110,7 +118,20 @@
     "location": "Локация",
     "mentor": "Ментор",
     "sandbox": "Песочница"
-
+},
+  "stepper": {
+    "сhooseTheDate": "Выберите дату",
+    "selectedDate": "Выбранныя дата",
+    "date": "Дата",
+    "chooseInterviewer": "Выберите интервьюера",
+    "interviewer": "Интервьер",
+    "chooseTime": "Выберите время",
+    "time": "Время",
+    "end": "Завершить",
+    "interviewDetails": "Детали интервью",
+    "dateIsRequired": "Необходимо выбрать дату.",
+    "interviewerIsRequired": "Необходимо выбрать интервьюера.",
+    "timeIsRequired": "Необходимо выбрать время."
   },
   "candidate": {
     "status": "Статус",
@@ -118,5 +139,9 @@
     "mentor": "Ментор",
     "interviewer": "Интервьюер",
     "feedback": "обратная связь"
+  },
+  "authTostr": {
+    "title": "Ошибка авторизации",
+    "text": "Пожалуйста, внимательно проверьте корректность всех данных"
   }
 }

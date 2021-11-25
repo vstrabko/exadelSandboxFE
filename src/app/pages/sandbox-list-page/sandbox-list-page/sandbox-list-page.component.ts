@@ -15,7 +15,8 @@ import { Observable } from 'rxjs';
 })
 export class SandboxListPageComponent implements OnInit {
   constructor(private router: Router, private sandboxService: SandboxService) {}
-  displayedColumns: string[] = ['select', 'id', 'name', 'email', 'body'];
+
+  displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];
   dataSource: MatTableDataSource<Sandbox>;
   selection = new SelectionModel<Sandbox>(true, []);
 
@@ -23,7 +24,6 @@ export class SandboxListPageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   sandboxes: Sandbox[];
-  getMethod: Observable<any>;
   candidate: any;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -37,8 +37,10 @@ export class SandboxListPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sandboxService.get().subscribe((data: Sandbox[]) => {
-      this.dataSource = new MatTableDataSource(data);
+
+    this.sandboxService.get().subscribe((data: any) => {
+      this.sandboxes = data;
+      this.dataSource = new MatTableDataSource(this.sandboxes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

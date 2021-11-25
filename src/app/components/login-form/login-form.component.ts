@@ -27,10 +27,7 @@ export class LoginFormComponent {
       this.modal.emit(false);
       this.log.emit(this.authService.isAuthenticated());
 
-      this.authService.login(this.email.value, this.password.value).subscribe(
-        (data: any): void => console.log(data),
-        (error: any): void => console.log(error),
-      );
+      this.authService.login(this.email.value, this.password.value).subscribe();
     }
   }
 

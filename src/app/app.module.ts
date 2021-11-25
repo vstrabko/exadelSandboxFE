@@ -8,7 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HeaderModule } from './components/header/header.module';
 import { FooterModule } from './components/footer/footer.module';
@@ -25,6 +25,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-page.module';
 import { CandidateTableModule } from './components/candidate-table/candidate-table.module';
+
+import { HttpHeadersInterceptor } from './interceptors/http-headers.interceptors';
+import { AuthService } from './services/auth.service';
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -69,7 +72,14 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     FullCalendarModule,
     CandidateTableModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpHeadersInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

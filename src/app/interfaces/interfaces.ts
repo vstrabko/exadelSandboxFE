@@ -14,3 +14,12 @@ export interface Employee {
 export interface LocalConfig {
   locale_id: string;
 }
+
+export interface Interval {
+  value: string;
+}
+
+export interface authResponse {
+  accessToken: string;
+  refreshToken: string;
+}
