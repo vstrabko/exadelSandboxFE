@@ -12,9 +12,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
+import { IsObjectHaveNullValues } from 'src/app/Pipes/nullIndetifier.pipe';
 
 @NgModule({
-  declarations: [CandidateRequestComponent],
+  declarations: [CandidateRequestComponent, IsObjectHaveNullValues],
   imports: [
     CommonModule,
     FormsModule,
