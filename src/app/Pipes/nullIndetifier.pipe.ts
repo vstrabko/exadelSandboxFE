@@ -5,7 +5,7 @@ import { IdName } from '../models/id-name.model';
   name: 'arrayHasNull',
 })
 export class IsObjectHaveNullValues implements PipeTransform {
-  transform(value:  IdName[] | undefined): IdName[] {
-    return value && value.some(item => item !== null) ? value : [];
+  transform(value: IdName[] | undefined): IdName[] {
+    return value && value.some((item: IdName | null) => item !== null) ? value : [];
   }
 }
