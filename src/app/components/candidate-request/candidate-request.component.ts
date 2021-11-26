@@ -53,7 +53,7 @@ export class CandidateRequestComponent implements OnInit {
     if (this.registrationForm.valid && this.sandboxChosen.name) {
       this.registrationForm.controls.sandboxId.setValue(this.sandboxChosen.id);
       this.candidateContextService.postCandidate(this.registrationForm.value);
-      /* this.registrationForm.reset(); */
+      this.registrationForm.reset();
     }
   }
 }

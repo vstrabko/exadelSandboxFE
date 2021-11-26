@@ -109,7 +109,6 @@ export class CreateSandboxPageComponent implements OnInit {
   }
 
   comparer(o1: string, o2: string): boolean {
-    // if possible compare by object's name property - and not by reference.
     return o1 && o2 ? o1 === o2 : o2 === o2;
   }
 
@@ -129,7 +128,7 @@ export class CreateSandboxPageComponent implements OnInit {
     );
     this.candidateContextService.postSandbox(this.sandboxRegistrationForm.value);
     if (this.sandboxRegistrationForm.valid) {
-      /* this.sandboxRegistrationForm.reset(); */
+      this.sandboxRegistrationForm.reset();
     }
   }
   edit(): void {
@@ -150,7 +149,7 @@ export class CreateSandboxPageComponent implements OnInit {
     console.log(this.sandboxEditForm.value);
 
     if (this.sandboxEditForm.valid) {
-      /* this.sandboxEditForm.reset(); */
+      this.sandboxEditForm.reset();
     }
   }
 }
