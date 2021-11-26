@@ -29,13 +29,22 @@ export interface authResponse {
   refreshToken: string;
 }
 
-export interface CalendarEvent {
+export interface CalendarEventPost {
   // "ownerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
   // "summary": "string",
   // "description": "string",
-
   startTime: string;
   endTime: string;
+}
+
+export interface CalendarEventGet {
+  id: "string",
+  ownerId: "string",
+  summary: "string",
+  description: "string",
+  startTime: "string",
+  endTime: "string",
+  type: number,
 }
 
 export interface InterviewEvent {

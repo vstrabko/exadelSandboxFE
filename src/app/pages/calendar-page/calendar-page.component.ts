@@ -3,11 +3,12 @@ import { Calendar } from '@fullcalendar/core'
 import { FullCalendarComponent, CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 
 import { EventTime } from 'src/app/interfaces/interfaces';
-import { INITIAL_EVENTS, createEventId } from './event-utils';
+// import { INITIAL_EVENTS, createEventId } from './event-utils';
+// import { INITIAL_EVENTS } from './event-utils';
 import enLocale from '@fullcalendar/core/locales/es';
 import ruLocale from '@fullcalendar/core/locales/fr';
 import { CalendarEventService } from '../../services/calendarEvent.service';
-import { CalendarEvent } from '../../interfaces/interfaces'
+import { CalendarEventPost } from '../../interfaces/interfaces'
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class CalendarPageComponent implements OnInit{
   public clickInfo: EventClickArg;
   public currentEvents: EventApi[] = [];
   public selectInfo: DateSelectArg;
-  public arrEventsPost: CalendarEvent[] = [];
+  public arrEventsPost: CalendarEventPost[] = [];
 
     constructor(private calendarEventService: CalendarEventService, private userService: UserService ) {
     const name = Calendar.name
@@ -30,6 +31,8 @@ export class CalendarPageComponent implements OnInit{
 
   ngOnInit(){
     this.calendarEventService.getEvents()
+    console.log('calendar page',this.calendarEventService.INITIAL_EVENTS)
+
   }
 
   calendarOptions: CalendarOptions = {
@@ -54,7 +57,8 @@ export class CalendarPageComponent implements OnInit{
     locales: [ enLocale, ruLocale ],
     locale: 'en',
     initialView: 'timeGridWeek',
-    initialEvents: INITIAL_EVENTS,
+    initialEvents: this.calendarEventService.INITIAL_EVENTS,
+    // initialEvents: INITIAL_EVENTS,
     weekNumberCalculation: 'ISO',
     weekends: true,
     editable: true,
