@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { MatSliderChange } from '@angular/material/slider';
 import axios from 'axios';
 import { Candidate } from 'src/app/models/candidate.model';
 import { ModalWindowService } from '../../modal-window/modal-window.service';
@@ -80,8 +81,8 @@ export class CandidateCardPopupComponent implements OnInit {
     this.modal.emit();
   }
 
-  onChangeRange(rangeValue: any): any {
-    this.sliderValue = rangeValue.value;
+  onChangeRange(rangeValue: MatSliderChange): void {
+    this.sliderValue = rangeValue.value ? rangeValue.value : 0;
   }
 
   getCandidateInfo(): any {

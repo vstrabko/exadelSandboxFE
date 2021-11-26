@@ -26,6 +26,7 @@ export class CreateSandboxPageComponent implements OnInit {
   public listInterviewers: Employee[];
   public listMentors: Employee[];
   public sandboxId: string;
+  public sandstat: string = '';
   public arrTech: string[] = [];
   public arrLang: string[] = [];
   public arrInterviewers: string[] = [];
@@ -84,6 +85,11 @@ export class CreateSandboxPageComponent implements OnInit {
       const _sandboxChosen = this.sandboxes.find((item: Sandbox) => item.name === value);
       if (_sandboxChosen) {
         this.sandboxChosen = _sandboxChosen;
+        if (this.sandboxChosen.status) {
+          this.sandstat = this.sandboxChosen.status === 'Draft' ? 'Active' : this.sandboxChosen.status
+        }
+        console.log(this.sandboxChosen.status);
+        
         this.arrTech =
           this.sandboxChosen.stackTechnologies && this.sandboxChosen.stackTechnologies[0] !== null
             ? this.sandboxChosen.stackTechnologies.map((tech: IdName) => tech.id)
@@ -114,41 +120,40 @@ export class CreateSandboxPageComponent implements OnInit {
 
   submit(): void {
     this.sandboxRegistrationForm.controls.createDate.setValue(new Date().toISOString());
-    this.sandboxRegistrationForm.controls.startDate.setValue(
-      this.sandboxRegistrationForm.controls.startDate.value.toISOString(),
-    );
-    this.sandboxRegistrationForm.controls.endDate.setValue(
-      this.sandboxRegistrationForm.controls.endDate.value.toISOString(),
-    );
-    this.sandboxRegistrationForm.controls.startRegistration.setValue(
-      this.sandboxRegistrationForm.controls.startRegistration.value.toISOString(),
-    );
-    this.sandboxRegistrationForm.controls.endRegistration.setValue(
-      this.sandboxRegistrationForm.controls.endRegistration.value.toISOString(),
-    );
-    this.candidateContextService.postSandbox(this.sandboxRegistrationForm.value);
     if (this.sandboxRegistrationForm.valid) {
+      this.sandboxRegistrationForm.controls.startDate.setValue(
+        this.sandboxRegistrationForm.controls.startDate.value.toISOString(),
+      );
+      this.sandboxRegistrationForm.controls.endDate.setValue(
+        this.sandboxRegistrationForm.controls.endDate.value.toISOString(),
+      );
+      this.sandboxRegistrationForm.controls.startRegistration.setValue(
+        this.sandboxRegistrationForm.controls.startRegistration.value.toISOString(),
+      );
+      this.sandboxRegistrationForm.controls.endRegistration.setValue(
+        this.sandboxRegistrationForm.controls.endRegistration.value.toISOString(),
+      );
+      this.candidateContextService.postSandbox(this.sandboxRegistrationForm.value);
       this.sandboxRegistrationForm.reset();
     }
   }
   edit(): void {
     this.sandboxEditForm.controls.id.setValue(this.sandboxChosen.id);
-    this.sandboxEditForm.controls.startDate.setValue(
-      new Date(Date.parse(this.sandboxEditForm.controls.startDate.value)).toISOString(),
-    );
-    this.sandboxEditForm.controls.endDate.setValue(
-      new Date(Date.parse(this.sandboxEditForm.controls.endDate.value)).toISOString(),
-    );
-    this.sandboxEditForm.controls.startRegistration.setValue(
-      new Date(Date.parse(this.sandboxEditForm.controls.startRegistration.value)).toISOString(),
-    );
-    this.sandboxEditForm.controls.endRegistration.setValue(
-      new Date(Date.parse(this.sandboxEditForm.controls.endRegistration.value)).toISOString(),
-    );
-    this.candidateContextService.putSandbox(this.sandboxEditForm.value);
-    console.log(this.sandboxEditForm.value);
-
     if (this.sandboxEditForm.valid) {
+      this.sandboxEditForm.controls.startDate.setValue(
+        new Date(Date.parse(this.sandboxEditForm.controls.startDate.value)).toISOString(),
+      );
+      this.sandboxEditForm.controls.endDate.setValue(
+        new Date(Date.parse(this.sandboxEditForm.controls.endDate.value)).toISOString(),
+      );
+      this.sandboxEditForm.controls.startRegistration.setValue(
+        new Date(Date.parse(this.sandboxEditForm.controls.startRegistration.value)).toISOString(),
+      );
+      this.sandboxEditForm.controls.endRegistration.setValue(
+        new Date(Date.parse(this.sandboxEditForm.controls.endRegistration.value)).toISOString(),
+      );
+      this.candidateContextService.putSandbox(this.sandboxEditForm.value);
+      
       this.sandboxEditForm.reset();
     }
   }
