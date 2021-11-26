@@ -1,6 +1,6 @@
 <form class="request-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
   <h2>{{ 'request.header' | translate }}</h2>
-  <input style="display: none;" formControlName="sandboxId" />
+  <input style="display: none" formControlName="sandboxId" />
 
   <div class="personal three-column">
     <mat-form-field appearance="outline">
@@ -16,7 +16,9 @@
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.englishLevel' | translate }}</mat-label>
       <mat-select formControlName="englishLevelId">
-        <mat-option *ngFor="let level of levelsValues" [value]="level.id">{{level.name}}</mat-option>
+        <mat-option *ngFor="let level of levelsValues" [value]="level.id">{{
+          level.name
+        }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -41,7 +43,12 @@
   <div class="motivation">
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.motivation' | translate }}</mat-label>
-      <textarea formControlName="motivation" [cdkTextareaAutosize] class="motivation_textarea" matInput></textarea>
+      <textarea
+        formControlName="motivation"
+        [cdkTextareaAutosize]
+        class="motivation_textarea"
+        matInput
+      ></textarea>
     </mat-form-field>
   </div>
 
@@ -49,7 +56,8 @@
     <div class="radio">
       <label id="Availability">{{ 'request.availability' | translate }}</label>
       <mat-radio-group formControlName="availabillityTypeId" aria-labelledby="Availability">
-        <mat-radio-button *ngFor="let hours of availability" [value]="hours.id" class="radio-button">{{hours.name}}
+        <mat-radio-button *ngFor="let hours of availability" [value]="hours.id" class="radio-button"
+          >{{ hours.name }}
         </mat-radio-button>
       </mat-radio-group>
     </div>
@@ -58,20 +66,20 @@
       <mat-form-field appearance="outline">
         <mat-label>{{ 'request.language' | translate }}</mat-label>
         <mat-select formControlName="sandboxPreferredLanguageId">
-          <mat-option *ngFor="let lang of sandboxChosen.languages" [value]="lang !== null ? lang.id : ''">{{lang !==
-            null ?
-            lang.name : ''}}</mat-option>
+          <mat-option
+            *ngFor="let lang of sandboxChosen.languages"
+            [value]="lang !== null ? lang.id : ''"
+            >{{ lang !== null ? lang.name : '' }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>{{ 'request.location' | translate }}</mat-label>
         <mat-select formControlName="location">
-          <mat-option *ngFor="let loc of location" [value]="loc !==
-          null ?
-          loc.name : ''">{{loc !==
-            null ?
-            loc.name : ''}}</mat-option>
+          <mat-option *ngFor="let loc of location" [value]="loc !== null ? loc.name : ''">{{
+            loc !== null ? loc.name : ''
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -80,9 +88,12 @@
       <mat-form-field appearance="outline">
         <mat-label>{{ 'request.skills' | translate }}</mat-label>
         <mat-select formControlName="primaryTechnologyId">
-          <mat-option *ngFor="let skill of sandboxChosen.stackTechnologies" [value]="skill !== null ? skill.id : ''">
-            {{skill
-            !== null ? skill.name : ''}}</mat-option>
+          <mat-option
+            *ngFor="let skill of sandboxChosen.stackTechnologies"
+            [value]="skill !== null ? skill.id : ''"
+          >
+            {{ skill !== null ? skill.name : '' }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
 
@@ -96,13 +107,22 @@
   <div class="skills">
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.certificates' | translate }}</mat-label>
-      <textarea formControlName="professionaCertificates" [cdkTextareaAutosize] class="skills-textarea"
-        matInput></textarea>
+      <textarea
+        formControlName="professionaCertificates"
+        [cdkTextareaAutosize]
+        class="skills-textarea"
+        matInput
+      ></textarea>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>{{ 'request.addSkills' | translate }}</mat-label>
-      <textarea formControlName="additionalSkills" [cdkTextareaAutosize] class="skills-textarea" matInput></textarea>
+      <textarea
+        formControlName="additionalSkills"
+        [cdkTextareaAutosize]
+        class="skills-textarea"
+        matInput
+      ></textarea>
     </mat-form-field>
   </div>
 
@@ -114,10 +134,12 @@
   </div>
 
   <div class="checkboxes">
-    <mat-checkbox formControlName="isJoinToExadel">{{ 'request.joinExadel' | translate }}</mat-checkbox>
+    <mat-checkbox formControlName="isJoinToExadel">{{
+      'request.joinExadel' | translate
+    }}</mat-checkbox>
     <mat-checkbox formControlName="isAgreement" required>{{
       'request.agreement' | translate
-      }}</mat-checkbox>
+    }}</mat-checkbox>
   </div>
 
   <div class="button">
