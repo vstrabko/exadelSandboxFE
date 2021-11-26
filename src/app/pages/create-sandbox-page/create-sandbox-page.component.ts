@@ -86,10 +86,11 @@ export class CreateSandboxPageComponent implements OnInit {
       if (_sandboxChosen) {
         this.sandboxChosen = _sandboxChosen;
         if (this.sandboxChosen.status) {
-          this.sandstat = this.sandboxChosen.status === 'Draft' ? 'Active' : this.sandboxChosen.status
+          this.sandstat =
+            this.sandboxChosen.status === 'Draft' ? 'Active' : this.sandboxChosen.status;
         }
         console.log(this.sandboxChosen.status);
-        
+
         this.arrTech =
           this.sandboxChosen.stackTechnologies && this.sandboxChosen.stackTechnologies[0] !== null
             ? this.sandboxChosen.stackTechnologies.map((tech: IdName) => tech.id)
@@ -153,7 +154,7 @@ export class CreateSandboxPageComponent implements OnInit {
         new Date(Date.parse(this.sandboxEditForm.controls.endRegistration.value)).toISOString(),
       );
       this.candidateContextService.putSandbox(this.sandboxEditForm.value);
-      
+
       this.sandboxEditForm.reset();
     }
   }
