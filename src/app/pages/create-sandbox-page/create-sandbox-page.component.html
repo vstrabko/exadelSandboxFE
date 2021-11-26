@@ -178,14 +178,8 @@
 
             <mat-form-field appearance="outline">
               <mat-label>{{ 'select.status' | translate }}</mat-label>
-              <mat-select formControlName="status" [(ngModel)]="sandboxChosen.status">
-                <mat-option value="Draft">Draft</mat-option>
-                <!-- Waiting for end point of sandbox statuses -->
-                <mat-option *ngIf="sandstat === 'Draft'" value="Active">Active</mat-option>
-                <mat-option *ngIf="sandstat === 'Inprogress'" value="Inprogress">Inprogress</mat-option>
-                <mat-option *ngIf="sandstat === 'Archive'" value="Archive">Archive</mat-option>
-                <mat-option *ngIf="sandstat === 'Application'" value="Application">Application</mat-option>
-                <mat-option *ngIf="sandstat === 'Registration'" value="Registration">Registration</mat-option>
+              <mat-select formControlName="status" [(ngModel)]="sandboxChosen.status" [compareWith]="comparer">
+                <mat-option *ngFor="let stat of sandstats" [value]="stat">{{stat}}</mat-option>
               </mat-select>
             </mat-form-field>
 

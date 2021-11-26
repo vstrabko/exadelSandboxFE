@@ -26,7 +26,14 @@ export class CreateSandboxPageComponent implements OnInit {
   public listInterviewers: Employee[];
   public listMentors: Employee[];
   public sandboxId: string;
-  public sandstat: string = '';
+  public sandstats: string[] = [
+    'Draft',
+    'Inprogress',
+    'Archive',
+    'Application',
+    'Registration',
+    'Active',
+  ];
   public arrTech: string[] = [];
   public arrLang: string[] = [];
   public arrInterviewers: string[] = [];
@@ -85,12 +92,6 @@ export class CreateSandboxPageComponent implements OnInit {
       const _sandboxChosen = this.sandboxes.find((item: Sandbox) => item.name === value);
       if (_sandboxChosen) {
         this.sandboxChosen = _sandboxChosen;
-        if (this.sandboxChosen.status) {
-          this.sandstat =
-            this.sandboxChosen.status === 'Draft' ? 'Active' : this.sandboxChosen.status;
-        }
-        console.log(this.sandboxChosen.status);
-
         this.arrTech =
           this.sandboxChosen.stackTechnologies && this.sandboxChosen.stackTechnologies[0] !== null
             ? this.sandboxChosen.stackTechnologies.map((tech: IdName) => tech.id)
@@ -154,7 +155,6 @@ export class CreateSandboxPageComponent implements OnInit {
         new Date(Date.parse(this.sandboxEditForm.controls.endRegistration.value)).toISOString(),
       );
       this.candidateContextService.putSandbox(this.sandboxEditForm.value);
-
       this.sandboxEditForm.reset();
     }
   }
