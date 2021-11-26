@@ -12,10 +12,10 @@ export abstract class ApiService<T extends ResourceModel<T>> {
 
   private baseUrl = String(environment.API_URL);
 
-  public create(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+  public create(resource: Partial<T>): Observable<any> {
     resource = new this.tConstructor(resource);
     return this.httpClient
-      .post<T>(`${this.baseUrl}${this.apiUrl}`, resource.toJson())
+      .post<T>(`${this.baseUrl}${this.apiUrl}`, resource)
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 

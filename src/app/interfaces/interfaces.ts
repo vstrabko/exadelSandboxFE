@@ -29,7 +29,18 @@ export interface authResponse {
   refreshToken: string;
 }
 
-export interface event {
+export interface CalendarEvent {
+  // "ownerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  // "summary": "string",
+  // "description": "string",
+
   startTime: string;
   endTime: string;
+}
+
+export interface InterviewEvent {
+    id: string;
+    candidateSandboxId: string;
+    startTime: string;
+    endTime: string;
 }
