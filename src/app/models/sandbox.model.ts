@@ -13,6 +13,7 @@ export class Sandbox extends ResourceModel<Sandbox> {
   public endRegistration: string;
   public stackTechnologies: IdName[];
   public languages: IdName[];
+  public formatStartDate: string;
   constructor(model?: Partial<Sandbox>) {
     super(model);
   }

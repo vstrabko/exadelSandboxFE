@@ -1,23 +1,48 @@
-import { Component, ViewChild, OnInit, Output, EventEmitter } from '@angular/core';
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { Component, ViewChild, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { SandboxService } from 'src/app/services/sandbox-service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Sandbox } from 'src/app/models/sandbox.model';
 import { Router } from '@angular/router';
+import { SandboxServiceFilter } from './../../../services/sandboxFilter-service';
+import { SandboxDataSource } from './sandbox-data-source';
+import { tap } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
+import { merge } from 'rxjs/internal/observable/merge';
 
 @Component({
   selector: 'app-sandbox-list-page',
   templateUrl: './sandbox-list-page.component.html',
   styleUrls: ['./sandbox-list-page.component.scss'],
 })
-export class SandboxListPageComponent implements OnInit {
-  constructor(private router: Router, private sandboxService: SandboxService) {}
+export class SandboxListPageComponent implements OnInit, AfterViewInit {
+  isLoading = false;
+  totalRows = 0;
+  pageSize = 5;
+  currentPage = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
 
+  constructor(
+    private router: Router,
+    private sandboxService: SandboxService,
+    private sandboxServiceFilter: SandboxServiceFilter,
+  ) {}
+  pageEvent: PageEvent;
   displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];
-  dataSource: MatTableDataSource<Sandbox>;
+  matDataSource: MatTableDataSource<Sandbox>;
+  dataSource: SandboxDataSource;
   selection = new SelectionModel<Sandbox>(true, []);
+
+  queryParams = {
+    params: {
+      PageNumber: 2,
+      PageSize: 2,
+      SortingType: 0,
+      SortField: '1',
+    },
+  };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -38,44 +63,68 @@ export class SandboxListPageComponent implements OnInit {
   ngOnInit(): void {
     this.sandboxService.get().subscribe((data: any) => {
       this.sandBoxes = data;
-      this.dataSource = new MatTableDataSource(this.sandBoxes);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.matDataSource = new MatTableDataSource(this.sandBoxes);
+      this.dataSource = new SandboxDataSource(this.sandboxServiceFilter);
+      this.dataSource.loadSandboxes(this.queryParams);
+      this.matDataSource.paginator = this.paginator;
+      this.matDataSource.sort = this.sort;
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page.pipe(tap(() => this.loadSandboxesPage())).subscribe((data: any) => {
+      console.log('data pagin', data);
+    });
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(tap(() => this.loadSandboxesPage()))
+      .subscribe((data: any) => {
+        console.log('data sort', data);
+      });
+  }
+
+  loadSandboxesPage(): void {
+    this.queryParams.params.PageSize = this.paginator.pageSize;
+    this.queryParams.params.PageNumber = this.paginator.pageIndex + 1;
+    this.queryParams.params.SortField = this.sort.active;
+    if (this.sort.direction === 'asc') {
+      this.queryParams.params.SortingType = 0;
+    } else if (this.sort.direction === 'desc') {
+      this.queryParams.params.SortingType = 1;
+    }
+
+    this.dataSource.loadSandboxes(this.queryParams);
   }
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.matDataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.matDataSource.paginator) {
+      this.matDataSource.paginator.firstPage();
     }
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
-    if (this.dataSource) {
+    if (this.matDataSource) {
       const numSelected = this.selection.selected.length;
-      const numRows = this.dataSource.data.length;
+      const numRows = this.matDataSource.data.length;
       return numSelected === numRows;
     } else {
       return false;
     }
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle(): void {
-    if (this.dataSource) {
+    if (this.matDataSource) {
       if (this.isAllSelected()) {
         this.selection.clear();
         return;
       }
-      this.selection.select(...this.dataSource.data);
+      this.selection.select(...this.matDataSource.data);
     }
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: Sandbox): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
