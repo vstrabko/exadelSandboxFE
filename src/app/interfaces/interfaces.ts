@@ -5,9 +5,10 @@ export interface ListSandboxes {
 
 export interface Employee {
   id: number;
-  firstName: string;
-  lastName: string;
-  tech?: string;
+  name: string;
+  surname: string;
+  email: string;
+  location: string;
 }
 
 export interface LocalConfig {

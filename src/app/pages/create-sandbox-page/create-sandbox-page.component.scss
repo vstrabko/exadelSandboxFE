@@ -14,7 +14,7 @@ $width-content: calc(100% - 234px);
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    .select, .datepicker, .number-candidates {
+    .datepicker, .number-candidates {
       min-width: 320px;
       max-width: 30%;
       padding-right: 20px;
@@ -41,4 +41,12 @@ $width-content: calc(100% - 234px);
   padding: 10px;
   border-radius: 4px;
   min-height: 25px;
+}
+
+h2 {
+  margin-top: 15px;
+}
+
+.select {
+  width: 100%;
 }

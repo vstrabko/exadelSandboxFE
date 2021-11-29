@@ -47,10 +47,10 @@ export abstract class ApiService<T extends ResourceModel<T>> {
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
-  public update(resource: Partial<T> & { toJson: () => T }): Observable<any> {
+  public update(resource: Partial<T>): Observable<any> {
     resource = new this.tConstructor(resource);
     return this.httpClient
-      .put<T>(`${this.baseUrl}${this.apiUrl}/${String(resource._id)}`, resource.toJson())
+      .put<T>(`${this.baseUrl}${this.apiUrl}/${String(resource.id)}`, resource)
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
@@ -68,9 +68,8 @@ export abstract class ApiService<T extends ResourceModel<T>> {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(`Backend returned code ${err.status}, body was: ${String(err.error)}`);
+      console.error(`Backend returned code ${err.status}, body was: ${JSON.stringify(err.error)}`);
     }
-
     // ...optionally return a default fallback value so app can continue (pick one)
     // which could be a default value (which has to be a HttpResponse here)
     // return Observable.of(new HttpResponse({body: [{name: "Default value..."}]}));
