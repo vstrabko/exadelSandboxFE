@@ -17,7 +17,7 @@ export class SandboxListPageComponent implements OnInit {
   constructor(
     private router: Router,
     private sandboxService: SandboxService,
-    private roleUser: AuthService
+    private roleUser: AuthService,
   ) {}
 
   displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];

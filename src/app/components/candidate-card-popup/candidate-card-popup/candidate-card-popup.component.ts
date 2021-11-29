@@ -103,7 +103,7 @@ export class CandidateCardPopupComponent implements OnInit {
     private modalWindowService: ModalWindowService,
     private userName: AuthService,
     private toastr: ToastrService,
-    ) {}
+    ){}
 
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
@@ -159,7 +159,8 @@ export class CandidateCardPopupComponent implements OnInit {
     this.postFeedbacks(FEEDBACK);
   }
 
-  postFeedbacks(FEEDBACK: { userId: any;
+  postFeedbacks(FEEDBACK: {
+    userId: any;
     grade: number;
     userReview: string;
     candidateProccesId: string;
@@ -190,7 +191,7 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
         const candidateTechSkills = response.data.candidateTechSkills;
         this.CANDIDATES_INFO.candidateTechSkills =
-          candidateTechSkills[candidateTechSkills.length - 1].skill.name; 
+          candidateTechSkills[candidateTechSkills.length - 1].skill.name;
         const candidateLanguages = response.data.candidateLanguages;
         this.CANDIDATES_INFO.candidateLanguages =
           candidateLanguages[candidateLanguages.length - 1].language.name;
@@ -210,5 +211,5 @@ export class CandidateCardPopupComponent implements OnInit {
         console.log(this.dateFeedback);
       })
       .catch((error: any) => this.toastr.error(error));
-    }
+  }
 }
