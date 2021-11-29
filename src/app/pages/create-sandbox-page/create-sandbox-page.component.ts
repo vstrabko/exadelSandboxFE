@@ -86,32 +86,27 @@ export class CreateSandboxPageComponent implements OnInit {
       mentorIds: new FormControl('', [Validators.required]),
     });
   }
+  // Make array of id's from array of objects
+  doArrayOfID(
+    value: 'stackTechnologies' | 'languages' | 'recruiters' | 'interviewers' | 'mentors',
+  ): string[] {
+    if (this.sandboxChosen[value]) {
+      const _value = this.sandboxChosen[value];
+      return _value && _value[0] !== null ? _value?.map((item: IdName) => item.id) : [];
+    }
+    return [];
+  }
 
   inputChange(value: string): void {
     if (this.sandboxes.length) {
       const _sandboxChosen = this.sandboxes.find((item: Sandbox) => item.name === value);
       if (_sandboxChosen) {
         this.sandboxChosen = _sandboxChosen;
-        this.arrTech =
-          this.sandboxChosen.stackTechnologies && this.sandboxChosen.stackTechnologies[0] !== null
-            ? this.sandboxChosen.stackTechnologies.map((tech: IdName) => tech.id)
-            : [];
-        this.arrLang =
-          this.sandboxChosen.languages && this.sandboxChosen.languages[0] !== null
-            ? this.sandboxChosen.languages.map((lang: IdName) => lang.id)
-            : [];
-        this.arrRecruiters =
-          this.sandboxChosen.recruiters && this.sandboxChosen.recruiters[0] !== null
-            ? this.sandboxChosen.recruiters.map((recr: IdName) => recr.id)
-            : [];
-        this.arrMentors =
-          this.sandboxChosen.mentors && this.sandboxChosen.mentors[0] !== null
-            ? this.sandboxChosen.mentors.map((men: IdName) => men.id)
-            : [];
-        this.arrInterviewers =
-          this.sandboxChosen.interviewers && this.sandboxChosen.interviewers[0] !== null
-            ? this.sandboxChosen.interviewers.map((int: IdName) => int.id)
-            : [];
+        this.arrTech = this.doArrayOfID('stackTechnologies');
+        this.arrLang = this.doArrayOfID('languages');
+        this.arrRecruiters = this.doArrayOfID('recruiters');
+        this.arrMentors = this.doArrayOfID('mentors');
+        this.arrInterviewers = this.doArrayOfID('interviewers');
       }
     }
   }
@@ -121,38 +116,32 @@ export class CreateSandboxPageComponent implements OnInit {
   }
 
   submit(): void {
-    this.sandboxRegistrationForm.controls.createDate.setValue(new Date().toISOString());
+    const sandFormCtrls = this.sandboxRegistrationForm.controls;
+    sandFormCtrls.createDate.setValue(new Date().toISOString());
     if (this.sandboxRegistrationForm.valid) {
-      this.sandboxRegistrationForm.controls.startDate.setValue(
-        this.sandboxRegistrationForm.controls.startDate.value.toISOString(),
-      );
-      this.sandboxRegistrationForm.controls.endDate.setValue(
-        this.sandboxRegistrationForm.controls.endDate.value.toISOString(),
-      );
-      this.sandboxRegistrationForm.controls.startRegistration.setValue(
-        this.sandboxRegistrationForm.controls.startRegistration.value.toISOString(),
-      );
-      this.sandboxRegistrationForm.controls.endRegistration.setValue(
-        this.sandboxRegistrationForm.controls.endRegistration.value.toISOString(),
-      );
+      sandFormCtrls.startDate.setValue(sandFormCtrls.startDate.value.toISOString());
+      sandFormCtrls.endDate.setValue(sandFormCtrls.endDate.value.toISOString());
+      sandFormCtrls.startRegistration.setValue(sandFormCtrls.startRegistration.value.toISOString());
+      sandFormCtrls.endRegistration.setValue(sandFormCtrls.endRegistration.value.toISOString());
       this.candidateContextService.postSandbox(this.sandboxRegistrationForm.value);
       this.sandboxRegistrationForm.reset();
     }
   }
   edit(): void {
-    this.sandboxEditForm.controls.id.setValue(this.sandboxChosen.id);
+    const sandFormCtrls = this.sandboxEditForm.controls;
+    sandFormCtrls.id.setValue(this.sandboxChosen.id);
     if (this.sandboxEditForm.valid) {
-      this.sandboxEditForm.controls.startDate.setValue(
-        new Date(Date.parse(this.sandboxEditForm.controls.startDate.value)).toISOString(),
+      sandFormCtrls.startDate.setValue(
+        new Date(Date.parse(sandFormCtrls.startDate.value)).toISOString(),
       );
-      this.sandboxEditForm.controls.endDate.setValue(
-        new Date(Date.parse(this.sandboxEditForm.controls.endDate.value)).toISOString(),
+      sandFormCtrls.endDate.setValue(
+        new Date(Date.parse(sandFormCtrls.endDate.value)).toISOString(),
       );
-      this.sandboxEditForm.controls.startRegistration.setValue(
-        new Date(Date.parse(this.sandboxEditForm.controls.startRegistration.value)).toISOString(),
+      sandFormCtrls.startRegistration.setValue(
+        new Date(Date.parse(sandFormCtrls.startRegistration.value)).toISOString(),
       );
-      this.sandboxEditForm.controls.endRegistration.setValue(
-        new Date(Date.parse(this.sandboxEditForm.controls.endRegistration.value)).toISOString(),
+      sandFormCtrls.endRegistration.setValue(
+        new Date(Date.parse(sandFormCtrls.endRegistration.value)).toISOString(),
       );
       this.candidateContextService.putSandbox(this.sandboxEditForm.value);
       this.sandboxEditForm.reset();

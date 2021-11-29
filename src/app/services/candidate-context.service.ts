@@ -27,8 +27,8 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     this.translateLabels();
   }
 
-  title: string = '';
-  text: string = '';
+  private title: string = '';
+  private text: string = '';
 
   private englishLevels: IdName[] = [];
   private languages: IdName[] = [];
