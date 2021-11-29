@@ -22,7 +22,7 @@ export class SandboxListPageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  sandBoxes: Sandbox[];
+  sandboxes: Sandbox[];
   candidate: any;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -37,8 +37,8 @@ export class SandboxListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.sandboxService.get().subscribe((data: any) => {
-      this.sandBoxes = data;
-      this.dataSource = new MatTableDataSource(this.sandBoxes);
+      this.sandboxes = data;
+      this.dataSource = new MatTableDataSource(this.sandboxes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
