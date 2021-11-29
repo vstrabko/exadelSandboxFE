@@ -99,7 +99,11 @@ export class CandidateCardPopupComponent implements OnInit {
   public grade: number;
   public candidateStatus: string;
 
-  constructor(private modalWindowService: ModalWindowService, private userName: AuthService, private toastr: ToastrService,) {}
+  constructor(
+    private modalWindowService: ModalWindowService,
+    private userName: AuthService,
+    private toastr: ToastrService,
+    ) {}
 
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
@@ -156,7 +160,7 @@ export class CandidateCardPopupComponent implements OnInit {
     this.postFeedbacks(FEEDBACK);
   }
 
-  postFeedbacks(FEEDBACK: any): any {
+  postFeedbacks(FEEDBACK: { userId: any; grade: number; userReview: string; candidateProccesId: string; }): any {
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
       .then((response: any) => this.toastr.success(response))
@@ -182,10 +186,17 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.phone = response.data.phone;
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
+
         const candidateTechSkills = response.data.candidateTechSkills;
-        this.CANDIDATES_INFO.candidateTechSkills = candidateTechSkills[candidateTechSkills.length - 1].skill.name; 
+
+        this.CANDIDATES_INFO.candidateTechSkills =
+          candidateTechSkills[candidateTechSkills.length - 1].skill.name; 
+
         const candidateLanguages = response.data.candidateLanguages
-        this.CANDIDATES_INFO.candidateLanguages = candidateLanguages[candidateLanguages.length - 1].language.name;
+
+        this.CANDIDATES_INFO.candidateLanguages =
+          candidateLanguages[candidateLanguages.length - 1].language.name;
+          
         const candidateSandboxes = response.data.candidateSandboxes;
         const candidateProcesses = candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].status.id;
