@@ -103,7 +103,7 @@ export class CandidateCardPopupComponent implements OnInit {
     private modalWindowService: ModalWindowService,
     private userName: AuthService,
     private toastr: ToastrService,
-    ) {}
+    ){}
 
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
@@ -150,17 +150,20 @@ export class CandidateCardPopupComponent implements OnInit {
 
   printForm(): any {
     const FEEDBACK = {
-      userId: this.userId,  
+      userId: this.userId,
       grade: this.sliderValue,
       userReview: this.userReview,
       candidateProccesId: this.candidateProccesId,
     };
     console.log(FEEDBACK);
-    
     this.postFeedbacks(FEEDBACK);
   }
 
-  postFeedbacks(FEEDBACK: { userId: any; grade: number; userReview: string; candidateProccesId: string; }): any {
+  postFeedbacks(FEEDBACK: { userId: any;
+                            grade: number;
+                            userReview: string;
+                            candidateProccesId: string;
+                          }): any {
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
       .then((response: any) => this.toastr.success(response))
@@ -179,24 +182,18 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.id = response.data.id;
         console.log(response.data.id);
         console.log(this.CANDIDATES_INFO.id);
-        
         this.CANDIDATES_INFO.surname = response.data.surname;
         this.CANDIDATES_INFO.email = response.data.email;
         this.CANDIDATES_INFO.location = response.data.location.name;
         this.CANDIDATES_INFO.phone = response.data.phone;
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
-
         const candidateTechSkills = response.data.candidateTechSkills;
-
         this.CANDIDATES_INFO.candidateTechSkills =
           candidateTechSkills[candidateTechSkills.length - 1].skill.name; 
-
-        const candidateLanguages = response.data.candidateLanguages
-
+        const candidateLanguages = response.data.candidateLanguages;
         this.CANDIDATES_INFO.candidateLanguages =
           candidateLanguages[candidateLanguages.length - 1].language.name;
-          
         const candidateSandboxes = response.data.candidateSandboxes;
         const candidateProcesses = candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].status.id;
