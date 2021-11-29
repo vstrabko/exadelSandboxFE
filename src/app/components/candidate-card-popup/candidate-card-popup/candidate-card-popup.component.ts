@@ -103,7 +103,7 @@ export class CandidateCardPopupComponent implements OnInit {
     private modalWindowService: ModalWindowService,
     private userName: AuthService,
     private toastr: ToastrService,
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
@@ -164,7 +164,7 @@ export class CandidateCardPopupComponent implements OnInit {
     grade: number;
     userReview: string;
     candidateProccesId: string;
-    }): any{
+  }): any {
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
       .then((response: any) => this.toastr.success(response))
