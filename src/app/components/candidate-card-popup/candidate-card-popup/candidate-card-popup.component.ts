@@ -99,8 +99,6 @@ export class CandidateCardPopupComponent implements OnInit {
   public grade: number;
   public candidateStatus: string;
 
-
-
   constructor(private modalWindowService: ModalWindowService, private userName: AuthService, private toastr: ToastrService,) {}
 
   ngOnInit(): void {
@@ -116,21 +114,18 @@ export class CandidateCardPopupComponent implements OnInit {
     this.getCandidateInfo();
 
     switch (this.userRole) {
-      case "Admin":
-        this.grade = 100
+      case 'Admin':
+        this.grade = 100;
         break;
-      case "Mentor":
-        this.grade = 10
+      case 'Mentor':
+        this.grade = 10;
         break;
-      case "Interviewer":
-        this.grade = 4
+      case 'Interviewer':
+        this.grade = 4;
         break;
-    
       default:
         break;
     }
-    console.log('cabdidate ID', this.CANDIDATES_INFO.id);
-
   }
 
   @Input() user: Candidate;
@@ -161,7 +156,7 @@ export class CandidateCardPopupComponent implements OnInit {
     this.postFeedbacks(FEEDBACK);
   }
 
-  postFeedbacks(FEEDBACK: any) {
+  postFeedbacks(FEEDBACK: any): any {
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
       .then((response: any) => this.toastr.success(response))
@@ -181,7 +176,6 @@ export class CandidateCardPopupComponent implements OnInit {
         console.log(response.data.id);
         console.log(this.CANDIDATES_INFO.id);
         
-        
         this.CANDIDATES_INFO.surname = response.data.surname;
         this.CANDIDATES_INFO.email = response.data.email;
         this.CANDIDATES_INFO.location = response.data.location.name;
@@ -194,28 +188,19 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.candidateLanguages = candidateLanguages[candidateLanguages.length - 1].language.name;
         const candidateSandboxes = response.data.candidateSandboxes;
         const candidateProcesses = candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
-         
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].status.id;
         this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
-
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
         const createDate: string[] = [];
         // const feedback: string[] = [];
         this.feedbacks.forEach((element: any) => {
           element.userId === this.userId ? (this.userReview = element.userReview) : null;
-          // createDate.push(new Date(element.createDate).toLocaleDateString());
-          // feedback.push(element.userReview);
-          // console.log(new Date(element.createDate).toLocaleDateString());
-          
-          
         });
-        // this.feedbacks = feedback;
         this.dateFeedback = createDate;
         console.log(this.feedbacks);
         
         console.log(this.dateFeedback);
       })
       .catch((error: any) => this.toastr.error(error));
-      
     }
 }
