@@ -6,6 +6,7 @@ import { SandboxService } from 'src/app/services/sandbox-service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Sandbox } from 'src/app/models/sandbox.model';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sandbox-list-page',
@@ -13,11 +14,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./sandbox-list-page.component.scss'],
 })
 export class SandboxListPageComponent implements OnInit {
-  constructor(private router: Router, private sandboxService: SandboxService) {}
+  constructor(private router: Router, private sandboxService: SandboxService, private roleUser: AuthService) {}
 
   displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];
   dataSource: MatTableDataSource<Sandbox>;
   selection = new SelectionModel<Sandbox>(true, []);
+  public role: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -42,6 +44,7 @@ export class SandboxListPageComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+    this.role = this.roleUser.userRole();
   }
 
   applyFilter(event: Event): void {

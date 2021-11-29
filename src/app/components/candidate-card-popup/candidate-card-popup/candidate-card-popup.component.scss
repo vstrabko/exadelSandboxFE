@@ -21,8 +21,20 @@
 }
 
 .section {
-    padding: 0 10px;
-    margin-bottom: 0 !important;
+  padding: 0 10px;
+  margin-bottom: 0 !important;
+
+  
+  
+}
+.all-feedback {
+  border: none;
+  .feedback {
+    border: 1px solid $blueColor;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
 }
 
 .candidate-name,
@@ -33,10 +45,10 @@
 
 .candidate-skills,
 .raiting {
-    width: 500px;
-    & > * {
-        width: 245px;
-    }
+  width: 500px;
+  & > * {
+    width: 245px;
+  }
 }
 
 .user-name {
@@ -77,6 +89,21 @@
     display: flex;
     &-slide {
         width: 90%;
+    }
+
+    &-info {
+      border: 1px solid $blueColor;
+      border-radius: 50%;
+      align-self: center;
+      padding: 10px;
+      min-height: 45px;
+      min-width: 55px;
+      display: flex;
+      justify-content: center;
+
+      span {
+        text-align: center;
+      }
     }
 }
 

@@ -3,17 +3,10 @@
     <div class="section">
       <div class="two-column">
         <mat-card class="candidate-name">{{ user.name }} {{ CANDIDATES_INFO.surname }}</mat-card>
-        <mat-form-field class="candidate-status" appearance="fill">
-          <mat-label>{{ 'candidate.status' | translate }}</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let stat of status" [value]="stat.value">
-              {{ stat.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <mat-card  class="candidate-name">Status: {{candidateStatus}}</mat-card>
       </div>
-      <mat-card class="candidate-skills">{{CANDIDATES_INFO.candidateTechSkills}}</mat-card>
-      <mat-card class="candidate-skills">{{CANDIDATES_INFO.additionalSkills}}</mat-card>
+      <mat-card class="candidate-skills">{{CANDIDATES_INFO.candidateTechSkills || null}}</mat-card>
+      <mat-card class="candidate-skills">{{CANDIDATES_INFO.additionalSkills || null}}</mat-card>
       <div class="raiting two-column">
         <mat-card>{{CANDIDATES_INFO.email}}</mat-card>
         <mat-card>{{CANDIDATES_INFO.skype}}</mat-card>
@@ -28,20 +21,20 @@
     <div class="section">
       <mat-card class="user-name">{{ userAuthName }}{{ 'feedback' | translate }}</mat-card>
 
-      <div class="custom-slider" *ngIf="userRole === 'Admin'">
+      <div class="custom-slider" *ngIf="userRole !== 'Recruiter'">
         <div class="custom-slider-slide">
           <mat-slider
             thumbLabel
             tickInterval="1"
             step="1"
             min="0"
-            max="100"
+            max="{{ grade }}"
             aria-label="units"
             (change)="onChangeRange($event)">
           </mat-slider>
         </div>
         <div class="custom-slider-info">
-          <span>{{ sliderValue }}</span>
+          <span >{{ sliderValue || 0 }}</span>
         </div>
       </div>
 
@@ -56,13 +49,26 @@
         </textarea>
       </mat-form-field>
 
-       <div class="all-feedback" *ngIf="userRole === 'Admin'">
-        <!-- <p>{{ feedback.userId }}</p>
-        <p>{{ feedback.createDate }}</p>
-        <p>{{ feedback.userReview }}</p> -->
-        <p *ngFor="let feedback of feedbacks">{{ feedback }}</p>
+      <div *ngIf="userRole === 'Admin'" class="all-feedback">
+        <div  *ngFor="let review of feedbacks">
+          <div  class="feedback">
 
+            <div class="review">
+              <span>{{ review.userReview }}</span>
+            </div>
+
+            <!-- <div class="userId">
+              <span>{{ review.userId }}</span>
+            </div> -->
+
+            <div class="date">
+              <span>{{ review.createDate | date: 'MMM d, y, h:mm a' }}</span>
+            </div>
+
+          </div>
+        </div>
       </div>
+
 
       <div class="two-column buttons">
         <button class="btn unfilled-btn" (click)="cancel()">{{ 'cancel' | translate }}</button>
