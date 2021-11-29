@@ -14,7 +14,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sandbox-list-page.component.scss'],
 })
 export class SandboxListPageComponent implements OnInit {
-  constructor(private router: Router, private sandboxService: SandboxService, private roleUser: AuthService) {}
+  constructor(
+    private router: Router,
+    private sandboxService: SandboxService,
+    private roleUser: AuthService
+  ) {}
 
   displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];
   dataSource: MatTableDataSource<Sandbox>;

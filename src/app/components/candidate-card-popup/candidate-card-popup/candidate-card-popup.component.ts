@@ -103,7 +103,7 @@ export class CandidateCardPopupComponent implements OnInit {
     private modalWindowService: ModalWindowService,
     private userName: AuthService,
     private toastr: ToastrService,
-    ){}
+    ) {}
 
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
@@ -160,10 +160,10 @@ export class CandidateCardPopupComponent implements OnInit {
   }
 
   postFeedbacks(FEEDBACK: { userId: any;
-                            grade: number;
-                            userReview: string;
-                            candidateProccesId: string;
-                          }): any {
+    grade: number;
+    userReview: string;
+    candidateProccesId: string;
+    }): any {
     return axios
       .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
       .then((response: any) => this.toastr.success(response))
@@ -195,7 +195,8 @@ export class CandidateCardPopupComponent implements OnInit {
         this.CANDIDATES_INFO.candidateLanguages =
           candidateLanguages[candidateLanguages.length - 1].language.name;
         const candidateSandboxes = response.data.candidateSandboxes;
-        const candidateProcesses = candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
+        const candidateProcesses =
+          candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].status.id;
         this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
@@ -206,7 +207,6 @@ export class CandidateCardPopupComponent implements OnInit {
         });
         this.dateFeedback = createDate;
         console.log(this.feedbacks);
-        
         console.log(this.dateFeedback);
       })
       .catch((error: any) => this.toastr.error(error));
