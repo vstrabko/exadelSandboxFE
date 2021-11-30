@@ -9,8 +9,14 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
 
 @NgModule({
   declarations: [CalendarPageComponent],
-  imports: [CommonModule, FullCalendarModule, PopupChooseTheTimeModule, PopupConfirmModule, InternationalizationModule],
+  imports: [
+    CommonModule,
+    FullCalendarModule,
+    PopupChooseTheTimeModule,
+    PopupConfirmModule,
+    InternationalizationModule,
+  ],
   exports: [CalendarPageComponent],
-  providers: [LocalizationService]
+  providers: [LocalizationService],
 })
 export class CalendarPageModule {}

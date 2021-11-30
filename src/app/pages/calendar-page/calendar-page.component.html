@@ -1,5 +1,4 @@
 <div class="page_container">
-  <button (click)="handleWeekendsToggle()">toggle weekends</button>
-    <full-calendar [options]='calendarOptions' id="calendar"></full-calendar>
+    <full-calendar *ngIf="dataAvailable" [options]='calendarOptions' id="calendar"></full-calendar>
   </div>
 <app-popup-confirm *ngIf="isVisible" (modal)="closeModal()" (deleteEvent)="deleteEvent()"></app-popup-confirm>

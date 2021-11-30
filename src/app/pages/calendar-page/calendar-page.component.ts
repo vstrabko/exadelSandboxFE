@@ -1,14 +1,18 @@
-import { Component, ViewChild, OnInit} from '@angular/core';
-import { Calendar } from '@fullcalendar/core'
-import { FullCalendarComponent, CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 
-import { EventTime } from 'src/app/interfaces/interfaces';
-// import { INITIAL_EVENTS, createEventId } from './event-utils';
-// import { INITIAL_EVENTS } from './event-utils';
+import {
+  FullCalendarComponent,
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventApi,
+  EventInput,
+} from '@fullcalendar/angular';
+
 import enLocale from '@fullcalendar/core/locales/es';
 import ruLocale from '@fullcalendar/core/locales/fr';
 import { CalendarEventService } from '../../services/calendarEvent.service';
-import { CalendarEventPost } from '../../interfaces/interfaces'
+import { CalendarEventPost } from '../../interfaces/interfaces';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,7 +20,9 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './calendar-page.component.html',
   styleUrls: ['./calendar-page.component.scss'],
 })
-export class CalendarPageComponent implements OnInit{
+export class CalendarPageComponent implements OnInit, OnDestroy {
+  @ViewChild('calendar', { static: true }) calendar: FullCalendarComponent;
+
   public isVisible = false;
   private calendarApi: any;
   public delEvent = false;
@@ -24,41 +30,46 @@ export class CalendarPageComponent implements OnInit{
   public currentEvents: EventApi[] = [];
   public selectInfo: DateSelectArg;
   public arrEventsPost: CalendarEventPost[] = [];
+  public dataAvailable: boolean = false;
 
-    constructor(private calendarEventService: CalendarEventService, private userService: UserService ) {
-    const name = Calendar.name
-  }
+  constructor(
+    private calendarEventService: CalendarEventService,
+    private userService: UserService,
+  ) {}
 
-  ngOnInit(){
-    this.calendarEventService.getEvents()
-    console.log('calendar page',this.calendarEventService.INITIAL_EVENTS)
-
+  ngOnInit(): void {
+    this.calendarEventService.INITIAL_EVENTS = [];
+    this.calendarEventService.getEvents();
+    this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
+      if (res.length) {
+        this.calendarOptions.initialEvents = res;
+        this.dataAvailable = true;
+      }
+    });
   }
 
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today weekends',
       center: 'title',
-      right: 'timeGridWeek,listWeek,dayGridMonth submit'
+      right: 'timeGridWeek,listWeek,dayGridMonth submit',
     },
     customButtons: {
       submit: {
         text: 'Submit',
         hint: 'Send events to server',
-        click: ()=> this.submitEvents(),
+        click: () => this.submitEvents(),
       },
       weekends: {
         text: 'Weekends',
         hint: 'Toggle weekends',
-        click: ()=> this.handleWeekendsToggle(),
-      }
+        click: () => this.handleWeekendsToggle(),
+      },
     },
-
-    locales: [ enLocale, ruLocale ],
+    locales: [enLocale, ruLocale],
     locale: 'en',
     initialView: 'timeGridWeek',
     initialEvents: this.calendarEventService.INITIAL_EVENTS,
-    // initialEvents: INITIAL_EVENTS,
     weekNumberCalculation: 'ISO',
     weekends: true,
     editable: true,
@@ -77,23 +88,20 @@ export class CalendarPageComponent implements OnInit{
   }
 
   handleDateSelect(selectInfo: DateSelectArg): void {
-
     this.calendarApi = selectInfo.view.calendar;
-    if(this.calendarApi.currentData.currentViewType === 'timeGridWeek' ){
-    this.createEvent(selectInfo)
-    this.calendarApi.unselect();
-
+    if (this.calendarApi.currentData.currentViewType === 'timeGridWeek') {
+      this.createEvent(selectInfo);
+      this.calendarApi.unselect();
     }
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
     this.openModal();
-    this.clickInfo = clickInfo
-
+    this.clickInfo = clickInfo;
+    // this.calendarEventService.deleteEvent(clickInfo.event.id)
     // if(this.calendarApi.currentData.currentViewType){
     //   this.openModal();
     // }
-
   }
 
   handleEvents(events: EventApi[]): void {
@@ -103,42 +111,46 @@ export class CalendarPageComponent implements OnInit{
   openModal(): void {
     this.isVisible = true;
   }
+
   closeModal(): void {
     this.isVisible = false;
   }
 
-
-  createEvent(selectInfo:DateSelectArg): void{
-      this.calendarApi.addEvent({
-        // id: createEventId(),
-        title: 'free time',
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: false,
-        color: 'green'
-      })
-
-
-    this.creatObjEventForPost(selectInfo)
+  createEvent(selectInfo: DateSelectArg): void {
+    this.calendarApi.addEvent({
+      // id: createEventId(),
+      title: 'free time',
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: false,
+      color: 'green',
+    });
+    this.creatObjEventForPost(selectInfo);
   }
 
-  deleteEvent(){
-    this.clickInfo.event.remove()
-    console.log(this.currentEvents)
+  deleteEvent(): void {
+    this.clickInfo.event.remove();
   }
 
-  submitEvents(){
-    console.log(this.arrEventsPost)
-    this.calendarEventService.postEvents(this.arrEventsPost)
+  submitEvents(): void {
+    this.calendarEventService.postEvents(this.arrEventsPost);
   }
 
-  creatObjEventForPost(selectInfo: any){
-    let startTime = selectInfo.start.toISOString();
-    let endTime = selectInfo.end.toISOString();
-    let objEvent = {
-      startTime:startTime,
-      endTime:endTime}
-    console.log(objEvent)
-    this.arrEventsPost.push(objEvent)
+  creatObjEventForPost(selectInfo: DateSelectArg): void {
+    const startTime = selectInfo.start.toISOString();
+    const endTime = selectInfo.end.toISOString();
+    const objEvent = {
+      ownerId: this.userService.user.id,
+      summary: 'Free time',
+      startTime: startTime,
+      endTime: endTime,
+    };
+    console.log(objEvent);
+    this.arrEventsPost.push(objEvent);
+  }
+
+  ngOnDestroy(): void {
+    this.dataAvailable = false;
+    this.calendarEventService.eventSubject.next([]);
   }
 }
