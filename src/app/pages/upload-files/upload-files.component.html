@@ -6,7 +6,7 @@
                 <input formControlName="email" matInput>
             </mat-form-field>
             <label for="inpFile" class="btn unfilled-btn">{{ 'uploadPage.upload' | translate }}
-                <input formControlName="file" type="file" accept=".txt" id="inpFile" (change)="onFileChange($event)">
+                <input formControlName="file" type="file" accept=".txt, .pdf" id="inpFile" (change)="onFileChange($event)">
             </label>
             <input type="submit" class="btn filled-btn">
         </form>
