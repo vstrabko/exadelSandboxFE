@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-
+import { MatSliderChange } from '@angular/material/slider';
 import axios from 'axios';
 import { ToastrService } from 'ngx-toastr';
 import { Candidate } from 'src/app/models/candidate.model';
@@ -158,6 +158,9 @@ export class CandidateCardPopupComponent implements OnInit {
     console.log(FEEDBACK);
     this.postFeedbacks(FEEDBACK);
   }
+  onChangeRange(rangeValue: MatSliderChange): void {
+    this.sliderValue = rangeValue.value ? rangeValue.value : 0;
+  }
 
   postFeedbacks(FEEDBACK: {
     userId: any;
@@ -171,9 +174,9 @@ export class CandidateCardPopupComponent implements OnInit {
       .catch((error: any) => this.toastr.error(error));
   }
 
-  onChangeRange(rangeValue: any): any {
-    this.sliderValue = rangeValue.value;
-  }
+  // onChangeRange(rangeValue: any): any {
+  //   this.sliderValue = rangeValue.value;
+  // }
 
   getCandidateInfo(): any {
     return axios

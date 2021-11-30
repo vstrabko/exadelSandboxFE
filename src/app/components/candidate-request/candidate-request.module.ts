@@ -8,19 +8,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
-
-import { CandidateModule } from '../candidate/candidate.module';
+import { IsObjectHaveNullValues } from 'src/app/Pipes/nullIndetifier.pipe';
 
 @NgModule({
-  declarations: [CandidateRequestComponent],
+  declarations: [CandidateRequestComponent, IsObjectHaveNullValues],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CandidateModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
@@ -28,6 +27,7 @@ import { CandidateModule } from '../candidate/candidate.module';
     MatRadioModule,
     MatCheckboxModule,
     InternationalizationModule,
+    MatAutocompleteModule,
   ],
   providers: [LocalizationService],
   exports: [CandidateRequestComponent],
