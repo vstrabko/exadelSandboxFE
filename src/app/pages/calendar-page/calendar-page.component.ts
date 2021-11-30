@@ -72,7 +72,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     initialEvents: this.calendarEventService.INITIAL_EVENTS,
     weekNumberCalculation: 'ISO',
     weekends: true,
-    editable: true,
+    editable: false,
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
@@ -89,22 +89,23 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
 
   handleDateSelect(selectInfo: DateSelectArg): void {
     this.calendarApi = selectInfo.view.calendar;
-    if (this.calendarApi.currentData.currentViewType === 'timeGridWeek') {
+    if (
+      this.calendarApi.currentData.currentViewType === 'timeGridWeek' &&
+      this.userService.user._roles.includes('Interviewer')
+    ) {
       this.createEvent(selectInfo);
       this.calendarApi.unselect();
     }
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    this.openModal();
-    this.clickInfo = clickInfo;
-    if (clickInfo.event.id) {
-      this.calendarEventService.deleteEvent(clickInfo.event.id);
+    if (this.userService.user._roles.includes('Interviewer')) {
+      this.openModal();
+      this.clickInfo = clickInfo;
+      if (clickInfo.event.id) {
+        this.calendarEventService.deleteEvent(clickInfo.event.id);
+      }
     }
-
-    // if(this.calendarApi.currentData.currentViewType){
-    //   this.openModal();
-    // }
   }
 
   handleEvents(events: EventApi[]): void {
