@@ -11,9 +11,14 @@ export class Sandbox extends ResourceModel<Sandbox> {
   public endDate: string;
   public startRegistration: string;
   public endRegistration: string;
+  public status: string;
   public stackTechnologies: IdName[];
   public languages: IdName[];
   public formatStartDate: string;
+  public interviewers: IdName[];
+  public recruiters: IdName[];
+  public mentors: IdName[];
+
   constructor(model?: Partial<Sandbox>) {
     super(model);
   }

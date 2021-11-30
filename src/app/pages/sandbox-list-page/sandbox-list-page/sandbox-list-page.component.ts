@@ -48,6 +48,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
 
   sandBoxes: Sandbox[];
   sandbox: Sandbox;
+
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   goCreateSandbox(): void {
@@ -59,7 +60,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.showModal.emit();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
     this.sandboxService.get().subscribe((data: Sandbox[]) => {
       this.sandBoxes = data;
       this.matDataSource = new MatTableDataSource(this.sandBoxes);

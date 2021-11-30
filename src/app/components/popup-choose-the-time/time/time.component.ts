@@ -21,11 +21,11 @@ export class TimeComponent {
   sortChildren(): void {
     this.sort.emit();
   }
-  onTimeChange(event: any, type: any): void {
+  onTimeChange(event: Event, type: string): void {
     if (type === 'from') {
-      this.comingTime.startTime = event.target.value;
+      this.comingTime.startTime = event.target ? (event.target as HTMLInputElement).value : '';
     } else {
-      this.comingTime.endTime = event.target.value;
+      this.comingTime.endTime = event.target ? (event.target as HTMLInputElement).value : '';
     }
     this.sort.emit(this.comingTime);
   }
