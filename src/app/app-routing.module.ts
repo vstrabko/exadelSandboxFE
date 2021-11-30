@@ -6,6 +6,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page/sandbox-list-page.component';
+import { UploadFilesComponent } from './pages/upload-files/upload-files.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarPageComponent },
   { path: 'sandbox', component: SandboxListPageComponent },
   { path: 'sandbox/create', component: CreateSandboxPageComponent },
-
+  { path: 'upload-files', component: UploadFilesComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

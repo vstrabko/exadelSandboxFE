@@ -144,5 +144,8 @@
   "authTostr": {
     "title": "Authentication error",
     "text": "Please check carefully that all details are correct"
+  },
+  "uploadPage": {
+    "upload": "Choose file"
   }
 }
