@@ -34,7 +34,7 @@ export class UploadFilesComponent implements OnInit {
   submit(): void {
     if (this.fileSendForm.valid) {
       const formData = new FormData();
-      const emailForm: string = this.fileSendForm.controls.email.value;
+      const emailForm: string = this.fileSendForm.controls.email.value || '';
       formData.append('file', this.fileSendForm.controls.fileSource.value, `${emailForm}`);
       this.http.post('http://64.227.114.210:9090/api/files', formData).subscribe();
     }
