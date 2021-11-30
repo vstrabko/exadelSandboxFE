@@ -60,7 +60,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.showModal.emit();
   }
 
-  ngOnInit(): void 
+  ngOnInit(): void {
     this.sandboxService.get().subscribe((data: Sandbox[]) => {
       this.sandBoxes = data;
       this.matDataSource = new MatTableDataSource(this.sandBoxes);
