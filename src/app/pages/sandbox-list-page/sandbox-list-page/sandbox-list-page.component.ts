@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Component, ViewChild, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -37,8 +36,8 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
 
   queryParams = {
     params: {
-      PageNumber: 2,
-      PageSize: 2,
+      PageNumber: 1,
+      PageSize: 5,
       SortingType: 0,
       SortField: '1',
     },
@@ -48,20 +47,20 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   sandBoxes: Sandbox[];
-  candidate: any;
+  sandbox: Sandbox;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   goCreateSandbox(): void {
     void this.router.navigateByUrl('/sandbox/create');
   }
 
-  togglePopup(row: number): void {
-    this.candidate = row;
+  togglePopup(row: Sandbox): void {
+    this.sandbox = row;
     this.showModal.emit();
   }
 
   ngOnInit(): void {
-    this.sandboxService.get().subscribe((data: any) => {
+    this.sandboxService.get().subscribe((data: Sandbox[]) => {
       this.sandBoxes = data;
       this.matDataSource = new MatTableDataSource(this.sandBoxes);
       this.dataSource = new SandboxDataSource(this.sandboxServiceFilter);
@@ -72,13 +71,13 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.paginator.page.pipe(tap(() => this.loadSandboxesPage())).subscribe((data: any) => {
+    this.paginator.page.pipe(tap(() => this.loadSandboxesPage())).subscribe((data: unknown) => {
       console.log('data pagin', data);
     });
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(tap(() => this.loadSandboxesPage()))
-      .subscribe((data: any) => {
+      .subscribe((data: unknown) => {
         console.log('data sort', data);
       });
   }

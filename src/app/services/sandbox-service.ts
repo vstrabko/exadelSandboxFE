@@ -6,6 +6,6 @@ import { ApiService } from './api.service';
 @Injectable({ providedIn: 'root' })
 export class SandboxService extends ApiService<Sandbox> {
   constructor(private http: HttpClient) {
-    super(http, Sandbox, '/api/sandboxes/all');
+    super(http, Sandbox, '/api/sandboxes');
   }
 }
