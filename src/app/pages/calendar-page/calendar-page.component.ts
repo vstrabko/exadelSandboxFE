@@ -98,7 +98,10 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   handleEventClick(clickInfo: EventClickArg): void {
     this.openModal();
     this.clickInfo = clickInfo;
-    // this.calendarEventService.deleteEvent(clickInfo.event.id)
+    if (clickInfo.event.id) {
+      this.calendarEventService.deleteEvent(clickInfo.event.id);
+    }
+
     // if(this.calendarApi.currentData.currentViewType){
     //   this.openModal();
     // }

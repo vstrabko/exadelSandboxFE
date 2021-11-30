@@ -40,6 +40,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
   postEvents(events: CalendarEventPost[]): void {
     events.forEach((ev: CalendarEventPost) => this.postEvent(ev));
   }
+
   postEvent(event: CalendarEventPost): Subscription {
     return this.http
       .post<any>(`${environment.API_URL}/api/events/free-time`, event)
@@ -62,8 +63,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
     this.eventSubject.next(this.INITIAL_EVENTS);
   }
 
-  // deleteEvent(eventId: string): Subscription {
-  //   return this.http
-  //     .delete<any>(`${environment.API_URL}/api/events/${eventId}`).subscribe(ev => console.log('delete', ev))
-  // }
+  deleteEvent(eventId: string): Subscription {
+    return this.http.delete<any>(`${environment.API_URL}/api/events/${eventId}`).subscribe();
+  }
 }
