@@ -51,7 +51,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
 
   add(): void {
     const newId = this.times.length;
-    const newTime:EventTime = {
+    const newTime: EventTime = {
       startTime: '00:00',
       endTime: '00:00',
       id: newId,
