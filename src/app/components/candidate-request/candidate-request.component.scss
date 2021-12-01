@@ -1,7 +1,7 @@
 @import '../../shared/constants/colors.scss';
 @import '../../shared/constants/otherStyles.scss';
 
-.request_form {
+.request-form {
   ::ng-deep .mat-form-field-wrapper {
   padding-bottom: 5px;
 }
@@ -53,7 +53,7 @@
   flex-direction: column;
 }
 
-.time_contact {
+.time-contact {
   width: 100%;
   & > * {
     width: 100%;

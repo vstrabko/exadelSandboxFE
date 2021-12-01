@@ -1,5 +1,8 @@
 {
   "cancel": "Cancel",
+  "apply": "Apply",
+  "reset": "Reset",
+  "close": "Close",
   "errors": {
     "goHome": "Error, go back to home page",
     "goHomeMessage": "Back to Home page"
@@ -25,6 +28,8 @@
     "success": "You have successfully submitted the form"
   },
   "ok": "OK",
+  "feedback": ", please, add your feedback",
+  "save": "Save",
   "other": {
     "englishLevel": "English Level"
   },
@@ -40,7 +45,11 @@
     "invalidEndDate": "Invalid end date",
     "invalidStartDate": "Invalid start date",
     "name": "Sandbox",
-    "period": "Sandbox period"
+    "period": "Sandbox period",
+    "startDate": "Start date",
+    "nameSandbox": "Name",
+    "nameDescription": "Description",
+    "statusSand": "Status"
   },
   "request": {
     "header": "Candidate request",
@@ -55,7 +64,7 @@
     "available1": "Less than 4 hours",
     "available2": "4-6 hours",
     "available3": "6-infinity hours",
-    "language": "Language of intership",
+    "language": "Language of internship",
     "location": "Location (City, Country)",
     "skills": "Primary skill",
     "job": "Current job",
@@ -63,7 +72,7 @@
     "addSkills": "Additional skills, technologies",
     "timeContact": "The best time to contact you",
     "joinExadel": "Are you planning to join Exadel after the Trainig?",
-    "agreement": "Could you provide your agreement to proceed with your Personal Data in accordance with the Privacy article above?",
+    "agreement": "Could you provide your agreement to proceed with your Personal Data?",
     "sendButton": "Send",
     "choose": "Choose an option"
   },
@@ -87,7 +96,8 @@
     "prevPage": "Previous page",
     "of": "of",
     "filter": "Filter",
-    "example": "Ex. Minsk"
+    "example": "Ex. Minsk",
+    "appointInterview": "Appoint Interview"
   },
   "tostr": {
     "title": "Success",
@@ -97,10 +107,36 @@
     "default": "select",
     "recruiters": "Recruiters *",
     "mentors": "Mentors *",
+
     "interviewers": "Interviewers *",
     "status": "Status",
     "location": "Location",
     "mentor": "Mentor",
     "sandbox": "Sandbox"
+},
+  "stepper": {
+    "сhooseTheDate": "Choose the date",
+    "selectedDate": "Selected date",
+    "date": "Date",
+    "chooseInterviewer": "Choose an interviewer",
+    "interviewer": "Interviewer",
+    "chooseTime": "Choose the time",
+    "time": "Time",
+    "end": "End",
+    "interviewDetails": "Interview details",
+    "dateIsRequired": "Date is required.",
+    "interviewerIsRequired": "Interviewer is required.",
+    "timeIsRequired": "Time is required."
+  },
+  "candidate": {
+    "status": "Status",
+    "recruiter": "Recruiter",
+    "mentor": "Mentor",
+    "interviewer": "Interviewer",
+    "feedback": "Feedback"
+  },
+  "authTostr": {
+    "title": "Authentication error",
+    "text": "Please check carefully that all details are correct"
   }
 }

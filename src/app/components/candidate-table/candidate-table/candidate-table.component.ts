@@ -61,10 +61,15 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   candidates: Candidate[];
   candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() showAppointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   togglePopup(row: Candidate): void {
     this.candidate = row;
     this.showModal.emit();
+  }
+
+  toggleAppoinInterview(): void {
+    this.showAppointInterview.emit();
   }
 
   ngOnInit(): void {

@@ -7,11 +7,17 @@ import { Component } from '@angular/core';
 })
 export class AdminMainPageComponent {
   showPopup: boolean;
+  showAppointInterview: boolean;
 
   showPop(): void {
     this.showPopup = !this.showPopup;
   }
   closeCard(): void {
     this.showPopup = !this.showPopup;
+  }
+
+  toggleAppointInterview(): void {
+    console.log('click');
+    this.showAppointInterview = !this.showAppointInterview;
   }
 }
