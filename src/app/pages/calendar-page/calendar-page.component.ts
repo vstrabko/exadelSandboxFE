@@ -1,7 +1,6 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import {
-  FullCalendarComponent,
   CalendarOptions,
   DateSelectArg,
   EventClickArg,
@@ -21,8 +20,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./calendar-page.component.scss'],
 })
 export class CalendarPageComponent implements OnInit, OnDestroy {
-  @ViewChild('calendar', { static: true }) calendar: FullCalendarComponent;
-
   public isVisible = false;
   private calendarApi: any;
   public delEvent = false;
@@ -30,7 +27,6 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   public currentEvents: EventApi[] = [];
   public selectInfo: DateSelectArg;
   public arrEventsPost: CalendarEventPost[] = [];
-  public dataAvailable: boolean = false;
 
   constructor(
     private calendarEventService: CalendarEventService,
@@ -38,13 +34,9 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.calendarEventService.INITIAL_EVENTS = [];
     this.calendarEventService.getEvents();
     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
-      if (res.length) {
-        this.calendarOptions.initialEvents = res;
-        this.dataAvailable = true;
-      }
+      this.calendarOptions.events = res;
     });
   }
 
@@ -69,7 +61,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     locales: [enLocale, ruLocale],
     locale: 'en',
     initialView: 'timeGridWeek',
-    initialEvents: this.calendarEventService.INITIAL_EVENTS,
+    initialEvents: [],
     weekNumberCalculation: 'ISO',
     weekends: true,
     editable: false,
@@ -102,14 +94,12 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     if (this.userService.user._roles.includes('Interviewer')) {
       this.openModal();
       this.clickInfo = clickInfo;
-      if (clickInfo.event.id) {
-        this.calendarEventService.deleteEvent(clickInfo.event.id);
-      }
     }
   }
 
   handleEvents(events: EventApi[]): void {
     this.currentEvents = events;
+    console.log('handleEvents', events);
   }
 
   openModal(): void {
@@ -122,8 +112,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
 
   createEvent(selectInfo: DateSelectArg): void {
     this.calendarApi.addEvent({
-      // id: createEventId(),
-      title: 'free time',
+      title: 'Free time',
       start: selectInfo.startStr,
       end: selectInfo.endStr,
       allDay: false,
@@ -134,6 +123,10 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
 
   deleteEvent(): void {
     this.clickInfo.event.remove();
+    console.log();
+    if (this.clickInfo.event.id) {
+      this.calendarEventService.deleteEvent(this.clickInfo.event.id);
+    }
   }
 
   submitEvents(): void {
@@ -149,12 +142,10 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
       startTime: startTime,
       endTime: endTime,
     };
-    console.log(objEvent);
     this.arrEventsPost.push(objEvent);
   }
 
   ngOnDestroy(): void {
-    this.dataAvailable = false;
     this.calendarEventService.eventSubject.next([]);
   }
 }

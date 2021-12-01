@@ -5,7 +5,7 @@ import { ApiService } from './api.service';
 import { CalendarEventModel } from '../models/calendarEvent.model';
 import { ToastService } from './toast.service';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { CalendarEventPost } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
@@ -15,7 +15,7 @@ import { EventInput } from '@fullcalendar/angular';
 export class CalendarEventService extends ApiService<CalendarEventModel> {
   public INITIAL_EVENTS: EventInput[] = [];
   public dataEvents: CalendarEventModel[];
-  public eventSubject: BehaviorSubject<EventInput[]>;
+  public eventSubject: Subject<EventInput[]>;
 
   constructor(
     private http: HttpClient,
@@ -23,7 +23,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
     private translateService: TranslateService,
   ) {
     super(http, CalendarEventModel, '');
-    this.eventSubject = new BehaviorSubject<EventInput[]>(this.INITIAL_EVENTS);
+    this.eventSubject = new Subject<EventInput[]>();
   }
 
   getEvents(): Subscription {
@@ -33,10 +33,6 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
     });
   }
 
-  // postEvents(events: any): void {
-  //     super.apiUrl = '/api/calendarevents';
-  //   this.create(events).subscribe(res => console.log(res));
-  // }
   postEvents(events: CalendarEventPost[]): void {
     events.forEach((ev: CalendarEventPost) => this.postEvent(ev));
   }
@@ -48,6 +44,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
   }
 
   pushEventsToCalendar(events: CalendarEventModel[]): void {
+    this.INITIAL_EVENTS = [];
     if (events.length) {
       events.forEach((ev: CalendarEventModel) => {
         const evObj = {

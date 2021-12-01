@@ -1,4 +1,4 @@
 <div class="page_container">
-    <full-calendar *ngIf="dataAvailable" [options]='calendarOptions' id="calendar"></full-calendar>
+    <full-calendar [options]='calendarOptions' id="calendar" #calendar></full-calendar>
   </div>
 <app-popup-confirm *ngIf="isVisible" (modal)="closeModal()" (deleteEvent)="deleteEvent()"></app-popup-confirm>
