@@ -43,7 +43,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="{{'candidateList.example' | translate}}" #input>
 </mat-form-field> -->
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 candidate-table">
     <mat-paginator [length]="candidates?.length" [pageSizeOptions]="[1, 5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="select">
@@ -101,3 +101,4 @@
         </tr>
     </table>
 </div>
+<button (click)="toggleAppoinInterview()" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>
