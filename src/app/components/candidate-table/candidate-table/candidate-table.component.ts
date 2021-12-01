@@ -50,7 +50,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     },
     params: {
       PageNumber: 1,
-      PageSize: 1,
+      PageSize: 5,
       SortingType: 0,
       SortField: 'id',
     },

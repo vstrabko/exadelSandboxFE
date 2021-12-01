@@ -44,7 +44,7 @@
 </mat-form-field> -->
 
 <div class="mat-elevation-z8 candidate-table">
-    <mat-paginator [length]="candidates?.length" [pageSizeOptions]="[1, 5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <mat-paginator [length]="candidates?.length" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
