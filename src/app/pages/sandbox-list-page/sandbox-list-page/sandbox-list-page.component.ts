@@ -88,7 +88,6 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
           this.loadSandboxesPage();
           this.sandboxService.get().subscribe((data: Sandbox[]) => {
             this.sandBoxes = data;
-            console.log('data', data);
           });
         }),
       )
