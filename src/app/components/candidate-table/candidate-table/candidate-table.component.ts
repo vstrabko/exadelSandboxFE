@@ -1,3 +1,4 @@
+import { CandidateContextService } from 'src/app/services/candidate-context.service';
 import { Component, ViewChild, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -5,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CandidateService } from 'src/app/services/candidate-service.service';
 import { Candidate } from 'src/app/models/candidate.model';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CandidateContext } from 'src/app/services/candidateContext.service';
 import { IdName } from 'src/app/models/id-name.model';
 import { tap } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
@@ -21,7 +21,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class CandidateTableComponent implements OnInit, AfterViewInit {
   constructor(
     private candidateService: CandidateService,
-    private candidateContext: CandidateContext,
+    private candidateContext: CandidateContextService,
     private candidateServiceFilter: CandidateServiceFilter,
   ) {}
   displayedColumns: string[] = [

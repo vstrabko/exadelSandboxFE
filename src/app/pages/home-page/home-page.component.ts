@@ -23,6 +23,6 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sandboxes = this.candidateContextService.getSandbox();
+    this.sandboxes = this.candidateContextService.getSandbox()[0];
   }
 }

@@ -11,6 +11,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
 import { MultiselectSearchModule } from 'src/app/components/candidate/multiselect-search/multiselect-search.module';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [CreateSandboxPageComponent],
@@ -25,6 +27,8 @@ import { MultiselectSearchModule } from 'src/app/components/candidate/multiselec
     MatNativeDateModule,
     InternationalizationModule,
     MultiselectSearchModule,
+    MatAutocompleteModule,
+    MatTabsModule,
   ],
   exports: [CreateSandboxPageComponent],
   providers: [LocalizationService],
