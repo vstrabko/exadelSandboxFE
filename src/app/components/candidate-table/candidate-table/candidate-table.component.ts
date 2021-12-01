@@ -1,3 +1,4 @@
+import { Employee } from './../../../interfaces/interfaces';
 import { CandidateContextService } from 'src/app/services/candidate-context.service';
 import { Component, ViewChild, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
@@ -32,6 +33,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     'status',
     'sandbox',
     'location',
+    'mentor',
   ];
   matDataSource: MatTableDataSource<Candidate>;
   dataSource: CandidateDataSource;
@@ -41,7 +43,10 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
 
   queryParams = {
     headers: {
-      Locations: ['01c71e88-a4f4-494e-9245-bebf5628efa6', 'd62bfdd0-7cdd-4912-b3d6-e600aea749cf'],
+      Locations: [],
+      Mentors: [],
+      Sandboxes: [],
+      Statuses: [],
     },
     params: {
       PageNumber: 1,
@@ -57,7 +62,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   statusValues: IdName[];
   locationsValues: any;
   sandboxValues: IdName[];
-  mentorsValues: IdName[];
+  mentorsValues: Employee[];
   candidates: Candidate[];
   candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -73,49 +78,59 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.statusValues = this.candidateContext.getStatuses();
-    this.sandboxValues = this.candidateContext.getSandbox();
-    this.mentorsValues = this.candidateContext.getMentors();
-    this.locationsValues = this.candidateContext.getLocations();
-    console.log(this.locationsValues);
+    this.statusValues = this.candidateContext.getStatuses()[0];
+    this.sandboxValues = this.candidateContext.getSandbox()[0];
+    this.mentorsValues = this.candidateContext.getMentors()[0];
+    this.locationsValues = this.candidateContext.getLocation()[0];
     this.candidateRequestForm = new FormGroup({
       locationsId: new FormControl(''),
+      sandmoxId: new FormControl(''),
+      mentorsId: new FormControl(''),
+      statusesId: new FormControl(''),
     });
 
     this.candidateService.get().subscribe((data: any) => {
-      console.log(data);
       this.candidates = data;
       this.matDataSource = new MatTableDataSource(this.candidates);
       this.matDataSource.paginator = this.paginator;
       this.matDataSource.sort = this.sort;
-      this.dataSource = new CandidateDataSource(this.candidateServiceFilter);
-      this.dataSource.loadCandidates(this.queryParams);
     });
+
+    this.dataSource = new CandidateDataSource(this.candidateServiceFilter);
+    this.dataSource.loadCandidates(this.queryParams);
   }
 
   ngAfterViewInit(): void {
-    this.paginator.page.pipe(tap(() => this.loadCandidatesPage())).subscribe((data: unknown) => {
-      console.log('data pagin', data);
-      console.log('selected locations', this.locations.value);
-    });
+    this.paginator.page.pipe(tap(() => this.loadCandidatesPage())).subscribe();
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(tap(() => this.loadCandidatesPage()))
-      .subscribe((data: unknown) => {
-        console.log('data sort', data);
-      });
+      .subscribe();
   }
 
   loadCandidatesPage(): void {
     this.queryParams.params.PageSize = this.paginator.pageSize;
     this.queryParams.params.PageNumber = this.paginator.pageIndex + 1;
-    this.queryParams.params.SortField = this.sort.active;
+    if (this.sort.active) {
+      this.queryParams.params.SortField = this.sort.active;
+    }
     if (this.sort.direction === 'asc') {
       this.queryParams.params.SortingType = 0;
     } else if (this.sort.direction === 'desc') {
       this.queryParams.params.SortingType = 1;
     }
-
+    if (this.candidateRequestForm.value.locationsId) {
+      this.queryParams.headers.Locations = this.candidateRequestForm.value.locationsId;
+    }
+    if (this.candidateRequestForm.value.mentorsId) {
+      this.queryParams.headers.Mentors = this.candidateRequestForm.value.mentorsId;
+    }
+    if (this.candidateRequestForm.value.sandmoxId) {
+      this.queryParams.headers.Sandboxes = this.candidateRequestForm.value.sandmoxId;
+    }
+    if (this.candidateRequestForm.value.statusesId) {
+      this.queryParams.headers.Statuses = this.candidateRequestForm.value.statusesId;
+    }
     this.dataSource.loadCandidates(this.queryParams);
   }
 
@@ -162,8 +177,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   }
 
   submit(): void {
-    console.log(this.candidateRequestForm.value);
+    this.loadCandidatesPage();
+    this.paginator.firstPage();
   }
+
+  // TODO: getting selected candidates:
 
   // selectLocation(event: any): void {
   //   console.log(event);
