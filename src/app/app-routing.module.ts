@@ -7,19 +7,20 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page/sandbox-list-page.component';
 import { GoogleAuthComponent } from './pages/google-auth/google-auth.component';
+import { CandidateGuard } from './guards/candidate.guard';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'candidates', component: AdminMainPageComponent },
-  { path: 'calendar', component: CalendarPageComponent },
-  { path: 'sandbox', component: SandboxListPageComponent },
-  { path: 'sandbox/create', component: CreateSandboxPageComponent },
+  { path: 'candidates', component: AdminMainPageComponent, canActivate: [CandidateGuard] },
+  { path: 'calendar', component: CalendarPageComponent, canActivate: [CandidateGuard] },
+  { path: 'sandbox', component: SandboxListPageComponent, canActivate: [CandidateGuard] },
+  { path: 'sandbox/create', component: CreateSandboxPageComponent, canActivate: [CandidateGuard] },
   {
     path: 'api/google/authorization/callback',
     component: GoogleAuthComponent,
     pathMatch: 'prefix',
+    canActivate: [CandidateGuard]
   },
-
   { path: '**', component: ErrorPageComponent },
 ];
 
