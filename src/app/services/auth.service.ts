@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { catchError, map } from 'rxjs/operators';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -36,7 +36,7 @@ export class AuthService {
       .pipe(
         map((token: authResponse) => {
           if (token) {
-              this.workWithToken(token)
+            this.workWithToken(token);
           }
         }),
       )
@@ -110,7 +110,7 @@ export class AuthService {
     return item ? item : '';
   }
 
-  workWithToken(token: authResponse) {
+  workWithToken(token: authResponse): void {
     this.setToken(token);
     this.userService.getUser().subscribe((user: User) => {
       this.authSubject.next(user);
