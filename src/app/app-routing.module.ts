@@ -6,7 +6,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page/sandbox-list-page.component';
-import { GoogleAuthComponent } from './pages/google-auth/google-auth.component'
+import { GoogleAuthComponent } from './pages/google-auth/google-auth.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -14,7 +14,11 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarPageComponent },
   { path: 'sandbox', component: SandboxListPageComponent },
   { path: 'sandbox/create', component: CreateSandboxPageComponent },
-  { path: 'api/google/authorization/callback', component: GoogleAuthComponent, pathMatch: 'prefix'},
+  {
+    path: 'api/google/authorization/callback',
+    component: GoogleAuthComponent,
+    pathMatch: 'prefix',
+  },
 
   { path: '**', component: ErrorPageComponent },
 ];

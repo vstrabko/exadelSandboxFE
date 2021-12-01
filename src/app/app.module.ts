@@ -73,7 +73,7 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     PopupChooseTheTimeModule,
     FullCalendarModule,
     CandidateTableModule,
-    GoogleAuthModule
+    GoogleAuthModule,
   ],
   providers: [
     AuthService,
