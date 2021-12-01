@@ -1,4 +1,12 @@
-import { Component, ViewChild, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+  ElementRef,
+} from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { SandboxService } from 'src/app/services/sandbox-service';
@@ -7,9 +15,10 @@ import { Sandbox } from 'src/app/models/sandbox.model';
 import { Router } from '@angular/router';
 import { SandboxServiceFilter } from './../../../services/sandboxFilter-service';
 import { SandboxDataSource } from './sandbox-data-source';
-import { tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { merge } from 'rxjs/internal/observable/merge';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-sandbox-list-page',
@@ -17,11 +26,7 @@ import { merge } from 'rxjs/internal/observable/merge';
   styleUrls: ['./sandbox-list-page.component.scss'],
 })
 export class SandboxListPageComponent implements OnInit, AfterViewInit {
-  isLoading = false;
   totalRows = 0;
-  pageSize = 5;
-  currentPage = 0;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
 
   constructor(
     private router: Router,
@@ -39,12 +44,13 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
       PageNumber: 1,
       PageSize: 5,
       SortingType: 0,
-      SortField: '1',
+      SearchingStringAll: ',',
     },
   };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('input') input: ElementRef;
 
   sandBoxes: Sandbox[];
   sandbox: Sandbox;
@@ -64,14 +70,30 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.sandboxService.get().subscribe((data: Sandbox[]) => {
       this.sandBoxes = data;
       this.matDataSource = new MatTableDataSource(this.sandBoxes);
-      this.dataSource = new SandboxDataSource(this.sandboxServiceFilter);
-      this.dataSource.loadSandboxes(this.queryParams);
       this.matDataSource.paginator = this.paginator;
       this.matDataSource.sort = this.sort;
     });
+    this.dataSource = new SandboxDataSource(this.sandboxServiceFilter);
+    this.dataSource.sandboxSubject.subscribe((data: Sandbox[]) => (this.sandBoxes = data));
+    this.dataSource.loadSandboxes(this.queryParams);
   }
 
   ngAfterViewInit(): void {
+    fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap(() => {
+          this.paginator.pageIndex = 0;
+          this.loadSandboxesPage();
+          this.sandboxService.get().subscribe((data: Sandbox[]) => {
+            this.sandBoxes = data;
+            console.log('data', data);
+          });
+        }),
+      )
+      .subscribe();
+
     this.paginator.page.pipe(tap(() => this.loadSandboxesPage())).subscribe((data: unknown) => {
       console.log('data pagin', data);
     });
@@ -86,23 +108,29 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
   loadSandboxesPage(): void {
     this.queryParams.params.PageSize = this.paginator.pageSize;
     this.queryParams.params.PageNumber = this.paginator.pageIndex + 1;
-    this.queryParams.params.SortField = this.sort.active;
+    if (this.sort.active) {
+      this.queryParams.params.SearchingStringAll = this.sort.active;
+    }
     if (this.sort.direction === 'asc') {
       this.queryParams.params.SortingType = 0;
     } else if (this.sort.direction === 'desc') {
       this.queryParams.params.SortingType = 1;
     }
-
     this.dataSource.loadSandboxes(this.queryParams);
   }
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.matDataSource.filter = filterValue.trim().toLowerCase();
-
+    if (filterValue === '') {
+      this.queryParams.params.SearchingStringAll = ',';
+    } else {
+      this.queryParams.params.SearchingStringAll = filterValue;
+    }
     if (this.matDataSource.paginator) {
       this.matDataSource.paginator.firstPage();
     }
+    this.dataSource.loadSandboxes(this.queryParams);
   }
 
   isAllSelected(): boolean {

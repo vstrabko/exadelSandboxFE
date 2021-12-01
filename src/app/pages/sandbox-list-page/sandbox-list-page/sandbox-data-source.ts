@@ -4,7 +4,7 @@ import { Sandbox } from 'src/app/models/sandbox.model';
 import { SandboxServiceFilter } from 'src/app/services/sandboxFilter-service';
 
 export class SandboxDataSource implements DataSource<Sandbox> {
-  private sandboxSubject = new BehaviorSubject<Sandbox[]>([]);
+  public sandboxSubject = new BehaviorSubject<Sandbox[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
   public loading$ = this.loadingSubject.asObservable();
