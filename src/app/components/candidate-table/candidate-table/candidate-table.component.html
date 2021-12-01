@@ -5,7 +5,7 @@
         </mat-panel-title>
         <mat-icon>assignment</mat-icon>
     </mat-expansion-panel-header>
-    <form action="">
+    <form [formGroup]="candidateRequestForm" (ngSubmit)="submit()">
     <div class="inputs_container">
         <mat-form-field appearance="fill">
             <mat-label>{{ 'select.status' | translate }}</mat-label>
@@ -15,8 +15,9 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>{{ 'select.location' | translate }}</mat-label>
-            <mat-select multiple>
-                <mat-option *ngFor="let location of locationsValues" [value]="location">{{location}}</mat-option>
+            <!-- <mat-select [(ngModel)]="selectedLocations" (change)="selectLocation($event)" multiple> -->
+            <mat-select formControlName="locationsId" multiple>
+                <mat-option *ngFor="let location of locationsValues" [value]="location.id">{{location.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">

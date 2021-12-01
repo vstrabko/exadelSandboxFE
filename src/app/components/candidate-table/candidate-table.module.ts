@@ -15,6 +15,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { MatPaginatorIntlRu } from '../candidate/candidate-list/intPaginator';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CandidateTableComponent],
@@ -32,6 +33,7 @@ import { MatPaginatorIntlRu } from '../candidate/candidate-list/intPaginator';
     MatIconModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
   ],
   exports: [CandidateTableComponent],
   providers: [LocalizationService, { provide: MatPaginatorIntl, useClass: MatPaginatorIntlRu }],

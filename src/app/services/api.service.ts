@@ -1,6 +1,6 @@
 import { Observable, ObservableInput, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ResourceModel } from '../models/resource.model';
 
@@ -27,9 +27,12 @@ export abstract class ApiService<T extends ResourceModel<T>> {
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
-  public filter(queryParams: { params: { [name: string]: string | number } }): Observable<any> {
+  public filter(options: {
+    headers?: HttpHeaders | { [header: string]: string | string[] };
+    params: { [name: string]: string | number };
+  }): Observable<any> {
     return this.httpClient
-      .get<T[]>(`${this.baseUrl}${this.apiUrl}`, queryParams)
+      .get<T[]>(`${this.baseUrl}${this.apiUrl}`, options)
       .pipe(
         map((result: Partial<T>[]) => result.map((res: Partial<T>) => new this.tConstructor(res))),
       )

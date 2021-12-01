@@ -11,6 +11,8 @@ import { tap } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
 import { CandidateServiceFilter } from 'src/app/services/candidate-filter.service';
 import { CandidateDataSource } from './candidate-data-source';
+import { FormControl, FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
@@ -34,8 +36,13 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   matDataSource: MatTableDataSource<Candidate>;
   dataSource: CandidateDataSource;
   selection = new SelectionModel<Candidate>(true, []);
+  locations = new FormControl();
+  public candidateRequestForm: FormGroup;
 
   queryParams = {
+    headers: {
+      Locations: ['01c71e88-a4f4-494e-9245-bebf5628efa6', 'd62bfdd0-7cdd-4912-b3d6-e600aea749cf'],
+    },
     params: {
       PageNumber: 1,
       PageSize: 1,
@@ -48,7 +55,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   statusValues: IdName[];
-  locationsValues: IdName[];
+  locationsValues: any;
   sandboxValues: IdName[];
   mentorsValues: IdName[];
   candidates: Candidate[];
@@ -65,6 +72,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     this.sandboxValues = this.candidateContext.getSandbox();
     this.mentorsValues = this.candidateContext.getMentors();
     this.locationsValues = this.candidateContext.getLocations();
+    console.log(this.locationsValues);
+    this.candidateRequestForm = new FormGroup({
+      locationsId: new FormControl(''),
+    });
+
     this.candidateService.get().subscribe((data: any) => {
       console.log(data);
       this.candidates = data;
@@ -79,6 +91,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.paginator.page.pipe(tap(() => this.loadCandidatesPage())).subscribe((data: unknown) => {
       console.log('data pagin', data);
+      console.log('selected locations', this.locations.value);
     });
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     merge(this.sort.sortChange, this.paginator.page)
@@ -142,4 +155,13 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${Number(row.id)}`;
   }
+
+  submit(): void {
+    console.log(this.candidateRequestForm.value);
+  }
+
+  // selectLocation(event: any): void {
+  //   console.log(event);
+  //   console.log(this.selectLocation);
+  // }
 }

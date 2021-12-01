@@ -40,7 +40,7 @@ export class CandidateContext extends ApiService<candidateRequestData> {
     return this.getData(this.statuses, '/api/statuses');
   }
   getLocations(): IdName[] {
-    return this.getData(this.statuses, '/api/locations');
+    return this.getData(this.locations, '/api/locations');
   }
   getSandbox(): Sandbox[] {
     return this.getData(this.sandboxes, '/api/sandboxes');
