@@ -17,6 +17,8 @@ interface Status {
   styleUrls: ['./candidate-card-popup.component.scss'],
 })
 export class CandidateCardPopupComponent implements OnInit {
+  private URL = 'http://64.227.114.210:9090/api/';
+
   public CANDIDATES_INFO = {
     id: '',
     name: '',
@@ -93,6 +95,7 @@ export class CandidateCardPopupComponent implements OnInit {
   public userId = this.userName.userId();
   public userReview: string;
   public feedbacks: any[];
+  public feedbackId: string;
   public candidateProccesId: string;
   public date = new Date();
   public dateFeedback: any[];
@@ -144,48 +147,70 @@ export class CandidateCardPopupComponent implements OnInit {
     { value: 'approved', viewValue: 'approved' },
   ];
 
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
+
   cancel(): void {
     this.modal.emit();
   }
 
   printForm(): any {
-    const FEEDBACK = {
+    const FEEDBACK_PUT = {
+      feedbackId: this.feedbackId,
+      grade: this.sliderValue,
+      userReview: this.userReview,
+    };
+    const FEEDBACK_POST = {
       userId: this.userId,
       grade: this.sliderValue,
       userReview: this.userReview,
       candidateProccesId: this.candidateProccesId,
     };
-    console.log(FEEDBACK);
-    this.postFeedbacks(FEEDBACK);
+    console.log(FEEDBACK_POST);
+    !this.feedbackId ? this.postFeedbacks(FEEDBACK_POST) : this.putFeedbacks(FEEDBACK_PUT);
+    // this.getFeedbacks();
   }
   onChangeRange(rangeValue: MatSliderChange): void {
     this.sliderValue = rangeValue.value ? rangeValue.value : 0;
   }
 
-  postFeedbacks(FEEDBACK: {
-    userId: any;
+  postFeedbacks(FEEDBACK_POST: {
+    userId: string;
     grade: number;
     userReview: string;
     candidateProccesId: string;
   }): any {
     return axios
-      .post(`http://64.227.114.210:9090/api/feedbacks`, FEEDBACK)
-      .then((response: any) => this.toastr.success(response))
-      .catch((error: any) => this.toastr.error(error));
+      .post(`${this.URL}feedbacks`, FEEDBACK_POST)
+      .then((response: any) => console.log(response))
+      .catch((error: any) => console.log(error));
   }
 
-  // onChangeRange(rangeValue: any): any {
-  //   this.sliderValue = rangeValue.value;
-  // }
+  getFeedbacks(): any {
+    return axios
+      .get(`${this.URL}feedbacks/${this.feedbackId}`)
+      .then((response: any) => console.log(response))
+      .catch((error: any) => console.log(error));
+  }
+
+  putFeedbacks(FEEDBACK_PUT: { feedbackId: string; grade: number; userReview: string }): any {
+    return axios //add to URL
+      .put(
+        `${this.URL}${FEEDBACK_PUT.feedbackId}?userReview=${FEEDBACK_PUT.userReview}&grade=${FEEDBACK_PUT.grade}`,
+        { params: FEEDBACK_PUT },
+      )
+      .then((response: any) => console.log(response))
+      .catch((error: any) => console.log(error));
+  }
 
   getCandidateInfo(): any {
     return axios
-      .get(`http://64.227.114.210:9090/api/candidates/${this.user.id}`)
+      .get(`${this.URL}candidates/${this.user.id}`)
       .then((response: any) => {
-        // this.toastr.success('Success');
+        console.log(response);
         this.CANDIDATES_INFO.id = response.data.id;
-        console.log(response.data.id);
-        console.log(this.CANDIDATES_INFO.id);
         this.CANDIDATES_INFO.surname = response.data.surname;
         this.CANDIDATES_INFO.email = response.data.email;
         this.CANDIDATES_INFO.location = response.data.location.name;
@@ -204,14 +229,27 @@ export class CandidateCardPopupComponent implements OnInit {
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].status.id;
         this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
+        console.log(this.feedbacks);
         const createDate: string[] = [];
-        // const feedback: string[] = [];
         this.feedbacks.forEach((element: any) => {
           element.userId === this.userId ? (this.userReview = element.userReview) : null;
+          element.userId === this.userId ? (this.feedbackId = element.id) : null;
+          // if (element.userId === this.userId) {
+          //   if (element.grade) {
+          //     this.grade = element.grade
+          //   } else this.grade = 0;
+          // }
+          element.userId === this.userId ? (this.sliderValue = element.grade) : null;
+          // console.log(this.userReview, this.feedbackId, element.grade);
+          // if (!element.grade) {
+          //   this.grade = 0;
+          // }
         });
         this.dateFeedback = createDate;
-        console.log(this.feedbacks);
-        console.log(this.dateFeedback);
+        // this.feedbacks.forEach((element: any) => {
+        //   element.userId === this.userId ? (this.feedbackId = element.id) : null;
+        //   console.log(this.feedbackId);
+        // });
       })
       .catch((error: any) => this.toastr.error(error));
   }
