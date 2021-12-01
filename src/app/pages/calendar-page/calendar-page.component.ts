@@ -116,7 +116,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
       start: selectInfo.startStr,
       end: selectInfo.endStr,
       allDay: false,
-      color: 'green',
+      color: '#009300',
     });
     this.creatObjEventForPost(selectInfo);
   }
