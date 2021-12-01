@@ -10,6 +10,7 @@ import { CalendarEventPost } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
 import { EventInput } from '@fullcalendar/angular';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class CalendarEventService extends ApiService<CalendarEventModel> {
@@ -21,13 +22,14 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
     private http: HttpClient,
     private toastService: ToastService,
     private translateService: TranslateService,
+    private userService: UserService,
   ) {
     super(http, CalendarEventModel, '');
     this.eventSubject = new Subject<EventInput[]>();
   }
 
   getEvents(): Subscription {
-    super.apiUrl = '/api/events';
+    super.apiUrl = `/api/users/${this.userService.user.id}/events`;
     return this.get().subscribe((events: CalendarEventModel[]) => {
       this.pushEventsToCalendar(events);
     });
@@ -49,11 +51,27 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
       events.forEach((ev: CalendarEventModel) => {
         const evObj = {
           id: ev.id,
-          title: 'Free time',
+          title: ev.summary,
           start: ev.startTime + 'Z',
           end: ev.endTime + 'Z',
-          backgroundColor: 'green',
+          backgroundColor: 'white',
+          borderColor: 'white',
         };
+        switch (ev.type) {
+          case 0:
+            evObj.backgroundColor = '#009300';
+            evObj.borderColor = '#009300';
+            break;
+          case 1:
+            evObj.backgroundColor = '#1a9da8';
+            evObj.borderColor = '#1a9da8';
+            break;
+          case 2:
+            evObj.backgroundColor = '#f9b615';
+            evObj.borderColor = '#f9b615';
+            break;
+        }
+
         this.INITIAL_EVENTS.push(evObj);
       });
     }
