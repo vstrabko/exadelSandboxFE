@@ -26,7 +26,6 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './sandbox-list-page.component.html',
   styleUrls: ['./sandbox-list-page.component.scss'],
 })
-
 export class SandboxListPageComponent implements OnInit, AfterViewInit {
   totalRows = 0;
   constructor(

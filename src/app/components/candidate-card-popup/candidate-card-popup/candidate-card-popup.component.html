@@ -14,7 +14,7 @@
         </mat-form-field>
 
         <div *ngIf="userRole === 'Admin'">
-          <mat-checkbox class="example-margin" (click)="addStatus()">Change the status</mat-checkbox>
+          <mat-checkbox class="example-margin" (click)="addStatus()">{{ 'status.change' | translate }}</mat-checkbox>
         </div>
 
       </div>
