@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -37,12 +36,7 @@ export class AuthService {
       .pipe(
         map((token: authResponse) => {
           if (token) {
-            this.setToken(token);
-            this.userService.getUser().subscribe((user: User) => {
-              this.authSubject.next(user);
-              void this.router.navigate(['/candidates']);
-              this.currentUser = user;
-            });
+            this.workWithToken(token);
           }
         }),
       )
@@ -114,5 +108,15 @@ export class AuthService {
   private getLSItem(key: string): string {
     const item = localStorage.getItem(key);
     return item ? item : '';
+  }
+
+  workWithToken(token: authResponse): void {
+    this.setToken(token);
+    this.userService.getUser().subscribe((user: User) => {
+      this.authSubject.next(user);
+      this.userService.setUser(user);
+      void this.router.navigate(['/candidates']);
+      this.currentUser = user;
+    });
   }
 }

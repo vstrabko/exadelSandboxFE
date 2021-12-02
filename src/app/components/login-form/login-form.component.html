@@ -14,9 +14,11 @@
       <mat-error *ngIf="password.hasError('required')">{{ 'loginForm.passwordInput' | translate }}</mat-error>
       <mat-error *ngIf="password.hasError('pattern')">{{ 'loginForm.passwordInputValid' | translate }}</mat-error>
     </mat-form-field>
+    <a class="btn unfilled-btn google-btn"  href="http://64.227.114.210:9090/api/google/authorization"><img class="google-logo" src="../../../assets/img/google-logo.svg">Log in with Google</a>
     <div class="buttons">
-      <button class="btn unfilled-btn" type="button" (click)="cancel()">{{ 'cancel' | translate }}</button>
+      <button class="btn unfilled-btn " type="button" (click)="cancel()">{{ 'cancel' | translate }}</button>
       <button class="btn filled-btn" type="submit">{{ 'login' | translate }}</button>
     </div>
+
   </form>
 </app-modal-window>

@@ -36,6 +36,8 @@ import timegridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 
+import { GoogleAuthModule } from './pages/google-auth/google-auth.module';
+
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
 }
@@ -72,6 +74,7 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     PopupChooseTheTimeModule,
     FullCalendarModule,
     CandidateTableModule,
+    GoogleAuthModule,
   ],
   providers: [
     CandidateGuard,
