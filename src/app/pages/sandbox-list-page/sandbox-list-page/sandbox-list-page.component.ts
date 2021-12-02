@@ -35,7 +35,9 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     private roleUser: AuthService,
     private sandboxServiceFilter: SandboxServiceFilter,
   ) {}
+
   pageEvent: PageEvent;
+
   displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];
   matDataSource: MatTableDataSource<Sandbox>;
   dataSource: SandboxDataSource;
@@ -120,9 +122,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
       this.queryParams.params.SortingType = 1;
     }
     this.dataSource.loadSandboxes(this.queryParams);
-
     this.role = this.roleUser.userRole();
-
   }
 
   applyFilter(event: Event): void {
