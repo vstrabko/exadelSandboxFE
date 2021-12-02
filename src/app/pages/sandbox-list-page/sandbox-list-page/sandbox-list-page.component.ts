@@ -19,7 +19,6 @@ export class SandboxListPageComponent implements OnInit {
     private sandboxService: SandboxService,
     private roleUser: AuthService,
   ) {}
-
   displayedColumns: string[] = ['select', 'startDate', 'name', 'description', 'status'];
   dataSource: MatTableDataSource<Sandbox>;
   selection = new SelectionModel<Sandbox>(true, []);
