@@ -19,18 +19,20 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { merge } from 'rxjs/internal/observable/merge';
 import { fromEvent } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sandbox-list-page',
   templateUrl: './sandbox-list-page.component.html',
   styleUrls: ['./sandbox-list-page.component.scss'],
 })
+
 export class SandboxListPageComponent implements OnInit, AfterViewInit {
   totalRows = 0;
-
   constructor(
     private router: Router,
     private sandboxService: SandboxService,
+    private roleUser: AuthService,
     private sandboxServiceFilter: SandboxServiceFilter,
   ) {}
   pageEvent: PageEvent;
@@ -38,6 +40,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
   matDataSource: MatTableDataSource<Sandbox>;
   dataSource: SandboxDataSource;
   selection = new SelectionModel<Sandbox>(true, []);
+  public role: string;
 
   queryParams = {
     params: {
@@ -96,6 +99,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.paginator.page.pipe(tap(() => this.loadSandboxesPage())).subscribe((data: unknown) => {
       console.log('data pagin', data);
     });
+
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(tap(() => this.loadSandboxesPage()))
@@ -116,6 +120,9 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
       this.queryParams.params.SortingType = 1;
     }
     this.dataSource.loadSandboxes(this.queryParams);
+
+    this.role = this.roleUser.userRole();
+
   }
 
   applyFilter(event: Event): void {

@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { REGEXP } from '../../shared/constants/validators';
+import { ModalWindowService } from '../modal-window/modal-window.service';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit, OnDestroy {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() log: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -19,8 +20,21 @@ export class LoginFormComponent {
     Validators.required,
     Validators.pattern(REGEXP.password_length),
   ]);
+  public modalForm: any;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private modalWindowService: ModalWindowService) {}
+  ngOnInit(): void {
+    this.modalForm = this.modalWindowService.event.subscribe((val: string) => {
+      this.submit();
+      console.log(val);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.modalForm) {
+      this.modalForm.unsubscribe();
+    }
+  }
 
   submit(): void {
     if (this.email.valid && this.password.valid) {

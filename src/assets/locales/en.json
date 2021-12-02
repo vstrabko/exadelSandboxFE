@@ -148,5 +148,8 @@
   "googleAuthTostr": {
     "title": "Authorisation error",
     "text": "Email is not registered in the system"
+    }
+  "status": {
+    "change": "Change status"
   }
 }

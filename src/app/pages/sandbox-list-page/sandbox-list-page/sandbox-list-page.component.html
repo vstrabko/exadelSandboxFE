@@ -67,7 +67,8 @@
           <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
         </tr>
       </mat-table>
-      <div class="wrapper-footer">
+
+      <div class="wrapper-footer" *ngIf="role==='Admin'">
         <button class="btn filled-btn btn-create-sandbox" (click)="goCreateSandbox()">
           {{ 'sandbox.createSandbox' | translate }}
         </button>

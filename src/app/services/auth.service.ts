@@ -7,7 +7,6 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 import { ToastService } from 'src/app/services/toast.service';
-
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { authResponse } from '../interfaces/interfaces';
@@ -28,6 +27,18 @@ export class AuthService {
   ) {
     this.authSubject = new BehaviorSubject<User | null>(this.currentUser || null);
     this.translateService = translateService;
+  }
+
+  userName(): any {
+    return this.currentUser?.fullName;
+  }
+
+  userRole(): any {
+    return this.currentUser?.role;
+  }
+
+  userId(): any {
+    return this.currentUser?.uid;
   }
 
   login(email: string, password: string): Observable<any> {
