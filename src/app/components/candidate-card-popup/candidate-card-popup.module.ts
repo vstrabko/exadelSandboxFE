@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [CandidateCardPopupComponent],
@@ -26,6 +27,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
     InternationalizationModule,
     MatSliderModule,
     FormsModule,
+    MatCheckboxModule,
   ],
   exports: [CandidateCardPopupComponent],
   providers: [LocalizationService],

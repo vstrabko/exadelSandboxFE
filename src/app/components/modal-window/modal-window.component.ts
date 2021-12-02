@@ -12,7 +12,7 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
 
   private vision: any;
   private form: any;
-  public whatIsTheForm: any;
+  public whatIsTheForm: string;
   public userName = '';
 
   public ngOnInit(): void {
@@ -57,6 +57,7 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
           case 'login':
             alert('login will be here');
             console.log('login will be here');
+            this.modalWindowService.event.next(this.whatIsTheForm);
             break;
           case 'candidates card':
             alert('candidates cards will be save');

@@ -3,7 +3,20 @@
     <div class="section">
       <div class="two-column">
         <mat-card class="candidate-name">{{ user.name }} {{ CANDIDATES_INFO.surname }}</mat-card>
-        <mat-card  class="candidate-name">Status: {{candidateStatus}}</mat-card>
+        <mat-card  class="candidate-name" *ngIf="!checked">Status: {{candidateStatus}}</mat-card>
+        <mat-form-field class="candidate-status" appearance="fill" *ngIf="checked && userRole === 'Admin'">
+          <mat-label>Add status: {{candidateStatus}}</mat-label>
+          <mat-select matNativeControl required>
+            <mat-option *ngFor="let status of statuses" [value]="candidateStatusChoose" (click)="addStatus()">
+              {{ status.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div *ngIf="userRole === 'Admin'">
+          <mat-checkbox class="example-margin" (click)="addStatus()">Change the status</mat-checkbox>
+        </div>
+
       </div>
       <mat-card class="candidate-skills">{{CANDIDATES_INFO.candidateTechSkills || null}}</mat-card>
       <mat-card class="candidate-skills">{{CANDIDATES_INFO.additionalSkills || null}}</mat-card>
@@ -55,6 +68,9 @@
 
             <div class="review">
               <span>{{ review.userReview }}</span>
+            </div>
+            <div class="grade" *ngIf="review.grade">
+              <span> Grade is {{ review.grade }}</span>
             </div>
             <div class="date">
               <span>{{ review.author }}, {{ review.createDate | date: 'MMM d, y, h:mm a' }}</span>

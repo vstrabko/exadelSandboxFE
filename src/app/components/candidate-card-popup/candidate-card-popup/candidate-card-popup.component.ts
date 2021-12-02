@@ -1,22 +1,19 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { ToastrService } from 'ngx-toastr';
 import { Candidate } from 'src/app/models/candidate.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalWindowService } from '../../modal-window/modal-window.service';
-
-interface Status {
-  value: string;
-  viewValue: string;
-}
+import { IdName } from 'src/app/models/id-name.model';
+// import { responseStatus } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-candidate-card-popup',
   templateUrl: './candidate-card-popup.component.html',
   styleUrls: ['./candidate-card-popup.component.scss'],
 })
-export class CandidateCardPopupComponent implements OnInit {
+export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   private URL = 'http://64.227.114.210:9090/api/';
 
   public CANDIDATES_INFO = {
@@ -101,12 +98,18 @@ export class CandidateCardPopupComponent implements OnInit {
   public dateFeedback: any[];
   public grade: number;
   public candidateStatus: string;
+  public statuses: IdName[];
+
+  candidateStatusChoose: string;
 
   constructor(
     private modalWindowService: ModalWindowService,
     private userName: AuthService,
     private toastr: ToastrService,
   ) {}
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit(): void {
     this.modalWindowService.visible.subscribe((result: boolean) => {
@@ -119,6 +122,7 @@ export class CandidateCardPopupComponent implements OnInit {
     }, 200);
 
     this.getCandidateInfo();
+    this.getStatuses();
 
     switch (this.userRole) {
       case 'Admin':
@@ -138,27 +142,26 @@ export class CandidateCardPopupComponent implements OnInit {
   @Input() user: Candidate;
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  status: Status[] = [
-    { value: 'Test-task', viewValue: 'Test-task' },
-    { value: 'interview', viewValue: 'interview' },
-    { value: 'tech interview', viewValue: 'tech interview' },
-    { value: 'rejecteted', viewValue: 'rejecteted' },
-    { value: 'questionable', viewValue: 'questionable' },
-    { value: 'approved', viewValue: 'approved' },
-  ];
-
-  checked = false;
-  indeterminate = false;
-  labelPosition: 'before' | 'after' = 'after';
-  disabled = false;
+  public checked = false;
 
   cancel(): void {
     this.modal.emit();
   }
 
+  addStatus(): void {
+    if (this.checked) {
+      this.candidateStatus = this.candidateStatusChoose;
+      console.log(this.candidateStatusChoose);
+      this.checked = false;
+      console.log(this.checked);
+    } else {
+      this.checked = true;
+      console.log(this.checked);
+    }
+  }
+
   printForm(): any {
     const FEEDBACK_PUT = {
-      feedbackId: this.feedbackId,
       grade: this.sliderValue,
       userReview: this.userReview,
     };
@@ -168,7 +171,7 @@ export class CandidateCardPopupComponent implements OnInit {
       userReview: this.userReview,
       candidateProccesId: this.candidateProccesId,
     };
-    console.log(FEEDBACK_POST);
+    !this.feedbackId ? console.log(FEEDBACK_POST) : console.log(FEEDBACK_PUT);
     !this.feedbackId ? this.postFeedbacks(FEEDBACK_POST) : this.putFeedbacks(FEEDBACK_PUT);
     // this.getFeedbacks();
   }
@@ -177,7 +180,7 @@ export class CandidateCardPopupComponent implements OnInit {
   }
 
   postFeedbacks(FEEDBACK_POST: {
-    userId: string;
+    userId: any;
     grade: number;
     userReview: string;
     candidateProccesId: string;
@@ -195,12 +198,18 @@ export class CandidateCardPopupComponent implements OnInit {
       .catch((error: any) => console.log(error));
   }
 
-  putFeedbacks(FEEDBACK_PUT: { feedbackId: string; grade: number; userReview: string }): any {
-    return axios //add to URL
-      .put(
-        `${this.URL}${FEEDBACK_PUT.feedbackId}?userReview=${FEEDBACK_PUT.userReview}&grade=${FEEDBACK_PUT.grade}`,
-        { params: FEEDBACK_PUT },
-      )
+  getStatuses(): any {
+    return axios
+      .get(`${this.URL}statuses`)
+      .then((response: AxiosResponse<any, any>): void => {
+        this.statuses = response.data;
+      })
+      .catch((error: any) => console.log(error));
+  }
+
+  putFeedbacks(FEEDBACK_PUT: { grade: number; userReview: string }): any {
+    return axios
+      .put(`${this.URL}feedbacks/${this.feedbackId}`, FEEDBACK_PUT)
       .then((response: any) => console.log(response))
       .catch((error: any) => console.log(error));
   }
@@ -226,7 +235,7 @@ export class CandidateCardPopupComponent implements OnInit {
         const candidateSandboxes = response.data.candidateSandboxes;
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
-        this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].status.id;
+        this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id;
         this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
         console.log(this.feedbacks);
@@ -234,23 +243,10 @@ export class CandidateCardPopupComponent implements OnInit {
         this.feedbacks.forEach((element: any) => {
           element.userId === this.userId ? (this.userReview = element.userReview) : null;
           element.userId === this.userId ? (this.feedbackId = element.id) : null;
-          // if (element.userId === this.userId) {
-          //   if (element.grade) {
-          //     this.grade = element.grade
-          //   } else this.grade = 0;
-          // }
           element.userId === this.userId ? (this.sliderValue = element.grade) : null;
-          // console.log(this.userReview, this.feedbackId, element.grade);
-          // if (!element.grade) {
-          //   this.grade = 0;
-          // }
         });
         this.dateFeedback = createDate;
-        // this.feedbacks.forEach((element: any) => {
-        //   element.userId === this.userId ? (this.feedbackId = element.id) : null;
-        //   console.log(this.feedbackId);
-        // });
       })
-      .catch((error: any) => this.toastr.error(error));
+      .catch((error: any) => console.log(error));
   }
 }
