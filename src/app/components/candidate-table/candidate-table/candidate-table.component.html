@@ -20,9 +20,9 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label>{{ 'select.mentor' | translate }}</mat-label>
-            <mat-select formControlName="mentorsId" multiple>
-                <mat-option *ngFor="let mentor of mentorsValues" [value]="mentor.id">{{mentor.name}}</mat-option>
+            <mat-label>{{ 'select.recruiter' | translate }}</mat-label>
+            <mat-select formControlName="recruitersId" multiple>
+                <mat-option *ngFor="let recruiter of recruitersValues" [value]="recruiter.id">{{recruiter.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
@@ -89,9 +89,9 @@
             <td mat-cell *matCellDef="let row"> {{row.location.name}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="mentor">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mentor </th>
-            <td mat-cell *matCellDef="let row"> {{row.candidateSandboxes[0].sandbox.mentors ? row.candidateSandboxes[0].sandbox.mentors : 'none'}} </td>
+        <ng-container matColumnDef="recruiter">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Recruiter </th>
+            <td mat-cell *matCellDef="let row"> {{row.candidateSandboxes[0].sandbox.recruiters ? row.candidateSandboxes[0].sandbox.recruiters : 'none'}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

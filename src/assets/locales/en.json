@@ -117,7 +117,7 @@
     "interviewers": "Interviewers *",
     "status": "Status",
     "location": "Location",
-    "mentor": "Mentor",
+    "recruiter": "Recruiter",
     "sandbox": "Sandbox"
 },
   "stepper": {

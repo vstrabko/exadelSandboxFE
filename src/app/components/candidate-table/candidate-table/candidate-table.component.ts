@@ -33,7 +33,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     'status',
     'sandbox',
     'location',
-    'mentor',
+    'recruiter',
   ];
   matDataSource: MatTableDataSource<Candidate>;
   dataSource: CandidateDataSource;
@@ -62,7 +62,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   statusValues: IdName[];
   locationsValues: any;
   sandboxValues: IdName[];
-  mentorsValues: Employee[];
+  recruitersValues: Employee[];
   candidates: Candidate[];
   candidate: Candidate;
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -80,12 +80,12 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.statusValues = this.candidateContext.getStatuses()[0];
     this.sandboxValues = this.candidateContext.getSandbox()[0];
-    this.mentorsValues = this.candidateContext.getMentors()[0];
+    this.recruitersValues = this.candidateContext.getRecruiters()[0];
     this.locationsValues = this.candidateContext.getLocation()[0];
     this.candidateRequestForm = new FormGroup({
       locationsId: new FormControl(''),
       sandmoxId: new FormControl(''),
-      mentorsId: new FormControl(''),
+      recruitersId: new FormControl(''),
       statusesId: new FormControl(''),
     });
 
