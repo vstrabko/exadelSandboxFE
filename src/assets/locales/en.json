@@ -142,8 +142,12 @@
     "feedback": "Feedback"
   },
   "authTostr": {
-    "title": "Authentication error",
+    "title": "Authorisation error",
     "text": "Please check carefully that all details are correct"
+  },
+  "googleAuthTostr": {
+    "title": "Authorisation error",
+    "text": "Email is not registered in the system"
   },
   "confirmPopup": {
     "content": "Are you sure you want to delete the event?"
