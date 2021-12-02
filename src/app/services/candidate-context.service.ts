@@ -56,7 +56,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     return this.getData<IdName>(this.languages, '/api/languages');
   }
   getLocation(): [IdName[], Observable<IdName[]>] {
-    return this.getData<IdName>(this.locations, '/api/locations/all');
+    return this.getData<IdName>(this.locations, '/api/locations');
   }
   getEnglishLevels(): [IdName[], Observable<IdName[]>] {
     return this.getData<IdName>(this.englishLevels, '/api/languagelevels');
@@ -68,7 +68,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     return this.getData<IdName>(this.stackTechnologies, '/api/stacktechnologies');
   }
   getSandbox(): [Sandbox[], Observable<Sandbox[]>] {
-    return this.getData<Sandbox>(this.sandboxes, '/api/sandboxes/all');
+    return this.getData<Sandbox>(this.sandboxes, '/api/sandboxes');
   }
   getAvailability(): [IdName[], Observable<IdName[]>] {
     return this.getData<IdName>(this.availability, '/api/availabilitytypes');

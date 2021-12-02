@@ -54,9 +54,9 @@ export class AppointInterviewPopupComponent implements OnInit {
       thirdCtrl: ['', Validators.required],
     });
 
-    setTimeout(() => {
-      this.modalWindowService.modalWindow.next('candidates card');
-    }, 200);
+    // setTimeout(() => {
+    //   this.modalWindowService.modalWindow.next('candidates card');
+    // }, 200);
 
     this.interviwerService.get().subscribe((data: any) => {
       this.interviewers = data;
