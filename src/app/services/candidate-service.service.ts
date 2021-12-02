@@ -7,6 +7,6 @@ import { ApiService } from './api.service';
 @Injectable({ providedIn: 'root' })
 export class CandidateService extends ApiService<Candidate> {
   constructor(private http: HttpClient) {
-    super(http, Candidate, 'https://jsonplaceholder.typicode.com/comments');
+    super(http, Candidate, '/api/candidates');
   }
 }

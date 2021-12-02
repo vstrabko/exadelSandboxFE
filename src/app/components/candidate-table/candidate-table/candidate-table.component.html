@@ -5,39 +5,46 @@
         </mat-panel-title>
         <mat-icon>assignment</mat-icon>
     </mat-expansion-panel-header>
+    <form [formGroup]="candidateRequestForm" (ngSubmit)="submit()">
     <div class="inputs_container">
         <mat-form-field appearance="fill">
             <mat-label>{{ 'select.status' | translate }}</mat-label>
-            <mat-select multiple>
-                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            <mat-select formControlName="statusesId" multiple>
+                <mat-option *ngFor="let status of statusValues" [value]="status.id">{{status.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>{{ 'select.location' | translate }}</mat-label>
-            <mat-select multiple>
-                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            <mat-select formControlName="locationsId" multiple>
+                <mat-option *ngFor="let location of locationsValues" [value]="location.id">{{location.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label>{{ 'select.mentor' | translate }}</mat-label>
-            <mat-select multiple>
-                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            <mat-label>{{ 'select.recruiter' | translate }}</mat-label>
+            <mat-select formControlName="recruitersId" multiple>
+                <mat-option *ngFor="let recruiter of recruitersValues" [value]="recruiter.id">{{recruiter.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>{{ 'select.sandbox' | translate }}</mat-label>
-            <mat-select multiple>
-                <mat-option *ngFor="let topping of statusValues" [value]="topping">{{topping}}</mat-option>
+            <mat-select formControlName="sandmoxId" multiple>
+                <mat-option *ngFor="let sandbox of sandboxValues" [value]="sandbox.id">{{sandbox.name}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
     <button class="btn filled-btn">{{ 'candidateList.request' | translate }}</button>
+    </form>
 </mat-expansion-panel>
-<mat-form-field appearance="standard">
+
+<!-- TODO: decide do we need such filter as we have filtering by sending request? -->
+
+<!-- <mat-form-field appearance="standard">
     <mat-label>{{'candidateList.filter' | translate}}</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="{{'candidateList.example' | translate}}" #input>
-</mat-form-field>
+</mat-form-field> -->
+
 <div class="mat-elevation-z8 candidate-table">
+    <mat-paginator [length]="candidates?.length" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
@@ -52,30 +59,46 @@
                 </mat-checkbox>
             </td>
         </ng-container>
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-        </ng-container>
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
             <td mat-cell *matCellDef="let row"> {{row.name}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Surname </th>
+            <td mat-cell *matCellDef="let row"> {{row.surname}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
             <td mat-cell *matCellDef="let row"> {{row.email}} </td>
         </ng-container>
-        <ng-container matColumnDef="body">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Feedback </th>
-            <td mat-cell *matCellDef="let row"> {{row.body}} </td>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let row"> {{row.candidateSandboxes[0].candidateProcesses[0].status.name}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="sandbox">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sandbox </th>
+            <td mat-cell *matCellDef="let row"> {{row.candidateSandboxes[0].sandbox.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+            <td mat-cell *matCellDef="let row"> {{row.location.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="recruiter">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Recruiter </th>
+            <td mat-cell *matCellDef="let row"> {{row.candidateSandboxes[0].sandbox.recruiters ? row.candidateSandboxes[0].sandbox.recruiters : 'none'}} </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row (click)="togglePopup(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
         <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            <td class="mat-cell" colspan="4">No data matching the filter</td>
         </tr>
     </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-   
 </div>
 <button (click)="toggleAppoinInterview()" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>
