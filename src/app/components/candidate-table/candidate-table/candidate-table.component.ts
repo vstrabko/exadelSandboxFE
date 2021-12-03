@@ -17,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { CandidateSandboxes } from './../../../interfaces/interfaces';
+import { ToastService } from 'src/app/services/toast.service';
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
@@ -29,6 +30,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     private candidateServiceFilter: CandidateServiceFilter,
     private http: HttpClient,
     private auth: AuthService,
+    private toast: ToastService,
   ) {}
   displayedColumns: string[] = [
     'select',
@@ -116,6 +118,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
           this.candidatesId,
         )
         .subscribe();
+      this.toast.showSuccess('', 'Кандидаты назначены');
     }
   }
 
