@@ -117,8 +117,10 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
           `${String(environment.API_URL)}/api/recruiters/${this.recruterId}/candidates`,
           this.candidatesId,
         )
-        .subscribe();
-      this.toast.showSuccess('', 'Кандидаты назначены');
+        .subscribe(
+          () => this.toast.showSuccess('', 'Кандидаты назначены'),
+          () => this.toast.showError('Ошибка', 'Кандидаты не назначены'),
+        );
     }
   }
 
