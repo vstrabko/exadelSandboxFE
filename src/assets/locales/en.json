@@ -162,13 +162,5 @@
     "subHint": "Send events to server",
     "weekText": "weekends",
     "weekHint": "On/off weekends"
-  },
-  "calendarTostrErr": {
-    "title": "Submit error",
-    "text": "Check the internet connection and try again"
-  },
-  "calendarTostrSucs": {
-    "title": "",
-    "text": "Events submitted successfully"
   }
 }
