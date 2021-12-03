@@ -44,7 +44,7 @@ export class CandidateRequestComponent implements OnInit {
       primaryTechnologyId: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl(null, [
         Validators.required,
-        Validators.pattern('[+0-9]*'),
+        Validators.pattern(/\+[0-9]*/g),
         Validators.minLength(9),
       ]),
       skype: new FormControl('', [Validators.required, Validators.minLength(3)]),
