@@ -84,6 +84,13 @@ export class AuthService {
       );
   }
 
+  userId(): string | null {
+    if (this.currentUser?._id !== undefined) {
+      return this.currentUser?._id;
+    }
+    return null;
+  }
+
   private setToken(response: authResponse | null): void {
     if (response) {
       this.removeToken();
