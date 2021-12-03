@@ -14,4 +14,7 @@ export class User extends ResourceModel<User> {
   get fullName(): string {
     return `${this.name} ${this.surname}`;
   }
+  get _roles(): string[] {
+    return this.roles;
+  }
 }
