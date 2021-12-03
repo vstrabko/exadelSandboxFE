@@ -13,6 +13,10 @@ import { merge } from 'rxjs/internal/observable/merge';
 import { CandidateServiceFilter } from 'src/app/services/candidate-filter.service';
 import { CandidateDataSource } from './candidate-data-source';
 import { FormControl, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
+import { CandidateSandboxes } from 'src/app/models/candidate.model';
 
 @Component({
   selector: 'app-candidate-table',
@@ -24,6 +28,8 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     private candidateService: CandidateService,
     private candidateContext: CandidateContextService,
     private candidateServiceFilter: CandidateServiceFilter,
+    private http: HttpClient,
+    private auth: AuthService,
   ) {}
   displayedColumns: string[] = [
     'select',
@@ -59,12 +65,15 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  statusValues: IdName[];
-  locationsValues: any;
-  sandboxValues: IdName[];
-  recruitersValues: Employee[];
-  candidates: Candidate[];
-  candidate: Candidate;
+  public statusValues: IdName[];
+  public locationsValues: any;
+  public sandboxValues: IdName[];
+  public recruitersValues: Employee[];
+  public candidates: Candidate[];
+  public candidate: Candidate;
+  public isStatusDraft: boolean = false;
+  public recruterId: string | undefined = this.auth.userId();
+  public candidatesId: string[] = [];
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAppointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -75,6 +84,40 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
 
   toggleAppoinInterview(): void {
     this.showAppointInterview.emit();
+  }
+
+  addFiltredCandidates(): void {
+    this.candidatesId = this.selection.selected.map((candidate: Candidate) => {
+      return candidate.candidateSandboxes
+        .filter((sand: CandidateSandboxes) => {
+          return (
+            sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
+            sand.sandbox.status === 'Application'
+          );
+        })
+        .map((filtred: CandidateSandboxes) => filtred.id)
+        .join('');
+    });
+    if (
+      this.candidatesId.length &&
+      !this.candidatesId.some((item: string) => item.length < 1) &&
+      this.recruterId !== undefined
+    ) {
+      this.isStatusDraft = false;
+    } else {
+      this.isStatusDraft = true;
+    }
+  }
+
+  appointCandidateToRecruiter(): void {
+    if (this.recruterId !== undefined) {
+      this.http
+        .post(
+          `${String(environment.API_URL)}/api/recruiters/${this.recruterId}/candidates`,
+          this.candidatesId,
+        )
+        .subscribe();
+    }
   }
 
   ngOnInit(): void {
