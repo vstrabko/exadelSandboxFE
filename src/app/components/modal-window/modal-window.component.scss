@@ -8,6 +8,7 @@
   top: 0;
   z-index: 10;
   background-color: $background-modal;
+  border-radius: 40px;
 
   .modal-window {
     background-color: #fafafa;
@@ -15,6 +16,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
 
     .header-container {
       background-color: $darkColor;
@@ -23,6 +25,8 @@
       font-weight: bold;
       text-align: center;
       line-height: 65px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
 
     .content_container {
