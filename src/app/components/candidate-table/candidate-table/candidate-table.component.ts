@@ -71,7 +71,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   public recruitersValues: Employee[];
   public candidates: Candidate[];
   public candidate: Candidate;
-  public isStatusDraft: boolean = false;
+  public isStatusDraft: boolean = true;
   public recruterId: string | undefined = this.auth.userId();
   public candidatesId: string[] = [];
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
