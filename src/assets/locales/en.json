@@ -151,5 +151,23 @@
   },
   "confirmPopup": {
     "content": "Are you sure you want to delete the event?"
+  },
+  "calendarButtons": {
+    "today": "today",
+    "month": "month",
+    "week": "week",
+    "list": "list",
+    "subText": "submit",
+    "subHint": "Send events to server",
+    "weekText": "weekends",
+    "weekHint": "On/off weekends"
+  },
+  "calendarTostrErr": {
+    "title": "Submit error",
+    "text": "Check the internet connection and try again"
+  },
+  "calendarTostrSucs": {
+    "title": "",
+    "text": "Events submitted successfully"
   }
 }
