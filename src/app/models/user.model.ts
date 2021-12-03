@@ -14,10 +14,11 @@ export class User extends ResourceModel<User> {
   get fullName(): string {
     return `${this.name} ${this.surname}`;
   }
+
   get _id(): string {
     return `${this.id}`;
   }
-  get role(): string[] {
+  get _roles(): string[] {
     return this.roles;
   }
 }

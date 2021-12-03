@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { ComingTimeType } from './time/time.component';
+import { EventTime } from '../../interfaces/interfaces';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 
 @Component({
@@ -8,6 +8,14 @@ import { ModalWindowService } from '../modal-window/modal-window.service';
   styleUrls: ['./popup-choose-the-time.component.scss'],
 })
 export class PopupChooseTheTimeComponent implements OnInit {
+  @Input() title: string = 'Choose the free time';
+  @Input() selectDate: string;
+  @Input() comingTime: EventTime[] = [];
+  @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() addTime: EventEmitter<EventTime[]> = new EventEmitter<EventTime[]>();
+
+  public times: EventTime[] = [];
+
   constructor(private modalWindowService: ModalWindowService) {}
 
   ngOnInit(): void {
@@ -22,17 +30,10 @@ export class PopupChooseTheTimeComponent implements OnInit {
       this.modalWindowService.modalWindow.next('time');
     }, 200);
   }
-  @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() title: string = 'Choose the time';
-  @Input() titleData: string = '01/11/2021';
 
-  @Input() comingTime: ComingTimeType[] = [];
-
-  public times: ComingTimeType[] = [];
-
-  sortTime(updateTime: ComingTimeType | undefined = undefined): void {
+  sortTime(updateTime: EventTime | undefined = undefined): void {
     if (updateTime) {
-      this.times = this.times.map((value: ComingTimeType) => {
+      this.times = this.times.map((value: EventTime) => {
         if (value.id === updateTime.id) {
           return updateTime;
         } else {
@@ -50,7 +51,7 @@ export class PopupChooseTheTimeComponent implements OnInit {
 
   add(): void {
     const newId = this.times.length;
-    const newTime = {
+    const newTime: EventTime = {
       startTime: '00:00',
       endTime: '00:00',
       id: newId,
@@ -60,13 +61,14 @@ export class PopupChooseTheTimeComponent implements OnInit {
   }
 
   del(timeId: number): void {
-    this.times = this.times.filter((time: ComingTimeType) => {
+    this.times = this.times.filter((time: EventTime) => {
       return time.id !== timeId;
     });
   }
 
   submit(): void {
     this.modal.emit(false);
+    this.addTime.emit(this.times);
   }
 
   cancel(): void {
