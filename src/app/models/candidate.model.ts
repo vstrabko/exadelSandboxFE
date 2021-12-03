@@ -1,47 +1,10 @@
 import { ResourceModel } from './resource.model';
-import { Sandbox } from './sandbox.model';
 import { IdName } from './id-name.model';
-
-interface CandidateLanguages {
-  id: string;
-  language: IdName;
-  languageLevel: {
-    orderLevel: number;
-    name: string;
-    id: string;
-  };
-}
-
-interface CandidateTechSkills {
-  id: string;
-  skill: IdName;
-}
-
-interface Feedbacks {
-  id: string;
-  userId: string;
-  author: string;
-  grade: number;
-  createDate: string;
-  userReview: string;
-  candidateProccesId: string;
-}
-
-interface CandidateProcesses {
-  id: string;
-  status: IdName;
-  testResult: string;
-  createDate: string;
-  feedbacks: Feedbacks[];
-}
-
-export interface CandidateSandboxes {
-  id: string;
-  sandbox: Sandbox;
-  currentJob: string;
-  candidateProcesses: CandidateProcesses[];
-  candidateProjectRole: IdName;
-}
+import {
+  CandidateLanguages,
+  CandidateTechSkills,
+  CandidateSandboxes,
+} from '../interfaces/interfaces';
 
 export class Candidate extends ResourceModel<Candidate> {
   public id: string;

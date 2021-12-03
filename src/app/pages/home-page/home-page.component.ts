@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SandboxService } from 'src/app/services/sandbox-service';
 import { Sandbox } from 'src/app/models/sandbox.model';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-home-page',
@@ -8,7 +9,7 @@ import { Sandbox } from 'src/app/models/sandbox.model';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  constructor(private sandboxService: SandboxService) {}
+  constructor(private sandboxService: SandboxService, private toast: ToastService) {}
 
   sandboxChosen: Partial<Sandbox> = {};
   sandboxes: Sandbox[] = [];
@@ -29,5 +30,6 @@ export class HomePageComponent implements OnInit {
         (data: Sandbox[]) =>
           (this.sandboxes = data.filter((sandbox: Sandbox) => sandbox.status === 'Registration')),
       );
+    this.toast.showSuccess('', 'Кандидаты назначены');
   }
 }

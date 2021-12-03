@@ -1,3 +1,5 @@
+import { IdName } from '../models/id-name.model';
+import { Sandbox } from '../models/sandbox.model';
 export interface ListSandboxes {
   id: number;
   name: string;
@@ -53,4 +55,45 @@ export interface InterviewEvent {
   candidateSandboxId: string;
   startTime: string;
   endTime: string;
+}
+
+export interface CandidateLanguages {
+  id: string;
+  language: IdName;
+  languageLevel: {
+    orderLevel: number;
+    name: string;
+    id: string;
+  };
+}
+
+export interface CandidateTechSkills {
+  id: string;
+  skill: IdName;
+}
+
+export interface Feedbacks {
+  id: string;
+  userId: string;
+  author: string;
+  grade: number;
+  createDate: string;
+  userReview: string;
+  candidateProccesId: string;
+}
+
+export interface CandidateProcesses {
+  id: string;
+  status: IdName;
+  testResult: string;
+  createDate: string;
+  feedbacks: Feedbacks[];
+}
+
+export interface CandidateSandboxes {
+  id: string;
+  sandbox: Sandbox;
+  currentJob: string;
+  candidateProcesses: CandidateProcesses[];
+  candidateProjectRole: IdName;
 }

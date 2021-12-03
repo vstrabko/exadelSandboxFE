@@ -16,8 +16,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
-import { CandidateSandboxes } from 'src/app/models/candidate.model';
-
+import { CandidateSandboxes } from './../../../interfaces/interfaces';
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
@@ -72,7 +71,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   public candidates: Candidate[];
   public candidate: Candidate;
   public isStatusDraft: boolean = true;
-  public recruterId: string | undefined = this.auth.userId();
+  public recruterId: string | null = this.auth.userId();
   public candidatesId: string[] = [];
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAppointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -110,7 +109,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   }
 
   appointCandidateToRecruiter(): void {
-    if (this.recruterId !== undefined) {
+    if (this.recruterId !== null) {
       this.http
         .post(
           `${String(environment.API_URL)}/api/recruiters/${this.recruterId}/candidates`,
