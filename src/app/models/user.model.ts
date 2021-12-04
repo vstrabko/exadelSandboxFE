@@ -15,11 +15,19 @@ export class User extends ResourceModel<User> {
     return `${this.name} ${this.surname}`;
   }
 
+
   get role(): string {
     return `${this.roles}`;
   }
 
   get uid(): string {
     return `${this.id}`;
+  }
+  
+  get _id(): string {
+    return `${this.id}`;
+  }
+  get _roles(): string[] {
+    return this.roles;
   }
 }
