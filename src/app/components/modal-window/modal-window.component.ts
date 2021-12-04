@@ -55,21 +55,19 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
 
         switch (this.whatIsTheForm) {
           case 'login':
-            alert('login will be here');
-            console.log('login will be here');
+            // alert('login will be here');
+            console.log(this.whatIsTheForm, 'login will be here');
             this.modalWindowService.event.next(this.whatIsTheForm);
             break;
           case 'candidates card':
-            alert('candidates cards will be save');
-            console.log('candidates cards will be save');
+            // alert('candidates cards will be save');
+            console.log(this.whatIsTheForm, 'candidates cards will be save');
+            this.modalWindowService.event.next(this.whatIsTheForm);
             break;
-          case 'time':
-            alert('choose the ime will be here');
-            console.log('choose the time will be here');
+          case 'appoint interview':
+            console.log(this.whatIsTheForm, 'candidates cards will be save');
+            this.modalWindowService.event.next(this.whatIsTheForm);
             break;
-          case 'english':
-            break;
-
           default:
             break;
         }

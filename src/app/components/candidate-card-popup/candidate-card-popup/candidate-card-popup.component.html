@@ -6,8 +6,8 @@
         <mat-card  class="candidate-name" *ngIf="!checked">Status: {{candidateStatus}}</mat-card>
         <mat-form-field class="candidate-status" appearance="fill" *ngIf="checked && userRole === 'Admin'">
           <mat-label>Add status: {{candidateStatus}}</mat-label>
-          <mat-select matNativeControl required>
-            <mat-option *ngFor="let status of statuses" [value]="candidateStatusChoose" (click)="addStatus()">
+          <mat-select matNativeControl required [(ngModel)]="selectedValue">
+            <mat-option *ngFor="let status of statuses" [value]="status.name">
               {{ status.name }}
             </mat-option>
           </mat-select>
@@ -15,19 +15,21 @@
 
         <div *ngIf="userRole === 'Admin'">
           <mat-checkbox class="example-margin" (click)="addStatus()">{{ 'status.change' | translate }}</mat-checkbox>
+          <button class="btn filled-btn" (click)="changeStatus()" [disabled]="counter">{{ 'status.save' | translate }}</button>
+
         </div>
 
       </div>
-      <mat-card class="candidate-skills">{{CANDIDATES_INFO.candidateTechSkills || null}}</mat-card>
-      <mat-card class="candidate-skills">{{CANDIDATES_INFO.additionalSkills || null}}</mat-card>
+      <mat-card class="candidate-skills">{{ CANDIDATES_INFO.candidateTechSkills || null }}</mat-card>
+      <mat-card class="candidate-skills">{{ CANDIDATES_INFO.additionalSkills || null }}</mat-card>
       <div class="raiting two-column">
-        <mat-card>{{CANDIDATES_INFO.email}}</mat-card>
-        <mat-card>{{CANDIDATES_INFO.skype}}</mat-card>
-        <mat-card>{{CANDIDATES_INFO.location}}</mat-card>
-        <mat-card>sertificates</mat-card>
-        <mat-card>{{CANDIDATES_INFO.phone}}</mat-card>
-        <mat-card>{{CANDIDATES_INFO.candidateLanguages}}</mat-card>
-        <mat-card>current job</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.email }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.skype }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.location }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.professionaCertificates }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.phone }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.candidateLanguages }}</mat-card>
+        <mat-card>{{ currentJob }}</mat-card>
         <mat-card>time to contact</mat-card>
       </div>
     </div>

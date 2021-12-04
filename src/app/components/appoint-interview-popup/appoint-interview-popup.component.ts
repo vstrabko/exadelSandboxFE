@@ -1,6 +1,6 @@
 import { InterviewerService } from './../../services/interviewer.service';
 import { Interviewer } from 'src/app/models/interviewer.model';
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Candidate } from 'src/app/models/candidate.model';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,7 +19,7 @@ import { Interval } from 'src/app/interfaces/interfaces';
     },
   ],
 })
-export class AppointInterviewPopupComponent implements OnInit {
+export class AppointInterviewPopupComponent implements OnInit, OnDestroy {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -38,12 +38,20 @@ export class AppointInterviewPopupComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private interviwerService: InterviewerService,
   ) {}
+
+  public visibleForm: any;
+  public saveForm: any;
+
   ngOnInit(): void {
-    this.modalWindowService.visible.subscribe((result: boolean) => {
+    this.visibleForm = this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
       this.cancel();
     });
 
+    this.saveForm = this.modalWindowService.event.subscribe((result: string) => {
+      // this.addEvent(); //TODO what to add into func
+      console.log(result);
+    });
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
@@ -53,19 +61,23 @@ export class AppointInterviewPopupComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required],
     });
-
-    // setTimeout(() => {
-    //   this.modalWindowService.modalWindow.next('candidates card');
-    // }, 200);
-
+    setTimeout(() => {
+      this.modalWindowService.modalWindow.next('appoint interview');
+    }, 200);
     this.interviwerService.get().subscribe((data: any) => {
       this.interviewers = data;
     });
   }
-
+  ngOnDestroy(): void {
+    if (this.visibleForm) {
+      this.visibleForm.unsubscribe();
+    }
+    if (this.saveForm) {
+      this.saveForm.unsubscribe();
+    }
+  }
   @Input() user: Candidate;
   @Output() appointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   cancel(): void {
     this.appointInterview.emit();
   }

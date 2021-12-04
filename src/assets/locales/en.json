@@ -150,6 +150,7 @@
     "text": "Email is not registered in the system"
     },
   "status": {
-    "change": "Change status"
+    "change": "Change status",
+    "save": "Save status"
   }
 }
