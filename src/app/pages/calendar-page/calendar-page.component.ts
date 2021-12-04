@@ -69,7 +69,6 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
       },
     },
     locales: [enLocale, ruLocale],
-    // locale: `${this.lang ? this.lang : 'en'}`,
     locale: 'en',
     initialView: 'timeGridWeek',
     initialEvents: [],
