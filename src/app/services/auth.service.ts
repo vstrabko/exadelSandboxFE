@@ -37,9 +37,9 @@ export class AuthService {
     return this.currentUser?.role;
   }
 
-  userId(): any {
-    return this.currentUser?.uid;
-  }
+  // userId(): any {
+  //   return this.currentUser?.uid;
+  // }
 
   login(email: string, password: string): Observable<any> {
     return this.http
