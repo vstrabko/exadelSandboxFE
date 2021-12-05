@@ -6,7 +6,7 @@ export class User extends ResourceModel<User> {
   private surname: string;
   private email: string;
   public location: string;
-  private roles: string;
+  private roles: string[];
 
   constructor(model?: Partial<User>) {
     super(model);
@@ -15,8 +15,8 @@ export class User extends ResourceModel<User> {
     return `${this.name} ${this.surname}`;
   }
 
-  get role(): string {
-    return `${this.roles}`;
+  get role(): string[] {
+    return this.roles;
   }
 
   get uid(): string {
@@ -26,7 +26,7 @@ export class User extends ResourceModel<User> {
   get _id(): string {
     return `${this.id}`;
   }
-  get _roles(): string {
-    return `${this.roles}`;
+  get _roles(): string[] {
+    return this.roles;
   }
 }

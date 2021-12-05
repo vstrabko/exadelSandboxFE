@@ -40,11 +40,12 @@ export class AppointInterviewPopupComponent implements OnInit, OnDestroy {
   ) {}
 
   public visibleForm: any;
+  public visible: boolean;
   public saveForm: any;
 
   ngOnInit(): void {
     this.visibleForm = this.modalWindowService.visible.subscribe((result: boolean) => {
-      console.log(result);
+      this.visible = result;
       this.cancel();
     });
 

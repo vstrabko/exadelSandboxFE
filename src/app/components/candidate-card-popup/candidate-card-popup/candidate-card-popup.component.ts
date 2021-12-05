@@ -6,6 +6,7 @@ import { Candidate } from 'src/app/models/candidate.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalWindowService } from '../../modal-window/modal-window.service';
 import { IdName } from 'src/app/models/id-name.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-candidate-card-popup',
@@ -13,7 +14,7 @@ import { IdName } from 'src/app/models/id-name.model';
   styleUrls: ['./candidate-card-popup.component.scss'],
 })
 export class CandidateCardPopupComponent implements OnInit, OnDestroy {
-  private URL = 'http://64.227.114.210:9090/api/';
+  private URL = `${environment.API_URL}/api/`;
 
   public CANDIDATES_INFO = {
     id: '',
@@ -54,7 +55,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public title = 'Candidate card';
   public sliderValue: number;
   public userAuthName = this.userName.userName();
-  public userRole = this.userName.userRole();
+  public userRole: string[] = this.userName.userRole();
   public userId = this.userName.userId();
   public userReview: string;
   public feedbacks: any[];
@@ -77,18 +78,25 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   ) {}
 
   public visibleForm: any;
+  public visible: boolean;
   public saveForm: any;
+  public save: string;
   public counter = 0;
+
+  public isAdmin = this.userRole.includes('Admin' || 'Manager');
+  public isMentor = this.userRole.includes('Mentor');
+  public isInterviewer = this.userRole.includes('Interviewer');
+  public isRecruiter = this.userRole.includes('Recruiter');
 
   ngOnInit(): void {
     this.visibleForm = this.modalWindowService.visible.subscribe((result: boolean) => {
-      console.log(result);
+      this.visible = result;
       this.cancel();
     });
 
     this.saveForm = this.modalWindowService.event.subscribe((result: string) => {
       this.printForm();
-      console.log(result);
+      this.save = result;
     });
 
     setTimeout(() => {
@@ -98,18 +106,12 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     this.getCandidateInfo();
     this.getStatuses();
 
-    switch (this.userRole) {
-      case 'Admin':
-        this.grade = 100;
-        break;
-      case 'Mentor':
-        this.grade = 10;
-        break;
-      case 'Interviewer':
-        this.grade = 4;
-        break;
-      default:
-        break;
+    if (this.isAdmin) {
+      this.grade = 100;
+    } else if (this.isMentor) {
+      this.grade = 10;
+    } else if (this.isInterviewer) {
+      this.grade = 4;
     }
   }
 
@@ -134,15 +136,10 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     if (this.checked) {
       this.candidateStatus = this.selectedValue;
       this.counter++;
-      console.log(this.selectedValue);
-      console.log('new status', this.candidateStatus);
-
       this.checked = false;
-      console.log(this.checked);
     } else {
       this.counter--;
       this.checked = true;
-      console.log(this.checked);
     }
   }
 
@@ -152,12 +149,9 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       candidateSandboxId: this.candidateSandbox,
       newStatusId: '',
     };
-    console.log(this.statuses);
     this.statuses.filter((el: any) => {
       el.name === this.candidateStatus ? (STATUS.newStatusId = el.id) : null;
     });
-    console.log(STATUS);
-
     this.putStatus(STATUS);
   }
 
@@ -181,7 +175,6 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       userReview: this.userReview,
       candidateProccesId: this.candidateProccesId,
     };
-    !this.feedbackId ? console.log(FEEDBACK_POST) : console.log(FEEDBACK_PUT);
     !this.feedbackId ? this.postFeedbacks(FEEDBACK_POST) : this.putFeedbacks(FEEDBACK_PUT);
   }
   onChangeRange(rangeValue: MatSliderChange): void {
@@ -229,7 +222,6 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     return axios
       .get(`${this.URL}candidates/${this.user.id}`)
       .then((response: any) => {
-        console.log(response);
         this.CANDIDATES_INFO.id = response.data.id;
         this.CANDIDATES_INFO.surname = response.data.surname;
         this.CANDIDATES_INFO.email = response.data.email;
@@ -250,10 +242,8 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id; //TODO
-        console.log('log', this.candidateProccesId);
         this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
-        console.log(this.feedbacks);
         const createDate: string[] = [];
         this.feedbacks.forEach((element: any) => {
           element.userId === this.userId ? (this.userReview = element.userReview) : null;
