@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 export class CreateSandboxPageComponent implements OnInit {
   constructor(private candidateContextService: CandidateContextService, private http: HttpClient) {}
   public sandboxes: Sandbox[] = [];
+  public sandboxesSubj: any;
   public sandboxChosen: Partial<Sandbox> = {};
   public languages: IdName[];
   public stackTechnologies: IdName[];
@@ -125,7 +126,11 @@ export class CreateSandboxPageComponent implements OnInit {
       sandFormCtrls.endRegistration.setValue(sandFormCtrls.endRegistration.value.toISOString());
       this.candidateContextService.postSandbox(this.sandboxRegistrationForm.value);
       this.sandboxRegistrationForm.reset();
+      Object.keys(this.sandboxRegistrationForm.controls).forEach((key: string) => {
+        this.sandboxRegistrationForm.controls[key].setErrors(null);
+      });
     }
+    this.sandboxes = this.candidateContextService.getSandbox()[0];
   }
   edit(): void {
     const sandFormCtrls = this.sandboxEditForm.controls;

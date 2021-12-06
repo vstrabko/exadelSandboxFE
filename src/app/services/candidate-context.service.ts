@@ -52,6 +52,18 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     return [dataArray, method];
   }
 
+  getSandboxes<T>(dataArray: T[], currentUrl: string): [T[], Observable<T[]>] {
+    super.apiUrl = currentUrl;
+    const method = this.get();
+    method.subscribe((data: T[]) => {
+      while (dataArray.length) {
+        dataArray.pop();
+      }
+      dataArray.push(...data);
+    });
+    return [dataArray, method];
+  }
+
   getLanguages(): [IdName[], Observable<IdName[]>] {
     return this.getData<IdName>(this.languages, '/api/languages');
   }
@@ -68,7 +80,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     return this.getData<IdName>(this.stackTechnologies, '/api/stacktechnologies');
   }
   getSandbox(): [Sandbox[], Observable<Sandbox[]>] {
-    return this.getData<Sandbox>(this.sandboxes, '/api/sandboxes');
+    return this.getSandboxes<Sandbox>(this.sandboxes, '/api/sandboxes');
   }
   getAvailability(): [IdName[], Observable<IdName[]>] {
     return this.getData<IdName>(this.availability, '/api/availabilitytypes');
@@ -87,18 +99,24 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
   }
   postCandidate(formData: CandidateFormModel): void {
     super.apiUrl = '/api/candidates';
-    this.create(formData).subscribe();
-    this.toastr.success(this.title, this.text);
+    this.create(formData).subscribe(
+      () => this.toastr.success(this.title, this.text),
+      () => this.toastr.error('Ошибка'),
+    );
   }
   postSandbox(formData: Sandbox): void {
     super.apiUrl = '/api/sandboxes';
-    this.create(formData).subscribe();
-    this.toastr.success(this.title, this.text);
+    this.create(formData).subscribe(
+      () => this.toastr.success(this.title, this.text),
+      () => this.toastr.error('Ошибка'),
+    );
   }
   putSandbox(formData: Sandbox): void {
     super.apiUrl = '/api/sandboxes';
-    this.update(formData).subscribe();
-    this.toastr.success(this.title, this.text);
+    this.update(formData).subscribe(
+      () => this.toastr.success(this.title, this.text),
+      () => this.toastr.error('Ошибка'),
+    );
   }
   translateLabels(): void {
     this.title = this.translateService.instant('tostr.title');
