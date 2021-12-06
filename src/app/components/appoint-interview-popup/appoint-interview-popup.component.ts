@@ -10,6 +10,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { dateRange } from 'src/app/interfaces/interfaces';
 import { EventServiceFilter } from 'src/app/services/eventFilter-service';
 import { PostInterviewService } from 'src/app/services/interviewPost-service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-appoint-interview-popup',
@@ -32,6 +33,7 @@ export class AppointInterviewPopupComponent implements OnInit {
   };
   noFreeInterviewers: boolean = false;
   freeInterviewersId: string[];
+  public title = 'Appoint interview';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -47,9 +49,11 @@ export class AppointInterviewPopupComponent implements OnInit {
     private interviwerService: InterviewerService,
     private eventServiceFilter: EventServiceFilter,
     private postInterviewService: PostInterviewService,
+    private translateService: TranslateService,
   ) {}
   ngOnInit(): void {
     console.log(this.selectedCandidate);
+    this.title = this.translateService.instant('candidateList.appointInterview');
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
       this.cancel();

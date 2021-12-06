@@ -51,9 +51,9 @@ body {
       transform: none;
       cursor: default;
     }
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
+  border: 1px solid $disabledButtonBorderColor;
+  background-color: $disabledButtonBackground;
+  color: $disabledButtonColor
 }
 }
 .unfilled-btn {

@@ -13,7 +13,10 @@
     "createNewSandbox": "Sandbox",
     "hello": "Hello"
   },
-  "login": "Log in",
+  "login": {
+    "title": "Log in",
+    "googleBtn": "Log in with Google"
+  },
   "loginForm": {
     "emailInput": "Please, enter your email",
     "emailInputValid": "Please, enter a valid email",
@@ -103,11 +106,14 @@
     "of": "of",
     "filter": "Filter",
     "example": "Ex. Minsk",
-    "appointInterview": "Appoint Interview"
+    "appointInterview": "Appoint interview",
+    "appointCandidateToInterviewer": "Appoint candidate"
   },
   "tostr": {
     "title": "Success",
-    "text": "You are registred!"
+    "text": "You are the rock!",
+    "titleEr": "Fail",
+    "textEr": "Something went wrong"
   },
   "select": {
     "default": "select",
@@ -135,6 +141,7 @@
     "timeIsRequired": "Time is required."
   },
   "candidate": {
+    "title": "Candidate card",
     "status": "Status",
     "recruiter": "Recruiter",
     "mentor": "Mentor",
@@ -148,5 +155,19 @@
   "googleAuthTostr": {
     "title": "Authorisation error",
     "text": "Email is not registered in the system"
+  },
+  "confirmPopup": {
+    "title": "Delete event",
+    "content": "Are you sure you want to delete the event?"
+  },
+  "calendarButtons": {
+    "today": "today",
+    "month": "month",
+    "week": "week",
+    "list": "list",
+    "subText": "submit",
+    "subHint": "Send events to server",
+    "weekText": "weekends",
+    "weekHint": "On/off weekends"
   }
 }

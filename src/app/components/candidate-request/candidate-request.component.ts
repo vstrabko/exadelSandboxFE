@@ -44,7 +44,7 @@ export class CandidateRequestComponent implements OnInit {
       primaryTechnologyId: new FormControl('', [Validators.required]),
       phoneNumber: new FormControl(null, [
         Validators.required,
-        Validators.pattern('+[0-9]*'),
+        Validators.pattern(/\+[0-9]*/g),
         Validators.minLength(9),
       ]),
       skype: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -66,6 +66,9 @@ export class CandidateRequestComponent implements OnInit {
       this.registrationForm.controls.sandboxId.setValue(this.sandboxChosen.id);
       this.candidateContextService.postCandidate(this.registrationForm.value);
       this.registrationForm.reset();
+      Object.keys(this.registrationForm.controls).forEach((key: string) => {
+        this.registrationForm.controls[key].setErrors(null);
+      });
     }
   }
 }

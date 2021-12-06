@@ -13,7 +13,10 @@
     "createNewSandbox": "Песочница",
     "hello": "Привет"
   },
-  "login": "Войти",
+  "login": {
+    "title": "Войти",
+    "googleBtn": "Войти через Google"
+  },
   "loginForm": {
     "emailInput": "Пожалуйста, введите Ваш email",
     "emailInputValid": "Пожалуйста, введите правильный email",
@@ -102,11 +105,14 @@
     "of": "из",
     "filter": "Фильтр",
     "example": "Прим. Минск",
-    "appointInterview": "Назначить Интервью"
+    "appointInterview": "Назначить интервью",
+    "appointCandidateToInterviewer": "Назначить кандидата"
   },
   "tostr": {
     "title": "Данные отправлены",
-    "text": "Вы зарегистрированы"
+    "text": "Все прошло успешно",
+    "titleEr": "Ошибка",
+    "textEr": "Что-то пошло не так"
   },
   "select": {
     "default": "выбрать",
@@ -118,7 +124,7 @@
     "location": "Локация",
     "recruiter": "Рекрутер",
     "sandbox": "Песочница"
-},
+  },
   "stepper": {
     "сhooseTheDate": "Выберите дату",
     "selectedDate": "Выбранныя дата",
@@ -134,6 +140,7 @@
     "timeIsRequired": "Необходимо выбрать время."
   },
   "candidate": {
+    "title": "Карточка кандидата",
     "status": "Статус",
     "recruiter": "Рекрутер",
     "mentor": "Ментор",
@@ -147,5 +154,20 @@
   "googleAuthTostr": {
     "title": "Ошибка авторизации",
     "text": "Электронная почта не зарегистрирована в системе"
+  },
+
+  "confirmPopup": {
+    "title": "Удалить событие",
+    "content": "Вы уверены, что хотите удалить это событие?"
+  },
+  "calendarButtons": {
+    "today": "сегодня",
+    "month": "месяц",
+    "week": "неделя",
+    "list": "список",
+    "subText": "отправить",
+    "subHint": "Отправить события на сервер",
+    "weekText": "выходные",
+    "weekHint": "Вкл/выкл выходные"
   }
 }
