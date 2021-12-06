@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { REGEXP } from '../../shared/constants/validators';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-form',
@@ -14,6 +15,7 @@ export class LoginFormComponent implements OnInit {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() log: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public base_URL = environment.API_URL;
   public title = 'Log in';
   email = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.email)]);
   password = new FormControl(null, [
