@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Interval } from 'src/app/interfaces/interfaces';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-appoint-interview-popup',
@@ -20,6 +21,7 @@ import { Interval } from 'src/app/interfaces/interfaces';
   ],
 })
 export class AppointInterviewPopupComponent implements OnInit {
+  public title = 'Appoint interview';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -37,8 +39,10 @@ export class AppointInterviewPopupComponent implements OnInit {
     private modalWindowService: ModalWindowService,
     private _formBuilder: FormBuilder,
     private interviwerService: InterviewerService,
+    private translateService: TranslateService,
   ) {}
   ngOnInit(): void {
+    this.title = this.translateService.instant('candidateList.appointInterview');
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
       this.cancel();

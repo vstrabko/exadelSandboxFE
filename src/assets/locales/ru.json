@@ -13,7 +13,10 @@
     "createNewSandbox": "Песочница",
     "hello": "Привет"
   },
-  "login": "Войти",
+  "login": {
+    "title": "Войти",
+    "googleBtn": "Войти через Google"
+  },
   "loginForm": {
     "emailInput": "Пожалуйста, введите Ваш email",
     "emailInputValid": "Пожалуйста, введите правильный email",
@@ -135,6 +138,7 @@
     "timeIsRequired": "Необходимо выбрать время."
   },
   "candidate": {
+    "title": "Карточка кандидата",
     "status": "Статус",
     "recruiter": "Рекрутер",
     "mentor": "Ментор",
@@ -151,6 +155,7 @@
   },
 
   "confirmPopup": {
+    "title": "Удалить событие",
     "content": "Вы уверены, что хотите удалить это событие?"
   }
 }
