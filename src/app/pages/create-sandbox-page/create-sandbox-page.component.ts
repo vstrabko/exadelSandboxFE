@@ -125,7 +125,11 @@ export class CreateSandboxPageComponent implements OnInit {
       sandFormCtrls.endRegistration.setValue(sandFormCtrls.endRegistration.value.toISOString());
       this.candidateContextService.postSandbox(this.sandboxRegistrationForm.value);
       this.sandboxRegistrationForm.reset();
+      Object.keys(this.sandboxRegistrationForm.controls).forEach((key: string) => {
+        this.sandboxRegistrationForm.controls[key].setErrors(null);
+      });
     }
+    this.sandboxes = this.candidateContextService.getSandbox()[0];
   }
   edit(): void {
     const sandFormCtrls = this.sandboxEditForm.controls;

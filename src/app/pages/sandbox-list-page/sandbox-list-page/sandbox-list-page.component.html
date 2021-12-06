@@ -72,6 +72,7 @@
         <button class="btn filled-btn btn-create-sandbox" (click)="goCreateSandbox()">
           {{ 'sandbox.createSandbox' | translate }}
         </button>
+        <button class="btn filled-btn btn-create-sandbox" (click)="downloadExel()">Export</button>
         <mat-paginator
           #paginator
           [length]="totalRows"

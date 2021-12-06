@@ -111,7 +111,9 @@
   },
   "tostr": {
     "title": "Success",
-    "text": "You are registred!"
+    "text": "You are the rock!",
+    "titleEr": "Fail",
+    "textEr": "Something went wrong"
   },
   "select": {
     "default": "select",
