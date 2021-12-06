@@ -123,5 +123,7 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
   translateLabels(): void {
     this.title = this.translateService.instant('tostr.title');
     this.text = this.translateService.instant('tostr.text');
+    this.titleEr = this.translateService.instant('tostr.titleEr');
+    this.textEr = this.translateService.instant('tostr.textEr');
   }
 }
