@@ -72,16 +72,13 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.sandboxService.get().subscribe((data: Sandbox[]) => {
       this.sandBoxes = data;
       this.sandBoxesExel = data;
-      // const sandBoxesExelCorrect = this.sandBoxesExel.map(function (i) {
-      //   return delete this.sandBoxesExel[i].id;
-      // });
+
       for (let i = 0; i < this.sandBoxesExel.length; i++) {
         delete this.sandBoxesExel[i].id;
         delete this.sandBoxesExel[i].endDate;
         delete this.sandBoxesExel[i].startRegistration;
         delete this.sandBoxesExel[i].endRegistration;
       }
-      console.log(this.sandBoxesExel[0]);
 
       this.matDataSource = new MatTableDataSource(this.sandBoxes);
       this.matDataSource.paginator = this.paginator;
