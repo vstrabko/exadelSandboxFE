@@ -39,6 +39,8 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   dataSource: CandidateDataSource;
   selection = new SelectionModel<Candidate>(true, []);
   locations = new FormControl();
+  isAppointInterviewDisabled = true;
+  selectedCandidate: Candidate;
   public candidateRequestForm: FormGroup;
 
   queryParams = {
@@ -179,12 +181,19 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   submit(): void {
     this.loadCandidatesPage();
     this.paginator.firstPage();
+    console.log(this.selection.selected[0]);
   }
 
-  // TODO: getting selected candidates:
-
-  // selectLocation(event: any): void {
-  //   console.log(event);
-  //   console.log(this.selectLocation);
-  // }
+  checkSelected(): void {
+    if (
+      this.selection.selected.length === 1 &&
+      this.selection.selected[0].candidateSandboxes[0].candidateProcesses[0].status.name ===
+        'Interview Tech'
+    ) {
+      this.isAppointInterviewDisabled = false;
+      this.selectedCandidate = this.selection.selected[0];
+    } else {
+      this.isAppointInterviewDisabled = true;
+    }
+  }
 }

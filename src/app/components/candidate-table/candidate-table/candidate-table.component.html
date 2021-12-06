@@ -54,7 +54,7 @@
                 </mat-checkbox>
             </th>
             <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null; checkSelected()"
                     [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" >
                 </mat-checkbox>
             </td>
@@ -101,4 +101,4 @@
         </tr>
     </table>
 </div>
-<button (click)="toggleAppoinInterview()" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>
+<button (click)="toggleAppoinInterview()" [disabled]="isAppointInterviewDisabled" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>

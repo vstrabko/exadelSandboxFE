@@ -23,3 +23,8 @@ export interface authResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface dateRange {
+  start: Date;
+  end: Date;
+}

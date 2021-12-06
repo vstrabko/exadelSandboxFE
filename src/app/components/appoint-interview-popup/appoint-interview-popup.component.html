@@ -1,6 +1,7 @@
 <app-modal-window [title]="'candidateList.appointInterview' | translate">
   <div class="card-popup_container">
     <div class="section">
+      <p class="selected-candidate">Appoint interview for {{selectedCandidate.name + ' ' + selectedCandidate.surname}}</p>
       <mat-stepper #stepper>
         <mat-step [stepControl]="firstFormGroup" errorMessage="{{'stepper.dateIsRequired' | translate}}">
           <form [formGroup]="firstFormGroup">
@@ -12,11 +13,12 @@
               <mat-datepicker #datepicker>
                 <mat-datepicker-actions>
                   <button mat-button matDatepickerCancel class="btn unfilled-btn">{{'cancel' | translate}}</button>
-                  <button mat-raised-button color="primary" matDatepickerApply class="btn filled-btn">{{'apply' | translate}}</button>
+                  <button mat-raised-button color="primary" matDatepickerApply (click)="getFreeTimes()" class="btn filled-btn">{{'apply' | translate}}</button>
                 </mat-datepicker-actions>
               </mat-datepicker>
             </mat-form-field>
           </form>
+          <p *ngIf="noFreeInterviewers">there are no free interviewers on that date</p>
         </mat-step>
         <mat-step [stepControl]="secondFormGroup" errorMessage="{{'stepper.interviewerIsRequired' | translate}}">
           <form [formGroup]="secondFormGroup">
@@ -51,8 +53,8 @@
               <mat-label>{{'stepper.chooseTime' | translate}}</mat-label>
               <mat-select [(value)]="selectedTime" formControlName="thirdCtrl"
               required>
-                <mat-option *ngFor="let interval of intervals" [value]="interval.value">
-                  {{interval.value}}
+                <mat-option *ngFor="let interval of intervals" [value]="interval">
+                  {{interval.start | date:'shortTime'}} - {{interval.end | date:'shortTime'}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -65,12 +67,12 @@
             <div class="details_content">
               <p><strong>{{'stepper.date' | translate}}</strong>: {{localDateString}}</p>
               <p><strong>{{'stepper.interviewer' | translate}}</strong>: {{selectedInterviewer}}</p>
-              <p><strong>{{'stepper.time' | translate}}</strong>: {{selectedTime}}</p>
+              <p *ngIf="selectedTime"><strong>{{'stepper.time' | translate}}</strong>: {{selectedTime.start | date:'shortTime'}} - {{selectedTime.end | date:'shortTime'}}</p>
             </div>
             <mat-card-actions>
               <div class="stepper-btn_container">
                 <button mat-button (click)="stepper.reset()" class="btn unfilled-btn">{{'reset' | translate}}</button>
-                <button class="btn filled-btn">{{'candidateList.appointInterview' | translate}}</button>
+                <button (click)="postInterview()" class="btn filled-btn">{{'candidateList.appointInterview' | translate}}</button>
               </div>
             </mat-card-actions>
           </mat-card>
