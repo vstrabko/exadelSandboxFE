@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { REGEXP } from '../../shared/constants/validators';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() log: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public base_URL = environment.API_URL;
   public title = 'Log in';
   email = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.email)]);
   password = new FormControl(null, [
@@ -20,7 +23,11 @@ export class LoginFormComponent {
     Validators.pattern(REGEXP.password_length),
   ]);
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private translateService: TranslateService) {}
+
+  ngOnInit(): void {
+    this.title = this.translateService.instant('login.title');
+  }
 
   submit(): void {
     if (this.email.valid && this.password.valid) {

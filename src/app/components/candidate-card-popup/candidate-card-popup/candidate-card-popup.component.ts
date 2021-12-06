@@ -3,6 +3,7 @@ import { MatSliderChange } from '@angular/material/slider';
 import axios from 'axios';
 import { Candidate } from 'src/app/models/candidate.model';
 import { ModalWindowService } from '../../modal-window/modal-window.service';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Status {
   value: string;
@@ -47,8 +48,12 @@ export class CandidateCardPopupComponent implements OnInit {
     ],
   };
 
-  constructor(private modalWindowService: ModalWindowService) {}
+  constructor(
+    private modalWindowService: ModalWindowService,
+    private translateService: TranslateService,
+  ) {}
   ngOnInit(): void {
+    this.title = this.translateService.instant('candidate.title');
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
       this.cancel();

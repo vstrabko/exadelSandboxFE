@@ -13,7 +13,10 @@
     "createNewSandbox": "Sandbox",
     "hello": "Hello"
   },
-  "login": "Log in",
+  "login": {
+    "title": "Log in",
+    "googleBtn": "Log in with Google"
+  },
   "loginForm": {
     "emailInput": "Please, enter your email",
     "emailInputValid": "Please, enter a valid email",
@@ -136,6 +139,7 @@
     "timeIsRequired": "Time is required."
   },
   "candidate": {
+    "title": "Candidate card",
     "status": "Status",
     "recruiter": "Recruiter",
     "mentor": "Mentor",
@@ -151,6 +155,7 @@
     "text": "Email is not registered in the system"
   },
   "confirmPopup": {
+    "title": "Delete event",
     "content": "Are you sure you want to delete the event?"
   },
   "calendarButtons": {
