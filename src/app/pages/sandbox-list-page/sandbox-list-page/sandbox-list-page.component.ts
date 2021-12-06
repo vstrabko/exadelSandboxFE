@@ -19,7 +19,9 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { merge } from 'rxjs/internal/observable/merge';
 import { fromEvent } from 'rxjs';
-
+import { utils, write, WorkBook } from 'xlsx';
+import { saveAs } from 'file-saver';
+import { SandboxExel } from 'src/app/models/sandboxExel.model';
 @Component({
   selector: 'app-sandbox-list-page',
   templateUrl: './sandbox-list-page.component.html',
@@ -54,6 +56,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
 
   sandBoxes: Sandbox[];
   sandbox: Sandbox;
+  sandBoxesExel: SandboxExel[];
 
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -65,10 +68,18 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.sandbox = row;
     this.showModal.emit();
   }
-
   ngOnInit(): void {
     this.sandboxService.get().subscribe((data: Sandbox[]) => {
       this.sandBoxes = data;
+      this.sandBoxesExel = data;
+
+      for (let i = 0; i < this.sandBoxesExel.length; i++) {
+        delete this.sandBoxesExel[i].id;
+        delete this.sandBoxesExel[i].endDate;
+        delete this.sandBoxesExel[i].startRegistration;
+        delete this.sandBoxesExel[i].endRegistration;
+      }
+
       this.matDataSource = new MatTableDataSource(this.sandBoxes);
       this.matDataSource.paginator = this.paginator;
       this.matDataSource.sort = this.sort;
@@ -157,5 +168,27 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${+row.id + 1}`;
+  }
+
+  downloadExel(): void {
+    const ws_name = 'SomeSheet';
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    const ws: any = utils.json_to_sheet(this.sandBoxesExel);
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    function s2ab(s: any): ArrayBuffer {
+      const buf = new ArrayBuffer(s.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i !== s.length; ++i) {
+        view[i] = s.charCodeAt(i) & 0xff;
+      }
+      return buf;
+    }
+    saveAs(
+      new Blob([s2ab(wbout)], { type: 'application/octet-stream' }),
+      'exportedSandboxList.xlsx',
+    );
   }
 }
