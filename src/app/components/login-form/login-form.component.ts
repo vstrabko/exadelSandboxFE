@@ -4,6 +4,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { REGEXP } from '../../shared/constants/validators';
 import { ModalWindowService } from '../modal-window/modal-window.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-form',
@@ -14,6 +16,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   @Output() modal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() log: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public base_URL = environment.API_URL;
   public title = 'Log in';
   email = new FormControl(null, [Validators.required, Validators.pattern(REGEXP.email)]);
   password = new FormControl(null, [
@@ -22,12 +25,13 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   ]);
   public modalForm: any;
 
-  constructor(private authService: AuthService, private modalWindowService: ModalWindowService) {}
+  constructor(private authService: AuthService, private modalWindowService: ModalWindowService, private translateService: TranslateService) {}
   ngOnInit(): void {
     this.modalForm = this.modalWindowService.event.subscribe((val: string) => {
       this.submit();
       console.log(val);
     });
+    this.title = this.translateService.instant('login.title');
   }
 
   ngOnDestroy(): void {

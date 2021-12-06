@@ -7,6 +7,12 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ModalWindowService } from '../../modal-window/modal-window.service';
 import { IdName } from 'src/app/models/id-name.model';
 import { environment } from '../../../../environments/environment';
+import { TranslateService } from '@ngx-translate/core';
+
+interface Status {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-candidate-card-popup',
@@ -91,8 +97,9 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.visibleForm = this.modalWindowService.visible.subscribe((result: boolean) => {
       this.visible = result;
-      this.cancel();
+      this.cancel()
     });
+    this.title = this.translateService.instant('candidate.title');
 
     this.saveForm = this.modalWindowService.event.subscribe((result: string) => {
       this.printForm();

@@ -59,15 +59,15 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
         };
         switch (ev.type) {
           case 0:
-            evObj.backgroundColor = '#009300';
+            evObj.backgroundColor = '#009300'; //dark green
             evObj.borderColor = '#009300';
             break;
           case 1:
-            evObj.backgroundColor = '#1a9da8';
+            evObj.backgroundColor = '#1a9da8'; //light blue
             evObj.borderColor = '#1a9da8';
             break;
           case 2:
-            evObj.backgroundColor = '#f9b615';
+            evObj.backgroundColor = '#f9b615'; // yellow
             evObj.borderColor = '#f9b615';
             break;
         }

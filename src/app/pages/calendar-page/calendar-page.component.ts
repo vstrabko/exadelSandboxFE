@@ -13,6 +13,8 @@ import ruLocale from '@fullcalendar/core/locales/fr';
 import { CalendarEventService } from '../../services/calendarEvent.service';
 import { CalendarEventPost } from '../../interfaces/interfaces';
 import { UserService } from 'src/app/services/user.service';
+import { LocalizationService } from 'src/app/internationalization/localization.service';
+import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-calendar-page',
@@ -27,16 +29,24 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   public currentEvents: EventApi[] = [];
   public selectInfo: DateSelectArg;
   public arrEventsPost: CalendarEventPost[] = [];
+  public lang: string | null;
 
   constructor(
     private calendarEventService: CalendarEventService,
     private userService: UserService,
+    private localizationService: LocalizationService,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
     this.calendarEventService.getEvents();
     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
       this.calendarOptions.events = res;
+      this.lang = localStorage.getItem('language');
+      this.changeLang(`${this.lang ? this.lang : 'en'}`);
+      this.translateService.onLangChange.subscribe((params: TranslationChangeEvent) => {
+        this.changeLang(params.lang);
+      });
     });
   }
 
@@ -48,7 +58,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     },
     customButtons: {
       submit: {
-        text: 'Submit',
+        text: `Submit`,
         hint: 'Send events to server',
         click: () => this.submitEvents(),
       },
@@ -99,7 +109,6 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
 
   handleEvents(events: EventApi[]): void {
     this.currentEvents = events;
-    console.log('handleEvents', events);
   }
 
   openModal(): void {
@@ -123,7 +132,6 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
 
   deleteEvent(): void {
     this.clickInfo.event.remove();
-    console.log();
     if (this.clickInfo.event.id) {
       this.calendarEventService.deleteEvent(this.clickInfo.event.id);
     }
@@ -143,6 +151,24 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
       endTime: endTime,
     };
     this.arrEventsPost.push(objEvent);
+  }
+
+  changeLang(lang: string): void {
+    this.calendarOptions.locale = lang;
+    const submit = this.calendarOptions.customButtons?.submit;
+    const weekends = this.calendarOptions.customButtons?.weekends;
+    this.calendarOptions.buttonText = {
+      today: `${this.translateService.instant('calendarButtons.today') as string}`,
+      month: `${this.translateService.instant('calendarButtons.month') as string}`,
+      week: `${this.translateService.instant('calendarButtons.week') as string}`,
+      list: `${this.translateService.instant('calendarButtons.list') as string}`,
+    };
+    if (submit && weekends) {
+      submit.text = `${this.translateService.instant('calendarButtons.subText') as string}`;
+      submit.hint = `${this.translateService.instant('calendarButtons.subHint') as string}`;
+      weekends.text = `${this.translateService.instant('calendarButtons.weekText') as string}`;
+      weekends.hint = `${this.translateService.instant('calendarButtons.weekHint') as string}`;
+    }
   }
 
   ngOnDestroy(): void {
