@@ -16,7 +16,6 @@ import { HttpClient } from '@angular/common/http';
 export class CreateSandboxPageComponent implements OnInit {
   constructor(private candidateContextService: CandidateContextService, private http: HttpClient) {}
   public sandboxes: Sandbox[] = [];
-  public sandboxesSubj: any;
   public sandboxChosen: Partial<Sandbox> = {};
   public languages: IdName[];
   public stackTechnologies: IdName[];
