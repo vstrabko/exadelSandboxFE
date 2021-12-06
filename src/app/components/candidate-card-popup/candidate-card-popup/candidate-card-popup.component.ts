@@ -9,11 +9,6 @@ import { IdName } from 'src/app/models/id-name.model';
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 
-interface Status {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-candidate-card-popup',
   templateUrl: './candidate-card-popup.component.html',
@@ -81,6 +76,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     private modalWindowService: ModalWindowService,
     private userName: AuthService,
     private toastr: ToastrService,
+    private translateService: TranslateService,
   ) {}
 
   public visibleForm: any;
@@ -97,7 +93,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.visibleForm = this.modalWindowService.visible.subscribe((result: boolean) => {
       this.visible = result;
-      this.cancel()
+      this.cancel();
     });
     this.title = this.translateService.instant('candidate.title');
 

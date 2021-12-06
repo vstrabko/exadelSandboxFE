@@ -25,7 +25,11 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   ]);
   public modalForm: any;
 
-  constructor(private authService: AuthService, private modalWindowService: ModalWindowService, private translateService: TranslateService) {}
+  constructor(
+    private authService: AuthService,
+    private modalWindowService: ModalWindowService,
+    private translateService: TranslateService,
+  ) {}
   ngOnInit(): void {
     this.modalForm = this.modalWindowService.event.subscribe((val: string) => {
       this.submit();
