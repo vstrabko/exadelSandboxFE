@@ -6,6 +6,7 @@ import { REGEXP } from '../../shared/constants/validators';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
@@ -23,7 +24,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.pattern(REGEXP.password_length),
   ]);
-  public modalForm: any;
+  public modalForm: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -31,9 +32,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
   ) {}
   ngOnInit(): void {
-    this.modalForm = this.modalWindowService.event.subscribe((val: string) => {
+    this.modalForm = this.modalWindowService.event.subscribe(() => {
       this.submit();
-      console.log(val);
     });
     this.title = this.translateService.instant('login.title');
   }

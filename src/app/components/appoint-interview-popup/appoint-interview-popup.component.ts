@@ -8,6 +8,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Interval } from 'src/app/interfaces/interfaces';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-appoint-interview-popup',
@@ -42,9 +43,8 @@ export class AppointInterviewPopupComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
   ) {}
 
-  public visibleForm: any;
+  public visibleForm: Subscription;
   public visible: boolean;
-  public saveForm: any;
 
   ngOnInit(): void {
     this.title = this.translateService.instant('candidateList.appointInterview');
@@ -53,10 +53,6 @@ export class AppointInterviewPopupComponent implements OnInit, OnDestroy {
       this.cancel();
     });
 
-    this.saveForm = this.modalWindowService.event.subscribe((result: string) => {
-      // this.addEvent(); //TODO what to add into func
-      console.log(result);
-    });
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
@@ -76,9 +72,6 @@ export class AppointInterviewPopupComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.visibleForm) {
       this.visibleForm.unsubscribe();
-    }
-    if (this.saveForm) {
-      this.saveForm.unsubscribe();
     }
   }
   @Input() user: Candidate;

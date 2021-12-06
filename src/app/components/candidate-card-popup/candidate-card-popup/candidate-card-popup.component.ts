@@ -8,6 +8,8 @@ import { ModalWindowService } from '../../modal-window/modal-window.service';
 import { IdName } from 'src/app/models/id-name.model';
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { Feedback } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-candidate-card-popup',
@@ -70,7 +72,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public candidateSandbox: string;
   public currentJob: string;
 
-  selectedValue: string;
+  public selectedValue: string;
 
   constructor(
     private modalWindowService: ModalWindowService,
@@ -79,11 +81,11 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
   ) {}
 
-  public visibleForm: any;
-  public visible: boolean;
-  public saveForm: any;
-  public save: string;
+  public visibleForm: Subscription;
+  public saveForm: Subscription;
   public counter = 0;
+  public error: string;
+  public success: string;
 
   public isAdmin = this.userRole.includes('Admin' || 'Manager');
   public isMentor = this.userRole.includes('Mentor');
@@ -91,15 +93,13 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public isRecruiter = this.userRole.includes('Recruiter');
 
   ngOnInit(): void {
-    this.visibleForm = this.modalWindowService.visible.subscribe((result: boolean) => {
-      this.visible = result;
+    this.visibleForm = this.modalWindowService.visible.subscribe(() => {
       this.cancel();
     });
     this.title = this.translateService.instant('candidate.title');
 
-    this.saveForm = this.modalWindowService.event.subscribe((result: string) => {
+    this.saveForm = this.modalWindowService.event.subscribe(() => {
       this.printForm();
-      this.save = result;
     });
 
     setTimeout(() => {
@@ -115,6 +115,14 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       this.grade = 10;
     } else if (this.isInterviewer) {
       this.grade = 4;
+    }
+
+    if (localStorage.getItem('language') === 'en') {
+      this.error = 'Error';
+      this.success = 'Success';
+    } else {
+      this.error = 'Ошибка';
+      this.success = 'Success';
     }
   }
 
@@ -163,11 +171,11 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       .put(
         `${this.URL}candidates/${STATUS.id}/candidatesandboxes/${STATUS.candidateSandboxId}?newStatusId=${STATUS.newStatusId}`,
       )
-      .then((response: any) => console.log(response))
-      .catch((error: any) => console.log(error));
+      .then(() => this.toastr.success(this.success))
+      .catch(() => this.toastr.error(this.error));
   }
 
-  printForm(): any {
+  printForm(): void {
     const FEEDBACK_PUT = {
       grade: this.sliderValue,
       userReview: this.userReview,
@@ -192,15 +200,14 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   }): any {
     return axios
       .post(`${this.URL}feedbacks`, FEEDBACK_POST)
-      .then((response: any) => console.log(response))
-      .catch((error: any) => console.log(error));
+      .then(() => this.toastr.success(this.success))
+      .catch(() => this.toastr.error(this.error));
   }
 
   getFeedbacks(): any {
     return axios
       .get(`${this.URL}feedbacks/${this.feedbackId}`)
-      .then((response: any) => console.log(response))
-      .catch((error: any) => console.log(error));
+      .catch((error: Error) => console.log(error));
   }
 
   getStatuses(): any {
@@ -211,14 +218,14 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
           this.statuses = response.data;
         }, 1);
       })
-      .catch((error: any) => console.log(error));
+      .catch((error: Error) => console.log(error));
   }
 
   putFeedbacks(FEEDBACK_PUT: { grade: number; userReview: string }): any {
     return axios
       .put(`${this.URL}feedbacks/${this.feedbackId}`, FEEDBACK_PUT)
-      .then((response: any) => console.log(response))
-      .catch((error: any) => console.log(error));
+      .then(() => this.toastr.success(this.success))
+      .catch(() => this.toastr.error(this.error));
   }
 
   getCandidateInfo(): any {
@@ -226,6 +233,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       .get(`${this.URL}candidates/${this.user.id}`)
       .then((response: any) => {
         this.CANDIDATES_INFO.id = response.data.id;
+        this.CANDIDATES_INFO.name = response.data.name;
         this.CANDIDATES_INFO.surname = response.data.surname;
         this.CANDIDATES_INFO.email = response.data.email;
         this.CANDIDATES_INFO.location = response.data.location.name;
@@ -244,17 +252,17 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.currentJob = candidateSandboxes[candidateSandboxes.length - 1].currentJob;
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
-        this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id; //TODO
+        this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id;
         this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
         const createDate: string[] = [];
-        this.feedbacks.forEach((element: any) => {
+        this.feedbacks.forEach((element: Feedback) => {
           element.userId === this.userId ? (this.userReview = element.userReview) : null;
           element.userId === this.userId ? (this.feedbackId = element.id) : null;
           element.userId === this.userId ? (this.sliderValue = element.grade) : null;
         });
         this.dateFeedback = createDate;
       })
-      .catch((error: any) => console.log(error));
+      .catch((error: Error) => console.log(error));
   }
 }
