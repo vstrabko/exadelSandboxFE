@@ -84,8 +84,8 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public visibleForm: Subscription;
   public saveForm: Subscription;
   public counter = 0;
-  public error: string;
-  public success: string;
+  private error: string = '';
+  private success: string = '';
 
   public isAdmin = this.userRole.includes('Admin' || 'Manager');
   public isMentor = this.userRole.includes('Mentor');
@@ -108,6 +108,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
 
     this.getCandidateInfo();
     this.getStatuses();
+    this.translateLabels();
 
     if (this.isAdmin) {
       this.grade = 100;
@@ -115,14 +116,6 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       this.grade = 10;
     } else if (this.isInterviewer) {
       this.grade = 4;
-    }
-
-    if (localStorage.getItem('language') === 'en') {
-      this.error = 'Error';
-      this.success = 'Success';
-    } else {
-      this.error = 'Ошибка';
-      this.success = 'Success';
     }
   }
 
@@ -264,5 +257,10 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.dateFeedback = createDate;
       })
       .catch((error: Error) => console.log(error));
+  }
+
+  translateLabels(): void {
+    this.error = this.translateService.instant('tostr.textEr');
+    this.success = this.translateService.instant('tostr.text');
   }
 }
