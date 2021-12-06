@@ -29,6 +29,8 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
 
   private title: string = '';
   private text: string = '';
+  private titleEr: string = '';
+  private textEr: string = '';
 
   private englishLevels: IdName[] = [];
   private languages: IdName[] = [];
@@ -101,21 +103,21 @@ export class CandidateContextService extends ApiService<candidateRequestData> {
     super.apiUrl = '/api/candidates';
     this.create(formData).subscribe(
       () => this.toastr.success(this.title, this.text),
-      () => this.toastr.error('Ошибка'),
+      () => this.toastr.error(this.titleEr, this.textEr),
     );
   }
   postSandbox(formData: Sandbox): void {
     super.apiUrl = '/api/sandboxes';
     this.create(formData).subscribe(
       () => this.toastr.success(this.title, this.text),
-      () => this.toastr.error('Ошибка'),
+      () => this.toastr.error(this.titleEr, this.textEr),
     );
   }
   putSandbox(formData: Sandbox): void {
     super.apiUrl = '/api/sandboxes';
     this.update(formData).subscribe(
       () => this.toastr.success(this.title, this.text),
-      () => this.toastr.error('Ошибка'),
+      () => this.toastr.error(this.titleEr, this.textEr),
     );
   }
   translateLabels(): void {
