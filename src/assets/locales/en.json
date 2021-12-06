@@ -152,5 +152,15 @@
   },
   "confirmPopup": {
     "content": "Are you sure you want to delete the event?"
+  },
+  "calendarButtons": {
+    "today": "today",
+    "month": "month",
+    "week": "week",
+    "list": "list",
+    "subText": "submit",
+    "subHint": "Send events to server",
+    "weekText": "weekends",
+    "weekHint": "On/off weekends"
   }
 }
