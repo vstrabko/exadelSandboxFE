@@ -3,6 +3,7 @@
   "apply": "Apply",
   "reset": "Reset",
   "close": "Close",
+  "download": "Download",
   "errors": {
     "goHome": "Error, go back to home page",
     "goHomeMessage": "Back to Home page"
@@ -113,7 +114,9 @@
     "title": "Success",
     "text": "You are the rock!",
     "titleEr": "Fail",
-    "textEr": "Something went wrong"
+    "textEr": "Something went wrong",
+    "downloadSuccess": "File download",
+    "downloadError": "Download error"
   },
   "select": {
     "default": "select",

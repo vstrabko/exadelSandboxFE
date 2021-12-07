@@ -14,10 +14,10 @@
           </mat-select>
         </mat-form-field>
 
-        <div *ngIf="isAdmin">
+        <div *ngIf="isAdmin" class="feedback">
           <mat-checkbox class="example-margin" (click)="addStatus()">{{ 'status.change' | translate }}</mat-checkbox>
-          <button class="btn filled-btn" (click)="changeStatus()" [disabled]="counter">{{ 'status.save' | translate }}</button>
-          <button class="btn filled-btn" (click)="downloadTest()">{{ 'status.save' | translate }}</button>
+          <button class="btn filled-btn" (click)="changeStatus()" [disabled]="!counter">{{ 'status.save' | translate }}</button>
+          <button class="btn filled-btn" (click)="downloadTest()">{{ 'download' | translate }}</button>
         </div>
       </div>
       <mat-card class="candidate-skills">{{ CANDIDATES_INFO.candidateTechSkills || null }}</mat-card>

@@ -76,9 +76,11 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
 
   public visibleForm: Subscription;
   public saveForm: Subscription;
-  public counter = 0;
+  public counter: number = 0;
   private error: string = '';
   private success: string = '';
+  private errorD: string = '';
+  private successD: string = '';
 
   public isAdmin = this.userRole.includes('Admin' || 'Manager');
   public isMentor = this.userRole.includes('Mentor');
@@ -163,6 +165,8 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
 
   downloadTest(): void {
     console.log('download test'); //TODO waiting endpoint from back end
+    // const download = ;
+    // ? this.toastr.success(this.successD) : this.toastr.error(this.errorD);
   }
 
   sendData(): void {
@@ -232,7 +236,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
         this.CANDIDATES_INFO.professionaCertificates = response.data.professionaCertificates;
-        // const candidateTechSkills = response.data.candidateTechSkills;
+        // const candidateTechSkills = response.data.candidateTechSkills;  //TODO remove comments when back is done
         // this.CANDIDATES_INFO.candidateTechSkills =
         //   candidateTechSkills[candidateTechSkills.length - 1].skill.name;
         const candidateLanguages = response.data.candidateLanguages;
@@ -261,5 +265,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   translateLabels(): void {
     this.error = this.translateService.instant('tostr.textEr');
     this.success = this.translateService.instant('tostr.text');
+    this.errorD = this.translateService.instant('tostr.downloadError');
+    this.successD = this.translateService.instant('tostr.downloadSuccess');
   }
 }
