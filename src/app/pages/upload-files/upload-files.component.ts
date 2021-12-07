@@ -37,6 +37,7 @@ export class UploadFilesComponent implements OnInit {
         formData.append('file', file);
         this.http.post('http://64.227.114.210:9090/api/files', formData).subscribe(
           (responseFileID: any) => {
+            // Change any type to interface when back done
             this.fileSendForm.controls.fileId.setValue(responseFileID);
             this.showImg = true;
           },
