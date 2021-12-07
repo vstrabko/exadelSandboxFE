@@ -44,15 +44,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         },
       },
     ],
-    candidateTechSkills: [
-      {
-        id: '',
-        skill: {
-          id: '',
-          name: '',
-        },
-      },
-    ],
+    candidateTechSkills: [],
   };
 
   public title = 'Candidate card';
@@ -71,6 +63,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public statuses: IdName[];
   public candidateSandbox: string;
   public currentJob: string;
+  public arr: string[];
 
   public selectedValue: string;
 
@@ -99,7 +92,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     this.title = this.translateService.instant('candidate.title');
 
     this.saveForm = this.modalWindowService.event.subscribe(() => {
-      this.printForm();
+      this.sendData();
     });
 
     setTimeout(() => {
@@ -168,7 +161,11 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       .catch(() => this.toastr.error(this.error));
   }
 
-  printForm(): void {
+  downloadTest(): void {
+    console.log('download test'); //TODO waiting endpoint from back end
+  }
+
+  sendData(): void {
     const FEEDBACK_PUT = {
       grade: this.sliderValue,
       userReview: this.userReview,
@@ -225,6 +222,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     return axios
       .get(`${this.URL}candidates/${this.user.id}`)
       .then((response: any) => {
+        console.log(response.data);
         this.CANDIDATES_INFO.id = response.data.id;
         this.CANDIDATES_INFO.name = response.data.name;
         this.CANDIDATES_INFO.surname = response.data.surname;
@@ -234,19 +232,20 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
         this.CANDIDATES_INFO.professionaCertificates = response.data.professionaCertificates;
-        const candidateTechSkills = response.data.candidateTechSkills;
-        this.CANDIDATES_INFO.candidateTechSkills =
-          candidateTechSkills[candidateTechSkills.length - 1].skill.name;
+        // const candidateTechSkills = response.data.candidateTechSkills;
+        // this.CANDIDATES_INFO.candidateTechSkills =
+        //   candidateTechSkills[candidateTechSkills.length - 1].skill.name;
         const candidateLanguages = response.data.candidateLanguages;
         this.CANDIDATES_INFO.candidateLanguages =
           candidateLanguages[candidateLanguages.length - 1].language.name;
         const candidateSandboxes = response.data.candidateSandboxes;
         this.candidateSandbox = candidateSandboxes[candidateSandboxes.length - 1].id;
         this.currentJob = candidateSandboxes[candidateSandboxes.length - 1].currentJob;
+        console.log(this.currentJob);
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id;
-        this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
+        this.candidateStatus = candidateProcesses[candidateProcesses.length - 2].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
         const createDate: string[] = [];
         this.feedbacks.forEach((element: Feedback) => {

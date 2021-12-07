@@ -93,7 +93,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
         .filter((sand: CandidateSandboxes) => {
           return (
             sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
-            sand.sandbox.status === 'Application'
+            (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
           );
         })
         .map((filtred: CandidateSandboxes) => filtred.id)
