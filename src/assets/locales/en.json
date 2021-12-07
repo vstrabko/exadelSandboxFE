@@ -58,7 +58,8 @@
     "startDate": "Start date",
     "nameSandbox": "Name",
     "nameDescription": "Description",
-    "statusSand": "Status"
+    "statusSand": "Status",
+    "exportSandbox": "Export"
   },
   "request": {
     "header": "Candidate request",

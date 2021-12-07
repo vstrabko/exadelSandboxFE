@@ -57,7 +57,8 @@
     "startDate": "Дата начала",
     "nameSandbox": "Наименование",
     "nameDescription": "Описание",
-    "statusSand": "Статус"
+    "statusSand": "Статус",
+    "exportSandbox": "Экспорт"
   },
   "request": {
     "header": "Заявка кандидата",
