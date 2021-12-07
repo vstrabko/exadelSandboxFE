@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ModalWindowService } from './modal-window.service';
 
 //all console logs will be delete, when functions will be done
@@ -10,9 +11,9 @@ import { ModalWindowService } from './modal-window.service';
 export class ModalWindowComponent implements OnInit, OnDestroy {
   constructor(private modalWindowService: ModalWindowService) {}
 
-  private vision: any;
-  private form: any;
-  public whatIsTheForm: any;
+  private vision: Subscription;
+  private form: Subscription;
+  public whatIsTheForm: string;
   public userName = '';
 
   public ngOnInit(): void {
@@ -49,26 +50,13 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
       case 13:
         event.preventDefault();
         this.modalWindowService.modalWindow.next(this.whatIsTheForm);
-
-        console.log('enter');
-        console.log('log ', this.whatIsTheForm);
-
         switch (this.whatIsTheForm) {
           case 'login':
-            alert('login will be here');
-            console.log('login will be here');
+            this.modalWindowService.event.next(this.whatIsTheForm);
             break;
           case 'candidates card':
-            alert('candidates cards will be save');
-            console.log('candidates cards will be save');
+            this.modalWindowService.event.next(this.whatIsTheForm);
             break;
-          case 'time':
-            alert('choose the ime will be here');
-            console.log('choose the time will be here');
-            break;
-          case 'english':
-            break;
-
           default:
             break;
         }

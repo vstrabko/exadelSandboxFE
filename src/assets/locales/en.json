@@ -156,6 +156,10 @@
     "title": "Authorisation error",
     "text": "Email is not registered in the system"
   },
+  "status": {
+    "change": "Change status",
+    "save": "Save status"
+  },
   "confirmPopup": {
     "title": "Delete event",
     "content": "Are you sure you want to delete the event?"
