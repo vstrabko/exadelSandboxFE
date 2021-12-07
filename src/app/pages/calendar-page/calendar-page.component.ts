@@ -195,17 +195,20 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     this.calendarOptions.locale = lang;
     const submit = this.calendarOptions.customButtons?.submit;
     const weekends = this.calendarOptions.customButtons?.weekends;
+    const sync = this.calendarOptions.customButtons?.sync;
     this.calendarOptions.buttonText = {
       today: `${this.translateService.instant('calendarButtons.today') as string}`,
       month: `${this.translateService.instant('calendarButtons.month') as string}`,
       week: `${this.translateService.instant('calendarButtons.week') as string}`,
       list: `${this.translateService.instant('calendarButtons.list') as string}`,
     };
-    if (submit && weekends) {
+    if (submit && weekends && sync) {
       submit.text = `${this.translateService.instant('calendarButtons.subText') as string}`;
       submit.hint = `${this.translateService.instant('calendarButtons.subHint') as string}`;
       weekends.text = `${this.translateService.instant('calendarButtons.weekText') as string}`;
       weekends.hint = `${this.translateService.instant('calendarButtons.weekHint') as string}`;
+      sync.text = `${this.translateService.instant('calendarButtons.syncText') as string}`;
+      sync.hint = `${this.translateService.instant('calendarButtons.syncHint') as string}`;
     }
   }
 

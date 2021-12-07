@@ -172,6 +172,8 @@
     "subText": "submit",
     "subHint": "Send events to server",
     "weekText": "weekends",
-    "weekHint": "On/off weekends"
+    "weekHint": "On/off weekends",
+    "syncText": "sync",
+    "syncHint": "Sync with Google calendar"
   }
 }
