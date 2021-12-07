@@ -6,8 +6,10 @@
                 <input formControlName="email" matInput>
             </mat-form-field>
             <label for="inpFile" class="btn unfilled-btn">{{ 'uploadPage.upload' | translate }}
-                <input formControlName="file" type="file" accept=".txt, .pdf" id="inpFile" (change)="onFileChange($event)">
+                <input type="file" accept=".txt, .pdf" id="inpFile" (change)="onFileChange($event)">
             </label>
+            <img *ngIf="showImg" src="../../../assets/img/check/check.png" alt="loaded">
+            <img *ngIf="!showImg" src="../../../assets/img/check/notCheck.png" alt="not loaded">
             <input type="submit" class="btn filled-btn">
         </form>
     </div>

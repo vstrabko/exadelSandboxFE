@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarPageComponent },
   { path: 'sandbox', component: SandboxListPageComponent },
   { path: 'sandbox/create', component: CreateSandboxPageComponent },
-  { path: 'upload-files', component: UploadFilesComponent },
+  { path: 'upload-files/:token', component: UploadFilesComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

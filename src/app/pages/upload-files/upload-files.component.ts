@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { REGEXP } from 'src/app/shared/constants/validators';
+import { ActivatedRoute } from '@angular/router';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-upload-files',
@@ -8,15 +11,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./upload-files.component.scss'],
 })
 export class UploadFilesComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private activateRoute: ActivatedRoute,
+    private toastr: ToastService,
+  ) {}
   public fileSendForm: FormGroup;
-  /* public email: string = 'test@test.test'; */
+  public showImg: boolean = false;
+  private token: string = this.activateRoute.snapshot.params['token'];
 
   ngOnInit(): void {
     this.fileSendForm = new FormGroup({
-      email: new FormControl('test@test.test', [Validators.required]),
-      file: new FormControl('', [Validators.required]),
-      fileSource: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.pattern(REGEXP.email)]),
+      fileId: new FormControl('', [Validators.required]),
+      token: new FormControl('', [Validators.required]),
     });
   }
 
@@ -25,18 +33,30 @@ export class UploadFilesComponent implements OnInit {
     if (target.files !== null) {
       if (target.files.length > 0) {
         const file = target.files[0];
-        this.fileSendForm.patchValue({
-          fileSource: file,
-        });
+        const formData = new FormData();
+        formData.append('file', file);
+        this.http.post('http://64.227.114.210:9090/api/files', formData).subscribe(
+          (responseFileID: any) => {
+            this.fileSendForm.controls.fileId.setValue(responseFileID);
+            this.showImg = true;
+          },
+          () => {
+            this.showImg = false;
+            this.toastr.showError('Refresh page and try again', 'File not uploaded');
+          },
+        );
       }
     }
   }
   submit(): void {
+    this.fileSendForm.controls.token.setValue(this.token);
     if (this.fileSendForm.valid) {
-      const formData = new FormData();
-      const candidateEmail: string = this.fileSendForm.controls.email.value || '';
-      formData.append('file', this.fileSendForm.controls.fileSource.value, `${candidateEmail}`);
-      this.http.post('http://64.227.114.210:9090/api/files', formData).subscribe();
+      this.http
+        .post(`http://64.227.114.210:9090/api/files/token`, this.fileSendForm.value)
+        .subscribe(
+          () => this.toastr.showSuccess('Upload', 'Succesful'),
+          () => this.toastr.showError('Error', 'File not uploaded'),
+        );
     }
   }
 }
