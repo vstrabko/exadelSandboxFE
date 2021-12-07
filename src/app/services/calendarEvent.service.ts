@@ -50,9 +50,18 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
   }
 
   postEvent(event: CalendarEventPost): Subscription {
-    return this.http
-      .post<any>(`${environment.API_URL}/api/events/free-time`, event)
-      .subscribe((ev: CalendarEventModel) => console.log('post', ev));
+    return this.http.post<any>(`${environment.API_URL}/api/events/free-time`, event).subscribe(
+      () =>
+        this.toastService.showSuccess(
+          this.translateService.instant('calendarTostrSucs.text'),
+          this.translateService.instant('calendarTostrSucs.title'),
+        ),
+      () =>
+        this.toastService.showError(
+          this.translateService.instant('calendarTostrErr.text'),
+          this.translateService.instant('calendarTostrErr.title'),
+        ),
+    );
   }
 
   pushEventsToCalendar(events: CalendarEventModel[]): void {

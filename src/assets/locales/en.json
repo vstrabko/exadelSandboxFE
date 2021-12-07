@@ -175,5 +175,17 @@
     "weekHint": "On/off weekends",
     "syncText": "sync",
     "syncHint": "Sync with Google calendar"
+  },
+  "calendarTostrSucs": {
+    "title": "Successfully",
+    "text": "Events were successfully sent to the server"
+  },
+  "calendarTostrErr": {
+    "title": "Error",
+    "text": "Events were not sent to the server"
+  },
+  "calendarTostrDel": {
+    "title": "Error",
+    "text": "You can`t delete this event"
   }
 }

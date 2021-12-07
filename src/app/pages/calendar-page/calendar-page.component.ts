@@ -17,6 +17,7 @@ import { CalendarEventPost } from '../../interfaces/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-calendar-page',
@@ -42,6 +43,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private localizationService: LocalizationService,
     private translateService: TranslateService,
+    private toastService: ToastService,
   ) {}
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
@@ -56,22 +58,6 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
       this.changeLang(params.lang);
     });
   }
-
-  // ngAfterViewChecked(){
-  //   if(this.calendar === undefined && this.calendarComponent !== undefined){
-  //     this.calendar = this.calendarComponent.getApi();
-  //     console.log('ngAfterViewChecked',this.calendar)
-  //     this.calendarEventService.getEvents();
-  //     this.start = this.calendar.view.activeStart.toISOString();
-  //     this.end = this.calendar.view.activeEnd.toISOString();
-  //     // if (this.userService.user._roles.includes('Admin')){
-  //     // this.calendarEventService.getEventsByType(this.start, this.end, 1);
-  //     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
-  //       this.calendarOptions.events = res;
-  //     });
-  //   }
-
-  // }
 
   calendarOptions: CalendarOptions = {
     headerToolbar: {
@@ -139,9 +125,17 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    if (this.userService.user._roles.includes('Interviewer')) {
+    if (
+      this.userService.user._roles.includes('Interviewer') &&
+      clickInfo.event.backgroundColor === '#009300'
+    ) {
       this.openModal();
       this.clickInfo = clickInfo;
+    } else {
+      this.toastService.showError(
+        this.translateService.instant('calendarTostrDel.text'),
+        this.translateService.instant('calendarTostrDel.title'),
+      );
     }
   }
 
