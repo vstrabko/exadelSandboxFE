@@ -19,7 +19,6 @@ const routes: Routes = [
     path: 'api/google/authorization/callback',
     component: GoogleAuthComponent,
     pathMatch: 'prefix',
-    canActivate: [CandidateGuard],
   },
   { path: '**', component: ErrorPageComponent },
 ];

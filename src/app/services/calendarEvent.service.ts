@@ -17,6 +17,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
   public INITIAL_EVENTS: EventInput[] = [];
   public dataEvents: CalendarEventModel[];
   public eventSubject: Subject<EventInput[]>;
+  public googleSubject: Subject<any>;
 
   constructor(
     private http: HttpClient,
@@ -26,6 +27,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
   ) {
     super(http, CalendarEventModel, '');
     this.eventSubject = new Subject<EventInput[]>();
+    this.googleSubject = new Subject<boolean>();
   }
 
   getEvents(): Subscription {
@@ -35,8 +37,16 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
     });
   }
 
+  getGoogleEvent(): any {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/events/google/${this.userService.user.id}`)
+      .subscribe(() => this.googleSubject.next(true));
+  }
+
   postEvents(events: CalendarEventPost[]): void {
-    events.forEach((ev: CalendarEventPost) => this.postEvent(ev));
+    events.forEach((ev: CalendarEventPost) => {
+      this.postEvent(ev);
+    });
   }
 
   postEvent(event: CalendarEventPost): Subscription {

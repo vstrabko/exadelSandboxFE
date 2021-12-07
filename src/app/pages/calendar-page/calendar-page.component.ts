@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 
 import {
   CalendarOptions,
@@ -6,6 +6,8 @@ import {
   EventClickArg,
   EventApi,
   EventInput,
+  FullCalendarComponent,
+  Calendar,
 } from '@fullcalendar/angular';
 
 import enLocale from '@fullcalendar/core/locales/es';
@@ -30,6 +32,10 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   public selectInfo: DateSelectArg;
   public arrEventsPost: CalendarEventPost[] = [];
   public lang: string | null;
+  public start: string;
+  public end: string;
+  public type: number;
+  public calendar: Calendar;
 
   constructor(
     private calendarEventService: CalendarEventService,
@@ -37,24 +43,41 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     private localizationService: LocalizationService,
     private translateService: TranslateService,
   ) {}
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
   ngOnInit(): void {
     this.calendarEventService.getEvents();
     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
       this.calendarOptions.events = res;
-      this.lang = localStorage.getItem('language');
-      this.changeLang(`${this.lang ? this.lang : 'en'}`);
-      this.translateService.onLangChange.subscribe((params: TranslationChangeEvent) => {
-        this.changeLang(params.lang);
-      });
+    });
+    this.lang = localStorage.getItem('language');
+    this.changeLang(`${this.lang ? this.lang : 'en'}`);
+    this.translateService.onLangChange.subscribe((params: TranslationChangeEvent) => {
+      this.changeLang(params.lang);
     });
   }
+
+  // ngAfterViewChecked(){
+  //   if(this.calendar === undefined && this.calendarComponent !== undefined){
+  //     this.calendar = this.calendarComponent.getApi();
+  //     console.log('ngAfterViewChecked',this.calendar)
+  //     this.calendarEventService.getEvents();
+  //     this.start = this.calendar.view.activeStart.toISOString();
+  //     this.end = this.calendar.view.activeEnd.toISOString();
+  //     // if (this.userService.user._roles.includes('Admin')){
+  //     // this.calendarEventService.getEventsByType(this.start, this.end, 1);
+  //     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
+  //       this.calendarOptions.events = res;
+  //     });
+  //   }
+
+  // }
 
   calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today weekends',
       center: 'title',
-      right: 'timeGridWeek,listWeek,dayGridMonth submit',
+      right: 'sync timeGridWeek,listWeek,dayGridMonth submit',
     },
     customButtons: {
       submit: {
@@ -66,6 +89,11 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
         text: 'Weekends',
         hint: 'Toggle weekends',
         click: () => this.handleWeekendsToggle(),
+      },
+      sync: {
+        text: 'sync',
+        hint: 'Sync with Google',
+        click: () => this.syncWithGoogle(),
       },
     },
     locales: [enLocale, ruLocale],
@@ -83,6 +111,16 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
   };
+
+  syncWithGoogle(): void {
+    this.calendarEventService.getGoogleEvent();
+    this.calendarEventService.googleSubject.subscribe(() => {
+      this.calendarEventService.getEvents();
+    });
+    this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
+      this.calendarOptions.events = res;
+    });
+  }
 
   handleWeekendsToggle(): void {
     const { calendarOptions } = this;
