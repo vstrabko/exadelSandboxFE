@@ -108,7 +108,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
       return candidate.candidateSandboxes
         .filter((sand: CandidateSandboxes) => {
           return (
-            sand.candidateProcesses[sand.candidateProcesses.length - 2].status.name === 'Draft' &&
+            sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
             (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
           );
         })
@@ -124,17 +124,14 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     } else {
       this.isStatusDraft = true;
     }
-    this.candidatesProcessId = this.selection.selected.map(
-      (candidate: Candidate) =>
-        candidate.candidateSandboxes[0].candidateProcesses[
-          candidate.candidateSandboxes[0].candidateProcesses.length - 2
-        ].id,
+    this.candidatesProcessId.push(
+      ...this.selection.selected.map(
+        (candidate: Candidate) =>
+          candidate.candidateSandboxes[0].candidateProcesses[
+            candidate.candidateSandboxes[0].candidateProcesses.length - 1
+          ].id,
+      ),
     );
-    if (this.candidatesProcessId.length) {
-      this.isCandidateProcessId = false;
-    } else {
-      this.isCandidateProcessId = true;
-    }
   }
 
   appointCandidateToRecruiter(): void {

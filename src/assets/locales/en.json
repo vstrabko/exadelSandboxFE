@@ -108,7 +108,7 @@
     "filter": "Filter",
     "example": "Ex. Minsk",
     "appointInterview": "Appoint interview",
-    "appointCandidateToInterviewer": "Appoint candidate"
+    "appointCandidateToInterviewer": "Assign Candidate"
   },
   "tostr": {
     "title": "Success",
