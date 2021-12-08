@@ -85,8 +85,10 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   public candidates: Candidate[];
   public candidate: Candidate;
   public isStatusDraft: boolean = true;
+  public isCandidateProcessId: boolean = true;
   public recruterId: string | null = this.auth.userId();
   public candidatesId: string[] = [];
+  public candidatesProcessId: string[] = [];
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAppointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -104,7 +106,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
       return candidate.candidateSandboxes
         .filter((sand: CandidateSandboxes) => {
           return (
-            sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
+            sand.candidateProcesses[sand.candidateProcesses.length - 2].status.name === 'Draft' &&
             (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
           );
         })
@@ -119,6 +121,17 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
       this.isStatusDraft = false;
     } else {
       this.isStatusDraft = true;
+    }
+    this.candidatesProcessId = this.selection.selected.map(
+      (candidate: Candidate) =>
+        candidate.candidateSandboxes[0].candidateProcesses[
+          candidate.candidateSandboxes[0].candidateProcesses.length - 2
+        ].id,
+    );
+    if (this.candidatesProcessId.length) {
+      this.isCandidateProcessId = false;
+    } else {
+      this.isCandidateProcessId = true;
     }
   }
 
@@ -246,6 +259,17 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   //   console.log(event);
   //   console.log(this.selectLocation);
   // }
+  sendEmail(): any {
+    this.http
+      .post(
+        `${String(environment.API_URL)}/api/candidates/send-test-task`,
+        this.candidatesProcessId,
+      )
+      .subscribe(
+        () => this.toast.showSuccess(this.title, this.text),
+        () => this.toast.showError(this.titleEr, this.textEr),
+      );
+  }
 
   translateLabels(): void {
     this.title = this.translateService.instant('tostr.title');

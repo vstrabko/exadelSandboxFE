@@ -178,5 +178,8 @@
     "subHint": "Send events to server",
     "weekText": "weekends",
     "weekHint": "On/off weekends"
+  },
+  "email": {
+    "send": "send e-mail"
   }
 }
