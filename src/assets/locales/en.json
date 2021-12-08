@@ -58,7 +58,8 @@
     "startDate": "Start date",
     "nameSandbox": "Name",
     "nameDescription": "Description",
-    "statusSand": "Status"
+    "statusSand": "Status",
+    "exportSandbox": "Export"
   },
   "request": {
     "header": "Candidate request",
@@ -155,6 +156,10 @@
   "googleAuthTostr": {
     "title": "Authorisation error",
     "text": "Email is not registered in the system"
+  },
+  "status": {
+    "change": "Change status",
+    "save": "Save status"
   },
   "confirmPopup": {
     "title": "Delete event",

@@ -38,6 +38,7 @@ export abstract class ApiService<T extends ResourceModel<T>> {
     params: { [name: string]: string | number };
   }): Observable<any> {
     return this.httpClient
+
       .get<T[]>(`${this.baseUrl}${this.apiUrl}`, options)
       .pipe(
         map((result: Partial<T>[]) => result.map((res: Partial<T>) => new this.tConstructor(res))),

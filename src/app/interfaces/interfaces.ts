@@ -101,3 +101,13 @@ export interface CandidateSandboxes {
   candidateProcesses: CandidateProcesses[];
   candidateProjectRole: IdName;
 }
+
+export interface Feedback {
+  author: string;
+  candidateProccesId: string;
+  createDate: string;
+  grade: number;
+  id: string;
+  userId: string;
+  userReview: string;
+}

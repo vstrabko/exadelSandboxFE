@@ -67,11 +67,12 @@
           <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
         </tr>
       </mat-table>
-      <div class="wrapper-footer">
+
+      <div class="wrapper-footer" *ngIf="isAdmin">
         <button class="btn filled-btn btn-create-sandbox" (click)="goCreateSandbox()">
           {{ 'sandbox.createSandbox' | translate }}
         </button>
-        <button class="btn filled-btn btn-create-sandbox" (click)="downloadExel()">Export</button>
+        <button class="btn filled-btn btn-create-sandbox" (click)="downloadExel()">{{ 'sandbox.exportSandbox' | translate }}</button>
         <mat-paginator
           #paginator
           [length]="totalRows"

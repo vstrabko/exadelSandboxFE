@@ -19,6 +19,7 @@ import { filter, map, mergeMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/services/toast.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-appoint-interview-popup',
@@ -32,9 +33,9 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class AppointInterviewPopupComponent implements OnInit {
+  public title = 'Appoint interview';
   noFreeInterviewers: boolean = false;
   freeInterviewersId: string[];
-  public title = 'Appoint interview';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -73,11 +74,15 @@ export class AppointInterviewPopupComponent implements OnInit {
     private toastService: ToastService,
     private http: HttpClient,
   ) {}
+
+  public visibleForm: Subscription;
+  public visible: boolean;
+
   ngOnInit(): void {
     this.recruiter = this.userService.user;
     this.title = this.translateService.instant('candidateList.appointInterview');
-    this.modalWindowService.visible.subscribe((result: boolean) => {
-      console.log(result);
+    this.visibleForm = this.modalWindowService.visible.subscribe((result: boolean) => {
+      this.visible = result;
       this.cancel();
     });
 
@@ -94,7 +99,6 @@ export class AppointInterviewPopupComponent implements OnInit {
 
   @Input() selectedCandidate: Candidate;
   @Output() appointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   cancel(): void {
     this.appointInterview.emit();
   }
