@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { REGEXP } from 'src/app/shared/constants/validators';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-upload-files',
@@ -15,7 +16,18 @@ export class UploadFilesComponent implements OnInit {
     private http: HttpClient,
     private activateRoute: ActivatedRoute,
     private toastr: ToastService,
-  ) {}
+    private translateService: TranslateService,
+  ) {
+    this.translateService.onLangChange.subscribe(() => {
+      this.translateLabels();
+    });
+    this.translateLabels();
+  }
+  private title: string = '';
+  private text: string = '';
+  private titleEr: string = '';
+  private textEr: string = '';
+
   public fileSendForm: FormGroup;
   public showImg: boolean = false;
   private token: string = this.activateRoute.snapshot.params['token'];
@@ -43,7 +55,7 @@ export class UploadFilesComponent implements OnInit {
           },
           () => {
             this.showImg = false;
-            this.toastr.showError('Refresh page and try again', 'File not uploaded');
+            this.toastr.showError(this.titleEr, this.textEr);
           },
         );
       }
@@ -55,9 +67,15 @@ export class UploadFilesComponent implements OnInit {
       this.http
         .post(`http://64.227.114.210:9090/api/testresults`, this.fileSendForm.value)
         .subscribe(
-          () => this.toastr.showSuccess('Upload', 'Succesful'),
-          () => this.toastr.showError('Error', 'File not uploaded'),
+          () => this.toastr.showSuccess(this.title, this.text),
+          () => this.toastr.showError(this.titleEr, this.textEr),
         );
     }
+  }
+  translateLabels(): void {
+    this.title = this.translateService.instant('tostr.title');
+    this.text = this.translateService.instant('tostr.text');
+    this.titleEr = this.translateService.instant('tostr.titleEr');
+    this.textEr = this.translateService.instant('tostr.textEr');
   }
 }
