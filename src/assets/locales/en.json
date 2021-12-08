@@ -187,5 +187,8 @@
   "calendarTostrDel": {
     "title": "Error",
     "text": "You can`t delete this event"
+  },
+  "calendarConfirm": {
+    "text": "When you go from this page, unsent events will be lost"
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { ComponentCanDeactivate } from '../../exit.about.guard';
 
 import {
   CalendarOptions,
@@ -18,13 +19,14 @@ import { UserService } from 'src/app/services/user.service';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
 import { ToastService } from '../../services/toast.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calendar-page',
   templateUrl: './calendar-page.component.html',
   styleUrls: ['./calendar-page.component.scss'],
 })
-export class CalendarPageComponent implements OnInit, OnDestroy {
+export class CalendarPageComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   public isVisible = false;
   private calendarApi: any;
   public delEvent = false;
@@ -113,6 +115,13 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
       this.calendarOptions.events = res;
     });
+  }
+  canDeactivate(): boolean | Observable<boolean> {
+    if (this.userService.user._roles.includes('Interviewer')) {
+      return confirm(this.translateService.instant('calendarConfirm.text'));
+    } else {
+      return true;
+    }
   }
 
   handleWeekendsToggle(): void {
