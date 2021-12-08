@@ -3,7 +3,7 @@
     <div class="drop-box_container">
       <h2>{{ 'sandbox.name' | translate }}</h2>
       <mat-form-field class="drop-box" appearance="outline">
-        <mat-label>{{ 'sandbox.name' | translate }}</mat-label>
+        <mat-label>{{ 'sandbox.sandboxName' | translate }}</mat-label>
         <mat-select #sandboxSelect (selectionChange)="inputChange(sandboxSelect.value)" >
           <mat-option *ngFor="let sandbox of sandboxes" [value]="sandbox.name">
             {{ sandbox.name }}

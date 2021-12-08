@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { CandidateSandboxes } from './../../../interfaces/interfaces';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
@@ -31,7 +32,13 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     private candidateServiceFilter: CandidateServiceFilter,
     private http: HttpClient,
     private toast: ToastService,
-  ) {}
+    private translateService: TranslateService,
+  ) {
+    this.translateService.onLangChange.subscribe(() => {
+      this.translateLabels();
+    });
+    this.translateLabels();
+  }
   displayedColumns: string[] = [
     'select',
     'name',
@@ -67,6 +74,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  private title: string = '';
+  private text: string = '';
+  private titleEr: string = '';
+  private textEr: string = '';
+
   public statusValues: IdName[];
   public locationsValues: any;
   public sandboxValues: IdName[];
@@ -95,7 +107,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
         .filter((sand: CandidateSandboxes) => {
           return (
             sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
-            sand.sandbox.status === 'Application'
+            (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
           );
         })
         .map((filtred: CandidateSandboxes) => filtred.id)
@@ -120,8 +132,8 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
           this.candidatesId,
         )
         .subscribe(
-          () => this.toast.showSuccess('', 'Кандидаты назначены'),
-          () => this.toast.showError('Ошибка', 'Кандидаты не назначены'),
+          () => this.toast.showSuccess(this.title, this.text),
+          () => this.toast.showError(this.titleEr, this.textEr),
         );
     }
   }
@@ -231,5 +243,12 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     } else {
       this.isAppointInterviewDisabled = true;
     }
+  }
+
+  translateLabels(): void {
+    this.title = this.translateService.instant('tostr.title');
+    this.text = this.translateService.instant('tostr.text');
+    this.titleEr = this.translateService.instant('tostr.titleEr');
+    this.textEr = this.translateService.instant('tostr.textEr');
   }
 }
