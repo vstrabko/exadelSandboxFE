@@ -86,9 +86,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   public candidates: Candidate[];
   public candidate: Candidate;
   public isStatusDraft: boolean = true;
+  public isCandidateProcessId: boolean = true;
   public recruterId: string | null = this.userService.user ? this.userService.user._id : '';
   public userRole: string;
   public candidatesId: string[] = [];
+  public candidatesProcessId: string[] = [];
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAppointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -105,10 +107,17 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     this.candidatesId = this.selection.selected.map((candidate: Candidate) => {
       return candidate.candidateSandboxes
         .filter((sand: CandidateSandboxes) => {
-          return (
-            sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
-            (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
-          );
+          if (sand.candidateProcesses.length > 1) {
+            return (
+              sand.candidateProcesses[sand.candidateProcesses.length - 2].status.name === 'Draft' &&
+              (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
+            );
+          } else {
+            return (
+              sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
+              (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
+            );
+          }
         })
         .map((filtred: CandidateSandboxes) => filtred.id)
         .join('');
@@ -122,6 +131,20 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     } else {
       this.isStatusDraft = true;
     }
+
+    this.candidatesProcessId.push(
+      ...this.selection.selected.map((candidate: Candidate) => {
+        if (candidate.candidateSandboxes[0].candidateProcesses.length > 1) {
+          return candidate.candidateSandboxes[0].candidateProcesses[
+            candidate.candidateSandboxes[0].candidateProcesses.length - 2
+          ].id;
+        } else {
+          return candidate.candidateSandboxes[0].candidateProcesses[
+            candidate.candidateSandboxes[0].candidateProcesses.length - 1
+          ].id;
+        }
+      }),
+    );
   }
 
   appointCandidateToRecruiter(): void {
@@ -230,6 +253,18 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     this.loadCandidatesPage();
     this.paginator.firstPage();
     console.log(this.selection.selected[0]);
+  }
+
+  sendEmail(): any {
+    this.http
+      .post(
+        `${String(environment.API_URL)}/api/candidates/send-test-task`,
+        this.candidatesProcessId,
+      )
+      .subscribe(
+        () => this.toast.showSuccess(this.title, this.text),
+        () => this.toast.showError(this.titleEr, this.textEr),
+      );
   }
 
   checkSelected(): void {

@@ -1,5 +1,6 @@
 import { ResourceModel } from './resource.model';
 import { IdName } from './id-name.model';
+import { Employee } from '../interfaces/interfaces';
 
 export class Sandbox extends ResourceModel<Sandbox> {
   public id: string;
@@ -15,9 +16,9 @@ export class Sandbox extends ResourceModel<Sandbox> {
   public stackTechnologies: IdName[];
   public languages: IdName[];
   public formatStartDate: string;
-  public interviewers: IdName[];
-  public recruiters: IdName[];
-  public mentors: IdName[];
+  public interviewers: Employee[];
+  public recruiters: Employee[];
+  public mentors: Employee[];
 
   constructor(model?: Partial<Sandbox>) {
     super(model);

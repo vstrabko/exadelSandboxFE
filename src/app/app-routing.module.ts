@@ -6,6 +6,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { SandboxListPageComponent } from './pages/sandbox-list-page/sandbox-list-page/sandbox-list-page.component';
+import { UploadFilesComponent } from './pages/upload-files/upload-files.component';
 import { GoogleAuthComponent } from './pages/google-auth/google-auth.component';
 import { CandidateGuard } from './guards/candidate.guard';
 import { ExitAboutGuard } from './exit.about.guard';
@@ -21,6 +22,7 @@ const routes: Routes = [
   },
   { path: 'sandbox', component: SandboxListPageComponent, canActivate: [CandidateGuard] },
   { path: 'sandbox/create', component: CreateSandboxPageComponent, canActivate: [CandidateGuard] },
+  { path: 'upload-files/:token', component: UploadFilesComponent },
   {
     path: 'api/google/authorization/callback',
     component: GoogleAuthComponent,

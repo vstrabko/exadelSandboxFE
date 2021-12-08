@@ -108,13 +108,14 @@
     "filter": "Filter",
     "example": "Ex. Minsk",
     "appointInterview": "Appoint interview",
-    "appointCandidateToInterviewer": "Appoint candidate"
+    "appointCandidateToInterviewer": "Assign Candidate"
   },
   "tostr": {
     "title": "Success",
     "text": "Everything went well",
     "titleEr": "Fail",
-    "textEr": "Something went wrong"
+    "textEr": "Something went wrong",
+    "textWr": "File should be < 10MB"
   },
   "select": {
     "default": "select",
@@ -126,7 +127,7 @@
     "location": "Location",
     "recruiter": "Recruiter",
     "sandbox": "Sandbox"
-},
+  },
   "stepper": {
     "сhooseTheDate": "Choose the date",
     "selectedDate": "Selected date",
@@ -153,6 +154,10 @@
     "title": "Authorisation error",
     "text": "Please check carefully that all details are correct"
   },
+  "uploadPage": {
+    "upload": "Choose file"
+  },
+
   "googleAuthTostr": {
     "title": "Authorisation error",
     "text": "Email is not registered in the system"
@@ -172,6 +177,11 @@
     "list": "List",
     "subText": "Submit",
     "subHint": "Send events to server",
+    "weekText": "weekends",
+    "weekHint": "On/off weekends"
+  },
+  "email": {
+    "send": "Send e-mail",
     "weekText": "Weekends",
     "weekHint": "On/off weekends",
     "syncText": "Google",
