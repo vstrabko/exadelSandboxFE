@@ -44,6 +44,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
   matDataSource: MatTableDataSource<Sandbox>;
   dataSource: SandboxDataSource;
   selection = new SelectionModel<Sandbox>(true, []);
+
   public role: string[] = this.roleUser.userRole();
   public isAdmin = this.role.includes('Admin' || 'Manager');
 
