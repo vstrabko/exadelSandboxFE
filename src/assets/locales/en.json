@@ -48,7 +48,7 @@
     "description": "Sandbox description",
     "invalidEndDate": "Invalid end date",
     "invalidStartDate": "Invalid start date",
-    "name": "Sandbox",
+    "name": "Choose a sandbox to fill out the form",
     "sandboxName": "Sandbox name",
     "period": "Sandbox period",
     "registration": "Sandbox registration period",
@@ -62,7 +62,7 @@
     "exportSandbox": "Export"
   },
   "request": {
-    "header": "Candidate request",
+    "header": "Candidate request (fill in english)",
     "firstName": "First Name",
     "secondName": "Second Name",
     "telephone": "Telephone",
@@ -112,7 +112,7 @@
   },
   "tostr": {
     "title": "Success",
-    "text": "You are the rock!",
+    "text": "Everything went well",
     "titleEr": "Fail",
     "textEr": "Something went wrong"
   },
