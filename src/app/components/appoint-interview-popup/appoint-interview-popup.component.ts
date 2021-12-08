@@ -165,9 +165,6 @@ export class AppointInterviewPopupComponent implements OnInit {
     console.log('freetimes', freeTimes);
     const idToUse = this.selectedInterviewer?.id || '';
     this.optionsBusy.params.id = idToUse;
-    //this.options.params.type = 1;
-    //const busyTimes = this.eventServiceFilter.filter(this.options);
-    //console.log('buzy', busyTimes);
     merge(
       freeTimes.pipe(
         mergeMap((evs: Event[]) => evs),
@@ -184,9 +181,6 @@ export class AppointInterviewPopupComponent implements OnInit {
       this.http
         .get(`${environment.API_URL}/api/users/${idToUse}/events/filter`, this.optionsBusy)
         .pipe(
-          // map((result: Partial<T>[]) =>
-          //   result.map((res: Partial<T>) => new this.tConstructor(res)),
-          // ),
           tap((x: any) => console.log(x)),
           mergeMap((evs: Event[]) => evs),
           filter((ev: Event) => ev.ownerId === String(this.recruiter.id)),
@@ -219,15 +213,6 @@ export class AppointInterviewPopupComponent implements OnInit {
     this.intervals = [];
     this.busyIntervals = [];
     this.getAllTimes();
-    // this.eventServiceFilter.filter(this.options).subscribe((data: Event[]) => {
-    //   data
-    //     .filter((ev: Event) => ev.ownerId === String(this.selectedInterviewer.id))
-    //     .map((ev: Event) => {
-    //       const freeTimeStart = new Date(ev.startTime);
-    //       const freeTimeEnd = new Date(ev.endTime);
-    //       console.log('buzy times', this.getDateIntervals(freeTimeStart, freeTimeEnd, 30));
-    //     });
-    // });
   }
 
   postInterview(): void {
