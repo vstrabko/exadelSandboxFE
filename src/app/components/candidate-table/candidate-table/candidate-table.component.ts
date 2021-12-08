@@ -256,7 +256,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
         () => this.toast.showError(this.titleEr, this.textEr),
       );
   }
-  
+
   checkSelected(): void {
     if (
       this.selection.selected.length === 1 &&
