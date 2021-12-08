@@ -165,15 +165,15 @@
     "content": "Вы уверены, что хотите удалить это событие?"
   },
   "calendarButtons": {
-    "today": "сегодня",
-    "month": "месяц",
-    "week": "неделя",
-    "list": "список",
-    "subText": "отправить",
+    "today": "Сегодня",
+    "month": "Месяц",
+    "week": "Неделя",
+    "list": "Список",
+    "subText": "Отправить",
     "subHint": "Отправить события на сервер",
-    "weekText": "выходные",
+    "weekText": "Выходные",
     "weekHint": "Вкл/выкл выходные",
-    "syncText": "синхр",
+    "syncText": "Google",
     "syncHint": "Синхронизация с Google календарем"
   },
   "calendarTostrSucs": {

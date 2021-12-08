@@ -165,15 +165,15 @@
     "content": "Are you sure you want to delete the event?"
   },
   "calendarButtons": {
-    "today": "today",
-    "month": "month",
-    "week": "week",
-    "list": "list",
-    "subText": "submit",
+    "today": "Today",
+    "month": "Month",
+    "week": "Week",
+    "list": "List",
+    "subText": "Submit",
     "subHint": "Send events to server",
-    "weekText": "weekends",
+    "weekText": "Weekends",
     "weekHint": "On/off weekends",
-    "syncText": "sync",
+    "syncText": "Google",
     "syncHint": "Sync with Google calendar"
   },
   "calendarTostrSucs": {
