@@ -107,10 +107,17 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     this.candidatesId = this.selection.selected.map((candidate: Candidate) => {
       return candidate.candidateSandboxes
         .filter((sand: CandidateSandboxes) => {
-          return (
-            sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
-            (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
-          );
+          if (sand.candidateProcesses.length > 1) {
+            return (
+              sand.candidateProcesses[sand.candidateProcesses.length - 2].status.name === 'Draft' &&
+              (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
+            );
+          } else {
+            return (
+              sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
+              (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
+            );
+          }
         })
         .map((filtred: CandidateSandboxes) => filtred.id)
         .join('');
@@ -124,13 +131,19 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     } else {
       this.isStatusDraft = true;
     }
+
     this.candidatesProcessId.push(
-      ...this.selection.selected.map(
-        (candidate: Candidate) =>
-          candidate.candidateSandboxes[0].candidateProcesses[
+      ...this.selection.selected.map((candidate: Candidate) => {
+        if (candidate.candidateSandboxes[0].candidateProcesses.length > 1) {
+          return candidate.candidateSandboxes[0].candidateProcesses[
+            candidate.candidateSandboxes[0].candidateProcesses.length - 2
+          ].id;
+        } else {
+          return candidate.candidateSandboxes[0].candidateProcesses[
             candidate.candidateSandboxes[0].candidateProcesses.length - 1
-          ].id,
-      ),
+          ].id;
+        }
+      }),
     );
   }
 
