@@ -2,13 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 import { ToastService } from 'src/app/services/toast.service';
-
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { authResponse } from '../interfaces/interfaces';
@@ -31,18 +29,21 @@ export class AuthService {
     this.translateService = translateService;
   }
 
+  userName(): any {
+    return this.currentUser?.fullName;
+  }
+
+  userRole(): any {
+    return this.currentUser?.role;
+  }
+
   login(email: string, password: string): Observable<any> {
     return this.http
       .post<any>(`${environment.API_URL}/api/authorization/sign-in`, { email, password })
       .pipe(
         map((token: authResponse) => {
           if (token) {
-            this.setToken(token);
-            this.userService.getUser().subscribe((user: User) => {
-              this.authSubject.next(user);
-              void this.router.navigate(['/candidates']);
-              this.currentUser = user;
-            });
+            this.workWithToken(token);
           }
         }),
       )
@@ -90,6 +91,13 @@ export class AuthService {
       );
   }
 
+  userId(): string | null {
+    if (this.currentUser?._id !== undefined) {
+      return this.currentUser?._id;
+    }
+    return null;
+  }
+
   private setToken(response: authResponse | null): void {
     if (response) {
       this.removeToken();
@@ -114,5 +122,15 @@ export class AuthService {
   private getLSItem(key: string): string {
     const item = localStorage.getItem(key);
     return item ? item : '';
+  }
+
+  workWithToken(token: authResponse): void {
+    this.setToken(token);
+    this.userService.getUser().subscribe((user: User) => {
+      this.authSubject.next(user);
+      this.userService.setUser(user);
+      void this.router.navigate(['/candidates']);
+      this.currentUser = user;
+    });
   }
 }

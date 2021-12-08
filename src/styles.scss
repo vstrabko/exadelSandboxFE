@@ -27,7 +27,7 @@ body {
   padding: 12px 15px 0;
   padding-bottom: $height-footer;
   background: $background-container_dark;
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 70px);
 }
 
 .btn {
@@ -44,6 +44,17 @@ body {
     transform: translateY(-1px);
     cursor: pointer;
   }
+  &:disabled,
+  &[disabled]{
+    &:hover {
+      box-shadow: 2px 2px 4px 0 $shadow-color;
+      transform: none;
+      cursor: default;
+    }
+  border: 1px solid $disabledButtonBorderColor;
+  background-color: $disabledButtonBackground;
+  color: $disabledButtonColor
+}
 }
 .unfilled-btn {
   background-color: $noColor;

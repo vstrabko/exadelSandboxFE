@@ -19,6 +19,7 @@ import { ErrorPageModule } from './pages/error-page/error-page.module';
 import { CandidateRequestModule } from './components/candidate-request/candidate-request.module';
 import { CalendarPageModule } from './pages/calendar-page/calendar-page.module';
 import { PopupChooseTheTimeModule } from './components/popup-choose-the-time/popup-choose-the-time.module';
+import { CandidateGuard } from './guards/candidate.guard';
 
 import { InternationalizationModule } from './internationalization/internationalization.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -35,6 +36,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timegridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+
+import { GoogleAuthModule } from './pages/google-auth/google-auth.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
@@ -73,8 +76,10 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     FullCalendarModule,
     CandidateTableModule,
     UploadFilesModule,
+    GoogleAuthModule,
   ],
   providers: [
+    CandidateGuard,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -13,7 +13,10 @@
     "createNewSandbox": "Sandbox",
     "hello": "Hello"
   },
-  "login": "Log in",
+  "login": {
+    "title": "Log in",
+    "googleBtn": "Log in with Google"
+  },
   "loginForm": {
     "emailInput": "Please, enter your email",
     "emailInputValid": "Please, enter a valid email",
@@ -45,7 +48,7 @@
     "description": "Sandbox description",
     "invalidEndDate": "Invalid end date",
     "invalidStartDate": "Invalid start date",
-    "name": "Sandbox",
+    "name": "Choose a sandbox to fill out the form",
     "sandboxName": "Sandbox name",
     "period": "Sandbox period",
     "registration": "Sandbox registration period",
@@ -55,10 +58,11 @@
     "startDate": "Start date",
     "nameSandbox": "Name",
     "nameDescription": "Description",
-    "statusSand": "Status"
+    "statusSand": "Status",
+    "exportSandbox": "Export"
   },
   "request": {
-    "header": "Candidate request",
+    "header": "Candidate request (fill in english)",
     "firstName": "First Name",
     "secondName": "Second Name",
     "telephone": "Telephone",
@@ -103,11 +107,14 @@
     "of": "of",
     "filter": "Filter",
     "example": "Ex. Minsk",
-    "appointInterview": "Appoint Interview"
+    "appointInterview": "Appoint interview",
+    "appointCandidateToInterviewer": "Appoint candidate"
   },
   "tostr": {
     "title": "Success",
-    "text": "You are registred!"
+    "text": "Everything went well",
+    "titleEr": "Fail",
+    "textEr": "Something went wrong"
   },
   "select": {
     "default": "select",
@@ -117,7 +124,7 @@
     "interviewers": "Interviewers *",
     "status": "Status",
     "location": "Location",
-    "mentor": "Mentor",
+    "recruiter": "Recruiter",
     "sandbox": "Sandbox"
 },
   "stepper": {
@@ -135,6 +142,7 @@
     "timeIsRequired": "Time is required."
   },
   "candidate": {
+    "title": "Candidate card",
     "status": "Status",
     "recruiter": "Recruiter",
     "mentor": "Mentor",
@@ -142,10 +150,33 @@
     "feedback": "Feedback"
   },
   "authTostr": {
-    "title": "Authentication error",
+    "title": "Authorisation error",
     "text": "Please check carefully that all details are correct"
   },
   "uploadPage": {
     "upload": "Choose file"
+  },
+  
+  "googleAuthTostr": {
+    "title": "Authorisation error",
+    "text": "Email is not registered in the system"
+  },
+  "status": {
+    "change": "Change status",
+    "save": "Save status"
+  },
+  "confirmPopup": {
+    "title": "Delete event",
+    "content": "Are you sure you want to delete the event?"
+  },
+  "calendarButtons": {
+    "today": "today",
+    "month": "month",
+    "week": "week",
+    "list": "list",
+    "subText": "submit",
+    "subHint": "Send events to server",
+    "weekText": "weekends",
+    "weekHint": "On/off weekends"
   }
 }
