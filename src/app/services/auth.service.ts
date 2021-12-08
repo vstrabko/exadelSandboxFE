@@ -91,6 +91,13 @@ export class AuthService {
     return null;
   }
 
+  userRole(): string[] | null {
+    if (this.currentUser?._roles !== undefined) {
+      return this.currentUser?._roles;
+    }
+    return null;
+  }
+
   private setToken(response: authResponse | null): void {
     if (response) {
       this.removeToken();

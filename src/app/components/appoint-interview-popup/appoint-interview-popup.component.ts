@@ -1,3 +1,7 @@
+import { dateRange } from './../../interfaces/interfaces';
+import { merge } from 'rxjs/internal/observable/merge';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 import { Event } from './../../models/event.model';
 import { InterviewerService } from './../../services/interviewer.service';
 import { Interviewer } from 'src/app/models/interviewer.model';
@@ -7,10 +11,14 @@ import { ModalWindowService } from '../modal-window/modal-window.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { dateRange } from 'src/app/interfaces/interfaces';
 import { EventServiceFilter } from 'src/app/services/eventFilter-service';
 import { PostInterviewService } from 'src/app/services/interviewPost-service';
 import { TranslateService } from '@ngx-translate/core';
+import { MatSelectChange } from '@angular/material/select';
+import { filter, map, mergeMap, tap } from 'rxjs/operators';
+import { ToastService } from 'src/app/services/toast.service';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-appoint-interview-popup',
@@ -24,13 +32,6 @@ import { TranslateService } from '@ngx-translate/core';
   ],
 })
 export class AppointInterviewPopupComponent implements OnInit {
-  options = {
-    params: {
-      start: '',
-      end: '',
-      type: 0,
-    },
-  };
   noFreeInterviewers: boolean = false;
   freeInterviewersId: string[];
   public title = 'Appoint interview';
@@ -40,9 +41,27 @@ export class AppointInterviewPopupComponent implements OnInit {
   selectedTime: dateRange;
   localDateString: string;
   intervals: dateRange[] = [];
-  selectedInterviewer: string;
+  busyIntervals: dateRange[] = [];
+  selectedInterviewer: Interviewer | null = null;
   interviewers: Interviewer[] = [];
-  ownerId: string = '30b071d5-7ae9-4bb0-a857-d579243e61b4';
+  ownerId: string = '';
+  recruiter: User;
+  options = {
+    params: {
+      start: '',
+      end: '',
+      type: 0,
+    },
+  };
+  optionsBusy = {
+    params: {
+      id: '',
+      start: '',
+      end: '',
+      type: 1,
+    },
+  };
+
   constructor(
     private modalWindowService: ModalWindowService,
     private _formBuilder: FormBuilder,
@@ -50,9 +69,12 @@ export class AppointInterviewPopupComponent implements OnInit {
     private eventServiceFilter: EventServiceFilter,
     private postInterviewService: PostInterviewService,
     private translateService: TranslateService,
+    private userService: UserService,
+    private toastService: ToastService,
+    private http: HttpClient,
   ) {}
   ngOnInit(): void {
-    console.log(this.selectedCandidate);
+    this.recruiter = this.userService.user;
     this.title = this.translateService.instant('candidateList.appointInterview');
     this.modalWindowService.visible.subscribe((result: boolean) => {
       console.log(result);
@@ -68,10 +90,6 @@ export class AppointInterviewPopupComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required],
     });
-
-    // setTimeout(() => {
-    //   this.modalWindowService.modalWindow.next('candidates card');
-    // }, 200);
   }
 
   @Input() selectedCandidate: Candidate;
@@ -86,10 +104,21 @@ export class AppointInterviewPopupComponent implements OnInit {
     return `${dateArr[1]}-${dateArr[0]}-${dateArr[2]}`;
   }
 
-  getDateIntervals(start: Date, end: Date, maxMin: number): void {
+  getDateIntervals(start: Date, end: Date, maxMin: number): dateRange[] {
     const result = [];
-    const s = new Date(start);
-    while (s <= end) {
+    const utcEnd = new Date(
+      Date.UTC(end.getFullYear(), end.getMonth(), end.getDate(), end.getHours(), end.getMinutes()),
+    );
+    const s = new Date(
+      Date.UTC(
+        start.getFullYear(),
+        start.getMonth(),
+        start.getDate(),
+        start.getHours(),
+        start.getMinutes(),
+      ),
+    );
+    while (s < utcEnd) {
       const e = new Date(
         s.getFullYear(),
         s.getMonth(),
@@ -97,66 +126,132 @@ export class AppointInterviewPopupComponent implements OnInit {
         s.getHours(),
         s.getMinutes() + maxMin,
       );
-      result.push({ start: new Date(s), end: e <= end ? e : new Date(end) });
+      result.push({ start: new Date(s), end: e < utcEnd ? e : new Date(utcEnd) });
       s.setMinutes(s.getMinutes() + maxMin);
     }
-    this.intervals = result;
+    return result;
+  }
+
+  pickDate(date: string): void {
+    this.localDateString = new Date(String(date)).toLocaleDateString();
+    const startDate = new Date(String(date));
+    const endDate = new Date(new Date(String(date)).setDate(startDate.getDate() + 1));
+    this.options.params.start = this.queryFormat(startDate);
+    this.options.params.end = this.queryFormat(endDate);
+    this.options.params.type = 0;
+    this.optionsBusy.params.start = this.queryFormat(startDate);
+    this.optionsBusy.params.end = this.queryFormat(endDate);
   }
 
   addEvent(event: MatDatepickerInputEvent<Date>): void {
-    this.localDateString = new Date(String(event.value)).toLocaleDateString();
-    const startDate = new Date(String(event.value));
-    const endDate = new Date(new Date(String(event.value)).setDate(startDate.getDate() + 1));
-    // const startArr = startDate.toLocaleDateString().split('.');
-    // const endArr = endDate.toLocaleDateString().split('.');
-    // this.options.params.start = `${startArr[1]}-${startArr[0]}-${startArr[2]}`;
-    // this.options.params.end = `${endArr[1]}-${endArr[0]}-${endArr[2]}`;
-
-    this.options.params.start = this.queryFormat(startDate);
-    this.options.params.end = this.queryFormat(endDate);
+    this.interviewers = [];
+    this.pickDate(String(event.value));
     this.eventServiceFilter.filter(this.options).subscribe((data: Event[]) => {
-      if (data.length === 0) {
-        this.noFreeInterviewers = true;
-      } else {
-        this.noFreeInterviewers = false;
-      }
+      if (data.length === 0) this.noFreeInterviewers = true;
+      else this.noFreeInterviewers = false;
       data.map((ev: Event) => {
-        console.log('event', ev);
-
-        const freeTimeStart = new Date(ev.startTime);
-        const freeTimeEnd = new Date(ev.endTime);
-
-        this.getDateIntervals(freeTimeStart, freeTimeEnd, 30);
-        this.ownerId = ev.ownerId;
-        this.interviwerService.getById(ev.ownerId).subscribe((data: any) => {
-          this.interviewers.push(data);
-          console.log('free interviewers', this.interviewers);
+        this.interviwerService.getById(ev.ownerId).subscribe((data: Interviewer) => {
+          if (this.interviewers.length === 0) this.interviewers.push(data);
+          for (const i of this.interviewers) {
+            if (data.id !== i.id) this.interviewers.push(data);
+          }
         });
       });
     });
   }
 
-  getFreeTimes(): void {
-    console.log('step two!');
+  getAllTimes(): void {
+    const freeTimes = this.eventServiceFilter.filter(this.options);
+    console.log('freetimes', freeTimes);
+    const idToUse = this.selectedInterviewer?.id || '';
+    this.optionsBusy.params.id = idToUse;
+    //this.options.params.type = 1;
+    //const busyTimes = this.eventServiceFilter.filter(this.options);
+    //console.log('buzy', busyTimes);
+    merge(
+      freeTimes.pipe(
+        mergeMap((evs: Event[]) => evs),
+        filter((ev: Event) => {
+          return ev.ownerId === `${idToUse}`;
+        }),
+        map((ev: Event) => {
+          const freeTimeStart = new Date(ev.startTime);
+          const freeTimeEnd = new Date(ev.endTime);
+          this.intervals.push(...this.getDateIntervals(freeTimeStart, freeTimeEnd, 30));
+          console.log('pipe', this.intervals);
+        }),
+      ),
+      this.http
+        .get(`${environment.API_URL}/api/users/${idToUse}/events/filter`, this.optionsBusy)
+        .pipe(
+          // map((result: Partial<T>[]) =>
+          //   result.map((res: Partial<T>) => new this.tConstructor(res)),
+          // ),
+          tap((x: any) => console.log(x)),
+          mergeMap((evs: Event[]) => evs),
+          filter((ev: Event) => ev.ownerId === String(this.recruiter.id)),
+          map((ev: Event) => {
+            console.log('map busy', ev);
+            const freeTimeStart = new Date(ev.startTime);
+            const freeTimeEnd = new Date(ev.endTime);
+            this.busyIntervals.push(...this.getDateIntervals(freeTimeStart, freeTimeEnd, 30));
+          }),
+        ),
+    ).subscribe({
+      complete: (): void => {
+        console.log(this.intervals);
+        console.log(this.busyIntervals);
+        this.intervals = this.intervals.filter((int: dateRange) => {
+          console.log('\n', int.start);
+          return !this.busyIntervals.some((bInt: dateRange) => {
+            console.log('busy start', bInt.start, bInt.start === int.start);
+            return bInt.start.toISOString() === int.start.toISOString();
+          });
+        });
+        console.log('after', this.intervals);
+      },
+    });
+  }
+
+  getFreeTimes(event: MatSelectChange): void {
+    console.log('step three');
+    this.selectedInterviewer = event.value;
+    this.intervals = [];
+    this.busyIntervals = [];
+    this.getAllTimes();
+    // this.eventServiceFilter.filter(this.options).subscribe((data: Event[]) => {
+    //   data
+    //     .filter((ev: Event) => ev.ownerId === String(this.selectedInterviewer.id))
+    //     .map((ev: Event) => {
+    //       const freeTimeStart = new Date(ev.startTime);
+    //       const freeTimeEnd = new Date(ev.endTime);
+    //       console.log('buzy times', this.getDateIntervals(freeTimeStart, freeTimeEnd, 30));
+    //     });
+    // });
   }
 
   postInterview(): void {
-    console.log('create interview!');
     const InterviewObject = {
-      ownerId: '875d48e4-b550-4a65-8733-238ca220594e',
-      summary: 'string',
+      ownerId: this.recruiter.id,
+      summary: `tech interview for ${this.selectedCandidate.name} ${this.selectedCandidate.surname}`,
       description: 'string',
-      startTime: '2021-12-02T19:08:52.670Z',
-      endTime: '2021-12-02T19:08:52.670Z',
-      candidateSandboxId: '30b071d5-7ae9-4bb0-a857-d579243e61b4',
+      startTime: this.selectedTime.start.toISOString(),
+      endTime: this.selectedTime.end.toISOString(),
+      candidateSandboxId: this.selectedCandidate.candidateSandboxes[0].id,
       members: [
         {
-          name: 'string',
-          email: 'string',
+          name: this.selectedCandidate.name || '',
+          email: this.selectedCandidate.email || '',
+        },
+        {
+          name: this.selectedInterviewer?.name || '',
+          email: this.selectedInterviewer?.email || '',
         },
       ],
     };
-
-    this.postInterviewService.create(InterviewObject).subscribe();
+    this.postInterviewService.create(InterviewObject).subscribe(
+      () => this.toastService.showSuccess('Appoint tech-interview', 'appointed!'),
+      () => this.toastService.showError('Appoint tech-interview', 'appointment failed!'),
+    );
   }
 }

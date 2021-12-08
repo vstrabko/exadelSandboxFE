@@ -101,5 +101,5 @@
         </tr>
     </table>
 </div>
-<button (click)="toggleAppoinInterview()" [disabled]="isAppointInterviewDisabled" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>
-<button (click)="appointCandidateToRecruiter()" [disabled]="isStatusDraft" class="btn filled-btn">{{ 'candidateList.appointCandidateToInterviewer' | translate }}</button>
+<button (click)="toggleAppoinInterview()" [style.display]="userRole === 'Recruiter' ? 'inline-block' : 'none'" [disabled]="isAppointInterviewDisabled" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>
+<button (click)="appointCandidateToRecruiter()" [style.display]="userRole === 'Recruiter' ? 'inline-block' : 'none'" [disabled]="isStatusDraft" class="btn filled-btn">{{ 'candidateList.appointCandidateToInterviewer' | translate }}</button>

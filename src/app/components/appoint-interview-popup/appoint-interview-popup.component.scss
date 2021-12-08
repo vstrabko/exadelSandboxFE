@@ -1,3 +1,5 @@
+@import '../../shared/constants/colors.scss';
+
 .textarea_container {
     width: 500px;
 }
@@ -42,4 +44,9 @@
 
 .stepper-btn_container{
   text-align: end;
+}
+
+
+.interview_warning {
+  color: $errorColor;
 }
