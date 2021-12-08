@@ -68,7 +68,7 @@
         </tr>
       </mat-table>
 
-      <div class="wrapper-footer" *ngIf="role==='Admin'">
+      <div class="wrapper-footer" *ngIf="isAdmin">
         <button class="btn filled-btn btn-create-sandbox" (click)="goCreateSandbox()">
           {{ 'sandbox.createSandbox' | translate }}
         </button>

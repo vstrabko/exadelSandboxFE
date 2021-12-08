@@ -93,7 +93,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
         .filter((sand: CandidateSandboxes) => {
           return (
             sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
-            sand.sandbox.status === 'Application'
+            (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
           );
         })
         .map((filtred: CandidateSandboxes) => filtred.id)
@@ -118,7 +118,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
           this.candidatesId,
         )
         .subscribe(
-          () => this.toast.showSuccess('', 'Кандидаты назначены'),
+          () => this.toast.showSuccess('Успешно', 'Кандидаты назначены'),
           () => this.toast.showError('Ошибка', 'Кандидаты не назначены'),
         );
     }
