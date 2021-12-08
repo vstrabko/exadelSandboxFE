@@ -1,37 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalizationService } from './internationalization/localization.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'exadelsandbox';
-  comingTimeArr = [
-    {
-      startTime: '02:00',
-      endTime: '03:00',
-      id: 0,
-    },
-    {
-      startTime: '01:00',
-      endTime: '02:00',
-      id: 1,
-    },
-    {
-      startTime: '04:00',
-      endTime: '05:00',
-      id: 2,
-    },
-    {
-      startTime: '06:00',
-      endTime: '07:00',
-      id: 3,
-    },
-  ];
 
-  constructor(private localizationService: LocalizationService) {
+  constructor(
+    private localizationService: LocalizationService,
+    private authService: AuthService,
+    private router: Router,
+  ) {
     this.localizationService.localStorage();
+  }
+  ngOnInit(): void {
+    if (localStorage.getItem('accessToken')) {
+      this.authService.refreshToken();
+      const token = {
+        accessToken: this.getLSItem('accessToken'),
+        refreshToken: this.getLSItem('refreshToken'),
+      };
+      this.authService.workWithToken(token);
+      void this.router.navigate(['/candidates']);
+    }
+  }
+  private getLSItem(key: string): string {
+    const item = localStorage.getItem(key);
+    return item ? item : '';
   }
 }
