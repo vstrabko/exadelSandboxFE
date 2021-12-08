@@ -1,6 +1,6 @@
 @import '../../../shared/constants/colors.scss';
 
-.candidate-table{
+.candidate-table {
   margin-bottom: 20px;
 }
 
@@ -14,13 +14,13 @@ table {
 }
 
 .inputs_container {
- display: flex;
- align-items: baseline;
- gap: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
 }
 
-.multiselect{
- margin-right: 20px;
+.multiselect {
+  margin-right: 20px;
 }
 
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
@@ -52,7 +52,7 @@ tr {
 
 // table checkboxes styles
 
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: $blueColor;
 }
 
@@ -64,4 +64,14 @@ tr {
 
 .mat-icon {
   margin-right: 10px;
+}
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  ::ng-deep .mat-spinner circle, .mat-spinner circle {
+    stroke: $blueColor;
+  }
 }

@@ -4,7 +4,7 @@
   </div>
   <nav class="user_tabs">
     <a routerLink="/candidates" routerLinkActive="active" (click)="showSpinner()" mat-button *ngIf="userName"
-      id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
+       id="candidatesList">{{ 'header.candidatesList' | translate }}</a>
     <a routerLink="/calendar" routerLinkActive="active" mat-button *ngIf="userName" id="calendar">{{
       'header.calendar' | translate }}</a>
     <a routerLink="/sandbox" routerLinkActive="active" mat-button *ngIf="userName" id="createNewSandbox">{{
@@ -22,4 +22,3 @@
 
 </header>
 <app-login-form *ngIf="isVisible" (modal)="closeModal()"></app-login-form>
-<app-spinner *ngIf="vision"></app-spinner>

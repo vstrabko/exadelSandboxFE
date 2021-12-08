@@ -6,6 +6,7 @@ import { PopupConfirmModule } from '../../components/popup-confirm/popup-confirm
 import { CalendarPageComponent } from './calendar-page.component';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [CalendarPageComponent],
@@ -15,6 +16,7 @@ import { LocalizationService } from 'src/app/internationalization/localization.s
     PopupChooseTheTimeModule,
     PopupConfirmModule,
     InternationalizationModule,
+    MatProgressSpinnerModule,
   ],
   exports: [CalendarPageComponent],
   providers: [LocalizationService],
