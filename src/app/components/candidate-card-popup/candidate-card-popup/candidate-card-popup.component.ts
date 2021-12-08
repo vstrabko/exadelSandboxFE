@@ -63,7 +63,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public statuses: IdName[];
   public candidateSandbox: string;
   public currentJob: string;
-  public arr: string[];
+  public urlFile: string;
 
   public selectedValue: string;
 
@@ -163,10 +163,12 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       .catch(() => this.toastr.error(this.error));
   }
 
-  downloadTest(): void {
-    console.log('download test'); //TODO waiting endpoint from back end
-    // const download = ;
-    // ? this.toastr.success(this.successD) : this.toastr.error(this.errorD);
+  downloadTest(): any {
+    this.urlFile = `${this.URL}files/${this.CANDIDATES_INFO.id}`; //TODO waiting endpoint from back end
+    return axios
+      .post(`${this.urlFile}`)
+      .then(() => this.toastr.success(this.successD))
+      .catch(() => this.toastr.error(this.errorD));
   }
 
   sendData(): void {
@@ -236,7 +238,9 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
         this.CANDIDATES_INFO.professionaCertificates = response.data.professionaCertificates;
-        // const candidateTechSkills = response.data.candidateTechSkills;  //TODO remove comments when back is done
+        // const candidateTechSkills = response.data.candidateTechSkills;
+        // console.log(candidateTechSkills);
+        //TODO remove comments when back is done
         // this.CANDIDATES_INFO.candidateTechSkills =
         //   candidateTechSkills[candidateTechSkills.length - 1].skill.name;
         const candidateLanguages = response.data.candidateLanguages;

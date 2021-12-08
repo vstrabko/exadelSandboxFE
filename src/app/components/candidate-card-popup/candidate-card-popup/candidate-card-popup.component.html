@@ -17,7 +17,7 @@
         <div *ngIf="isAdmin" class="feedback">
           <mat-checkbox class="example-margin" (click)="addStatus()">{{ 'status.change' | translate }}</mat-checkbox>
           <button class="btn filled-btn" (click)="changeStatus()" [disabled]="!counter">{{ 'status.save' | translate }}</button>
-          <button class="btn filled-btn" (click)="downloadTest()">{{ 'download' | translate }}</button>
+          <button class="btn filled-btn" href="urlFile" (click)="downloadTest()">{{ 'download' | translate }}</button>
         </div>
       </div>
       <mat-card class="candidate-skills">{{ CANDIDATES_INFO.candidateTechSkills || null }}</mat-card>
@@ -35,9 +35,7 @@
     </div>
     <div class="section">
       <mat-card class="user-name">{{ userAuthName }}{{ 'feedback' | translate }}</mat-card>
-
       <div class="custom-slider" *ngIf="!isRecruiter">
-
         <div class="custom-slider-slide">
           <mat-slider
             thumbLabel
@@ -60,16 +58,14 @@
           class="textarea" 
           [(ngModel)]="userReview"
           matInput placeholder="Place your review here..."
-          >
+        >
           {{ userReview }}
         </textarea>
       </mat-form-field>
 
       <div *ngIf="isAdmin" class="all-feedback">
-
         <div  *ngFor="let review of feedbacks">
-          <div  class="feedback">
-
+          <div  class="feedback" *ngIf="review">
             <div class="review">
               <span>{{ review.userReview }}</span>
             </div>
