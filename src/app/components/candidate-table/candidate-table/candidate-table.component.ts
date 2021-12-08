@@ -36,7 +36,6 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     'select',
     'name',
     'surname',
-    'email',
     'status',
     'sandbox',
     'location',
