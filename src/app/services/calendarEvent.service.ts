@@ -37,6 +37,14 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
     });
   }
 
+  getEventsForAdmin(): Subscription {
+    super.apiUrl = `/api/events`;
+    return this.get().subscribe((events: CalendarEventModel[]) => {
+      const arrEvent = events.filter((ev: CalendarEventModel) => ev.type === 1);
+      this.pushEventsToCalendar(arrEvent);
+    });
+  }
+
   getGoogleEvent(): any {
     return this.http
       .get<any>(`${environment.API_URL}/api/events/google/${this.userService.user.id}`)

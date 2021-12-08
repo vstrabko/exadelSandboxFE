@@ -48,7 +48,14 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
   ngOnInit(): void {
-    this.calendarEventService.getEvents();
+    if (
+      this.userService.user._roles.includes('Admin') ||
+      this.userService.user._roles.includes('EDU manager')
+    ) {
+      this.calendarEventService.getEventsForAdmin();
+    } else {
+      this.calendarEventService.getEvents();
+    }
     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
       this.calendarOptions.events = res;
     });
