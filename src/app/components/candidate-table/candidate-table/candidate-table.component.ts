@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { CandidateSandboxes } from './../../../interfaces/interfaces';
 import { ToastService } from 'src/app/services/toast.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
@@ -31,7 +32,13 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     private http: HttpClient,
     private auth: AuthService,
     private toast: ToastService,
-  ) {}
+    private translateService: TranslateService,
+  ) {
+    this.translateService.onLangChange.subscribe(() => {
+      this.translateLabels();
+    });
+    this.translateLabels();
+  }
   displayedColumns: string[] = [
     'select',
     'name',
@@ -65,6 +72,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  private title: string = '';
+  private text: string = '';
+  private titleEr: string = '';
+  private textEr: string = '';
 
   public statusValues: IdName[];
   public locationsValues: any;
@@ -118,8 +130,8 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
           this.candidatesId,
         )
         .subscribe(
-          () => this.toast.showSuccess('Успешно', 'Кандидаты назначены'),
-          () => this.toast.showError('Ошибка', 'Кандидаты не назначены'),
+          () => this.toast.showSuccess(this.title, this.text),
+          () => this.toast.showError(this.titleEr, this.textEr),
         );
     }
   }
@@ -234,4 +246,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   //   console.log(event);
   //   console.log(this.selectLocation);
   // }
+
+  translateLabels(): void {
+    this.title = this.translateService.instant('tostr.title');
+    this.text = this.translateService.instant('tostr.text');
+    this.titleEr = this.translateService.instant('tostr.titleEr');
+    this.textEr = this.translateService.instant('tostr.textEr');
+  }
 }
