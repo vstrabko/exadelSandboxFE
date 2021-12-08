@@ -17,7 +17,7 @@ export class AdminMainPageComponent {
   }
 
   toggleAppointInterview(): void {
-    console.log('click');
+    console.log('show popup');
     this.showAppointInterview = !this.showAppointInterview;
   }
 }

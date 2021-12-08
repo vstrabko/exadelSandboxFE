@@ -1,9 +1,17 @@
+@import '../../shared/constants/colors.scss';
+
 .textarea_container {
     width: 500px;
 }
 
 .textarea {
   max-height: 150px;
+}
+
+.selected-candidate{
+  margin-left: 20px;
+  font-size: 24px;
+    font-weight: 500;
 }
 
 .card-popup_container {
@@ -36,4 +44,9 @@
 
 .stepper-btn_container{
   text-align: end;
+}
+
+
+.interview_warning {
+  color: $errorColor;
 }

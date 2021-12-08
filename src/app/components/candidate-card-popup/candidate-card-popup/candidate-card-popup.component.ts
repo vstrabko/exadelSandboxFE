@@ -58,7 +58,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public title = 'Candidate card';
   public sliderValue: number;
   public userAuthName = this.userName.userName();
-  public userRole: string[] = this.userName.userRole();
+  public userRole: string[] | null = this.userName.userRole();
   public userId = this.userName.userId();
   public userReview: string;
   public feedbacks: any[];
@@ -87,10 +87,10 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   private error: string = '';
   private success: string = '';
 
-  public isAdmin = this.userRole.includes('Admin' || 'Manager');
-  public isMentor = this.userRole.includes('Mentor');
-  public isInterviewer = this.userRole.includes('Interviewer');
-  public isRecruiter = this.userRole.includes('Recruiter');
+  public isAdmin = this.userRole?.includes('Admin' || 'Manager');
+  public isMentor = this.userRole?.includes('Mentor');
+  public isInterviewer = this.userRole?.includes('Interviewer');
+  public isRecruiter = this.userRole?.includes('Recruiter');
 
   ngOnInit(): void {
     this.visibleForm = this.modalWindowService.visible.subscribe(() => {

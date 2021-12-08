@@ -171,16 +171,35 @@
     "content": "Are you sure you want to delete the event?"
   },
   "calendarButtons": {
-    "today": "today",
-    "month": "month",
-    "week": "week",
-    "list": "list",
-    "subText": "submit",
+    "today": "Today",
+    "month": "Month",
+    "week": "Week",
+    "list": "List",
+    "subText": "Submit",
     "subHint": "Send events to server",
     "weekText": "weekends",
     "weekHint": "On/off weekends"
   },
   "email": {
-    "send": "Send e-mail"
+    "send": "Send e-mail",
+    "weekText": "Weekends",
+    "weekHint": "On/off weekends",
+    "syncText": "Google",
+    "syncHint": "Sync with Google calendar"
+  },
+  "calendarTostrSucs": {
+    "title": "Successfully",
+    "text": "Events were successfully sent to the server"
+  },
+  "calendarTostrErr": {
+    "title": "Error",
+    "text": "Events were not sent to the server"
+  },
+  "calendarTostrDel": {
+    "title": "Error",
+    "text": "You can`t delete this event"
+  },
+  "calendarConfirm": {
+    "text": "When you go from this page, unsent events will be lost"
   }
 }
