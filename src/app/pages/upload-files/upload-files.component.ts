@@ -53,7 +53,7 @@ export class UploadFilesComponent implements OnInit {
     this.fileSendForm.controls.token.setValue(this.token);
     if (this.fileSendForm.valid) {
       this.http
-        .post(`http://64.227.114.210:9090/api/files/token`, this.fileSendForm.value)
+        .post(`http://64.227.114.210:9090/api/testresults`, this.fileSendForm.value)
         .subscribe(
           () => this.toastr.showSuccess('Upload', 'Succesful'),
           () => this.toastr.showError('Error', 'File not uploaded'),
