@@ -54,7 +54,7 @@
                 </mat-checkbox>
             </th>
             <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null; addFiltredCandidates()"
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null; addFiltredCandidates(); checkSelected()"
                     [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" >
                 </mat-checkbox>
             </td>
@@ -69,14 +69,9 @@
             <td mat-cell *matCellDef="let row"> {{row.surname}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
-            <td mat-cell *matCellDef="let row"> {{row.email}} </td>
-        </ng-container>
-
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-            <td mat-cell *matCellDef="let row"> {{row.candidateSandboxes[0].candidateProcesses[0].status.name}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.candidateSandboxes[0].candidateProcesses[row.candidateSandboxes[0].candidateProcesses.length - 1].status.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="sandbox">
@@ -101,5 +96,5 @@
         </tr>
     </table>
 </div>
-<button (click)="toggleAppoinInterview()" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>
-<button (click)="appointCandidateToRecruiter()" [disabled]="isStatusDraft" class="btn filled-btn">{{ 'candidateList.appointCandidateToInterviewer' | translate }}</button>
+<button (click)="toggleAppoinInterview()" [style.display]="userRole === 'Recruiter' ? 'inline-block' : 'none'" [disabled]="isAppointInterviewDisabled" class="btn filled-btn">{{ 'candidateList.appointInterview' | translate }}</button>
+<button (click)="appointCandidateToRecruiter()" [style.display]="userRole === 'Recruiter' ? 'inline-block' : 'none'" [disabled]="isStatusDraft" class="btn filled-btn">{{ 'candidateList.appointCandidateToInterviewer' | translate }}</button>

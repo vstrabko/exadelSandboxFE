@@ -32,6 +32,10 @@ export interface authResponse {
   refreshToken: string;
 }
 
+export interface dateRange {
+  start: Date;
+  end: Date;
+}
 export interface CalendarEventPost {
   ownerId: string;
   summary?: string;

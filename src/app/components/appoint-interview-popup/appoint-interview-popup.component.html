@@ -1,6 +1,7 @@
 <app-modal-window [title]="'candidateList.appointInterview' | translate">
   <div class="card-popup_container">
     <div class="section">
+      <p class="selected-candidate">Appoint interview for {{selectedCandidate.name + ' ' + selectedCandidate.surname}}</p>
       <mat-stepper #stepper>
         <mat-step [stepControl]="firstFormGroup" errorMessage="{{'stepper.dateIsRequired' | translate}}">
           <form [formGroup]="firstFormGroup">
@@ -17,6 +18,7 @@
               </mat-datepicker>
             </mat-form-field>
           </form>
+          <p class="interview_warning" *ngIf="noFreeInterviewers">there are no free interviewers on that date</p>
         </mat-step>
         <mat-step [stepControl]="secondFormGroup" errorMessage="{{'stepper.interviewerIsRequired' | translate}}">
           <form [formGroup]="secondFormGroup">
@@ -27,10 +29,10 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>{{'stepper.chooseInterviewer' | translate}}</mat-label>
-              <mat-select [(value)]="selectedInterviewer" formControlName="secondCtrl"
+              <mat-select #selectedInterviewer (selectionChange)="getFreeTimes($event)" formControlName="secondCtrl"
               required>
-                <mat-option *ngFor="let interviewer of interviewers" [value]="interviewer.name">
-                  {{interviewer.name}}
+                <mat-option *ngFor="let interviewer of interviewers" [value]="interviewer">
+                  {{interviewer.name}} {{interviewer.surname}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -45,14 +47,14 @@
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>{{'stepper.interviewer' | translate}}</mat-label>
-              <input matInput disabled value="{{selectedInterviewer}}">
+              <input matInput disabled value="{{selectedInterviewer.value.name + ' ' + selectedInterviewer.value.surname}}">
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>{{'stepper.chooseTime' | translate}}</mat-label>
               <mat-select [(value)]="selectedTime" formControlName="thirdCtrl"
               required>
-                <mat-option *ngFor="let interval of intervals" [value]="interval.value">
-                  {{interval.value}}
+                <mat-option *ngFor="let interval of intervals" [value]="interval">
+                  {{interval.start | date:'shortTime'}} - {{interval.end | date:'shortTime'}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -64,13 +66,13 @@
             <mat-card-title>{{'stepper.interviewDetails' | translate}}</mat-card-title>
             <div class="details_content">
               <p><strong>{{'stepper.date' | translate}}</strong>: {{localDateString}}</p>
-              <p><strong>{{'stepper.interviewer' | translate}}</strong>: {{selectedInterviewer}}</p>
-              <p><strong>{{'stepper.time' | translate}}</strong>: {{selectedTime}}</p>
+              <p><strong>{{'stepper.interviewer' | translate}}</strong>: {{selectedInterviewer.value.name + ' ' + selectedInterviewer.value.surname}}</p>
+              <p *ngIf="selectedTime"><strong>{{'stepper.time' | translate}}</strong>: {{selectedTime.start | date:'shortTime'}} - {{selectedTime.end | date:'shortTime'}}</p>
             </div>
             <mat-card-actions>
               <div class="stepper-btn_container">
                 <button mat-button (click)="stepper.reset()" class="btn unfilled-btn">{{'reset' | translate}}</button>
-                <button class="btn filled-btn">{{'candidateList.appointInterview' | translate}}</button>
+                <button (click)="postInterview(); cancel()" class="btn filled-btn">{{'candidateList.appointInterview' | translate}}</button>
               </div>
             </mat-card-actions>
           </mat-card>

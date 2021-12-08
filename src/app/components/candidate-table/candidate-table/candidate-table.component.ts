@@ -15,9 +15,9 @@ import { CandidateDataSource } from './candidate-data-source';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AuthService } from 'src/app/services/auth.service';
 import { CandidateSandboxes } from './../../../interfaces/interfaces';
 import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-candidate-table',
@@ -26,11 +26,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CandidateTableComponent implements OnInit, AfterViewInit {
   constructor(
+    private userService: UserService,
     private candidateService: CandidateService,
     private candidateContext: CandidateContextService,
     private candidateServiceFilter: CandidateServiceFilter,
     private http: HttpClient,
-    private auth: AuthService,
     private toast: ToastService,
     private translateService: TranslateService,
   ) {
@@ -43,7 +43,6 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     'select',
     'name',
     'surname',
-    'email',
     'status',
     'sandbox',
     'location',
@@ -53,6 +52,8 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   dataSource: CandidateDataSource;
   selection = new SelectionModel<Candidate>(true, []);
   locations = new FormControl();
+  isAppointInterviewDisabled = true;
+  selectedCandidate: Candidate;
   public candidateRequestForm: FormGroup;
 
   queryParams = {
@@ -85,7 +86,8 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   public candidates: Candidate[];
   public candidate: Candidate;
   public isStatusDraft: boolean = true;
-  public recruterId: string | null = this.auth.userId();
+  public recruterId: string | null = this.userService.user ? this.userService.user._id : '';
+  public userRole: string;
   public candidatesId: string[] = [];
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAppointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -137,6 +139,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.userRole = this.userService.user ? this.userService.user._roles[0] : '';
     this.statusValues = this.candidateContext.getStatuses()[0];
     this.sandboxValues = this.candidateContext.getSandbox()[0];
     this.recruitersValues = this.candidateContext.getRecruiters()[0];
@@ -193,18 +196,6 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     this.dataSource.loadCandidates(this.queryParams);
   }
 
-  // TODO: decide do we need such filter as we have filtering by sending request?
-
-  // applyFilter(event: Event): void {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   console.log(filterValue);
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  //   console.log(this.dataSource);
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
     if (this.matDataSource) {
@@ -238,14 +229,21 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   submit(): void {
     this.loadCandidatesPage();
     this.paginator.firstPage();
+    console.log(this.selection.selected[0]);
   }
 
-  // TODO: getting selected candidates:
-
-  // selectLocation(event: any): void {
-  //   console.log(event);
-  //   console.log(this.selectLocation);
-  // }
+  checkSelected(): void {
+    if (
+      this.selection.selected.length === 1 &&
+      this.selection.selected[0].candidateSandboxes[0].candidateProcesses[0].status.name ===
+        'Interview'
+    ) {
+      this.isAppointInterviewDisabled = false;
+      this.selectedCandidate = this.selection.selected[0];
+    } else {
+      this.isAppointInterviewDisabled = true;
+    }
+  }
 
   translateLabels(): void {
     this.title = this.translateService.instant('tostr.title');

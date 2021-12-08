@@ -45,8 +45,8 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
   dataSource: SandboxDataSource;
   selection = new SelectionModel<Sandbox>(true, []);
 
-  public role: string[] = this.roleUser.userRole();
-  public isAdmin = this.role.includes('Admin' || 'Manager');
+  public role: string[] | null = this.roleUser.userRole();
+  public isAdmin = this.role?.includes('Admin' || 'Manager');
 
   queryParams = {
     params: {
