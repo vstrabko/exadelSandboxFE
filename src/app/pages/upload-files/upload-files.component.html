@@ -1,0 +1,16 @@
+<div class="page_container">
+    <div class="page_wrapper">
+        <form class="sandbox_wrapper" [formGroup]="fileSendForm" (ngSubmit)="submit()">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input formControlName="email" matInput>
+            </mat-form-field>
+            <label for="inpFile" class="btn unfilled-btn">{{ 'uploadPage.upload' | translate }}
+                <input type="file" accept=".txt, .pdf" id="inpFile" (change)="onFileChange($event)">
+            </label>
+            <img *ngIf="showImg" src="../../../assets/img/check/check.png" alt="loaded">
+            <img *ngIf="!showImg" src="../../../assets/img/check/notCheck.png" alt="not loaded">
+            <input type="submit" class="btn filled-btn">
+        </form>
+    </div>
+</div>

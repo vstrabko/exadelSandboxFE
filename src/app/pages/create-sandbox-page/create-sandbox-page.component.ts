@@ -92,7 +92,7 @@ export class CreateSandboxPageComponent implements OnInit {
   ): string[] {
     if (this.sandboxChosen[value]) {
       const _value = this.sandboxChosen[value];
-      return _value && _value[0] !== null ? _value?.map((item: IdName) => item.id) : [];
+      return _value && _value[0] !== null ? _value?.map((item: IdName | Employee) => item.id) : [];
     }
     return [];
   }

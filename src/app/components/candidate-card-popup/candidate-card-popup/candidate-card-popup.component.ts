@@ -44,15 +44,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         },
       },
     ],
-    candidateTechSkills: [
-      {
-        id: '',
-        skill: {
-          id: '',
-          name: '',
-        },
-      },
-    ],
+    candidateTechSkills: [],
   };
 
   public title = 'Candidate card';
@@ -71,6 +63,10 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public statuses: IdName[];
   public candidateSandbox: string;
   public currentJob: string;
+  public urlFile: string;
+  public spinner: false;
+  public timeContact: string;
+  public file: string;
 
   public selectedValue: string;
 
@@ -83,9 +79,11 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
 
   public visibleForm: Subscription;
   public saveForm: Subscription;
-  public counter = 0;
+  public counter: number = 0;
   private error: string = '';
   private success: string = '';
+  private errorD: string = '';
+  private successD: string = '';
 
   public isAdmin = this.userRole?.includes('Admin' || 'Manager');
   public isMentor = this.userRole?.includes('Mentor');
@@ -99,7 +97,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     this.title = this.translateService.instant('candidate.title');
 
     this.saveForm = this.modalWindowService.event.subscribe(() => {
-      this.printForm();
+      this.sendData();
     });
 
     setTimeout(() => {
@@ -164,11 +162,21 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       .put(
         `${this.URL}candidates/${STATUS.id}/candidatesandboxes/${STATUS.candidateSandboxId}?newStatusId=${STATUS.newStatusId}`,
       )
-      .then(() => this.toastr.success(this.success))
+      .then(() => {
+        this.toastr.success(this.success);
+      })
       .catch(() => this.toastr.error(this.error));
   }
 
-  printForm(): void {
+  downloadTest(): any {
+    this.urlFile = String(`${this.URL}files/${this.file}`);
+    return axios
+      .get(`${this.urlFile}`)
+      .then(() => this.toastr.success(this.successD))
+      .catch(() => this.toastr.error(this.errorD));
+  }
+
+  sendData(): void {
     const FEEDBACK_PUT = {
       grade: this.sliderValue,
       userReview: this.userReview,
@@ -176,7 +184,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     const FEEDBACK_POST = {
       userId: this.userId,
       grade: this.sliderValue,
-      userReview: this.userReview,
+      userReview: this.userReview || '',
       candidateProccesId: this.candidateProccesId,
     };
     !this.feedbackId ? this.postFeedbacks(FEEDBACK_POST) : this.putFeedbacks(FEEDBACK_PUT);
@@ -186,14 +194,17 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   }
 
   postFeedbacks(FEEDBACK_POST: {
-    userId: any;
+    userId: string | null;
     grade: number;
     userReview: string;
     candidateProccesId: string;
   }): any {
     return axios
       .post(`${this.URL}feedbacks`, FEEDBACK_POST)
-      .then(() => this.toastr.success(this.success))
+      .then(() => {
+        this.spinner = false;
+        this.toastr.success(this.success);
+      })
       .catch(() => this.toastr.error(this.error));
   }
 
@@ -234,18 +245,20 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
         this.CANDIDATES_INFO.professionaCertificates = response.data.professionaCertificates;
-        const candidateTechSkills = response.data.candidateTechSkills;
-        this.CANDIDATES_INFO.candidateTechSkills =
-          candidateTechSkills[candidateTechSkills.length - 1].skill.name;
         const candidateLanguages = response.data.candidateLanguages;
         this.CANDIDATES_INFO.candidateLanguages =
           candidateLanguages[candidateLanguages.length - 1].language.name;
         const candidateSandboxes = response.data.candidateSandboxes;
+        this.CANDIDATES_INFO.candidateTechSkills =
+          candidateSandboxes[candidateSandboxes.length - 1].primaryTechnology.name;
+        this.timeContact = candidateSandboxes[candidateSandboxes.length - 1].timeContact;
         this.candidateSandbox = candidateSandboxes[candidateSandboxes.length - 1].id;
         this.currentJob = candidateSandboxes[candidateSandboxes.length - 1].currentJob;
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id;
+        const files = candidateProcesses[candidateProcesses.length - 1].сandidateProccessTestTasks;
+        this.file = files[files.length - 1].responseTestFileId;
         this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
         const createDate: string[] = [];
@@ -262,5 +275,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   translateLabels(): void {
     this.error = this.translateService.instant('tostr.textEr');
     this.success = this.translateService.instant('tostr.text');
+    this.errorD = this.translateService.instant('tostr.downloadError');
+    this.successD = this.translateService.instant('tostr.downloadSuccess');
   }
 }
