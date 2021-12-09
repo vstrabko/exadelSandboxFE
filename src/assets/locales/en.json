@@ -49,7 +49,7 @@
     "description": "Sandbox description",
     "invalidEndDate": "Invalid end date",
     "invalidStartDate": "Invalid start date",
-    "name": "Sandbox",
+    "name": "Choose a sandbox to fill out the form",
     "sandboxName": "Sandbox name",
     "period": "Sandbox period",
     "registration": "Sandbox registration period",
@@ -59,10 +59,11 @@
     "startDate": "Start date",
     "nameSandbox": "Name",
     "nameDescription": "Description",
-    "statusSand": "Status"
+    "statusSand": "Status",
+    "exportSandbox": "Export"
   },
   "request": {
-    "header": "Candidate request",
+    "header": "Candidate request (fill in english)",
     "firstName": "First Name",
     "secondName": "Second Name",
     "telephone": "Telephone",
@@ -108,12 +109,13 @@
     "filter": "Filter",
     "example": "Ex. Minsk",
     "appointInterview": "Appoint interview",
-    "appointCandidateToInterviewer": "Appoint candidate"
+    "appointCandidateToInterviewer": "Assign Candidate"
   },
   "tostr": {
     "title": "Success",
-    "text": "You are the rock!",
+    "text": "Everything went well",
     "titleEr": "Fail",
+    "textWr": "File should be < 10MB"
     "textEr": "Something wrong",
     "downloadSuccess": "File download",
     "downloadError": "Download error"
@@ -127,7 +129,7 @@
     "location": "Location",
     "recruiter": "Recruiter",
     "sandbox": "Sandbox"
-},
+  },
   "stepper": {
     "сhooseTheDate": "Choose the date",
     "selectedDate": "Selected date",
@@ -154,6 +156,10 @@
     "title": "Authorisation error",
     "text": "Please check carefully that all details are correct"
   },
+  "uploadPage": {
+    "upload": "Choose file"
+  },
+
   "googleAuthTostr": {
     "title": "Authorisation error",
     "text": "Email is not registered in the system"
@@ -167,13 +173,35 @@
     "content": "Are you sure you want to delete the event?"
   },
   "calendarButtons": {
-    "today": "today",
-    "month": "month",
-    "week": "week",
-    "list": "list",
-    "subText": "submit",
+    "today": "Today",
+    "month": "Month",
+    "week": "Week",
+    "list": "List",
+    "subText": "Submit",
     "subHint": "Send events to server",
     "weekText": "weekends",
     "weekHint": "On/off weekends"
+  },
+  "email": {
+    "send": "Send e-mail",
+    "weekText": "Weekends",
+    "weekHint": "On/off weekends",
+    "syncText": "Google",
+    "syncHint": "Sync with Google calendar"
+  },
+  "calendarTostrSucs": {
+    "title": "Successfully",
+    "text": "Events were successfully sent to the server"
+  },
+  "calendarTostrErr": {
+    "title": "Error",
+    "text": "Events were not sent to the server"
+  },
+  "calendarTostrDel": {
+    "title": "Error",
+    "text": "You can`t delete this event"
+  },
+  "calendarConfirm": {
+    "text": "When you go from this page, unsent events will be lost"
   }
 }

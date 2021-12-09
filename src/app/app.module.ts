@@ -26,6 +26,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SandboxListPageModule } from './pages/sandbox-list-page/sandbox-list-page.module';
 import { CandidateTableModule } from './components/candidate-table/candidate-table.module';
+import { UploadFilesModule } from './pages/upload-files/upload-files.module';
 
 import { HttpHeadersInterceptor } from './interceptors/http-headers.interceptors';
 import { AuthService } from './services/auth.service';
@@ -37,6 +38,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 
 import { GoogleAuthModule } from './pages/google-auth/google-auth.module';
+import { ExitAboutGuard } from './exit.about.guard';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, '../assets/locales/', '.json');
@@ -74,10 +76,12 @@ FullCalendarModule.registerPlugins([dayGridPlugin, timegridPlugin, interactionPl
     PopupChooseTheTimeModule,
     FullCalendarModule,
     CandidateTableModule,
+    UploadFilesModule,
     GoogleAuthModule,
   ],
   providers: [
     CandidateGuard,
+    ExitAboutGuard,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

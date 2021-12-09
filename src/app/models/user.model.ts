@@ -11,6 +11,7 @@ export class User extends ResourceModel<User> {
   constructor(model?: Partial<User>) {
     super(model);
   }
+
   get fullName(): string {
     return `${this.name} ${this.surname}`;
   }
@@ -26,6 +27,7 @@ export class User extends ResourceModel<User> {
   get _id(): string {
     return `${this.id}`;
   }
+
   get _roles(): string[] {
     return this.roles;
   }

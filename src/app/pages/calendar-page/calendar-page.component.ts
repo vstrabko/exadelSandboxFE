@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { ComponentCanDeactivate } from '../../exit.about.guard';
 
 import {
   CalendarOptions,
@@ -6,6 +7,8 @@ import {
   EventClickArg,
   EventApi,
   EventInput,
+  FullCalendarComponent,
+  Calendar,
 } from '@fullcalendar/angular';
 
 import enLocale from '@fullcalendar/core/locales/es';
@@ -15,13 +18,15 @@ import { CalendarEventPost } from '../../interfaces/interfaces';
 import { UserService } from 'src/app/services/user.service';
 import { LocalizationService } from 'src/app/internationalization/localization.service';
 import { TranslateService, TranslationChangeEvent } from '@ngx-translate/core';
+import { ToastService } from '../../services/toast.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calendar-page',
   templateUrl: './calendar-page.component.html',
   styleUrls: ['./calendar-page.component.scss'],
 })
-export class CalendarPageComponent implements OnInit, OnDestroy {
+export class CalendarPageComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   public isVisible = false;
   private calendarApi: any;
   public delEvent = false;
@@ -30,23 +35,36 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   public selectInfo: DateSelectArg;
   public arrEventsPost: CalendarEventPost[] = [];
   public lang: string | null;
+  public start: string;
+  public end: string;
+  public type: number;
+  public calendar: Calendar;
 
   constructor(
     private calendarEventService: CalendarEventService,
     private userService: UserService,
     private localizationService: LocalizationService,
     private translateService: TranslateService,
+    private toastService: ToastService,
   ) {}
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
   ngOnInit(): void {
-    this.calendarEventService.getEvents();
+    if (
+      this.userService.user._roles.includes('Admin') ||
+      this.userService.user._roles.includes('EDU manager')
+    ) {
+      this.calendarEventService.getEventsForAdmin();
+    } else {
+      this.calendarEventService.getEvents();
+    }
     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
       this.calendarOptions.events = res;
-      this.lang = localStorage.getItem('language');
-      this.changeLang(`${this.lang ? this.lang : 'en'}`);
-      this.translateService.onLangChange.subscribe((params: TranslationChangeEvent) => {
-        this.changeLang(params.lang);
-      });
+    });
+    this.lang = localStorage.getItem('language');
+    this.changeLang(`${this.lang ? this.lang : 'en'}`);
+    this.translateService.onLangChange.subscribe((params: TranslationChangeEvent) => {
+      this.changeLang(params.lang);
     });
   }
 
@@ -54,7 +72,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     headerToolbar: {
       left: 'prev,next today weekends',
       center: 'title',
-      right: 'timeGridWeek,listWeek,dayGridMonth submit',
+      right: 'sync timeGridWeek,listWeek,dayGridMonth submit',
     },
     customButtons: {
       submit: {
@@ -66,6 +84,11 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
         text: 'Weekends',
         hint: 'Toggle weekends',
         click: () => this.handleWeekendsToggle(),
+      },
+      sync: {
+        text: 'sync',
+        hint: 'Sync with Google',
+        click: () => this.syncWithGoogle(),
       },
     },
     locales: [enLocale, ruLocale],
@@ -84,6 +107,23 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     eventsSet: this.handleEvents.bind(this),
   };
 
+  syncWithGoogle(): void {
+    this.calendarEventService.getGoogleEvent();
+    this.calendarEventService.googleSubject.subscribe(() => {
+      this.calendarEventService.getEvents();
+    });
+    this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
+      this.calendarOptions.events = res;
+    });
+  }
+  canDeactivate(): boolean | Observable<boolean> {
+    if (this.userService.user._roles.includes('Interviewer')) {
+      return confirm(this.translateService.instant('calendarConfirm.text'));
+    } else {
+      return true;
+    }
+  }
+
   handleWeekendsToggle(): void {
     const { calendarOptions } = this;
     calendarOptions.weekends = !calendarOptions.weekends;
@@ -101,9 +141,17 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    if (this.userService.user._roles.includes('Interviewer')) {
+    if (
+      this.userService.user._roles.includes('Interviewer') &&
+      clickInfo.event.backgroundColor === '#009300'
+    ) {
       this.openModal();
       this.clickInfo = clickInfo;
+    } else {
+      this.toastService.showError(
+        this.translateService.instant('calendarTostrDel.text'),
+        this.translateService.instant('calendarTostrDel.title'),
+      );
     }
   }
 
@@ -157,17 +205,20 @@ export class CalendarPageComponent implements OnInit, OnDestroy {
     this.calendarOptions.locale = lang;
     const submit = this.calendarOptions.customButtons?.submit;
     const weekends = this.calendarOptions.customButtons?.weekends;
+    const sync = this.calendarOptions.customButtons?.sync;
     this.calendarOptions.buttonText = {
       today: `${this.translateService.instant('calendarButtons.today') as string}`,
       month: `${this.translateService.instant('calendarButtons.month') as string}`,
       week: `${this.translateService.instant('calendarButtons.week') as string}`,
       list: `${this.translateService.instant('calendarButtons.list') as string}`,
     };
-    if (submit && weekends) {
+    if (submit && weekends && sync) {
       submit.text = `${this.translateService.instant('calendarButtons.subText') as string}`;
       submit.hint = `${this.translateService.instant('calendarButtons.subHint') as string}`;
       weekends.text = `${this.translateService.instant('calendarButtons.weekText') as string}`;
       weekends.hint = `${this.translateService.instant('calendarButtons.weekHint') as string}`;
+      sync.text = `${this.translateService.instant('calendarButtons.syncText') as string}`;
+      sync.hint = `${this.translateService.instant('calendarButtons.syncHint') as string}`;
     }
   }
 

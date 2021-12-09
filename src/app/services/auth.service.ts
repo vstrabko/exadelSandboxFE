@@ -33,14 +33,6 @@ export class AuthService {
     return this.currentUser?.fullName;
   }
 
-  userRole(): any {
-    return this.currentUser?.role;
-  }
-
-  // userId(): any {
-  //   return this.currentUser?.uid;
-  // }
-
   login(email: string, password: string): Observable<any> {
     return this.http
       .post<any>(`${environment.API_URL}/api/authorization/sign-in`, { email, password })
@@ -98,6 +90,13 @@ export class AuthService {
   userId(): string | null {
     if (this.currentUser?._id !== undefined) {
       return this.currentUser?._id;
+    }
+    return null;
+  }
+
+  userRole(): string[] | null {
+    if (this.currentUser?._roles !== undefined) {
+      return this.currentUser?._roles;
     }
     return null;
   }

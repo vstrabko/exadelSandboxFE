@@ -6,7 +6,7 @@ export interface ListSandboxes {
 }
 
 export interface Employee {
-  id: number;
+  id: string;
   name: string;
   surname: string;
   email: string;
@@ -32,6 +32,10 @@ export interface authResponse {
   refreshToken: string;
 }
 
+export interface dateRange {
+  start: Date;
+  end: Date;
+}
 export interface CalendarEventPost {
   ownerId: string;
   summary?: string;
@@ -88,12 +92,23 @@ export interface CandidateProcesses {
   testResult: string;
   createDate: string;
   feedbacks: Feedbacks[];
+  сandidateProccessTestTasks: CandidateTestTasks[];
+}
+
+export interface CandidateTestTasks {
+  TestFileId: string;
+  ResponseTestFileId: string;
 }
 
 export interface CandidateSandboxes {
   id: string;
   sandbox: Sandbox;
   currentJob: string;
+  motivation: string;
+  timeContact: string;
+  isJoinToExadel: true;
+  isAgreement: boolean;
+  primaryTechnology: IdName;
   candidateProcesses: CandidateProcesses[];
   candidateProjectRole: IdName;
 }

@@ -17,6 +17,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
   public INITIAL_EVENTS: EventInput[] = [];
   public dataEvents: CalendarEventModel[];
   public eventSubject: Subject<EventInput[]>;
+  public googleSubject: Subject<any>;
 
   constructor(
     private http: HttpClient,
@@ -26,6 +27,7 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
   ) {
     super(http, CalendarEventModel, '');
     this.eventSubject = new Subject<EventInput[]>();
+    this.googleSubject = new Subject<boolean>();
   }
 
   getEvents(): Subscription {
@@ -35,14 +37,39 @@ export class CalendarEventService extends ApiService<CalendarEventModel> {
     });
   }
 
+  getEventsForAdmin(): Subscription {
+    super.apiUrl = `/api/events`;
+    return this.get().subscribe((events: CalendarEventModel[]) => {
+      const arrEvent = events.filter((ev: CalendarEventModel) => ev.type === 1);
+      this.pushEventsToCalendar(arrEvent);
+    });
+  }
+
+  getGoogleEvent(): any {
+    return this.http
+      .get<any>(`${environment.API_URL}/api/events/google/${this.userService.user.id}`)
+      .subscribe(() => this.googleSubject.next(true));
+  }
+
   postEvents(events: CalendarEventPost[]): void {
-    events.forEach((ev: CalendarEventPost) => this.postEvent(ev));
+    events.forEach((ev: CalendarEventPost) => {
+      this.postEvent(ev);
+    });
   }
 
   postEvent(event: CalendarEventPost): Subscription {
-    return this.http
-      .post<any>(`${environment.API_URL}/api/events/free-time`, event)
-      .subscribe((ev: CalendarEventModel) => console.log('post', ev));
+    return this.http.post<any>(`${environment.API_URL}/api/events/free-time`, event).subscribe(
+      () =>
+        this.toastService.showSuccess(
+          this.translateService.instant('calendarTostrSucs.text'),
+          this.translateService.instant('calendarTostrSucs.title'),
+        ),
+      () =>
+        this.toastService.showError(
+          this.translateService.instant('calendarTostrErr.text'),
+          this.translateService.instant('calendarTostrErr.title'),
+        ),
+    );
   }
 
   pushEventsToCalendar(events: CalendarEventModel[]): void {

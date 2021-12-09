@@ -44,7 +44,9 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
   matDataSource: MatTableDataSource<Sandbox>;
   dataSource: SandboxDataSource;
   selection = new SelectionModel<Sandbox>(true, []);
-  public role: string;
+
+  public role: string[] | null = this.roleUser.userRole();
+  public isAdmin = this.role?.includes('Admin' || 'Manager');
 
   queryParams = {
     params: {
@@ -52,6 +54,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
       PageSize: 5,
       SortingType: 0,
       SearchingStringAll: ',',
+      SortField: 'status',
     },
   };
 
@@ -125,7 +128,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.queryParams.params.PageSize = this.paginator.pageSize;
     this.queryParams.params.PageNumber = this.paginator.pageIndex + 1;
     if (this.sort.active) {
-      this.queryParams.params.SearchingStringAll = this.sort.active;
+      this.queryParams.params.SortField = this.sort.active;
     }
     if (this.sort.direction === 'asc') {
       this.queryParams.params.SortingType = 0;

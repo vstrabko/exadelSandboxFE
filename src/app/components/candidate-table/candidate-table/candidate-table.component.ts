@@ -15,9 +15,10 @@ import { CandidateDataSource } from './candidate-data-source';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { AuthService } from 'src/app/services/auth.service';
 import { CandidateSandboxes } from './../../../interfaces/interfaces';
 import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
@@ -25,18 +26,23 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class CandidateTableComponent implements OnInit, AfterViewInit {
   constructor(
+    private userService: UserService,
     private candidateService: CandidateService,
     private candidateContext: CandidateContextService,
     private candidateServiceFilter: CandidateServiceFilter,
     private http: HttpClient,
-    private auth: AuthService,
     private toast: ToastService,
-  ) {}
+    private translateService: TranslateService,
+  ) {
+    this.translateService.onLangChange.subscribe(() => {
+      this.translateLabels();
+    });
+    this.translateLabels();
+  }
   displayedColumns: string[] = [
     'select',
     'name',
     'surname',
-    'email',
     'status',
     'sandbox',
     'location',
@@ -46,6 +52,8 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   dataSource: CandidateDataSource;
   selection = new SelectionModel<Candidate>(true, []);
   locations = new FormControl();
+  isAppointInterviewDisabled = true;
+  selectedCandidate: Candidate;
   public candidateRequestForm: FormGroup;
 
   queryParams = {
@@ -66,6 +74,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  private title: string = '';
+  private text: string = '';
+  private titleEr: string = '';
+  private textEr: string = '';
+
   public statusValues: IdName[];
   public locationsValues: any;
   public sandboxValues: IdName[];
@@ -73,8 +86,11 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   public candidates: Candidate[];
   public candidate: Candidate;
   public isStatusDraft: boolean = true;
-  public recruterId: string | null = this.auth.userId();
+  public isCandidateProcessId: boolean = true;
+  public recruterId: string | null = this.userService.user ? this.userService.user._id : '';
+  public userRole: string;
   public candidatesId: string[] = [];
+  public candidatesProcessId: string[] = [];
   @Output() showModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAppointInterview: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -91,10 +107,17 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     this.candidatesId = this.selection.selected.map((candidate: Candidate) => {
       return candidate.candidateSandboxes
         .filter((sand: CandidateSandboxes) => {
-          return (
-            sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
-            (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
-          );
+          if (sand.candidateProcesses.length > 1) {
+            return (
+              sand.candidateProcesses[sand.candidateProcesses.length - 2].status.name === 'Draft' &&
+              (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
+            );
+          } else {
+            return (
+              sand.candidateProcesses[sand.candidateProcesses.length - 1].status.name === 'Draft' &&
+              (sand.sandbox.status === 'Application' || sand.sandbox.status === 'Registration')
+            );
+          }
         })
         .map((filtred: CandidateSandboxes) => filtred.id)
         .join('');
@@ -108,6 +131,20 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     } else {
       this.isStatusDraft = true;
     }
+
+    this.candidatesProcessId.push(
+      ...this.selection.selected.map((candidate: Candidate) => {
+        if (candidate.candidateSandboxes[0].candidateProcesses.length > 1) {
+          return candidate.candidateSandboxes[0].candidateProcesses[
+            candidate.candidateSandboxes[0].candidateProcesses.length - 2
+          ].id;
+        } else {
+          return candidate.candidateSandboxes[0].candidateProcesses[
+            candidate.candidateSandboxes[0].candidateProcesses.length - 1
+          ].id;
+        }
+      }),
+    );
   }
 
   appointCandidateToRecruiter(): void {
@@ -118,13 +155,14 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
           this.candidatesId,
         )
         .subscribe(
-          () => this.toast.showSuccess('', 'Кандидаты назначены'),
-          () => this.toast.showError('Ошибка', 'Кандидаты не назначены'),
+          () => this.toast.showSuccess(this.title, this.text),
+          () => this.toast.showError(this.titleEr, this.textEr),
         );
     }
   }
 
   ngOnInit(): void {
+    this.userRole = this.userService.user ? this.userService.user._roles[0] : '';
     this.statusValues = this.candidateContext.getStatuses()[0];
     this.sandboxValues = this.candidateContext.getSandbox()[0];
     this.recruitersValues = this.candidateContext.getRecruiters()[0];
@@ -181,18 +219,6 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     this.dataSource.loadCandidates(this.queryParams);
   }
 
-  // TODO: decide do we need such filter as we have filtering by sending request?
-
-  // applyFilter(event: Event): void {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   console.log(filterValue);
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  //   console.log(this.dataSource);
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
     if (this.matDataSource) {
@@ -226,12 +252,38 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
   submit(): void {
     this.loadCandidatesPage();
     this.paginator.firstPage();
+    console.log(this.selection.selected[0]);
   }
 
-  // TODO: getting selected candidates:
+  sendEmail(): any {
+    this.http
+      .post(
+        `${String(environment.API_URL)}/api/candidates/send-test-task`,
+        this.candidatesProcessId,
+      )
+      .subscribe(
+        () => this.toast.showSuccess(this.title, this.text),
+        () => this.toast.showError(this.titleEr, this.textEr),
+      );
+  }
 
-  // selectLocation(event: any): void {
-  //   console.log(event);
-  //   console.log(this.selectLocation);
-  // }
+  checkSelected(): void {
+    if (
+      this.selection.selected.length === 1 &&
+      this.selection.selected[0].candidateSandboxes[0].candidateProcesses[0].status.name ===
+        'Interview'
+    ) {
+      this.isAppointInterviewDisabled = false;
+      this.selectedCandidate = this.selection.selected[0];
+    } else {
+      this.isAppointInterviewDisabled = true;
+    }
+  }
+
+  translateLabels(): void {
+    this.title = this.translateService.instant('tostr.title');
+    this.text = this.translateService.instant('tostr.text');
+    this.titleEr = this.translateService.instant('tostr.titleEr');
+    this.textEr = this.translateService.instant('tostr.textEr');
+  }
 }
