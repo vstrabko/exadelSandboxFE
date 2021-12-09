@@ -19,12 +19,15 @@ import { CandidateSandboxes } from './../../../interfaces/interfaces';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-candidate-table',
   templateUrl: './candidate-table.component.html',
   styleUrls: ['./candidate-table.component.scss'],
 })
 export class CandidateTableComponent implements OnInit, AfterViewInit {
+  public dataAvailable = false;
+
   constructor(
     private userService: UserService,
     private candidateService: CandidateService,
@@ -39,6 +42,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
     });
     this.translateLabels();
   }
+
   displayedColumns: string[] = [
     'select',
     'name',
@@ -179,6 +183,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
       this.matDataSource = new MatTableDataSource(this.candidates);
       this.matDataSource.paginator = this.paginator;
       this.matDataSource.sort = this.sort;
+      this.dataAvailable = true;
     });
 
     this.dataSource = new CandidateDataSource(this.candidateServiceFilter);

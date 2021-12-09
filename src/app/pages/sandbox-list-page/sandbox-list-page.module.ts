@@ -8,6 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 import { SandboxListPageComponent } from './sandbox-list-page/sandbox-list-page.component';
 import { InternationalizationModule } from 'src/app/internationalization/internationalization.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [SandboxListPageComponent],
@@ -20,6 +21,7 @@ import { InternationalizationModule } from 'src/app/internationalization/interna
     MatCheckboxModule,
     MatSortModule,
     InternationalizationModule,
+    MatProgressSpinnerModule,
   ],
   exports: [SandboxListPageComponent],
 })

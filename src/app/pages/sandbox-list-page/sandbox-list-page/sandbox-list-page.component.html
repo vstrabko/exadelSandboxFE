@@ -1,16 +1,27 @@
+<div class="wrapper">
+  <mat-spinner [diameter]="70" *ngIf="!dataAvailable"></mat-spinner>
+</div>
 <div class="page_container">
   <div class="page_wrapper">
     <mat-form-field appearance="standard">
       <mat-label class="filter">Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input />
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input/>
     </mat-form-field>
     <div class="mat-elevation-z8">
-      <mat-table
+      <mat-paginator
+        #paginator
+        [length]="totalRows"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+      <table
         mat-table
         [dataSource]="dataSource"
         matSort
         matSortDirection="asc"
         matSortDisableClear
+        *ngIf="dataAvailable"
       >
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
@@ -66,20 +77,15 @@
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
         </tr>
-      </mat-table>
+      </table>
 
       <div class="wrapper-footer" *ngIf="isAdmin">
         <button class="btn filled-btn btn-create-sandbox" (click)="goCreateSandbox()">
           {{ 'sandbox.createSandbox' | translate }}
         </button>
-        <button class="btn filled-btn btn-create-sandbox" (click)="downloadExel()">{{ 'sandbox.exportSandbox' | translate }}</button>
-        <mat-paginator
-          #paginator
-          [length]="totalRows"
-          [pageSizeOptions]="[5, 10, 25, 100]"
-          aria-label="Select page"
-        >
-        </mat-paginator>
+        <button class="btn filled-btn btn-create-sandbox" (click)="downloadExel()">{{ 'sandbox.exportSandbox' |
+          translate }}
+        </button>
       </div>
     </div>
   </div>
