@@ -149,6 +149,9 @@ export class CreateSandboxPageComponent implements OnInit {
       );
       this.candidateContextService.putSandbox(this.sandboxEditForm.value);
       this.sandboxEditForm.reset();
+      Object.keys(this.sandboxEditForm.controls).forEach((key: string) => {
+        this.sandboxEditForm.controls[key].setErrors(null);
+      });
     }
   }
 }
