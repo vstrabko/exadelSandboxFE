@@ -151,8 +151,8 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       candidateSandboxId: this.candidateSandbox,
       newStatusId: '',
     };
-    this.statuses.filter((el: any) => {
-      el.name === this.candidateStatus ? (STATUS.newStatusId = el.id) : null;
+    this.statuses.find((el: any) => {
+      el.name === this.selectedValue ? (STATUS.newStatusId = el.id) : null;
     });
     this.putStatus(STATUS);
   }
@@ -256,11 +256,16 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.currentJob = candidateSandboxes[candidateSandboxes.length - 1].currentJob;
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
-        this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id;
-        const files = candidateProcesses[candidateProcesses.length - 1].сandidateProccessTestTasks;
-        this.file = files[files.length - 1].responseTestFileId;
-        this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
-        this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
+        const process = candidateProcesses.reduce(function (
+          previous: { createDate: any },
+          current: { createDate: any },
+        ) {
+          return previous.createDate > current.createDate ? previous : current;
+        });
+        this.candidateProccesId = process.id;
+        this.candidateStatus = process.status.name;
+        this.file = process.сandidateProccessTestTasks[0].responseTestFileId;
+        this.feedbacks = process.feedbacks;
         const createDate: string[] = [];
         this.feedbacks.forEach((element: Feedback) => {
           element.userId === this.userId ? (this.userReview = element.userReview) : null;

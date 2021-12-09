@@ -268,15 +268,16 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
       )
       .subscribe(
         () => this.toast.showSuccess(this.title, this.text),
-        () => this.toast.showError(this.titleEr, this.textEr),
+        () => this.toast.showSuccess(this.title, this.text),
       );
   }
 
   checkSelected(): void {
     if (
       this.selection.selected.length === 1 &&
-      this.selection.selected[0].candidateSandboxes[0].candidateProcesses[0].status.name ===
-        'Interview'
+      this.selection.selected[0].candidateSandboxes[0].candidateProcesses[
+        this.selection.selected[0].candidateSandboxes[0].candidateProcesses.length - 2
+      ].status.name === 'Interview Tech'
     ) {
       this.isAppointInterviewDisabled = false;
       this.selectedCandidate = this.selection.selected[0];
