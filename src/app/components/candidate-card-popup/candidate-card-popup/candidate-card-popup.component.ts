@@ -64,6 +64,9 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   public candidateSandbox: string;
   public currentJob: string;
   public urlFile: string;
+  public spinner: false;
+  public timeContact: string;
+  public file: string;
 
   public selectedValue: string;
 
@@ -159,14 +162,16 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       .put(
         `${this.URL}candidates/${STATUS.id}/candidatesandboxes/${STATUS.candidateSandboxId}?newStatusId=${STATUS.newStatusId}`,
       )
-      .then(() => this.toastr.success(this.success))
+      .then(() => {
+        this.toastr.success(this.success);
+      })
       .catch(() => this.toastr.error(this.error));
   }
 
   downloadTest(): any {
-    this.urlFile = `${this.URL}files/${this.CANDIDATES_INFO.id}`; //TODO waiting endpoint from back end
+    this.urlFile = String(`${this.URL}files/${this.file}`);
     return axios
-      .post(`${this.urlFile}`)
+      .get(`${this.urlFile}`)
       .then(() => this.toastr.success(this.successD))
       .catch(() => this.toastr.error(this.errorD));
   }
@@ -179,7 +184,7 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     const FEEDBACK_POST = {
       userId: this.userId,
       grade: this.sliderValue,
-      userReview: this.userReview,
+      userReview: this.userReview || '',
       candidateProccesId: this.candidateProccesId,
     };
     !this.feedbackId ? this.postFeedbacks(FEEDBACK_POST) : this.putFeedbacks(FEEDBACK_PUT);
@@ -189,14 +194,17 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
   }
 
   postFeedbacks(FEEDBACK_POST: {
-    userId: any;
+    userId: string | null;
     grade: number;
     userReview: string;
     candidateProccesId: string;
   }): any {
     return axios
       .post(`${this.URL}feedbacks`, FEEDBACK_POST)
-      .then(() => this.toastr.success(this.success))
+      .then(() => {
+        this.spinner = false;
+        this.toastr.success(this.success);
+      })
       .catch(() => this.toastr.error(this.error));
   }
 
@@ -228,7 +236,6 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     return axios
       .get(`${this.URL}candidates/${this.user.id}`)
       .then((response: any) => {
-        console.log(response.data);
         this.CANDIDATES_INFO.id = response.data.id;
         this.CANDIDATES_INFO.name = response.data.name;
         this.CANDIDATES_INFO.surname = response.data.surname;
@@ -238,22 +245,21 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.CANDIDATES_INFO.skype = response.data.skype;
         this.CANDIDATES_INFO.additionalSkills = response.data.additionalSkills;
         this.CANDIDATES_INFO.professionaCertificates = response.data.professionaCertificates;
-        // const candidateTechSkills = response.data.candidateTechSkills;
-        // console.log(candidateTechSkills);
-        //TODO remove comments when back is done
-        // this.CANDIDATES_INFO.candidateTechSkills =
-        //   candidateTechSkills[candidateTechSkills.length - 1].skill.name;
         const candidateLanguages = response.data.candidateLanguages;
         this.CANDIDATES_INFO.candidateLanguages =
           candidateLanguages[candidateLanguages.length - 1].language.name;
         const candidateSandboxes = response.data.candidateSandboxes;
+        this.CANDIDATES_INFO.candidateTechSkills =
+          candidateSandboxes[candidateSandboxes.length - 1].primaryTechnology.name;
+        this.timeContact = candidateSandboxes[candidateSandboxes.length - 1].timeContact;
         this.candidateSandbox = candidateSandboxes[candidateSandboxes.length - 1].id;
         this.currentJob = candidateSandboxes[candidateSandboxes.length - 1].currentJob;
-        console.log(this.currentJob);
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
         this.candidateProccesId = candidateProcesses[candidateProcesses.length - 1].id;
-        this.candidateStatus = candidateProcesses[candidateProcesses.length - 2].status.name;
+        const files = candidateProcesses[candidateProcesses.length - 1].сandidateProccessTestTasks;
+        this.file = files[files.length - 1].responseTestFileId;
+        this.candidateStatus = candidateProcesses[candidateProcesses.length - 1].status.name;
         this.feedbacks = candidateProcesses[candidateProcesses.length - 1].feedbacks;
         const createDate: string[] = [];
         this.feedbacks.forEach((element: Feedback) => {
