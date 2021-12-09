@@ -3,6 +3,7 @@
   "apply": "Apply",
   "reset": "Reset",
   "close": "Close",
+  "download": "Download",
   "errors": {
     "goHome": "Error, go back to home page",
     "goHomeMessage": "Back to Home page"
@@ -114,14 +115,15 @@
     "title": "Success",
     "text": "Everything went well",
     "titleEr": "Fail",
-    "textEr": "Something went wrong",
     "textWr": "File should be < 10MB"
+    "textEr": "Something wrong",
+    "downloadSuccess": "File download",
+    "downloadError": "Download error"
   },
   "select": {
     "default": "select",
     "recruiters": "Recruiters *",
     "mentors": "Mentors *",
-
     "interviewers": "Interviewers *",
     "status": "Status",
     "location": "Location",
