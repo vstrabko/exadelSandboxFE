@@ -1,0 +1,24 @@
+<app-modal-window [title]="title">
+  <div class="wrapper-content">
+    <div class="wrapper-data">
+      <span class="title-data">{{ selectDate }}</span>
+    </div>
+    <div class="wrapper-time">
+      <app-time *ngFor="let id of times"
+      [comingTime]="id"
+      (delete)="del($event)"
+      (sort)="sortTime($event)"
+
+       style="margin-top: 10px"></app-time>
+      <button class="btn filled-btn btn-plus" type="button" (click)="add()">+</button>
+    </div>
+    <div class="wrapper-btn">
+      <button class="btn unfilled-btn" type="button" (click)="cancel()">
+        {{ 'popupTimer.cancel' | translate }}
+      </button>
+      <button class="btn filled-btn" type="submit" (click)="submit()">
+        {{ 'popupTimer.ok' | translate }}
+      </button>
+    </div>
+  </div>
+</app-modal-window>

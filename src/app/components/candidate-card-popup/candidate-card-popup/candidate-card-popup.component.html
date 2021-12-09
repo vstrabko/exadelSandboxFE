@@ -1,0 +1,88 @@
+<app-modal-window [title]="title">
+  <div class="card-popup_container">
+    <div class="section">
+      <div class="two-column">
+        <mat-card class="candidate-name">{{ CANDIDATES_INFO.name }} {{ CANDIDATES_INFO.surname }}</mat-card>
+        <mat-card  class="candidate-name" *ngIf="!checked">Status: {{candidateStatus}}</mat-card>
+        <mat-form-field class="candidate-status" appearance="fill" *ngIf="checked && isAdmin">
+
+          <mat-label>Add status: {{candidateStatus}}</mat-label>
+          <mat-select matNativeControl required [(ngModel)]="selectedValue">
+            <mat-option *ngFor="let status of statuses" [value]="status.name">
+              {{ status.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div *ngIf="isAdmin" class="feedback">
+          <mat-checkbox class="example-margin" (click)="addStatus()">{{ 'status.change' | translate }}</mat-checkbox>
+          <button class="btn filled-btn" (click)="changeStatus()" [disabled]="!counter">{{ 'status.save' | translate }}</button>
+          <a href="{{urlFile}}"><button class="btn filled-btn"  (click)="downloadTest()">{{ 'download' | translate }}</button></a>
+        </div>
+      </div>
+      <mat-card class="candidate-skills">{{ CANDIDATES_INFO.candidateTechSkills || null }}</mat-card>
+      <mat-card class="candidate-skills">{{ CANDIDATES_INFO.additionalSkills || null }}</mat-card>
+      <div class="raiting two-column">
+        <mat-card>{{ CANDIDATES_INFO.email }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.skype }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.location }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.professionaCertificates }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.phone }}</mat-card>
+        <mat-card>{{ CANDIDATES_INFO.candidateLanguages }}</mat-card>
+        <mat-card>{{ currentJob }}</mat-card>
+        <mat-card>{{ timeContact }}</mat-card>
+      </div>
+    </div>
+    <div class="section">
+      <mat-card class="user-name">{{ userAuthName }}{{ 'feedback' | translate }}</mat-card>
+      <div class="custom-slider" *ngIf="!isRecruiter">
+        <div class="custom-slider-slide">
+          <mat-slider
+            thumbLabel
+            tickInterval="1"
+            step="1"
+            min="0"
+            max="{{ grade }}"
+            aria-label="units"
+            (change)="onChangeRange($event)">
+          </mat-slider>
+        </div>
+        <div class="custom-slider-info">
+          <span >{{ sliderValue || 0 }}</span>
+        </div>
+      </div>
+
+      <mat-form-field class="textarea_container" appearance="fill" *ngIf="!isAdmin">
+        <mat-label>{{ userAuthName }} feedback</mat-label>
+        <textarea [cdkTextareaAutosize] 
+          class="textarea" 
+          [(ngModel)]="userReview"
+          matInput placeholder="Place your review here..."
+        >
+          {{ userReview }}
+        </textarea>
+      </mat-form-field>
+
+      <div *ngIf="isAdmin" class="all-feedback">
+        <div  *ngFor="let review of feedbacks">
+          <div  class="feedback" *ngIf="review">
+            <div class="review">
+              <span>{{ review.userReview }}</span>
+            </div>
+            <div class="grade" *ngIf="review.grade">
+              <span> Grade is {{ review.grade }}</span>
+            </div>
+            <div class="date">
+              <span>{{ review.author }}, {{ review.createDate | date: 'MMM d, y, h:mm a' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-column buttons">
+        <button class="btn unfilled-btn" (click)="cancel()">{{ 'cancel' | translate }}</button>
+        <button class="btn filled-btn" (click)="sendData()">{{ 'save' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</app-modal-window>

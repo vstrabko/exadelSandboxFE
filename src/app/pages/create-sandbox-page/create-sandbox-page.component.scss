@@ -1,0 +1,52 @@
+@import '../../shared/constants/colors.scss';
+
+$width-content: calc(100% - 234px);
+
+.sandbox_wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .description {
+    min-width: 320px;
+  }
+
+  .sandbox_container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .datepicker, .number-candidates {
+      min-width: 320px;
+      max-width: 30%;
+      padding-right: 20px;
+      &:last-child{
+        padding-right: 0;
+      }
+    }
+  }
+  .btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .textarea {
+    max-height: 250px;
+  }
+}
+
+.multi_flex {
+  display: flex;
+  align-items: baseline;
+  background-color: $inputBg;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  min-height: 25px;
+}
+
+h2 {
+  margin-top: 15px;
+}
+
+.select {
+  width: 100%;
+}

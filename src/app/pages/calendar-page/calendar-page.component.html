@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <mat-spinner [diameter]="70" *ngIf="!dataAvailable"></mat-spinner>
+</div>
+<div class="page_container">
+  <full-calendar [options]='calendarOptions' id="calendar" #calendar></full-calendar>
+</div>
+<app-popup-confirm *ngIf="isVisible" (modal)="closeModal()" (deleteEvent)="deleteEvent()"></app-popup-confirm>

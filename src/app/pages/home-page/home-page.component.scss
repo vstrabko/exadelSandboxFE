@@ -1,0 +1,29 @@
+@import '../../shared/constants/colors.scss';
+@import '../../shared/constants/otherStyles.scss';
+
+.drop-box_container,
+.description_container,
+.sandbox-interviews-container {
+  width: 100%;
+  background: $background-content;
+  &:not(:first-child) {
+    margin-top: 12px;
+  }
+}
+
+.drop-box_container,
+.sandbox-interviews {
+  padding: 10px 15px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+}
+
+.drop-box {
+  width: 100%;
+}
+
+.drop-box {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+}

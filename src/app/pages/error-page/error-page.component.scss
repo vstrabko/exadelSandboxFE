@@ -1,0 +1,39 @@
+@import '../../shared/constants/otherStyles.scss';
+@import '../../shared/constants/colors.scss';
+
+/* src="assets/img/404.png" */
+
+.container-404 {
+  display: flex;
+  padding: 0;
+  min-height: calc(100vh - 70px);
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #262626;
+  background-image: url('../../../assets/img/404.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.wrapper-content {
+  position: absolute;
+  color: $noColor;
+  width: 382px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 10;
+  font-size: 30px;
+  bottom: 50px;
+}
+
+.btn-404 {
+  width: 142px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-top: 10px;
+}

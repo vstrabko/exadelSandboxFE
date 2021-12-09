@@ -1,0 +1,29 @@
+.login-form {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 120px;
+
+  .form-field {
+    width: 300px;
+  }
+  .google-btn {
+    color: black;
+    width: 220px;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .google-logo {
+    width: 24px;
+    padding-right: 5px;
+    vertical-align: middle;
+  }
+
+  .buttons {
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}

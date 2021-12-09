@@ -1,0 +1,200 @@
+{
+  "cancel": "Отмена",
+  "apply": "Принять",
+  "reset": "Сбросить",
+  "close": "Закрыть",
+  "download": "Скачать",
+  "errors": {
+    "goHome": "Ошибка, вернуться на главную страницу",
+    "goHomeMessage": "На главную"
+  },
+  "header": {
+    "calendar": "Календарь",
+    "candidatesList": "Список кандидатов",
+    "createNewSandbox": "Песочница",
+    "hello": "Привет"
+  },
+  "login": {
+    "title": "Войти",
+    "googleBtn": "Войти через Google"
+  },
+  "loginForm": {
+    "emailInput": "Пожалуйста, введите Ваш email",
+    "emailInputValid": "Пожалуйста, введите правильный email",
+    "enterEmail": "Введите Ваш email",
+    "enterPassword": "Введите Ваш пароль",
+    "passwordInput": "Пожалуйста, введите пароль",
+    "passwordInputValid": "Пароль должен быть не менее 8 символов."
+  },
+  "logout": "Выйти",
+  "messages": {
+    "send": "ОТПРАВЛЕНО",
+    "success": "Вы успешно отправили форму"
+  },
+  "ok": "ОК",
+  "feedback": ", пожалуйста, добавьте ваш отзыв",
+  "save": "Сохранить",
+  "other": {
+    "englishLevel": "Уровень английского"
+  },
+  "roles": {
+    "interviewers": "Интервьюеры",
+    "mentors": "Менторы",
+    "recruiters": "Рекрутеры"
+  },
+  "sandbox": {
+    "candidatesNumber": "Количество кандидатов",
+    "createSandbox": "Создать песочницу",
+    "editSandbox": "Редактировать песочницу",
+    "description": "Описание песочницы",
+    "invalidEndDate": "Неверная дата окончания",
+    "invalidStartDate": "Неверная дата старта",
+    "name": "Выберите песочницу для заполнения формы",
+    "sandboxName": "Название песочницы",
+    "period": "Длительность",
+    "registration": "Период регистрации",
+    "listMentors": "Список менторов",
+    "listInterviewers": "Список интервьюеров",
+    "listRecruiters": "Список рекрутеров",
+    "startDate": "Дата начала",
+    "nameSandbox": "Наименование",
+    "nameDescription": "Описание",
+    "statusSand": "Статус",
+    "exportSandbox": "Экспорт"
+  },
+  "request": {
+    "header": "Заявка кандидата (заполните на английском языке)",
+    "firstName": "Имя",
+    "secondName": "Фамилия",
+    "telephone": "Телефон",
+    "email": "E-mail",
+    "skype": "Skype",
+    "englishLevel": "Уровень английского",
+    "motivation": "Мотивация",
+    "availability": "Часы доступности в день",
+    "available1": "Менее 4 чассов",
+    "available2": "4-6 часа",
+    "available3": "6 и более часов",
+    "language": "Язык стажировки",
+    "location": "Место нахождения (Город, Страна)",
+    "skills": "Основные навыки",
+    "job": "Текущее место работы ",
+    "certificates": "Сертификаты",
+    "addSkills": "Дополнительные навыки",
+    "timeContact": "Подходящее время для связи",
+    "joinExadel": "Планируете ли вы присоединиться к Exadel после обучения?",
+    "agreement": "Согласны ли вы на обработку ваших персональных данных?",
+    "sendButton": "Отправить",
+    "choose": "Выберите необходимое"
+  },
+  "popupTimer": {
+    "from": "с",
+    "to": "по",
+    "cancel": "Отмена",
+    "ok": "OK",
+    "title": "Выберите время"
+  },
+  "candidateList": {
+    "requestTitle": "Запрос списка кандидатов",
+    "request": "Запросить",
+    "select": "выбрать",
+    "search": "поиск",
+    "haveChosen": "Вы выбрали:",
+    "other": "другой",
+    "others": "других",
+    "perPage": "Элементов на странице",
+    "nextPage": "Следущая страница",
+    "prevPage": "Предыдущая страница",
+    "of": "из",
+    "filter": "Фильтр",
+    "example": "Прим. Минск",
+    "appointInterview": "Назначить интервью",
+    "appointCandidateToInterviewer": "Назначить кандидата"
+  },
+  "tostr": {
+    "title": "Данные отправлены",
+    "text": "Все прошло успешно",
+    "titleEr": "Ошибка",
+    "textEr": "Что-то пошло не так",
+    "textWr": "Файл должен быть < 10MB",
+    "downloadSuccess": "Файл загружен",
+    "downloadError": "Ошибка скачивания"
+  },
+  "select": {
+    "default": "выбрать",
+    "recruiters": "Рекрутеры *",
+    "mentors": "Менторы *",
+    "interviewers": "Интервьюеры *",
+    "status": "Статус",
+    "location": "Локация",
+    "recruiter": "Рекрутер",
+    "sandbox": "Песочница"
+  },
+  "stepper": {
+    "сhooseTheDate": "Выберите дату",
+    "selectedDate": "Выбранныя дата",
+    "date": "Дата",
+    "chooseInterviewer": "Выберите интервьюера",
+    "interviewer": "Интервьер",
+    "chooseTime": "Выберите время",
+    "time": "Время",
+    "end": "Завершить",
+    "interviewDetails": "Детали интервью",
+    "dateIsRequired": "Необходимо выбрать дату.",
+    "interviewerIsRequired": "Необходимо выбрать интервьюера.",
+    "timeIsRequired": "Необходимо выбрать время."
+  },
+  "candidate": {
+    "title": "Карточка кандидата",
+    "status": "Статус",
+    "recruiter": "Рекрутер",
+    "mentor": "Ментор",
+    "interviewer": "Интервьюер",
+    "feedback": "обратная связь"
+  },
+  "authTostr": {
+    "title": "Ошибка авторизации",
+    "text": "Пожалуйста, внимательно проверьте корректность всех данных"
+  },
+  "uploadPage": {
+    "upload": "Выбрать файл"
+  },
+  "googleAuthTostr": {
+    "title": "Ошибка авторизации",
+    "text": "Электронная почта не зарегистрирована в системе"
+  },
+  "status": {
+    "change": "Сменить статус",
+    "save": "Сохранить статус"
+  },
+  "confirmPopup": {
+    "title": "Удалить событие",
+    "content": "Вы уверены, что хотите удалить это событие?"
+  },
+  "calendarButtons": {
+    "today": "Сегодня",
+    "month": "Месяц",
+    "week": "Неделя",
+    "list": "Список",
+    "subText": "Отправить",
+    "subHint": "Отправить события на сервер",
+    "weekText": "Выходные",
+    "weekHint": "Вкл/выкл выходные",
+    "syncText": "Google",
+    "syncHint": "Синхронизация с Google календарем"
+  },
+  "email": {
+    "send": "Отправить e-mail"
+  },
+  "calendarTostrSucs": {
+    "title": "Успешно",
+    "text": "События успешно отправлены на сервер"
+  },
+  "calendarTostrDel": {
+    "title": "Ошибка",
+    "text": "Вы не можете удалить это событие"
+  },
+  "calendarConfirm": {
+    "text": "При переходе с этой страницы, неотправленные события будут утеряны."
+  }
+}

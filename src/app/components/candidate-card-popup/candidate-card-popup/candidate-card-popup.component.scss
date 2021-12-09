@@ -1,0 +1,127 @@
+@import '../../../shared/constants/colors.scss';
+
+.textarea_container {
+    width: 500px;
+}
+
+.textarea {
+  max-height: 150px;
+}
+
+.card-popup_container {
+  display: flex;
+  padding: 20px 10px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-bottom: 0 !important;
+}
+
+*:not(.radio-buttons > *) {
+  margin-bottom: 10px;
+}
+
+.section {
+  padding: 0 10px;
+  margin-bottom: 0 !important;
+
+}
+.all-feedback {
+  border: none;
+  .feedback {
+    border: 1px solid $blueColor;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+}
+
+.candidate-name,
+.candidate-status {
+    width: 245px;
+    height: 60px;
+}
+
+.candidate-skills,
+.raiting {
+  width: 500px;
+  & > * {
+    width: 245px;
+  }
+}
+
+.user-name {
+    width: 100%;
+}
+
+.two-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0 !important;
+
+  .feedback {
+    margin-left: 8px;
+  }
+}
+
+.buttons {
+    justify-content: flex-end;
+    & > * {
+        width: 100px;
+        margin: 0 0 0 15px;
+        margin-left: 15px;
+    }
+}
+
+.radio-buttons {
+    width: 498px;
+    & > * {
+        width: calc(498px / 3);
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .card-popup_container {
+        flex-wrap: wrap;
+    }
+}
+
+.custom-slider {
+    display: flex;
+    width: 500px;
+    &-slide {
+        width: 90%;
+    }
+
+    &-info {
+      border: 1px solid $blueColor;
+      border-radius: 50%;
+      align-self: center;
+      padding: 10px;
+      min-height: 45px;
+      min-width: 55px;
+      display: flex;
+      justify-content: center;
+
+      span {
+        text-align: center;
+        position: relative;
+        top: 5px;
+      }
+    }
+}
+
+mat-slider {
+    width: 100%;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+    background-color: $blueColor;
+}
+::ng-deep .mat-accent .mat-slider-thumb-label {
+    background-color: $blueColor;
+}
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: $blueColor;
+}

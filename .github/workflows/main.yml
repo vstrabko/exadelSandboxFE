@@ -1,0 +1,19 @@
+name: exadelSandboxFE-Push-Validations
+
+on:
+  push:
+    branches: [master, dev, feature/**, bugfix/**, chore/**]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+      - name: Install dependencies
+        run: npm ci
+      - name: run lint
+        run: npm run lint:ci
+      - name: Build dependencies
+        run: npm run build

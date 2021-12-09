@@ -1,0 +1,205 @@
+{
+  "cancel": "Cancel",
+  "apply": "Apply",
+  "reset": "Reset",
+  "close": "Close",
+  "download": "Download",
+  "errors": {
+    "goHome": "Error, go back to home page",
+    "goHomeMessage": "Back to Home page"
+  },
+  "header": {
+    "calendar": "Calendar",
+    "candidatesList": "Candidates list",
+    "createNewSandbox": "Sandbox",
+    "hello": "Hello"
+  },
+  "login": {
+    "title": "Log in",
+    "googleBtn": "Log in with Google"
+  },
+  "loginForm": {
+    "emailInput": "Please, enter your email",
+    "emailInputValid": "Please, enter a valid email",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "passwordInput": "Please, enter your password",
+    "passwordInputValid": "The password must be at least 8 characters"
+  },
+  "logout": "Log out",
+  "messages": {
+    "send": "SEND",
+    "success": "You have successfully submitted the form"
+  },
+  "ok": "OK",
+  "feedback": ", please, add your feedback",
+  "save": "Save",
+  "other": {
+    "englishLevel": "English Level"
+  },
+  "roles": {
+    "interviewers": "Interviewers",
+    "mentors": "Mentors",
+    "recruiters": "Recruiters"
+  },
+  "sandbox": {
+    "candidatesNumber": "Number of candidates",
+    "createSandbox": "Create sandbox",
+    "editSandbox": "Edit sandbox",
+    "description": "Sandbox description",
+    "invalidEndDate": "Invalid end date",
+    "invalidStartDate": "Invalid start date",
+    "name": "Choose a sandbox to fill out the form",
+    "sandboxName": "Sandbox name",
+    "period": "Sandbox period",
+    "registration": "Sandbox registration period",
+    "listMentors": "List of Mentors",
+    "listInterviewers": "List of Interviewers",
+    "listRecruiters": "List of Recruiters",
+    "startDate": "Start date",
+    "nameSandbox": "Name",
+    "nameDescription": "Description",
+    "statusSand": "Status",
+    "exportSandbox": "Export"
+  },
+  "request": {
+    "header": "Candidate request (fill in english)",
+    "firstName": "First Name",
+    "secondName": "Second Name",
+    "telephone": "Telephone",
+    "email": "E-mail",
+    "skype": "Skype",
+    "englishLevel": "English level",
+    "motivation": "Motivation",
+    "availability": "Availability hours per day",
+    "available1": "Less than 4 hours",
+    "available2": "4-6 hours",
+    "available3": "6-infinity hours",
+    "language": "Language of internship",
+    "location": "Location (City, Country)",
+    "skills": "Primary skill",
+    "job": "Current job",
+    "certificates": "Professional certificates",
+    "addSkills": "Additional skills, technologies",
+    "timeContact": "The best time to contact you",
+    "joinExadel": "Are you planning to join Exadel after the Trainig?",
+    "agreement": "Could you provide your agreement to proceed with your Personal Data?",
+    "sendButton": "Send",
+    "choose": "Choose an option"
+  },
+  "popupTimer": {
+    "from": "from",
+    "to": "to",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "title": "Choose the time"
+  },
+  "candidateList": {
+    "requestTitle": "Candidate list request",
+    "request": "Request",
+    "select": "select",
+    "search": "search",
+    "haveChosen": "You have chosen:",
+    "other": "other",
+    "others": "others",
+    "perPage": "Items per page",
+    "nextPage": "Next page",
+    "prevPage": "Previous page",
+    "of": "of",
+    "filter": "Filter",
+    "example": "Ex. Minsk",
+    "appointInterview": "Appoint interview",
+    "appointCandidateToInterviewer": "Assign Candidate"
+  },
+  "tostr": {
+    "title": "Success",
+    "text": "Everything went well",
+    "titleEr": "Fail",
+    "textWr": "File should be < 10MB",
+    "textEr": "Something wrong",
+    "downloadSuccess": "File download",
+    "downloadError": "Download error"
+  },
+  "select": {
+    "default": "select",
+    "recruiters": "Recruiters *",
+    "mentors": "Mentors *",
+    "interviewers": "Interviewers *",
+    "status": "Status",
+    "location": "Location",
+    "recruiter": "Recruiter",
+    "sandbox": "Sandbox"
+  },
+  "stepper": {
+    "сhooseTheDate": "Choose the date",
+    "selectedDate": "Selected date",
+    "date": "Date",
+    "chooseInterviewer": "Choose an interviewer",
+    "interviewer": "Interviewer",
+    "chooseTime": "Choose the time",
+    "time": "Time",
+    "end": "End",
+    "interviewDetails": "Interview details",
+    "dateIsRequired": "Date is required.",
+    "interviewerIsRequired": "Interviewer is required.",
+    "timeIsRequired": "Time is required."
+  },
+  "candidate": {
+    "title": "Candidate card",
+    "status": "Status",
+    "recruiter": "Recruiter",
+    "mentor": "Mentor",
+    "interviewer": "Interviewer",
+    "feedback": "Feedback"
+  },
+  "authTostr": {
+    "title": "Authorisation error",
+    "text": "Please check carefully that all details are correct"
+  },
+  "uploadPage": {
+    "upload": "Choose file"
+  },
+
+  "googleAuthTostr": {
+    "title": "Authorisation error",
+    "text": "Email is not registered in the system"
+  },
+  "status": {
+    "change": "Change status",
+    "save": "Save status"
+  },
+  "confirmPopup": {
+    "title": "Delete event",
+    "content": "Are you sure you want to delete the event?"
+  },
+  "calendarButtons": {
+    "today": "Today",
+    "month": "Month",
+    "week": "Week",
+    "list": "List",
+    "subText": "Submit",
+    "subHint": "Send events to server",
+    "weekText": "Weekends",
+    "weekHint": "On/off weekends",
+    "syncText": "Google",
+    "syncHint": "Sync with Google calendar"
+  },
+  "email": {
+    "send": "Send e-mail"
+  },
+  "calendarTostrSucs": {
+    "title": "Successfully",
+    "text": "Events were successfully sent to the server"
+  },
+  "calendarTostrErr": {
+    "title": "Error",
+    "text": "Events were not sent to the server"
+  },
+  "calendarTostrDel": {
+    "title": "Error",
+    "text": "You can`t delete this event"
+  },
+  "calendarConfirm": {
+    "text": "When you go from this page, unsent events will be lost"
+  }
+}

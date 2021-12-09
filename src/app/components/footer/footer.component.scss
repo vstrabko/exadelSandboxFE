@@ -1,0 +1,23 @@
+
+.footer {
+  bottom: 0;
+  width: 100%;
+}
+
+.wrapper-footer {
+  height: 30px;
+  background: #e5ebf0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    border: none;
+    cursor: pointer;
+  }
+
+  img {
+    height: 13px;
+  }
+
+}

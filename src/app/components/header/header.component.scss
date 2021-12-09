@@ -1,0 +1,58 @@
+@import '../../shared/constants/colors.scss';
+@import '../../shared/constants/otherStyles.scss';
+
+.header {
+  height: $header-height;
+  background-color: $backColor;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 0 10px;
+  align-items: center;
+
+  .img {
+    margin-top: auto;
+
+    img {
+      height: 30px;
+    }
+  }
+
+  .user_tabs {
+    a {
+      line-height: $header-height;
+      border-radius: 0;
+    }
+    
+    .active {
+      background-color: $blueColor;
+      color: white;
+    }
+  }
+
+  .userName {
+    font-size: 18px;
+    color: $darkColor;
+    margin-right: 15px;
+  }
+}
+
+.header_right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: $header-height;
+}
+
+.button-login,
+.button-logout {
+  button {
+    width: 100px;
+    height: 30px;
+    background-color: $blueColor;
+    color: $noColor;
+    border-radius: 20px 0 0 20px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 0;
+  }
+}
