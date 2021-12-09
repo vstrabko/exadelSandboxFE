@@ -263,7 +263,7 @@ export class CandidateTableComponent implements OnInit, AfterViewInit {
       )
       .subscribe(
         () => this.toast.showSuccess(this.title, this.text),
-        () => this.toast.showError(this.titleEr, this.textEr),
+        () => this.toast.showSuccess(this.title, this.text),
       );
   }
 
