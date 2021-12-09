@@ -111,5 +111,5 @@
     [disabled]="isStatusDraft" class="btn filled-btn">{{ 'candidateList.appointCandidateToInterviewer' | translate
     }}</button>
 <button (click)="sendEmail()"
-    [style.display]="userRole === 'Recruiter' || userRole === 'Admin' || userRole === 'Education manager' ? 'inline-block' : 'none'"
+    [style.display]="userRole === 'Recruiter' || userRole === 'Admin' || userRole === 'EDU manager' ? 'inline-block' : 'none'"
     class="btn filled-btn">{{ 'email.send' | translate }}</button>
