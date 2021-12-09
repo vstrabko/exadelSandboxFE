@@ -12,12 +12,12 @@ export class AdminMainPageComponent {
   showPop(): void {
     this.showPopup = !this.showPopup;
   }
+
   closeCard(): void {
     this.showPopup = !this.showPopup;
   }
 
   toggleAppointInterview(): void {
-    console.log('show popup');
     this.showAppointInterview = !this.showAppointInterview;
   }
 }

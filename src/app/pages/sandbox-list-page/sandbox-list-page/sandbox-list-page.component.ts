@@ -31,6 +31,8 @@ import { SandboxExel } from 'src/app/models/sandboxExel.model';
 })
 export class SandboxListPageComponent implements OnInit, AfterViewInit {
   totalRows = 0;
+  public dataAvailable = false;
+
   constructor(
     private router: Router,
     private sandboxService: SandboxService,
@@ -76,10 +78,12 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
     this.sandbox = row;
     this.showModal.emit();
   }
+
   ngOnInit(): void {
     this.sandboxService.get().subscribe((data: Sandbox[]) => {
       this.sandBoxes = data;
       this.sandBoxesExel = data;
+      this.dataAvailable = true;
 
       for (let i = 0; i < this.sandBoxesExel.length; i++) {
         delete this.sandBoxesExel[i].id;
@@ -196,6 +200,7 @@ export class SandboxListPageComponent implements OnInit, AfterViewInit {
       }
       return buf;
     }
+
     saveAs(
       new Blob([s2ab(wbout)], { type: 'application/octet-stream' }),
       'exportedSandboxList.xlsx',

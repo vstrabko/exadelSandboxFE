@@ -7,7 +7,9 @@
   transform: translate(-50%, -50%);
   ::ng-deep .mat-spinner circle, .mat-spinner circle {
     stroke: $blueColor;
-
   }
+}
+.auth {
+  height: 30vh;
 }
 

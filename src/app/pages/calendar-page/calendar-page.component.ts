@@ -8,7 +8,6 @@ import {
   EventApi,
   EventInput,
   FullCalendarComponent,
-  Calendar,
 } from '@fullcalendar/angular';
 
 import enLocale from '@fullcalendar/core/locales/es';
@@ -35,10 +34,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy, ComponentCanDea
   public selectInfo: DateSelectArg;
   public arrEventsPost: CalendarEventPost[] = [];
   public lang: string | null;
-  public start: string;
-  public end: string;
-  public type: number;
-  public calendar: Calendar;
+  public dataAvailable = false;
 
   constructor(
     private calendarEventService: CalendarEventService,
@@ -47,6 +43,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy, ComponentCanDea
     private translateService: TranslateService,
     private toastService: ToastService,
   ) {}
+
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
   ngOnInit(): void {
@@ -60,6 +57,12 @@ export class CalendarPageComponent implements OnInit, OnDestroy, ComponentCanDea
     }
     this.calendarEventService.eventSubject.subscribe((res: EventInput[]) => {
       this.calendarOptions.events = res;
+      this.dataAvailable = true;
+      this.lang = localStorage.getItem('language');
+      this.changeLang(`${this.lang ? this.lang : 'en'}`);
+      this.translateService.onLangChange.subscribe((params: TranslationChangeEvent) => {
+        this.changeLang(params.lang);
+      });
     });
     this.lang = localStorage.getItem('language');
     this.changeLang(`${this.lang ? this.lang : 'en'}`);
@@ -116,6 +119,7 @@ export class CalendarPageComponent implements OnInit, OnDestroy, ComponentCanDea
       this.calendarOptions.events = res;
     });
   }
+
   canDeactivate(): boolean | Observable<boolean> {
     if (this.userService.user._roles.includes('Interviewer')) {
       return confirm(this.translateService.instant('calendarConfirm.text'));
