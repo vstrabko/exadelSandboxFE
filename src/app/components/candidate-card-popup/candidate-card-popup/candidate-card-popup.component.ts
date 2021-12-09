@@ -151,8 +151,8 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
       candidateSandboxId: this.candidateSandbox,
       newStatusId: '',
     };
-    this.statuses.filter((el: any) => {
-      el.name === this.candidateStatus ? (STATUS.newStatusId = el.id) : null;
+    this.statuses.find((el: any) => {
+      el.name === this.selectedValue ? (STATUS.newStatusId = el.id) : null;
     });
     this.putStatus(STATUS);
   }
@@ -236,7 +236,6 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
     return axios
       .get(`${this.URL}candidates/${this.user.id}`)
       .then((response: any) => {
-        console.log(response.data);
         this.CANDIDATES_INFO.id = response.data.id;
         this.CANDIDATES_INFO.name = response.data.name;
         this.CANDIDATES_INFO.surname = response.data.surname;
@@ -257,7 +256,12 @@ export class CandidateCardPopupComponent implements OnInit, OnDestroy {
         this.currentJob = candidateSandboxes[candidateSandboxes.length - 1].currentJob;
         const candidateProcesses =
           candidateSandboxes[candidateSandboxes.length - 1].candidateProcesses;
-        const process = candidateProcesses.find((el: { createDate: string }) => el.createDate);
+        const process = candidateProcesses.reduce(function (
+          previous: { createDate: any },
+          current: { createDate: any },
+        ) {
+          return previous.createDate > current.createDate ? previous : current;
+        });
         this.candidateProccesId = process.id;
         this.candidateStatus = process.status.name;
         this.file = process.сandidateProccessTestTasks[0].responseTestFileId;
