@@ -115,7 +115,7 @@
     "title": "Success",
     "text": "Everything went well",
     "titleEr": "Fail",
-    "textWr": "File should be < 10MB"
+    "textWr": "File should be < 10MB",
     "textEr": "Something wrong",
     "downloadSuccess": "File download",
     "downloadError": "Download error"
